@@ -1,9 +1,16 @@
 {
-	"name": "seaquel-app",
-	"main": ".svelte-kit/cloudflare/_worker.js",
-	"compatibility_date": "2025-12-18",
-	"assets": {
-		"binding": "ASSETS",
-		"directory": ".svelte-kit/cloudflare",
-	}
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "seaquel-app",
+  "main": ".svelte-kit/cloudflare/_worker.js",
+  "compatibility_date": "2025-12-18",
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".svelte-kit/cloudflare",
+  },
+  "routes": [
+    {
+      "pattern": "seaquel.app",
+      "custom_domain": true,
+    },
+  ],
 }
