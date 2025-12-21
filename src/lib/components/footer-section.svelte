@@ -1,7 +1,8 @@
 <script lang="ts">
-    // import { GithubIcon, TwitterIcon, DiscIcon } from "lucide-svelte";
+    import { GithubIcon,  } from "lucide-svelte";
     import { Button } from "$lib/components/ui/button";
     import Logo from "./logo.svelte";
+    import LogoDiscord from "./logo-discord.svelte";
 
     const footerLinks = {
         product: [
@@ -38,17 +39,17 @@
                     The modern database client built for speed, efficiency, and
                     intelligence.
                 </p>
-                <!-- <div class="flex gap-2">
-					<Button size="icon" variant="ghost" class="size-9">
+                <div class="flex gap-2">
+					<Button href="https://github.com/webstonehq/seaquel" target="_blank" size="icon" variant="ghost" class="size-9">
 						<GithubIcon class="size-4" />
 					</Button>
-					<Button size="icon" variant="ghost" class="size-9">
-						<TwitterIcon class="size-4" />
+					<Button href="https://discord.gg/QuzUESE8x4" target="_blank" size="icon" variant="ghost" class="size-9">
+						<LogoDiscord class="size-4 fill-black dark:fill-white" />
 					</Button>
-					<Button size="icon" variant="ghost" class="size-9">
+					<!-- <Button size="icon" variant="ghost" class="size-9">
 						<DiscIcon class="size-4" />
-					</Button>
-				</div> -->
+					</Button> -->
+				</div>
             </div>
 
             <!-- Links -->
