@@ -16,9 +16,8 @@
 
 			<!-- Navigation -->
 			<nav class="hidden md:flex items-center gap-6">
-				<a href="#features" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Features</a>
-				<!-- <a href="#download" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Download</a>
-				<a href="#docs" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Docs</a> -->
+				<a href="/#features" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Overview</a>
+				<a href="/features" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">All Features</a>
 			</nav>
 
 			<!-- Actions -->

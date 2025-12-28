@@ -1,7 +1,22 @@
 <script lang="ts">
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
-	import { ZapIcon, CpuIcon, WifiOffIcon, BrainCircuitIcon, DatabaseIcon, ShieldCheckIcon } from "lucide-svelte";
+	import { ZapIcon, CpuIcon, WifiOffIcon, BrainCircuitIcon, DatabaseIcon, ShieldCheckIcon, ActivityIcon, NetworkIcon } from "lucide-svelte";
 	import { fly } from "svelte/transition";
+
+	const heroFeatures = [
+		{
+			icon: ActivityIcon,
+			title: "Visual Query Plans",
+			description: "Understand query performance with interactive EXPLAIN and EXPLAIN ANALYZE diagrams. See planning time, execution time, and drill into each operation node to optimize your queries.",
+			gradient: "from-violet-500/10 to-purple-500/10",
+		},
+		{
+			icon: NetworkIcon,
+			title: "ERD Viewer",
+			description: "Explore your database schema visually with interactive Entity Relationship Diagrams. Search tables, filter by schema, and export to PNG or SVG with one click.",
+			gradient: "from-teal-500/10 to-cyan-500/10",
+		},
+	];
 
 	const features = [
 		{
@@ -54,14 +69,35 @@
 			<p class="text-lg text-muted-foreground max-w-2xl mx-auto">Seaquel combines cutting-edge technology with intuitive design to deliver the ultimate database management experience.</p>
 		</div>
 
-		<!-- Features grid -->
+		<!-- Hero features - Visual Tools (Priority) -->
+		<div class="grid md:grid-cols-2 gap-6 lg:gap-8 mb-8">
+			{#each heroFeatures as feature, index}
+				<div in:fly={{ y: 30, delay: 100 + index * 100, duration: 600 }}>
+					<Card class="h-full border-2 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1 bg-linear-to-br {feature.gradient}">
+						<CardHeader class="pb-2">
+							<div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 ring-2 ring-primary/20">
+								<feature.icon class="size-7 text-primary" />
+							</div>
+							<CardTitle class="text-2xl">{feature.title}</CardTitle>
+						</CardHeader>
+						<CardContent>
+							<CardDescription class="text-base leading-relaxed">
+								{feature.description}
+							</CardDescription>
+						</CardContent>
+					</Card>
+				</div>
+			{/each}
+		</div>
+
+		<!-- Core features grid -->
 		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 			{#each features as feature, index}
-				<div in:fly={{ y: 30, delay: 100 + index * 100, duration: 600 }}>
-					<Card class="h-full border-2 hover:border-primary/50 hover:shadow-lg-lg-lg-xl hover:shadow-lg-lg-lg-primary/10 transition-all duration-300 hover:-translate-y-1 bg-linear-to-br {feature.gradient}">
+				<div in:fly={{ y: 30, delay: 300 + index * 100, duration: 600 }}>
+					<Card class="h-full border-2 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1 bg-linear-to-br {feature.gradient}">
 						<CardHeader>
 							<div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 ring-2 ring-primary/20">
-								<svelte:component this={feature.icon} class="size-6 text-primary" />
+								<feature.icon class="size-6 text-primary" />
 							</div>
 							<CardTitle class="text-xl">{feature.title}</CardTitle>
 						</CardHeader>
