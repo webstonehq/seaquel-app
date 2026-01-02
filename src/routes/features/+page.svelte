@@ -26,6 +26,18 @@
 		SunMoonIcon,
 		ChevronsLeftRightIcon,
 		TerminalIcon,
+		FolderTreeIcon,
+		TablePropertiesIcon,
+		ListOrderedIcon,
+		CopyIcon,
+		GaugeIcon,
+		LinkIcon,
+		ShieldCheckIcon,
+		CommandIcon,
+		MousePointerClickIcon,
+		TriangleAlertIcon,
+		RefreshCwIcon,
+		GlobeIcon,
 	} from "lucide-svelte";
 
 	const visualTools = [
@@ -38,6 +50,16 @@
 			icon: NetworkIcon,
 			title: "ERD Viewer",
 			description: "Interactive Entity Relationship Diagrams with table search, schema filtering, and one-click export to PNG or SVG.",
+		},
+		{
+			icon: FolderTreeIcon,
+			title: "Schema Tree Browser",
+			description: "Navigate your database with collapsible schema groups. See row counts, distinguish tables from views, and explore structure hierarchically.",
+		},
+		{
+			icon: TablePropertiesIcon,
+			title: "Table Inspector",
+			description: "Detailed column information with primary key and foreign key badges. View index information and constraints at a glance.",
 		},
 	];
 
@@ -62,6 +84,11 @@
 			title: "Query Execution",
 			description: "Execute queries with Cmd+Enter. See execution time, row counts, and affected row indicators instantly.",
 		},
+		{
+			icon: ListOrderedIcon,
+			title: "Multi-Statement Execution",
+			description: "Execute multiple SQL statements at once with live statement count. Results are displayed separately for each statement.",
+		},
 	];
 
 	const dataOperations = [
@@ -84,6 +111,16 @@
 			icon: DownloadIcon,
 			title: "Multi-Format Export",
 			description: "Export query results to CSV, JSON, SQL INSERT statements, or Markdown tables with one click.",
+		},
+		{
+			icon: CopyIcon,
+			title: "Advanced Copy Options",
+			description: "Copy individual rows as JSON, copy entire column values to clipboard. Multiple formats for seamless data transfer.",
+		},
+		{
+			icon: GaugeIcon,
+			title: "Virtual Scrolling",
+			description: "Efficiently render thousands of rows without performance degradation. Smooth scrolling through massive result sets.",
 		},
 	];
 
@@ -131,6 +168,16 @@
 			title: "Connection Persistence",
 			description: "Saved connections persist across app restarts. Pick up right where you left off.",
 		},
+		{
+			icon: LinkIcon,
+			title: "Connection String Mode",
+			description: "Two ways to connect: paste a connection string for quick setup, or use the detailed configuration form.",
+		},
+		{
+			icon: ShieldCheckIcon,
+			title: "SSL/TLS Configuration",
+			description: "Flexible SSL modes: disable, allow, prefer, or require. Secure your database connections with proper encryption.",
+		},
 	];
 
 	const developerExperience = [
@@ -153,6 +200,34 @@
 			icon: LayoutGridIcon,
 			title: "Resizable Panels",
 			description: "Customize your workspace with resizable sidebar and result panels to fit your workflow.",
+		},
+		{
+			icon: CommandIcon,
+			title: "Command Palette",
+			description: "Quick access with Cmd+K to execute commands, navigate tabs, switch connections, and more. Power user efficiency.",
+		},
+		{
+			icon: MousePointerClickIcon,
+			title: "Tab Context Menu",
+			description: "Right-click tabs for quick actions: close other tabs, close tabs to the right or left, close all tabs at once.",
+		},
+		{
+			icon: TriangleAlertIcon,
+			title: "Unsaved Changes Warnings",
+			description: "Never lose your work. Seaquel warns you when closing tabs with unsaved modifications.",
+		},
+		{
+			icon: RefreshCwIcon,
+			title: "Auto App Updates",
+			description: "Automatic update detection and one-click installation. Always stay on the latest version effortlessly.",
+		},
+	];
+
+	const internationalization = [
+		{
+			icon: GlobeIcon,
+			title: "Multi-Language Support",
+			description: "Available in 6 languages: English, German, French, Spanish, Arabic, and Korean. More languages coming soon.",
 		},
 	];
 </script>
@@ -191,7 +266,7 @@
 				</div>
 
 				<div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-					{#each visualTools as feature, index}
+					{#each visualTools as feature, index (feature.title)}
 						<div in:fly={{ y: 30, delay: 100 + index * 100, duration: 600 }}>
 							<Card class="h-full border-2 border-primary/20 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1 bg-linear-to-br from-primary/5 to-primary/10">
 								<CardHeader class="pb-2">
@@ -243,6 +318,12 @@
 			title="Developer Experience"
 			description="Built for developers who value efficiency and customization."
 			features={developerExperience}
+		/>
+
+		<FeatureCategory
+			title="Internationalization"
+			description="Seaquel speaks your language with full localization support."
+			features={internationalization}
 		/>
 
 		<CtaSection />
