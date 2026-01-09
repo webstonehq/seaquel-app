@@ -13,7 +13,7 @@
 		{
 			icon: NetworkIcon,
 			title: "ERD Viewer",
-			description: "Explore your database schema visually with interactive Entity Relationship Diagrams. Search tables, filter by schema, and export to PNG or SVG with one click.",
+			description: "Explore your database schema visually with interactive Entity Relationship Diagrams. Search tables, filter by schema, and export to PNG, SVG, or copy to clipboard.",
 			gradient: "from-teal-500/10 to-cyan-500/10",
 		},
 	];
