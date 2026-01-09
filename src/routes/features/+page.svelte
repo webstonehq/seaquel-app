@@ -23,7 +23,7 @@
 		ShieldIcon,
 		LockIcon,
 		KeyboardIcon,
-		SunMoonIcon,
+		PaletteIcon,
 		ChevronsLeftRightIcon,
 		TerminalIcon,
 		FolderTreeIcon,
@@ -38,6 +38,9 @@
 		TriangleAlertIcon,
 		RefreshCwIcon,
 		GlobeIcon,
+		FileCodeIcon,
+		PlugIcon,
+		ImportIcon,
 	} from "lucide-svelte";
 
 	const visualTools = [
@@ -49,12 +52,12 @@
 		{
 			icon: NetworkIcon,
 			title: "ERD Viewer",
-			description: "Interactive Entity Relationship Diagrams with table search, schema filtering, and one-click export to PNG or SVG.",
+			description: "Interactive Entity Relationship Diagrams with table search, schema filtering, and one-click export to PNG, SVG, or clipboard.",
 		},
 		{
 			icon: FolderTreeIcon,
 			title: "Schema Tree Browser",
-			description: "Navigate your database with collapsible schema groups. See row counts, distinguish tables from views, and explore structure hierarchically.",
+			description: "Navigate your database with collapsible schema groups. See row counts, distinguish tables from views, and quickly generate SELECT queries from any table.",
 		},
 		{
 			icon: TablePropertiesIcon,
@@ -88,6 +91,11 @@
 			icon: ListOrderedIcon,
 			title: "Multi-Statement Execution",
 			description: "Execute multiple SQL statements at once with live statement count. Results are displayed separately for each statement.",
+		},
+		{
+			icon: FileCodeIcon,
+			title: "Sample Queries",
+			description: "Get started quickly with pre-populated sample queries for each database type. Learn SQL patterns and explore your schema instantly.",
 		},
 	];
 
@@ -178,6 +186,16 @@
 			title: "SSL/TLS Configuration",
 			description: "Flexible SSL modes: disable, allow, prefer, or require. Secure your database connections with proper encryption.",
 		},
+		{
+			icon: PlugIcon,
+			title: "Test Connection",
+			description: "Verify your connection settings before saving. Quickly diagnose connectivity issues with detailed error feedback.",
+		},
+		{
+			icon: ImportIcon,
+			title: "DBeaver Import",
+			description: "Migrate from DBeaver effortlessly. Bulk import your existing connection configurations with one click.",
+		},
 	];
 
 	const developerExperience = [
@@ -187,9 +205,9 @@
 			description: "Comprehensive shortcuts: Cmd+Enter to execute, Cmd+S to save, Cmd+Shift+F to format, and more.",
 		},
 		{
-			icon: SunMoonIcon,
-			title: "Dark/Light Mode",
-			description: "System-aware theming with manual override. Comfortable viewing in any lighting condition.",
+			icon: PaletteIcon,
+			title: "Custom Themes",
+			description: "Choose from preset themes like Nord, or create your own. Import and export themes, with full light and dark mode support.",
 		},
 		{
 			icon: ChevronsLeftRightIcon,
