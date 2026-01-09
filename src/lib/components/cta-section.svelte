@@ -1,7 +1,18 @@
 <script lang="ts">
     import { Button } from "$lib/components/ui/button";
     import { Card } from "$lib/components/ui/card";
-    import { DownloadIcon } from "lucide-svelte";
+    import { DownloadIcon, CheckIcon, ShieldIcon, HeartIcon } from "lucide-svelte";
+    import { onMount } from "svelte";
+    import { detectPlatform, detectArchitecture, getDownloadUrl, type Platform, type Architecture } from "$lib/utils";
+
+    let platform: Platform = $state("unknown");
+    let arch: Architecture = $state("unknown");
+    let downloadUrl = $derived(getDownloadUrl(platform, arch));
+
+    onMount(() => {
+        platform = detectPlatform();
+        arch = detectArchitecture();
+    });
 </script>
 
 <section class="py-20 md:py-32">
@@ -23,25 +34,41 @@
                 <h2
                     class="text-3xl md:text-5xl font-bold tracking-tight max-w-3xl"
                 >
-                    Ready to Transform Your Database Workflow?
+                    Stop Fighting Your Database Client
                 </h2>
                 <p class="text-lg text-muted-foreground max-w-2xl">
-                    Join thousands of developers who've already made the switch
-                    to faster, smarter database management.
+                    Experience what a database client should feel like. Fast, lightweight, and built with the features you actually need.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <Button href="https://github.com/webstonehq/seaquel/releases" size="lg" class="text-base px-8 shadow-lg-lg-lg-lg shadow-lg-lg-lg-primary/25">
-						<DownloadIcon class="mr-2" />
-						Download Now
-					</Button>
-                    <!-- <Button size="lg" variant="outline" class="text-base px-8">
-						View Documentation
-						<ArrowRightIcon class="ml-2" />
-					</Button> -->
+
+                <!-- Trust Signals -->
+                <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 pt-4 text-sm text-muted-foreground">
+                    <div class="flex items-center gap-2">
+                        <CheckIcon class="size-4 text-green-500" />
+                        <span>Free forever</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <CheckIcon class="size-4 text-green-500" />
+                        <span>No account required</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <ShieldIcon class="size-4 text-green-500" />
+                        <span>100% local - no telemetry</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <HeartIcon class="size-4 text-green-500" />
+                        <span>Open source</span>
+                    </div>
                 </div>
-                <p class="text-sm text-muted-foreground pt-4">
-                    Free forever • No credit card required • Available for
-                    macOS. Windows & Linux by December 31, 2025
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <Button href={downloadUrl} size="lg" class="text-base px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
+                        <DownloadIcon class="mr-2" />
+                        Download Now
+                    </Button>
+                </div>
+
+                <p class="text-sm text-muted-foreground pt-2">
+                    Available for macOS & Linux today. Windows coming Q1 2026.
                 </p>
             </div>
         </Card>

@@ -1,8 +1,19 @@
 <script lang="ts">
     import { Button } from "$lib/components/ui/button";
-    import { DownloadIcon, GithubIcon, SparklesIcon } from "lucide-svelte";
+    import { DownloadIcon, GithubIcon, HeartIcon } from "lucide-svelte";
     import { fly, fade } from "svelte/transition";
+    import { onMount } from "svelte";
+    import { detectPlatform, detectArchitecture, getDownloadUrl, getPlatformLabel, type Platform, type Architecture } from "$lib/utils";
     import productUi from "$lib/assets/seaquel-product-ui.webp";
+
+    let platform: Platform = $state("unknown");
+    let arch: Architecture = $state("unknown");
+    let downloadUrl = $derived(getDownloadUrl(platform, arch));
+
+    onMount(() => {
+        platform = detectPlatform();
+        arch = detectArchitecture();
+    });
 </script>
 
 <section
@@ -23,8 +34,8 @@
                 <div
                     class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary border border-primary/20"
                 >
-                    <SparklesIcon class="size-4" />
-                    <span>Built with Tauri & SvelteKit</span>
+                    <HeartIcon class="size-4" />
+                    <span>Free & Open Source</span>
                 </div>
             </div>
 
@@ -36,10 +47,10 @@
                 <h1
                     class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight"
                 >
-                    Database Management,
+                    The Database Client
                     <span
                         class="bg-linear-to-r from-primary via-accent-foreground to-primary bg-clip-text text-transparent"
-                        >Reimagined</span
+                        >Developers Actually Want</span
                     >
                 </h1>
                 <p
@@ -53,15 +64,24 @@
 
             <!-- CTA buttons -->
             <div class="flex flex-col sm:flex-row gap-4 pt-4" in:fly={{ y: 20, delay: 400, duration: 600 }}>
-				<Button href="https://github.com/webstonehq/seaquel/releases" size="lg" class="text-base px-8 shadow-lg-lg shadow-lg-primary/25 hover:shadow-lg-xl hover:shadow-lg-primary/30 transition-all duration-300">
-					<DownloadIcon class="mr-2" />
-					Download for Free
-				</Button>
-				<Button href="https://github.com/webstonehq/seaquel" size="lg" variant="outline" class="text-base px-8">
-					<GithubIcon class="mr-2" />
-					View on GitHub
-				</Button>
-			</div>
+                <Button href={downloadUrl} size="lg" class="text-base px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 group">
+                    <DownloadIcon class="mr-2 group-hover:scale-110 transition-transform" />
+                    {#if platform === 'macos'}
+                        Download for macOS
+                    {:else if platform === 'linux'}
+                        Download for Linux
+                    {:else if platform === 'windows'}
+                        Download for Windows
+                        <span class="ml-2 text-xs opacity-70">(Coming Soon)</span>
+                    {:else}
+                        Download for Free
+                    {/if}
+                </Button>
+                <Button href="https://github.com/webstonehq/seaquel" size="lg" variant="outline" class="text-base px-8">
+                    <GithubIcon class="mr-2" />
+                    View on GitHub
+                </Button>
+            </div>
 
             <!-- Stats or trust indicators -->
             <div
@@ -75,12 +95,18 @@
                     <div class="text-sm text-muted-foreground">
                         More Efficient
                     </div>
+                    <div class="text-xs text-muted-foreground/60">
+                        vs. Electron apps
+                    </div>
                 </div>
                 <div class="space-y-1">
                     <div class="text-3xl md:text-4xl font-bold text-primary">
                         50%
                     </div>
                     <div class="text-sm text-muted-foreground">Less Memory</div>
+                    <div class="text-xs text-muted-foreground/60">
+                        vs. DBeaver
+                    </div>
                 </div>
                 <div class="space-y-1">
                     <div class="text-3xl md:text-4xl font-bold text-primary">
@@ -88,6 +114,9 @@
                     </div>
                     <div class="text-sm text-muted-foreground">
                         Offline Ready
+                    </div>
+                    <div class="text-xs text-muted-foreground/60">
+                        No cloud required
                     </div>
                 </div>
             </div>
@@ -105,7 +134,7 @@
 
                     <!-- Screenshot container -->
                     <div
-                        class="relative rounded-2xl overflow-hidden border-2 border-primary/20 shadow-lg-2xl bg-card"
+                        class="relative rounded-2xl overflow-hidden border-2 border-primary/20 shadow-2xl bg-card"
                     >
                         <!-- Screenshot image -->
                         <enhanced:img
