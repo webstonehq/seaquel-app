@@ -4,7 +4,6 @@
     import { fly, fade } from "svelte/transition";
     import { onMount } from "svelte";
     import { detectPlatform, detectArchitecture, getDownloadUrl, getPlatformLabel, type Platform, type Architecture } from "$lib/utils";
-    import productUi from "$lib/assets/seaquel-product-ui.webp";
 
     let platform: Platform = $state("unknown");
     let arch: Architecture = $state("unknown");
@@ -121,7 +120,7 @@
                 </div>
             </div>
 
-            <!-- Product Screenshot -->
+            <!-- Product demo -->
             <div
                 class="w-full max-w-6xl pt-12"
                 in:fly={{ y: 40, delay: 800, duration: 800 }}
@@ -132,21 +131,15 @@
                         class="absolute -inset-1 bg-linear-to-r from-primary via-accent to-primary rounded-2xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"
                     ></div>
 
-                    <!-- Screenshot container -->
                     <div
                         class="relative rounded-2xl overflow-hidden border-2 border-primary/20 shadow-2xl bg-card"
                     >
-                        <!-- Screenshot image -->
-                        <enhanced:img
-                            src={productUi}
-                            alt="Seaquel Database Client Interface"
-                            class="w-full h-auto aspect-16/10 object-cover"
-                        />
-
-                        <!-- Overlay gradient for depth -->
-                        <div
-                            class="absolute inset-0 bg-linear-to-t from-background/20 via-transparent to-transparent pointer-events-none"
-                        ></div>
+                        <iframe
+                            src="/demo/"
+                            title="Seaquel Demo - Interactive Database Client"
+                            class="w-full aspect-video border-0"
+                            loading="lazy"
+                        ></iframe>
                     </div>
                 </div>
             </div>
