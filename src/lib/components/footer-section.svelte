@@ -84,7 +84,7 @@
                     </li>
                     <li>
                         <a
-                            href="https://github.com/webstonehq/seaquel/releases"
+                            href="/changelog"
                             class="hover:text-foreground transition-colors"
                             >Changelog</a
                         >
