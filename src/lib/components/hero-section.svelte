@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button } from "$lib/components/ui/button";
-    import { DownloadIcon, GithubIcon, HeartIcon } from "lucide-svelte";
+    import { DownloadIcon, GithubIcon, HeartIcon, MousePointerClickIcon } from "lucide-svelte";
     import { fly, fade } from "svelte/transition";
     import { onMount } from "svelte";
     import { detectPlatform, detectArchitecture, getDownloadUrl, getPlatformLabel, type Platform, type Architecture } from "$lib/utils";
@@ -8,11 +8,20 @@
     let platform: Platform = $state("unknown");
     let arch: Architecture = $state("unknown");
     let downloadUrl = $derived(getDownloadUrl(platform, arch));
+    let showCursorHint = $state(true);
+
+    let iframeRef: HTMLIFrameElement;
 
     onMount(() => {
         platform = detectPlatform();
         arch = detectArchitecture();
     });
+
+    function dismissHint() {
+        showCursorHint = false;
+        // Focus the iframe so user can interact immediately
+        iframeRef?.focus();
+    }
 </script>
 
 <section
@@ -122,10 +131,15 @@
 
             <!-- Product demo -->
             <div
-                class="w-full max-w-6xl pt-12"
+                class="w-full max-w-6xl pt-12 flex flex-col items-center"
                 in:fly={{ y: 40, delay: 800, duration: 800 }}
             >
-                <div class="relative group">
+                <!-- Interactive demo label -->
+                <div class="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent-foreground border border-accent/20 mb-4">
+                    <MousePointerClickIcon class="size-4" />
+                    <span>Interactive Demo</span>
+                </div>
+                <div class="relative group w-full">
                     <!-- Glow effect -->
                     <div
                         class="absolute -inset-1 bg-linear-to-r from-primary via-accent to-primary rounded-2xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"
@@ -134,7 +148,23 @@
                     <div
                         class="relative rounded-2xl overflow-hidden border-2 border-primary/20 shadow-2xl bg-card"
                     >
+                        {#if showCursorHint}
+                            <button
+                                class="absolute inset-0 flex items-center justify-center z-10 cursor-pointer bg-transparent border-0"
+                                transition:fade={{ duration: 300 }}
+                                onclick={dismissHint}
+                                aria-label="Click to interact with demo"
+                            >
+                                <div class="flex items-center gap-2 animate-bounce">
+                                    <MousePointerClickIcon class="size-12 text-primary drop-shadow-lg" />
+                                    <span class="text-sm font-medium text-foreground bg-background/80 px-3 py-1.5 rounded-full shadow-lg">
+                                        Live app — click to explore
+                                    </span>
+                                </div>
+                            </button>
+                        {/if}
                         <iframe
+                            bind:this={iframeRef}
                             src="/demo/"
                             title="Seaquel Demo - Interactive Database Client"
                             class="w-full aspect-video border-0"
@@ -142,6 +172,10 @@
                         ></iframe>
                     </div>
                 </div>
+
+                <p class="text-sm text-muted-foreground mt-4">
+                    Click anywhere to start exploring
+                </p>
             </div>
         </div>
     </div>
