@@ -28,8 +28,8 @@
 
 			<!-- Navigation - Desktop -->
 			<nav class="hidden md:flex items-center gap-6">
-				<a href="/#features" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Features</a>
-				<a href="/features" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">All Features</a>
+				<a href="/features" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Features</a>
+				<a href="/changelog" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Changelog</a>
 				<a href="https://github.com/webstonehq/seaquel" target="_blank" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5">
 					<GithubIcon class="size-4" />
 					GitHub
