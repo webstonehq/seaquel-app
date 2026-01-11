@@ -45,7 +45,7 @@ export async function getChangelogEntries(): Promise<ChangelogEntry[]> {
 	}
 
 	// Sort by date descending (newest first)
-	return entries.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+	return entries.sort((a, b) => b.slug.localeCompare(a.slug));
 }
 
 /**
