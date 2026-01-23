@@ -1,9 +1,23 @@
 <script lang="ts">
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
-	import { ZapIcon, CpuIcon, WifiOffIcon, BrainCircuitIcon, DatabaseIcon, ShieldCheckIcon, ActivityIcon, NetworkIcon } from "lucide-svelte";
+	import { ZapIcon, CpuIcon, WifiOffIcon, BrainCircuitIcon, DatabaseIcon, ShieldCheckIcon, ActivityIcon, NetworkIcon, LayoutDashboardIcon, GitBranchIcon, BarChart3Icon } from "lucide-svelte";
 	import { fly } from "svelte/transition";
 
 	const heroFeatures = [
+		{
+			icon: LayoutDashboardIcon,
+			title: "Canvas Workspace",
+			description: "Build analysis workflows visually. Drag tables, write queries, view results, and create charts on an infinite canvas - all connected and auto-updating.",
+			gradient: "from-indigo-500/10 to-violet-500/10",
+			badge: "New in 2026.3",
+		},
+		{
+			icon: GitBranchIcon,
+			title: "Query Visualizer",
+			description: "See your SQL as visual diagrams. Understand JOINs, WHERE clauses, and SELECT columns at a glance with automatic AST parsing.",
+			gradient: "from-emerald-500/10 to-teal-500/10",
+			badge: "New in 2026.3",
+		},
 		{
 			icon: ActivityIcon,
 			title: "Visual Query Plans",
@@ -56,6 +70,12 @@
 			title: "Secure by Design",
 			description: "Your credentials stay on your machine, encrypted with modern standards. No accounts, no cloud sync, no telemetry. Just privacy.",
 			gradient: "from-red-500/10 to-rose-500/10",
+		},
+		{
+			icon: BarChart3Icon,
+			title: "Built-in Charts",
+			description: "Turn query results into Bar, Line, Pie, and Scatter charts instantly. Configure axes and groupings with an intuitive UI.",
+			gradient: "from-amber-500/10 to-orange-500/10",
 		},
 	];
 </script>

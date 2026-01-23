@@ -41,9 +41,28 @@
 		FileCodeIcon,
 		PlugIcon,
 		ImportIcon,
+		LayoutDashboardIcon,
+		GitBranchIcon,
+		BarChart3Icon,
+		LineChartIcon,
+		PieChartIcon,
+		ScatterChartIcon,
+		TrendingUpIcon,
+		FlameIcon,
+		HardDriveIcon,
 	} from "lucide-svelte";
 
 	const visualTools = [
+		{
+			icon: LayoutDashboardIcon,
+			title: "Canvas Workspace",
+			description: "An infinite visual canvas powered by XYFlow. Drag tables to inspect data, write SQL in query nodes, view results, and create charts - all connected in a visual workflow.",
+		},
+		{
+			icon: GitBranchIcon,
+			title: "Query Visualizer",
+			description: "SQL queries parsed into visual diagrams showing table relationships, JOINs, WHERE clauses, and SELECT projections. Access via the Visualize tab in the editor.",
+		},
 		{
 			icon: ActivityIcon,
 			title: "Visual Query Plans",
@@ -96,6 +115,11 @@
 			icon: FileCodeIcon,
 			title: "Sample Queries",
 			description: "Get started quickly with pre-populated sample queries for each database type. Learn SQL patterns and explore your schema instantly.",
+		},
+		{
+			icon: FlameIcon,
+			title: "Hot Path Analysis",
+			description: "Automatic bottleneck detection highlights expensive operations with severity indicators (green, yellow, red).",
 		},
 	];
 
@@ -196,6 +220,11 @@
 			title: "DBeaver Import",
 			description: "Migrate from DBeaver effortlessly. Bulk import your existing connection configurations with one click.",
 		},
+		{
+			icon: HardDriveIcon,
+			title: "DuckDB Desktop Support",
+			description: "Full support for DuckDB connections in the desktop app. Fast, embedded analytics at your fingertips.",
+		},
 	];
 
 	const developerExperience = [
@@ -246,6 +275,47 @@
 			icon: GlobeIcon,
 			title: "Multi-Language Support",
 			description: "Available in 6 languages: English, German, French, Spanish, Arabic, and Korean. More languages coming soon.",
+		},
+	];
+
+	const dataVisualization = [
+		{
+			icon: BarChart3Icon,
+			title: "Bar Charts",
+			description: "Create bar charts from query results with configurable axes and groupings.",
+		},
+		{
+			icon: LineChartIcon,
+			title: "Line Charts",
+			description: "Visualize trends over time. Auto-updates when connected to query results on the canvas.",
+		},
+		{
+			icon: PieChartIcon,
+			title: "Pie Charts",
+			description: "Display proportional data with configurable segments and labels.",
+		},
+		{
+			icon: ScatterChartIcon,
+			title: "Scatter Charts",
+			description: "Plot relationships between variables and identify correlations visually.",
+		},
+	];
+
+	const statisticsDashboard = [
+		{
+			icon: GaugeIcon,
+			title: "Database Metrics",
+			description: "View database size, table counts, and total row counts at a glance.",
+		},
+		{
+			icon: TrendingUpIcon,
+			title: "Index Usage Monitoring",
+			description: "Monitor index utilization to identify optimization opportunities.",
+		},
+		{
+			icon: DatabaseIcon,
+			title: "Multi-Database Statistics",
+			description: "Statistics available for both DuckDB and PostgreSQL connections.",
 		},
 	];
 </script>
@@ -306,6 +376,19 @@
 		</section>
 
 		<!-- Feature Categories -->
+		<FeatureCategory
+			title="Data Visualization"
+			description="Transform your query results into meaningful charts."
+			features={dataVisualization}
+		/>
+
+		<FeatureCategory
+			title="Statistics Dashboard"
+			description="Monitor your database health and performance at a glance."
+			features={statisticsDashboard}
+			variant="highlight"
+		/>
+
 		<FeatureCategory
 			title="Query Editor"
 			description="A powerful, professional-grade SQL editor with all the features you'd expect."
