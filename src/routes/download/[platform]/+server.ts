@@ -5,11 +5,21 @@ const FALLBACK_URL = "https://github.com/webstonehq/seaquel/releases";
 
 // Asset name patterns for each platform (standard Tauri naming)
 const ASSET_PATTERNS: Record<string, RegExp> = {
-	"macos": /\.dmg$/i,           // Default macOS (will prefer aarch64)
-	"macos-arm": /aarch64\.dmg$/i, // Apple Silicon
-	"macos-intel": /x64\.dmg$/i,   // Intel Mac
-	"windows": /\.(exe|msi)$/i,    // Windows installer
-	"linux": /\.(AppImage|deb)$/i, // Linux
+	// macOS
+	"macos": /\.dmg$/i,            // Default macOS (will prefer aarch64)
+	"macos-arm": /aarch64.*\.dmg$/i, // Apple Silicon
+	"macos-intel": /x64.*\.dmg$/i,   // Intel Mac
+
+	// Windows
+	"windows": /\.(exe|msi)$/i,      // Windows installer (generic)
+	"windows-msi": /x64.*\.msi$/i,   // MSI installer
+	"windows-nsis": /x64.*setup\.exe$/i, // NSIS installer
+
+	// Linux
+	"linux": /\.(AppImage|deb)$/i,   // Linux (generic)
+	"linux-deb": /amd64\.deb$/i,     // Debian/Ubuntu
+	"linux-rpm": /x86_64\.rpm$/i,    // Fedora/RHEL
+	"linux-appimage": /amd64\.AppImage$/i, // AppImage
 };
 
 interface GitHubAsset {

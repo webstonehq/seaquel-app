@@ -1,20 +1,11 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button";
 	import ThemeToggle from "$lib/components/theme-toggle.svelte";
-	import { GithubIcon, DownloadIcon, MenuIcon, XIcon } from "lucide-svelte";
-	import { onMount } from "svelte";
-	import { detectPlatform, detectArchitecture, getDownloadUrl, type Platform, type Architecture } from "$lib/utils";
+	import DownloadDropdown from "$lib/components/download-dropdown.svelte";
+	import { GithubIcon, MenuIcon, XIcon } from "lucide-svelte";
 	import Logo from "./logo.svelte";
 
 	let mobileMenuOpen = $state(false);
-	let platform: Platform = $state("unknown");
-	let arch: Architecture = $state("unknown");
-	let downloadUrl = $derived(getDownloadUrl(platform, arch));
-
-	onMount(() => {
-		platform = detectPlatform();
-		arch = detectArchitecture();
-	});
 </script>
 
 <header class="fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-md">
@@ -41,14 +32,9 @@
 				<ThemeToggle />
 
 				<!-- Download CTA - Desktop Only -->
-				<Button
-					href={downloadUrl}
-					size="sm"
-					class="hidden md:inline-flex gap-2"
-				>
-					<DownloadIcon class="size-4" />
-					Download
-				</Button>
+				<div class="hidden md:block">
+					<DownloadDropdown size="sm" />
+				</div>
 
 				<!-- Mobile Menu Toggle -->
 				<Button
@@ -76,10 +62,7 @@
 						<GithubIcon class="size-4" />
 						GitHub
 					</a>
-					<Button href={downloadUrl} class="w-full gap-2">
-						<DownloadIcon class="size-4" />
-						Download for Free
-					</Button>
+					<DownloadDropdown class="w-full" />
 				</nav>
 			</div>
 		{/if}

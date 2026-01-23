@@ -1,21 +1,11 @@
 <script lang="ts">
     import { Button } from "$lib/components/ui/button";
-    import { DownloadIcon, GithubIcon, HeartIcon, MousePointerClickIcon } from "lucide-svelte";
+    import DownloadDropdown from "$lib/components/download-dropdown.svelte";
+    import { GithubIcon, HeartIcon, MousePointerClickIcon } from "lucide-svelte";
     import { fly, fade } from "svelte/transition";
-    import { onMount } from "svelte";
-    import { detectPlatform, detectArchitecture, getDownloadUrl, getPlatformLabel, type Platform, type Architecture } from "$lib/utils";
 
-    let platform: Platform = $state("unknown");
-    let arch: Architecture = $state("unknown");
-    let downloadUrl = $derived(getDownloadUrl(platform, arch));
     let showCursorHint = $state(true);
-
     let iframeRef: HTMLIFrameElement;
-
-    onMount(() => {
-        platform = detectPlatform();
-        arch = detectArchitecture();
-    });
 
     function dismissHint() {
         showCursorHint = false;
@@ -72,19 +62,7 @@
 
             <!-- CTA buttons -->
             <div class="flex flex-col sm:flex-row gap-4 pt-4" in:fly={{ y: 20, delay: 400, duration: 600 }}>
-                <Button href={downloadUrl} size="lg" class="text-base px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 group">
-                    <DownloadIcon class="mr-2 group-hover:scale-110 transition-transform" />
-                    {#if platform === 'macos'}
-                        Download for macOS
-                    {:else if platform === 'linux'}
-                        Download for Linux
-                    {:else if platform === 'windows'}
-                        Download for Windows
-                        <span class="ml-2 text-xs opacity-70">(Coming Soon)</span>
-                    {:else}
-                        Download for Free
-                    {/if}
-                </Button>
+                <DownloadDropdown size="lg" class="text-base px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" />
                 <Button href="https://github.com/webstonehq/seaquel" size="lg" variant="outline" class="text-base px-8">
                     <GithubIcon class="mr-2" />
                     View on GitHub
