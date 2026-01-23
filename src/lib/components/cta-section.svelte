@@ -1,18 +1,7 @@
 <script lang="ts">
-    import { Button } from "$lib/components/ui/button";
     import { Card } from "$lib/components/ui/card";
-    import { DownloadIcon, CheckIcon, ShieldIcon, HeartIcon } from "lucide-svelte";
-    import { onMount } from "svelte";
-    import { detectPlatform, detectArchitecture, getDownloadUrl, type Platform, type Architecture } from "$lib/utils";
-
-    let platform: Platform = $state("unknown");
-    let arch: Architecture = $state("unknown");
-    let downloadUrl = $derived(getDownloadUrl(platform, arch));
-
-    onMount(() => {
-        platform = detectPlatform();
-        arch = detectArchitecture();
-    });
+    import DownloadDropdown from "$lib/components/download-dropdown.svelte";
+    import { CheckIcon, ShieldIcon, HeartIcon } from "lucide-svelte";
 </script>
 
 <section class="py-20 md:py-32">
@@ -61,10 +50,7 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <Button href={downloadUrl} size="lg" class="text-base px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
-                        <DownloadIcon class="mr-2" />
-                        Download Now
-                    </Button>
+                    <DownloadDropdown size="lg" label="Download Now" class="text-base px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" />
                 </div>
 
                 <p class="text-sm text-muted-foreground pt-2">

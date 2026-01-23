@@ -1,25 +1,8 @@
 <script lang="ts">
     import { GithubIcon, DownloadIcon } from "lucide-svelte";
     import { Button } from "$lib/components/ui/button";
-    import { onMount } from "svelte";
-    import {
-        detectPlatform,
-        detectArchitecture,
-        getDownloadUrl,
-        type Platform,
-        type Architecture,
-    } from "$lib/utils";
     import Logo from "./logo.svelte";
     import LogoDiscord from "./logo-discord.svelte";
-
-    let platform: Platform = $state("unknown");
-    let arch: Architecture = $state("unknown");
-    let downloadUrl = $derived(getDownloadUrl(platform, arch));
-
-    onMount(() => {
-        platform = detectPlatform();
-        arch = detectArchitecture();
-    });
 </script>
 
 <footer class="border-t bg-muted/30">
@@ -77,7 +60,7 @@
                     </li>
                     <li>
                         <a
-                            href={downloadUrl}
+                            href="/download"
                             class="hover:text-foreground transition-colors"
                             >Download</a
                         >
@@ -132,7 +115,7 @@
                 &copy; {new Date().getFullYear()} Seaquel. MIT Licensed.
             </p>
             <Button
-                href={downloadUrl}
+                href="/download"
                 variant="outline"
                 size="sm"
                 class="gap-2"
