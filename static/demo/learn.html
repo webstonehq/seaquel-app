@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./favicon.png" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1"
+		/>
+		<title>Tauri + SvelteKit + Typescript App</title>
+		<script>
+			// Prevent flash of wrong theme on initial load
+			(function() {
+				var root = document.documentElement;
+
+				// Handle dark mode
+				var mode = localStorage.getItem('mode-watcher-mode');
+				var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				var isDark = mode === 'dark' || (mode === 'system' && prefersDark) || (!mode && prefersDark);
+				if (isDark) {
+					root.classList.add('dark');
+					root.style.colorScheme = 'dark';
+				}
+
+				// Apply cached theme colors
+				try {
+					var cached = localStorage.getItem('seaquel-theme-cache');
+					if (cached) {
+						var theme = JSON.parse(cached);
+						if (theme.colors) {
+							// Map of property names to CSS variable names
+							var varMap = {
+								background: '--background',
+								foreground: '--foreground',
+								card: '--card',
+								cardForeground: '--card-foreground',
+								popover: '--popover',
+								popoverForeground: '--popover-foreground',
+								primary: '--primary',
+								primaryForeground: '--primary-foreground',
+								secondary: '--secondary',
+								secondaryForeground: '--secondary-foreground',
+								muted: '--muted',
+								mutedForeground: '--muted-foreground',
+								accent: '--accent',
+								accentForeground: '--accent-foreground',
+								destructive: '--destructive',
+								border: '--border',
+								input: '--input',
+								ring: '--ring',
+								chart1: '--chart-1',
+								chart2: '--chart-2',
+								chart3: '--chart-3',
+								chart4: '--chart-4',
+								chart5: '--chart-5',
+								sidebar: '--sidebar',
+								sidebarForeground: '--sidebar-foreground',
+								sidebarPrimary: '--sidebar-primary',
+								sidebarPrimaryForeground: '--sidebar-primary-foreground',
+								sidebarAccent: '--sidebar-accent',
+								sidebarAccentForeground: '--sidebar-accent-foreground',
+								sidebarBorder: '--sidebar-border',
+								sidebarRing: '--sidebar-ring'
+							};
+
+							for (var key in varMap) {
+								if (theme.colors[key]) {
+									root.style.setProperty(varMap[key], theme.colors[key]);
+								}
+							}
+						}
+					}
+				} catch (e) {
+					// Ignore cache errors
+				}
+			})();
+		</script>
+		
+		<link rel="modulepreload" href="./_app/immutable/entry/start.BCvzYMWz.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/CBhLCIkr.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/RtNAYh7v.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.yGS3r4Rb.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/Cezg9DFx.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/CifI9K24.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/vJbyZA0Y.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/G68d9aZ3.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/Bzak7iHL.js">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">
+			<script>
+				{
+					__sveltekit_1de2ybc = {
+						base: new URL(".", location).pathname.slice(0, -1),
+						assets: "/demo"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("./_app/immutable/entry/start.BCvzYMWz.js"),
+						import("./_app/immutable/entry/app.yGS3r4Rb.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
