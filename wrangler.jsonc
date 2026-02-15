@@ -1,5 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
+  "account_id": "13a7056687683b5912ad023317f3db40",
   "name": "seaquel-app",
   "main": ".svelte-kit/cloudflare/_worker.js",
   "compatibility_date": "2025-12-18",
@@ -29,4 +30,11 @@
       "persist": true,
     },
   },
+  "d1_databases": [
+    {
+      "binding": "SEAQUEL_DB",
+      "database_name": "seaquel-db",
+      "database_id": "5304ee29-52f5-4995-96e2-f5683809099f",
+    },
+  ],
 }

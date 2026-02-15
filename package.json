@@ -13,6 +13,7 @@
 		"demo:update": "(rm -fr ./static/demo && cd ../../seaquel/ && npm run build:demo && cp -r ./build-demo ../seaquel-app/main/static/demo)"
 	},
 	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20260214.0",
 		"@internationalized/date": "^3.10.1",
 		"@lucide/svelte": "^0.561.0",
 		"@nerdfolio/remult-better-auth": "^0.3.3",
