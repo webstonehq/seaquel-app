@@ -31,8 +31,13 @@
         currency: string;
     } | null>(null);
 
-    function formatAmount(cents: number) {
-        return (cents / 100).toFixed(2);
+    function formatPrice(cents: number): string {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: data.plan.currency,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: cents % 100 === 0 ? 0 : 2,
+        }).format(cents / 100);
     }
 
     // Hold a reference to the DodoPayments module once loaded
@@ -190,9 +195,9 @@
                         {#if step === "checkout"}
                             {data.plan.name} &mdash;
                             {#if data.plan.allowMultipleUnits && units > 1}
-                                {units} seats &times; USD {data.plan.price} =
+                                {units} seats &times; {data.plan.formattedPrice} =
                             {/if}
-                            USD {total} / year
+                            {formatPrice(total)} {data.plan.period}
                         {:else}
                             {data.plan.description}
                         {/if}
@@ -232,7 +237,7 @@
                                         <p
                                             class="text-sm text-muted-foreground mt-0.5"
                                         >
-                                            USD {data.plan.price} per seat per year
+                                            {data.plan.formattedPrice} per seat per year
                                         </p>
                                     </div>
                                     <div class="flex items-center gap-1">
@@ -275,18 +280,17 @@
                                     <div class="flex items-baseline gap-1.5">
                                         <span
                                             class="text-4xl font-bold tracking-tight"
-                                            >USD {total}</span
+                                            >{formatPrice(total)}</span
                                         >
                                         <span class="text-muted-foreground"
-                                            >/ year</span
+                                            >{data.plan.period}</span
                                         >
                                     </div>
                                     {#if data.plan.allowMultipleUnits && units > 1}
                                         <p
                                             class="text-sm text-muted-foreground mt-1"
                                         >
-                                            {units} seats &times; USD {data.plan
-                                                .price}
+                                            {units} seats &times; {data.plan.formattedPrice}
                                         </p>
                                     {/if}
                                 </div>
@@ -353,7 +357,7 @@
                                             &nbsp;&times; {units} seats
                                         {/if}
                                     </span>
-                                    <span>USD {total}</span>
+                                    <span>{formatPrice(total)}</span>
                                 </div>
 
                                 <div
@@ -361,9 +365,9 @@
                                 >
                                     <span>Total (incl. tax)</span>
                                     {#if breakdown}
-                                        <span>{breakdown.currency} {formatAmount(breakdown.total)}</span>
+                                        <span>{new Intl.NumberFormat('en-US', { style: 'currency', currency: breakdown.currency, minimumFractionDigits: 2 }).format(breakdown.total / 100)}</span>
                                     {:else}
-                                        <span>USD {total}</span>
+                                        <span>{formatPrice(total)}</span>
                                     {/if}
                                 </div>
                             </div>
