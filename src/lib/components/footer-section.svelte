@@ -60,6 +60,13 @@
                     </li>
                     <li>
                         <a
+                            href="/pricing"
+                            class="hover:text-foreground transition-colors"
+                            >Pricing</a
+                        >
+                    </li>
+                    <li>
+                        <a
                             href="/download"
                             class="hover:text-foreground transition-colors"
                             >Download</a
@@ -111,9 +118,15 @@
         <div
             class="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4"
         >
-            <p class="text-sm text-muted-foreground">
-                &copy; {new Date().getFullYear()} Seaquel. MIT Licensed.
-            </p>
+            <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+                <p class="text-sm text-muted-foreground">
+                    &copy; {new Date().getFullYear()} Seaquel. MIT Licensed.
+                </p>
+                <div class="flex items-center gap-4 text-sm text-muted-foreground">
+                    <a href="/terms" class="hover:text-foreground transition-colors">Terms</a>
+                    <a href="/privacy" class="hover:text-foreground transition-colors">Privacy</a>
+                </div>
+            </div>
             <Button
                 href="/download"
                 variant="outline"

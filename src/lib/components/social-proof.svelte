@@ -49,10 +49,10 @@
 				<span class="font-medium">100% Open Source</span>
 			</div>
 
-			<!-- Made By Developers -->
+			<!-- Made By A Developers -->
 			<div class="flex items-center gap-2 text-muted-foreground">
 				<UsersIcon class="size-5" />
-				<span class="font-medium">Made by developers, for developers</span>
+				<span class="font-medium">Made by a developer, for developers</span>
 			</div>
 		</div>
 	</div>

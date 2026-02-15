@@ -1,4 +1,5 @@
 import { dev } from "$app/environment";
+import { remult } from "remult";
 import type { LayoutServerLoad } from "./$types";
 
 const ONE_MINUTE = 60;
@@ -13,5 +14,5 @@ export const load: LayoutServerLoad = ({ setHeaders }) => {
       Vary: "Accept-Encoding",
     });
   }
-  return {};
+  return { user: remult.user };
 };

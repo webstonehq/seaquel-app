@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
 	import { fly } from "svelte/transition";
-	import type { Component } from "svelte";
+	import type { Component, ComponentType, SvelteComponent } from "svelte";
 
 	interface Feature {
-		icon: Component;
+		icon: Component<any> | ComponentType<SvelteComponent<any>>;
 		title: string;
 		description: string;
 	}

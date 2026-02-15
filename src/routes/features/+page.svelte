@@ -50,6 +50,19 @@
 		TrendingUpIcon,
 		FlameIcon,
 		HardDriveIcon,
+		GraduationCapIcon,
+		BookOpenIcon,
+		BoxesIcon,
+		UsersIcon,
+		GitForkIcon,
+		FolderGit2Icon,
+		SlidersHorizontalIcon,
+		BracesIcon,
+		ToggleLeftIcon,
+		ArrowLeftRightIcon,
+		AsteriskIcon,
+		FunctionSquareIcon,
+		MonitorIcon,
 	} from "lucide-svelte";
 
 	const visualTools = [
@@ -270,11 +283,85 @@
 		},
 	];
 
+	const learnSql = [
+		{
+			icon: GraduationCapIcon,
+			title: "Interactive Tutorials",
+			description: "Structured lessons covering SELECT, WHERE, JOINs, aggregates, and more. Each lesson includes progressive challenges that validate your queries in real time.",
+		},
+		{
+			icon: BoxesIcon,
+			title: "Visual Query Sandbox",
+			description: "A drag-and-drop canvas where you build queries visually by placing table nodes, connecting JOINs, and configuring filters — with live SQL generation.",
+		},
+		{
+			icon: BookOpenIcon,
+			title: "Practice Database",
+			description: "A built-in e-commerce sample database so you can start learning immediately without setting up your own data.",
+		},
+	];
+
+	const sharedQueryLibrary = [
+		{
+			icon: GitForkIcon,
+			title: "Git-Synced Repositories",
+			description: "Share SQL queries across your team with Git-backed query repositories. Push and pull query collections to keep everyone in sync.",
+		},
+		{
+			icon: FolderGit2Icon,
+			title: "Managed Repositories",
+			description: "Browse, search, and organize shared queries directly from the Manage panel without leaving Seaquel.",
+		},
+		{
+			icon: UsersIcon,
+			title: "Team Collaboration",
+			description: "Build a shared library of queries your whole team can rely on. Review, update, and version control your SQL together.",
+		},
+	];
+
+	const queryBuilder = [
+		{
+			icon: FunctionSquareIcon,
+			title: "Aggregate Functions",
+			description: "Add COUNT, SUM, AVG, MIN, and MAX aggregates per column from the filter panel or directly on table nodes in the canvas.",
+		},
+		{
+			icon: BracesIcon,
+			title: "Variable Support",
+			description: "Use {{variables}} in WHERE filter values and LIMIT inputs for reusable, parameterized queries.",
+		},
+		{
+			icon: ToggleLeftIcon,
+			title: "Boolean Operators",
+			description: "Toggle between AND/OR operators in WHERE clauses for more expressive filter conditions.",
+		},
+		{
+			icon: AsteriskIcon,
+			title: "SELECT * Expansion",
+			description: "Expand wildcard selects into explicit column lists with one click for precise control over your output.",
+		},
+		{
+			icon: ArrowLeftRightIcon,
+			title: "Two-Way SQL Sync",
+			description: "Edit SQL directly or use the visual builder — changes sync both ways in real time so you never lose context.",
+		},
+		{
+			icon: SlidersHorizontalIcon,
+			title: "Pluggable Execution",
+			description: "A unified query editor architecture with pluggable execution backends, powering both the main workspace and the tutorial sandbox.",
+		},
+	];
+
 	const internationalization = [
 		{
 			icon: GlobeIcon,
 			title: "Multi-Language Support",
 			description: "Available in 6 languages: English, German, French, Spanish, Arabic, and Korean. More languages coming soon.",
+		},
+		{
+			icon: MonitorIcon,
+			title: "Windows Support",
+			description: "Native Windows builds with MSI installers for x64 and ARM. Code-signed with Azure Trusted Signing for a smooth installation experience.",
 		},
 	];
 
@@ -322,7 +409,7 @@
 
 <svelte:head>
 	<title>Features - Seaquel</title>
-	<meta name="description" content="Explore all Seaquel features: Visual Query Plans, ERD Viewer, Monaco Editor, data operations, query history, and more." />
+	<meta name="description" content="Explore all Seaquel features: interactive SQL tutorials, shared query library, visual query builder, canvas workspace, query plans, ERD viewer, and more." />
 </svelte:head>
 
 <div class="min-h-screen bg-background text-foreground">
@@ -377,53 +464,73 @@
 
 		<!-- Feature Categories -->
 		<FeatureCategory
+			title="Learn SQL"
+			description="Master SQL interactively with built-in tutorials, challenges, and a visual query builder sandbox."
+			features={learnSql}
+		/>
+
+		<FeatureCategory
+			title="Shared Query Library"
+			description="Collaborate with your team through Git-synced query repositories."
+			features={sharedQueryLibrary}
+			variant="highlight"
+		/>
+
+		<FeatureCategory
+			title="Visual Query Builder"
+			description="Build queries visually with aggregates, variables, boolean operators, and two-way SQL sync."
+			features={queryBuilder}
+		/>
+
+		<FeatureCategory
 			title="Data Visualization"
 			description="Transform your query results into meaningful charts."
 			features={dataVisualization}
+			variant="highlight"
 		/>
 
 		<FeatureCategory
 			title="Statistics Dashboard"
 			description="Monitor your database health and performance at a glance."
 			features={statisticsDashboard}
-			variant="highlight"
 		/>
 
 		<FeatureCategory
 			title="Query Editor"
 			description="A powerful, professional-grade SQL editor with all the features you'd expect."
 			features={queryEditor}
+			variant="highlight"
 		/>
 
 		<FeatureCategory
 			title="Data Operations"
 			description="Full control over your data with intuitive editing and export capabilities."
 			features={dataOperations}
-			variant="highlight"
 		/>
 
 		<FeatureCategory
 			title="History & Organization"
 			description="Keep track of your queries and stay organized with powerful search."
 			features={historyOrganization}
+			variant="highlight"
 		/>
 
 		<FeatureCategory
 			title="Connection Features"
 			description="Connect securely to your databases with flexible authentication options."
 			features={connectionFeatures}
-			variant="highlight"
 		/>
 
 		<FeatureCategory
 			title="Developer Experience"
 			description="Built for developers who value efficiency and customization."
 			features={developerExperience}
+			variant="highlight"
 		/>
 
 		<FeatureCategory
-			title="Internationalization"
-			description="Seaquel speaks your language with full localization support."
+			title="Platform & Internationalization"
+			description="Seaquel speaks your language and runs on your platform."
 			features={internationalization}
 		/>
 

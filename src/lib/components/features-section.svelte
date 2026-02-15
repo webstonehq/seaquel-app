@@ -1,35 +1,35 @@
 <script lang="ts">
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
-	import { ZapIcon, CpuIcon, WifiOffIcon, BrainCircuitIcon, DatabaseIcon, ShieldCheckIcon, ActivityIcon, NetworkIcon, LayoutDashboardIcon, GitBranchIcon, BarChart3Icon } from "lucide-svelte";
+	import { ZapIcon, CpuIcon, WifiOffIcon, BrainCircuitIcon, DatabaseIcon, ShieldCheckIcon, ActivityIcon, NetworkIcon, LayoutDashboardIcon, GitBranchIcon, BarChart3Icon, GraduationCapIcon, UsersIcon } from "lucide-svelte";
 	import { fly } from "svelte/transition";
 
 	const heroFeatures = [
+		{
+			icon: GraduationCapIcon,
+			title: "Learn SQL",
+			description: "Master SQL with built-in interactive tutorials. Solve progressive challenges, build queries visually in a drag-and-drop sandbox, and practice on a ready-to-go sample database.",
+			gradient: "from-amber-500/10 to-orange-500/10",
+			badge: "New in 2026.4",
+		},
+		{
+			icon: UsersIcon,
+			title: "Shared Query Library",
+			description: "Collaborate with your team through Git-synced query repositories. Push, pull, and organize shared SQL collections without leaving Seaquel.",
+			gradient: "from-sky-500/10 to-blue-500/10",
+			badge: "New in 2026.4",
+		},
 		{
 			icon: LayoutDashboardIcon,
 			title: "Canvas Workspace",
 			description: "Build analysis workflows visually. Drag tables, write queries, view results, and create charts on an infinite canvas - all connected and auto-updating.",
 			gradient: "from-indigo-500/10 to-violet-500/10",
-			badge: "New in 2026.3",
-		},
-		{
-			icon: GitBranchIcon,
-			title: "Query Visualizer",
-			description: "See your SQL as visual diagrams. Understand JOINs, WHERE clauses, and SELECT columns at a glance with automatic AST parsing.",
-			gradient: "from-emerald-500/10 to-teal-500/10",
-			badge: "New in 2026.3",
+			badge: "Signature Feature",
 		},
 		{
 			icon: ActivityIcon,
 			title: "Visual Query Plans",
 			description: "Stop guessing why your queries are slow. Interactive EXPLAIN diagrams show exactly where time is spent, so you can optimize with confidence.",
 			gradient: "from-violet-500/10 to-purple-500/10",
-			badge: "Signature Feature",
-		},
-		{
-			icon: NetworkIcon,
-			title: "ERD Viewer",
-			description: "Understand any database schema in seconds. Explore relationships visually, search tables instantly, and export diagrams for documentation.",
-			gradient: "from-teal-500/10 to-cyan-500/10",
 			badge: "Signature Feature",
 		},
 	];

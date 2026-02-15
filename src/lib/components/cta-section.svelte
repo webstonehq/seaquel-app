@@ -54,7 +54,7 @@
                 </div>
 
                 <p class="text-sm text-muted-foreground pt-2">
-                    Available for macOS & Linux today. Windows coming Q1 2026.
+                    Available for macOS, Linux & Windows.
                 </p>
             </div>
         </Card>

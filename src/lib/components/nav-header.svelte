@@ -20,6 +20,7 @@
 			<!-- Navigation - Desktop -->
 			<nav class="hidden md:flex items-center gap-6">
 				<a href="/features" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Features</a>
+				<a href="/pricing" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
 				<a href="/changelog" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Changelog</a>
 				<a href="https://github.com/webstonehq/seaquel" target="_blank" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5">
 					<GithubIcon class="size-4" />
@@ -58,6 +59,7 @@
 				<nav class="flex flex-col gap-4">
 					<a href="/#features" class="text-sm font-medium" onclick={() => mobileMenuOpen = false}>Features</a>
 					<a href="/features" class="text-sm font-medium" onclick={() => mobileMenuOpen = false}>All Features</a>
+					<a href="/pricing" class="text-sm font-medium" onclick={() => mobileMenuOpen = false}>Pricing</a>
 					<a href="https://github.com/webstonehq/seaquel" target="_blank" class="text-sm font-medium flex items-center gap-2">
 						<GithubIcon class="size-4" />
 						GitHub
