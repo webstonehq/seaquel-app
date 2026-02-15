@@ -18,7 +18,7 @@ export const api = remultApi({
     if (!dev && !building) {
       const { createD1DataProvider } = await import("remult/remult-d1");
       remult.dataProvider = createD1DataProvider(
-        event.platform.env.SEAQUEL_DB,
+        event.platform?.env.SEAQUEL_DB,
       );
     }
   },
