@@ -1,1 +1,0 @@
-import{i as s}from"./DSoDdw3M.js";var i;(function(p){p.Nsis="nsis",p.Msi="msi",p.Deb="deb",p.Rpm="rpm",p.AppImage="appimage",p.App="app"})(i||(i={}));async function a(){return s("plugin:app|version")}async function r(p){return s("plugin:app|set_app_theme",{theme:p})}export{i as BundleType,a as getVersion,r as setTheme};
