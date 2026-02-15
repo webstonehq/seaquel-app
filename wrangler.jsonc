@@ -16,6 +16,7 @@
     },
   ],
   "vars": {
+    "BETTER_AUTH_URL": "https://seaquel.app",
     "DODO_MODE": "live",
     "PUBLIC_DODO_PRODUCT_MAP": {
       "pdt_0NYVr6Fe7j3GenJdKuTwb": "individual",
