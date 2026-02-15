@@ -25,47 +25,18 @@
 
     let total = $derived(data.plan.price * units);
 
+    // Pricing breakdown from checkout.breakdown event (values in minor units / cents)
+    let breakdown = $state<{
+        total: number;
+        currency: string;
+    } | null>(null);
+
+    function formatAmount(cents: number) {
+        return (cents / 100).toFixed(2);
+    }
+
     // Hold a reference to the DodoPayments module once loaded
     let DodoPaymentsRef: any = null;
-
-    const themeConfig: ThemeConfig = {
-        light: {
-            bgPrimary: "#000",
-            bgSecondary: "#F4F4F5",
-            borderPrimary: "#E4E4E7",
-            borderSecondary: "#E4E4E7",
-            inputFocusBorder: "#CBA700",
-            textPrimary: "#09090B",
-            textSecondary: "#71717A",
-            textPlaceholder: "#A1A1AA",
-            textError: "#DC2626",
-            textSuccess: "#16A34A",
-            buttonPrimary: "#CBA700",
-            buttonPrimaryHover: "#B89600",
-            buttonTextPrimary: "#422006",
-            buttonSecondary: "#F4F4F5",
-            buttonSecondaryHover: "#E4E4E7",
-            buttonTextSecondary: "#09090B",
-        },
-        dark: {
-            bgPrimary: "#09090B",
-            bgSecondary: "#18181B",
-            borderPrimary: "#27272A",
-            borderSecondary: "#27272A",
-            inputFocusBorder: "#CBA700",
-            textPrimary: "#FAFAFA",
-            textSecondary: "#A1A1AA",
-            textPlaceholder: "#71717A",
-            textError: "#EF4444",
-            textSuccess: "#34D399",
-            buttonPrimary: "#CBA700",
-            buttonPrimaryHover: "#B89600",
-            buttonTextPrimary: "#422006",
-            buttonSecondary: "#27272A",
-            buttonSecondaryHover: "#3F3F46",
-            buttonTextSecondary: "#FAFAFA",
-        },
-    };
 
     function decrementUnits() {
         if (units > 1) units--;
@@ -109,6 +80,10 @@
                 displayType: "inline",
                 onEvent: (event: any) => {
                     switch (event.event_type) {
+                        case "checkout.breakdown": {
+                            breakdown = event.data?.message ?? null;
+                            break;
+                        }
                         case "checkout.status": {
                             const status = event.data?.message?.status;
                             if (status === "succeeded") {
@@ -133,6 +108,7 @@
                             errorMessage =
                                 "Checkout session expired. Please try again.";
                             step = "configure";
+                            breakdown = null;
                             break;
                         }
                     }
@@ -147,7 +123,6 @@
                 elementId: "dodo-checkout",
                 options: {
                     manualRedirect: true,
-                    themeConfig,
                 },
             });
         } catch {
@@ -161,6 +136,7 @@
         DodoPaymentsRef?.Checkout?.close();
         step = "configure";
         errorMessage = "";
+        breakdown = null;
     }
 
     onDestroy(() => {
@@ -214,9 +190,9 @@
                         {#if step === "checkout"}
                             {data.plan.name} &mdash;
                             {#if data.plan.allowMultipleUnits && units > 1}
-                                {units} seats &times; ${data.plan.price} =
+                                {units} seats &times; USD {data.plan.price} =
                             {/if}
-                            ${total} / year
+                            USD {total} / year
                         {:else}
                             {data.plan.description}
                         {/if}
@@ -256,7 +232,7 @@
                                         <p
                                             class="text-sm text-muted-foreground mt-0.5"
                                         >
-                                            ${data.plan.price} per seat per year
+                                            USD {data.plan.price} per seat per year
                                         </p>
                                     </div>
                                     <div class="flex items-center gap-1">
@@ -299,7 +275,7 @@
                                     <div class="flex items-baseline gap-1.5">
                                         <span
                                             class="text-4xl font-bold tracking-tight"
-                                            >${total}</span
+                                            >USD {total}</span
                                         >
                                         <span class="text-muted-foreground"
                                             >/ year</span
@@ -309,7 +285,7 @@
                                         <p
                                             class="text-sm text-muted-foreground mt-1"
                                         >
-                                            {units} seats &times; ${data.plan
+                                            {units} seats &times; USD {data.plan
                                                 .price}
                                         </p>
                                     {/if}
@@ -352,28 +328,64 @@
                     </div>
                 {:else}
                     <!-- Inline checkout -->
-                    <div in:fly={{ y: 20, duration: 400 }}>
+                    <div
+                        class="flex flex-col gap-6"
+                        in:fly={{ y: 20, duration: 400 }}
+                    >
                         {#if errorMessage}
                             <div
-                                class="rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm px-4 py-3 mb-6"
+                                class="rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm px-4 py-3"
                             >
                                 {errorMessage}
                             </div>
                         {/if}
 
-                        <Card class="border-2 p-0 overflow-hidden">
-                            <div
-                                id="dodo-checkout"
-                                class="min-h-[500px] w-full"
-                            ></div>
+                        <!-- Order summary -->
+                        <Card class="border-2 p-6">
+                            <h2 class="font-semibold mb-3">Order summary</h2>
+
+                            <div class="text-sm space-y-2">
+                                <div
+                                    class="flex items-center justify-between"
+                                >
+                                    <span class="text-muted-foreground">
+                                        {data.plan.name} License{#if data.plan.allowMultipleUnits && units > 1}
+                                            &nbsp;&times; {units} seats
+                                        {/if}
+                                    </span>
+                                    <span>USD {total}</span>
+                                </div>
+
+                                <div
+                                    class="border-t pt-2 mt-2 flex items-center justify-between font-semibold"
+                                >
+                                    <span>Total (incl. tax)</span>
+                                    {#if breakdown}
+                                        <span>{breakdown.currency} {formatAmount(breakdown.total)}</span>
+                                    {:else}
+                                        <span>USD {total}</span>
+                                    {/if}
+                                </div>
+                            </div>
+
+                            <p
+                                class="text-xs text-muted-foreground mt-3"
+                            >
+                                Billed annually. Renews at the same rate each year until cancelled.
+                            </p>
                         </Card>
 
+                        <!-- Dodo checkout iframe - no overflow-hidden to keep footer visible -->
                         <div
-                            class="flex items-center justify-center gap-1.5 mt-4 text-xs text-muted-foreground"
+                            id="dodo-checkout"
+                            class="min-h-[500px] w-full"
+                        ></div>
+
+                        <div
+                            class="flex items-center justify-center gap-1.5 text-xs text-muted-foreground"
                         >
                             <ShieldCheckIcon class="size-3.5" />
-                            <span>Secure checkout powered by Dodo Payments</span
-                            >
+                            <span>Secure checkout powered by Dodo Payments</span>
                         </div>
                     </div>
                 {/if}
