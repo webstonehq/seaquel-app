@@ -14,6 +14,13 @@
       "custom_domain": true,
     },
   ],
+  "vars": {
+    "DODO_MODE": "live",
+    "PUBLIC_DODO_PRODUCT_MAP": {
+      "pdt_0NYVr6Fe7j3GenJdKuTwb": "individual",
+      "pdt_0NYVr5YOwzPkhLqn0rCsA": "business",
+    },
+  },
   "observability": {
     "logs": {
       "enabled": true,

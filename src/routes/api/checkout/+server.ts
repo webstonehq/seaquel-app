@@ -1,6 +1,5 @@
 import { json } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
-import { env as publicEnv } from '$env/dynamic/public';
 import type { RequestHandler } from './$types';
 
 const BASE_URLS: Record<string, string> = {
@@ -21,7 +20,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		return json({ message: 'Missing product ID' }, { status: 400 });
 	}
 
-	const mode = publicEnv.PUBLIC_DODO_MODE || 'test';
+	const mode = env.DODO_MODE || 'test';
 	const baseUrl = BASE_URLS[mode] || BASE_URLS.test;
 
 	const res = await fetch(`${baseUrl}/checkouts`, {
