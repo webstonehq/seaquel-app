@@ -22,6 +22,7 @@ export async function fetchProductPrice(
 
 	const res = await fetch(`${baseUrl}/products/${productId}`, {
 		headers: { Authorization: `Bearer ${apiKey}` },
+		signal: AbortSignal.timeout(5000),
 	});
 
 	if (!res.ok) {

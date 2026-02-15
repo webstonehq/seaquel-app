@@ -6,17 +6,22 @@
     import { Card } from "$lib/components/ui/card";
     import { fly } from "svelte/transition";
     import { CheckIcon, XIcon, UserIcon, BuildingIcon } from "lucide-svelte";
-    import { page } from "$app/state";
 
-    const productMap = page.data.productMap || {};
+    let { data } = $props();
 
-    const plans = [
+    const tierConfig: Record<
+        string,
         {
-            productId: Object.entries(productMap).find(
-                ([productId, name]) => name === "individual",
-            )?.[0],
+            name: string;
+            period: string;
+            description: string;
+            icon: typeof UserIcon;
+            features: { text: string; included: boolean }[];
+            highlight: boolean;
+        }
+    > = {
+        individual: {
             name: "Individual",
-            price: "$50",
             period: "/ year",
             description:
                 "For individual developers using Seaquel commercially.",
@@ -31,12 +36,8 @@
             ],
             highlight: false,
         },
-        {
-            productId: Object.entries(productMap).find(
-                ([productId, name]) => name === "business",
-            )?.[0],
+        business: {
             name: "Business",
-            price: "$90",
             period: "/ year / seat",
             description:
                 "For teams and organizations. Reassign seats as your team changes.",
@@ -51,7 +52,17 @@
             ],
             highlight: true,
         },
-    ];
+    };
+
+    const plans = $derived(
+        data.plans
+            ?.map((p) => ({
+                ...tierConfig[p.tier],
+                productId: p.productId,
+                formattedPrice: p.formattedPrice,
+            }))
+            .filter((p) => p.name) ?? [],
+    );
 </script>
 
 <svelte:head>
@@ -91,6 +102,11 @@
         <!-- Pricing Cards -->
         <section class="py-16 md:py-20">
             <div class="container mx-auto px-4 md:px-6">
+                {#if data.error}
+                <div class="max-w-md mx-auto text-center">
+                    <p class="text-muted-foreground">{data.error}</p>
+                </div>
+                {:else}
                 <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                     {#each plans as plan, index (plan.name)}
                         <div
@@ -136,7 +152,7 @@
                                 <div class="mb-8">
                                     <span
                                         class="text-4xl md:text-5xl font-bold tracking-tight"
-                                        >{plan.price}</span
+                                        >{plan.formattedPrice}</span
                                     >
                                     <span class="text-muted-foreground ml-1"
                                         >{plan.period}</span
@@ -184,6 +200,7 @@
                         </div>
                     {/each}
                 </div>
+                {/if}
             </div>
         </section>
 
