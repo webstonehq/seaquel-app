@@ -7,17 +7,29 @@
     let {
         hash = "demo",
         hintText = "Live app — click to explore",
+        mode,
+        autoOpen = false,
     }: {
         hash?: string;
         hintText?: string;
+        mode?: string;
+        autoOpen?: boolean;
     } = $props();
 
     let showCursorHint = $state(true);
     let theaterMode = $state(false);
     let iframeRef: HTMLIFrameElement;
 
+    // Build demo iframe src with optional mode param
+    let demoSrc = $state("/demo/");
+
     onMount(() => {
-        if (window.location.hash === `#${hash}`) {
+        const urlMode = mode ?? new URLSearchParams(window.location.search).get("mode");
+        if (urlMode) {
+            demoSrc = `/demo/?mode=${encodeURIComponent(urlMode)}`;
+        }
+
+        if (autoOpen || window.location.hash === `#${hash}`) {
             openTheater();
         }
     });
@@ -85,7 +97,7 @@
 
         <iframe
             bind:this={iframeRef}
-            src="/demo/"
+            src={demoSrc}
             title="Seaquel Demo - Interactive Database Client"
             class="w-full aspect-video border-0"
             loading="lazy"
@@ -140,7 +152,7 @@
             <!-- Demo frame -->
             <div class="relative w-full h-full rounded-2xl overflow-hidden border-2 border-primary/30 shadow-2xl bg-card">
                 <iframe
-                    src="/demo/"
+                    src={demoSrc}
                     title="Seaquel Demo - Interactive Database Client (Fullscreen)"
                     class="w-full h-full border-0"
                 ></iframe>

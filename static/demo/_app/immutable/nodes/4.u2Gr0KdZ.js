@@ -1,1 +1,0 @@
-import"../chunks/Bzak7iHL.js";import{i as a}from"../chunks/D_OlEWjx.js";import{p as r,o as t,a as p}from"../chunks/s46vk8Jw.js";import{g as e}from"../chunks/B8HBp01Q.js";import{r as m}from"../chunks/CJ42X6a-.js";function u(s,o){r(o,!1),t(()=>{e(m("/manage"),{replaceState:!0})}),a(),p()}export{u as component};

@@ -60,6 +60,13 @@
                     </li>
                     <li>
                         <a
+                            href="/learn-sql"
+                            class="hover:text-foreground transition-colors"
+                            >Learn SQL</a
+                        >
+                    </li>
+                    <li>
+                        <a
                             href="/pricing"
                             class="hover:text-foreground transition-colors"
                             >Pricing</a
