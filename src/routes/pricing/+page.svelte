@@ -18,13 +18,15 @@
             icon: typeof UserIcon;
             features: { text: string; included: boolean }[];
             highlight: boolean;
+            originalPrice: string;
         }
     > = {
         individual: {
             name: "Individual",
             period: "/ year",
             description:
-                "For individual developers using Seaquel commercially.",
+                "For individual developers using Seaquel commercially or as freelancers.",
+            originalPrice: "$80",
             icon: UserIcon,
             features: [
                 { text: "Commercial use", included: true },
@@ -41,6 +43,7 @@
             period: "/ year / seat",
             description:
                 "For teams and organizations. Reassign seats as your team changes.",
+            originalPrice: "$130",
             icon: BuildingIcon,
             features: [
                 { text: "Commercial use", included: true },
@@ -150,6 +153,16 @@
 
                                 <!-- Price -->
                                 <div class="mb-8">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span
+                                            class="text-lg text-muted-foreground line-through"
+                                            >{plan.originalPrice}</span
+                                        >
+                                        <span
+                                            class="px-2 py-0.5 rounded-full bg-green-500/15 text-green-600 dark:text-green-400 text-xs font-semibold"
+                                            >Launch discount</span
+                                        >
+                                    </div>
                                     <span
                                         class="text-4xl md:text-5xl font-bold tracking-tight"
                                         >{plan.formattedPrice}</span
