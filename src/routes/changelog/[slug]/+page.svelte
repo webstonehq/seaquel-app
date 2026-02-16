@@ -1,20 +1,13 @@
 <script lang="ts">
 	import NavHeader from "$lib/components/nav-header.svelte";
 	import FooterSection from "$lib/components/footer-section.svelte";
+	import DemoPlayer from "$lib/components/demo-player.svelte";
 	import { Button } from "$lib/components/ui/button";
 	import { CalendarIcon, ArrowLeftIcon, MousePointerClickIcon } from "lucide-svelte";
-	import { fly, fade } from "svelte/transition";
+	import { fly } from "svelte/transition";
 	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();
-
-	let showCursorHint = $state(true);
-	let iframeRef: HTMLIFrameElement;
-
-	function dismissHint() {
-		showCursorHint = false;
-		iframeRef?.focus();
-	}
 </script>
 
 <svelte:head>
@@ -61,35 +54,7 @@
 					<p class="text-muted-foreground text-center mb-6 max-w-lg">
 						Explore the features below in this interactive demo — no download required.
 					</p>
-					<div class="relative group w-full">
-						<div
-							class="absolute -inset-1 bg-linear-to-r from-primary via-accent to-primary rounded-xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"
-						></div>
-						<div class="relative rounded-xl overflow-hidden border border-border shadow-xl bg-card">
-							{#if showCursorHint}
-								<button
-									class="absolute inset-0 flex items-center justify-center z-10 cursor-pointer bg-background/50 backdrop-blur-sm border-0"
-									transition:fade={{ duration: 300 }}
-									onclick={dismissHint}
-									aria-label="Click to interact with demo"
-								>
-									<div class="flex items-center gap-2 animate-bounce">
-										<MousePointerClickIcon class="size-10 text-primary drop-shadow-lg" />
-										<span class="text-sm font-medium text-foreground bg-background/90 px-3 py-1.5 rounded-full shadow-lg">
-											Click to explore
-										</span>
-									</div>
-								</button>
-							{/if}
-							<iframe
-								bind:this={iframeRef}
-								src="/demo/"
-								title="Seaquel Demo"
-								class="w-full aspect-video border-0"
-								loading="lazy"
-							></iframe>
-						</div>
-					</div>
+					<DemoPlayer hintText="Click to explore" />
 				</div>
 			</div>
 
