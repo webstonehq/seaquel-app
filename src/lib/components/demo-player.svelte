@@ -5,7 +5,7 @@
     import { onMount } from "svelte";
 
     let {
-        hash = "demo",
+        hash = "fullscreen",
         hintText = "Live app — click to explore",
         mode,
         autoOpen = false,
