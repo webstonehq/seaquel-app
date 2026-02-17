@@ -1,0 +1,44 @@
+---
+title: Executing Queries
+description: Run SQL queries and view results with execution time and row counts.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Running a query
+
+<Tabs>
+<TabItem label="Mac">
+
+Press `Cmd+Enter` to execute the current editor contents.
+
+</TabItem>
+<TabItem label="Windows / Linux">
+
+Press `Ctrl+Enter` to execute the current editor contents.
+
+</TabItem>
+</Tabs>
+
+## Multi-statement execution
+
+Write multiple SQL statements separated by semicolons. Seaquel executes all of them in sequence:
+
+```sql
+SELECT * FROM users;
+SELECT * FROM orders;
+```
+
+Each statement produces its own result set, displayed in separate panels below the editor.
+
+## Understanding the output
+
+After execution, you'll see for each statement:
+
+- **Row count** — how many rows were returned or affected
+- **Execution time** — how long the query took to run
+- **Error messages** — if a statement fails, its error is shown inline without stopping subsequent statements
+
+## EXPLAIN queries
+
+Use the toolbar buttons to run EXPLAIN or EXPLAIN ANALYZE on your query. This shows the query execution plan without modifying the SQL in your editor — useful for diagnosing slow queries.

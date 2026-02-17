@@ -5,12 +5,13 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "pnpm docs:update && vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"demo:update": "(rm -fr ./static/demo && cd ../../../../seaquel/ && npm run build:demo && cp -r ./build-demo ../seaquel-app/main/packages/marketing/static/demo)"
+		"demo:update": "(rm -fr ./static/demo && cd ../../../../seaquel/ && npm run build:demo && cp -r ./build-demo ../seaquel-app/main/packages/marketing/static/demo)",
+		"docs:update": "pnpm -C ../docs build && rm -rf ./static/docs && cp -r ../docs/dist ./static/docs"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20260214.0",

@@ -1,0 +1,59 @@
+---
+title: Installation
+description: Download and install Seaquel on macOS, Windows, or Linux.
+---
+
+import { Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+Seaquel is a lightweight desktop app built with Tauri. It runs on any modern macOS, Windows, or Linux system with minimal resource usage — no Java, Docker, or background services required.
+
+## Download
+
+Get the latest release from:
+
+- **[seaquel.app](https://seaquel.app)** — recommended
+- **[GitHub Releases](https://github.com/webstonehq/seaquel/releases)** — all versions and checksums
+
+## Install
+
+<Tabs>
+<TabItem label="macOS">
+
+1. Download the `.dmg` file for your architecture (Apple Silicon or Intel).
+2. Open the DMG and drag **Seaquel** into your **Applications** folder.
+3. Launch Seaquel from Applications or Spotlight (`Cmd+Space`, type "Seaquel").
+
+<Aside>
+Homebrew support is coming soon. Follow the [GitHub repo](https://github.com/webstonehq/seaquel) for updates.
+</Aside>
+
+</TabItem>
+<TabItem label="Windows">
+
+1. Download the `.msi` installer (x64 or ARM).
+2. Run the installer and follow the prompts.
+3. Launch Seaquel from the Start Menu or desktop shortcut.
+
+The Windows installer is code-signed with Azure Trusted Signing.
+
+</TabItem>
+<TabItem label="Linux">
+
+**AppImage:**
+
+1. Download the `.AppImage` file.
+2. Make it executable: `chmod +x Seaquel-*.AppImage`
+3. Run it: `./Seaquel-*.AppImage`
+
+**Debian/Ubuntu (.deb):**
+
+1. Download the `.deb` file.
+2. Install it: `sudo dpkg -i seaquel-*.deb`
+3. Launch Seaquel from your application menu.
+
+</TabItem>
+</Tabs>
+
+## First launch
+
+When you open Seaquel for the first time, you'll land on the connection screen. From here you can create your first database connection — see [Quick Start](/docs/getting-started/quick-start/) to get up and running in under 5 minutes.

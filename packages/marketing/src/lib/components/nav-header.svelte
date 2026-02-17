@@ -23,6 +23,7 @@
 				<a href="/learn-sql" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Learn SQL</a>
 				<a href="/pricing" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
 				<a href="/changelog" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Changelog</a>
+				<a href="/docs" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Docs</a>
 				<a href="https://github.com/webstonehq/seaquel" target="_blank" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5">
 					<GithubIcon class="size-4" />
 					GitHub
@@ -62,6 +63,7 @@
 					<a href="/features" class="text-sm font-medium" onclick={() => mobileMenuOpen = false}>All Features</a>
 					<a href="/learn-sql" class="text-sm font-medium" onclick={() => mobileMenuOpen = false}>Learn SQL</a>
 					<a href="/pricing" class="text-sm font-medium" onclick={() => mobileMenuOpen = false}>Pricing</a>
+					<a href="/docs" class="text-sm font-medium" onclick={() => mobileMenuOpen = false}>Docs</a>
 					<a href="https://github.com/webstonehq/seaquel" target="_blank" class="text-sm font-medium flex items-center gap-2">
 						<GithubIcon class="size-4" />
 						GitHub

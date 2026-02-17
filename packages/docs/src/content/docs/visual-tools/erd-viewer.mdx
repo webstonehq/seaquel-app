@@ -1,0 +1,38 @@
+---
+title: ERD Viewer
+description: Generate interactive Entity Relationship Diagrams from your database.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+The ERD viewer generates an interactive Entity Relationship Diagram directly from your database schema. It shows tables, columns, and foreign key relationships in a visual layout.
+
+## Opening the ERD
+
+1. Open the command palette with `Cmd+K` (Mac) or `Ctrl+K` (Windows/Linux).
+2. Search for **View ERD Diagram**.
+3. The diagram generates from your current connection.
+
+## Navigating the diagram
+
+- **Pan**: click and drag the background.
+- **Zoom**: scroll to zoom in and out, or use the zoom controls.
+- **Search**: use the search field to find tables by name.
+- **Schema filter**: show or hide specific schemas to focus on the tables you care about.
+
+Each table node displays its columns with data types, and badges for primary keys and foreign keys. Foreign key relationships appear as connections between tables.
+
+The toolbar shows the total **table count** and **relationship count** for quick reference.
+
+## Exporting
+
+The ERD viewer supports multiple export formats:
+
+- **Download as PNG** — raster image for documents and presentations
+- **Download as SVG** — vector image that scales cleanly at any size
+- **Copy to clipboard as PNG** — paste directly into other apps
+- **Copy to clipboard as SVG** — paste as vector into design tools
+
+<Aside>
+SVG exports are ideal for documentation — they stay sharp at any zoom level and have smaller file sizes than PNG for diagram content.
+</Aside>

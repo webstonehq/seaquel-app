@@ -4,7 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "pnpm -C packages/marketing dev",
-		"build": "pnpm -C packages/marketing build",
+		"build": "pnpm -C packages/docs build && rm -rf packages/marketing/static/docs && cp -r packages/docs/dist packages/marketing/static/docs && pnpm -C packages/marketing build",
 		"preview": "pnpm -C packages/marketing preview",
 		"check": "pnpm -C packages/marketing check"
 	}

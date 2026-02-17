@@ -1,0 +1,45 @@
+---
+title: Importing Connections
+description: Import connections from DBeaver and TablePlus.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Migrating from another database client? Seaquel can import your existing connections in one click.
+
+<Tabs>
+<TabItem label="DBeaver">
+
+## DBeaver import
+
+Seaquel reads DBeaver's `data-sources.json` configuration file and extracts your connections.
+
+1. Open **Settings** and find **Import Connections**.
+2. Select **DBeaver**.
+3. Seaquel locates the config file automatically, or you can browse to it manually.
+4. Review the detected connections — each shows host, port, database, and username.
+5. Check the connections you want to import (duplicates are detected and flagged).
+6. Click **Import**.
+
+Supported provider types: PostgreSQL, MySQL, MariaDB, SQLite, DuckDB, MSSQL.
+
+</TabItem>
+<TabItem label="TablePlus">
+
+## TablePlus import
+
+Seaquel reads TablePlus's `Connections.plist` file.
+
+1. Open **Settings** and find **Import Connections**.
+2. Select **TablePlus**.
+3. Seaquel locates the plist file, or you can browse to it manually.
+4. Review the detected connections with database type, host, and name.
+5. Check the connections you want to import (duplicates are detected).
+6. Click **Import**.
+
+Driver types are automatically mapped to Seaquel's database types.
+
+</TabItem>
+</Tabs>
+
+After importing, you may need to re-enter passwords — Seaquel cannot read credentials from other applications' keychains for security reasons.

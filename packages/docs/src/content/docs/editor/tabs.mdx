@@ -1,0 +1,52 @@
+---
+title: Tabs
+description: Manage multiple query tabs with keyboard shortcuts.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Each query runs in its own tab. You can have multiple tabs open at once, rename them, and switch between them with keyboard shortcuts.
+
+## Keyboard shortcuts
+
+<Tabs>
+<TabItem label="Mac">
+
+| Action | Shortcut |
+| --- | --- |
+| New tab | `Cmd+T` |
+| Close tab | `Cmd+W` |
+| Jump to tab 1-9 | `Cmd+1` through `Cmd+9` |
+| Next tab | `Cmd+Shift+]` |
+| Previous tab | `Cmd+Shift+[` |
+
+</TabItem>
+<TabItem label="Windows / Linux">
+
+| Action | Shortcut |
+| --- | --- |
+| New tab | `Ctrl+T` |
+| Close tab | `Ctrl+W` |
+| Jump to tab 1-9 | `Ctrl+1` through `Ctrl+9` |
+| Next tab | `Ctrl+Shift+]` |
+| Previous tab | `Ctrl+Shift+[` |
+
+</TabItem>
+</Tabs>
+
+## Tab context menu
+
+Right-click any tab to access additional actions:
+
+- **Close other tabs** — close everything except the clicked tab
+- **Close tabs to the right** — close all tabs after the clicked tab
+- **Close tabs to the left** — close all tabs before the clicked tab
+- **Close all tabs** — close every open tab
+
+## Renaming tabs
+
+Double-click a tab title to rename it. Giving tabs descriptive names makes it easier to keep track of what each query does.
+
+## Unsaved changes
+
+Seaquel warns you when you try to close a tab that has unsaved modifications, so you never accidentally lose work.

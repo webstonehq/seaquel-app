@@ -1,0 +1,32 @@
+---
+title: Seaquel Docs
+description: Documentation for Seaquel — a modern database client for PostgreSQL, MySQL, SQLite, DuckDB, and MSSQL.
+template: splash
+hero:
+  tagline: A modern database client with visual tools, Learn SQL tutorials, and a powerful query editor. Available for macOS, Windows, and Linux.
+  actions:
+    - text: Get Started
+      link: /docs/getting-started/installation/
+      icon: right-arrow
+    - text: Download Seaquel
+      link: https://seaquel.app
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<Card title="Getting Started" icon="rocket">
+		[Install Seaquel](/docs/getting-started/installation/), connect to your first database, and run a query in under 5 minutes.
+	</Card>
+	<Card title="Connections" icon="setting">
+		Connect to [PostgreSQL](/docs/connections/postgresql/), [MySQL](/docs/connections/mysql/), [SQLite](/docs/connections/sqlite/), [DuckDB](/docs/connections/duckdb/), and [MSSQL](/docs/connections/mssql/) with SSH tunnels and SSL support.
+	</Card>
+	<Card title="Visual Tools" icon="puzzle">
+		Explore your data on an [infinite canvas](/docs/visual-tools/canvas/), visualize [query plans](/docs/visual-tools/query-plans/), generate [ERD diagrams](/docs/visual-tools/erd-viewer/), and create [charts](/docs/visual-tools/charts/).
+	</Card>
+	<Card title="Learn SQL" icon="open-book">
+		Interactive [tutorials](/docs/learn-sql/tutorials/) from SELECT basics to window functions, with a built-in [practice database](/docs/learn-sql/practice-database/).
+	</Card>
+</CardGrid>
