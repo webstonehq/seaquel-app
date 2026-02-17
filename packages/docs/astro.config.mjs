@@ -8,6 +8,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Seaquel Docs',
+			customCss: ['./src/styles/custom.css'],
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/webstonehq/seaquel' },
 				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/QuzUESE8x4' },

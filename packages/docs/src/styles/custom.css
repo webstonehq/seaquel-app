@@ -1,0 +1,38 @@
+/* Custom Starlight theme to match the Seaquel marketing site */
+
+/* Dark mode (Starlight default) */
+:root {
+	/* Accent — marketing primary: oklch(0.795 0.184 86.047) */
+	--sl-color-accent-low: oklch(0.28 0.07 86.047);
+	--sl-color-accent: oklch(0.795 0.184 86.047);
+	--sl-color-accent-high: oklch(0.9 0.1 86.047);
+
+	/* Gray scale — marketing uses hue ~286 (purple-tinted neutrals) */
+	--sl-color-white: oklch(1 0 0);
+	--sl-color-gray-1: oklch(0.93 0.003 286);
+	--sl-color-gray-2: oklch(0.705 0.015 286.067);
+	--sl-color-gray-3: oklch(0.552 0.016 285.938);
+	--sl-color-gray-4: oklch(0.4 0.01 286);
+	--sl-color-gray-5: oklch(0.274 0.006 286.033);
+	--sl-color-gray-6: oklch(0.21 0.006 285.885);
+	--sl-color-black: oklch(0.141 0.005 285.823);
+}
+
+/* Light mode */
+:root[data-theme='light'] {
+	/* Accent */
+	--sl-color-accent-low: oklch(0.93 0.06 86.047);
+	--sl-color-accent: oklch(0.795 0.184 86.047);
+	--sl-color-accent-high: oklch(0.45 0.13 86.047);
+
+	/* Gray scale (inverted) */
+	--sl-color-white: oklch(0.141 0.005 285.823);
+	--sl-color-gray-1: oklch(0.21 0.006 285.885);
+	--sl-color-gray-2: oklch(0.274 0.006 286.033);
+	--sl-color-gray-3: oklch(0.4 0.01 286);
+	--sl-color-gray-4: oklch(0.552 0.016 285.938);
+	--sl-color-gray-5: oklch(0.92 0.004 286.32);
+	--sl-color-gray-6: oklch(0.967 0.001 286.375);
+	--sl-color-gray-7: oklch(0.985 0 0);
+	--sl-color-black: oklch(1 0 0);
+}
