@@ -22,6 +22,6 @@ DuckDB is a fast, embedded analytics database. Seaquel provides full DuckDB supp
 DuckDB connections support:
 
 - Full SQL with analytical functions (window functions, CTEs, etc.)
-- [Statistics dashboard](/schema/statistics/) with database metrics
+- [Statistics dashboard](/docs/schema/statistics/) with database metrics
 - Schema browser with tables and views
-- All [export formats](/results/exporting/) (CSV, JSON, SQL, Markdown)
+- All [export formats](/docs/results/exporting/) (CSV, JSON, SQL, Markdown)

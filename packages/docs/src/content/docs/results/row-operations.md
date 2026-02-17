@@ -14,7 +14,7 @@ Seaquel provides full CRUD support directly from the result grid.
 
 ## Update a row
 
-Edit values directly in the grid by clicking a cell, or select a row and open the edit dialog for a form-based view of all columns. See [Editing Data](/results/editing-data/) for details on inline editing.
+Edit values directly in the grid by clicking a cell, or select a row and open the edit dialog for a form-based view of all columns. See [Editing Data](/docs/results/editing-data/) for details on inline editing.
 
 ## Delete a row
 

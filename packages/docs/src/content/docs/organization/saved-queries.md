@@ -12,7 +12,7 @@ Save queries you use often so you can find and re-run them without rewriting SQL
 3. Enter a descriptive name for the query.
 4. The query is saved to the current connection.
 
-If the query uses [parameters](/editor/query-parameters/), those are saved along with the SQL.
+If the query uses [parameters](/docs/editor/query-parameters/), those are saved along with the SQL.
 
 ## Managing saved queries
 

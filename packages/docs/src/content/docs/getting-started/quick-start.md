@@ -30,4 +30,4 @@ That's it — you're up and running.
 
 - **Browse your schema** — expand tables and views in the left sidebar.
 - **Open the command palette** — press `Cmd+K` (Mac) or `Ctrl+K` (Windows/Linux) to search commands, switch tabs, jump to tables, and more.
-- **Learn the interface** — see the [Interface Overview](/getting-started/interface-overview/) for a full tour of the Seaquel workspace.
+- **Learn the interface** — see the [Interface Overview](/docs/getting-started/interface-overview/) for a full tour of the Seaquel workspace.

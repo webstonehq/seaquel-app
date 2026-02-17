@@ -42,7 +42,7 @@ The floating AI panel lets you describe what you need in plain language and get 
 
 ## Canvas
 
-The visual canvas is an infinite workspace where you can lay out tables, queries, results, and charts as nodes. Access it from the sidebar. See [Canvas](/visual-tools/canvas/) for details.
+The visual canvas is an infinite workspace where you can lay out tables, queries, results, and charts as nodes. Access it from the sidebar. See [Canvas](/docs/visual-tools/canvas/) for details.
 
 ## Status Bar
 

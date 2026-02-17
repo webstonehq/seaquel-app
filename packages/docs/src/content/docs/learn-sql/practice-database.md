@@ -18,7 +18,7 @@ The practice database models a simplified e-commerce platform with realistic dat
 
 ## Using the practice database
 
-The practice database is automatically available in the [SQL tutorials](/learn-sql/tutorials/). You can also connect to it directly:
+The practice database is automatically available in the [SQL tutorials](/docs/learn-sql/tutorials/). You can also connect to it directly:
 
 1. Open the sidebar.
 2. Select the **Practice Database** connection.

@@ -34,8 +34,8 @@ Use **Require** for production databases and cloud providers.
 
 **Cloud providers** (AWS RDS, Supabase, Neon, etc.): use the connection string from your provider's dashboard. Enable SSL — most cloud providers require it.
 
-**Remote servers:** combine with an [SSH tunnel](/connections/ssh-tunnels/) to connect through bastion hosts or jump servers.
+**Remote servers:** combine with an [SSH tunnel](/docs/connections/ssh-tunnels/) to connect through bastion hosts or jump servers.
 
 ## Features
 
-Seaquel provides full schema browsing for PostgreSQL: tables, views, functions, indexes, and constraints. [Statistics](/schema/statistics/) are fully supported with table sizes and index usage monitoring.
+Seaquel provides full schema browsing for PostgreSQL: tables, views, functions, indexes, and constraints. [Statistics](/docs/schema/statistics/) are fully supported with table sizes and index usage monitoring.

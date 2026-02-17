@@ -29,7 +29,7 @@ Seaquel lets you turn query results into charts without leaving the app. Pick a 
 
 ## Charts on the canvas
 
-Charts integrate directly with the [canvas](/visual-tools/canvas/):
+Charts integrate directly with the [canvas](/docs/visual-tools/canvas/):
 
 1. Add a query node and execute it to produce a result node.
 2. Connect a chart node to the result node.

@@ -3,7 +3,7 @@ title: Tutorials
 description: Learn SQL interactively with progressive lessons and challenges.
 ---
 
-Seaquel includes a built-in SQL curriculum that teaches you from the basics through advanced topics. Every lesson runs against a [practice database](/learn-sql/practice-database/) — no external setup needed.
+Seaquel includes a built-in SQL curriculum that teaches you from the basics through advanced topics. Every lesson runs against a [practice database](/docs/learn-sql/practice-database/) — no external setup needed.
 
 ## Accessing tutorials
 

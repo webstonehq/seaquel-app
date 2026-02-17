@@ -30,7 +30,7 @@ Apply aggregate functions to columns: COUNT, SUM, AVG, MIN, MAX. Seaquel automat
 
 ### Variables
 
-Use `{{variables}}` in filter values and LIMIT clauses. Variables are prompted for values at execution time, just like [query parameters](/editor/query-parameters/).
+Use `{{variables}}` in filter values and LIMIT clauses. Variables are prompted for values at execution time, just like [query parameters](/docs/editor/query-parameters/).
 
 ### Expand wildcards
 

@@ -29,7 +29,7 @@ Enable SSL in the connection settings for encrypted connections. Recommended for
 
 ## SSH tunnels
 
-For databases behind firewalls, use an [SSH tunnel](/connections/ssh-tunnels/) to connect securely through a jump server.
+For databases behind firewalls, use an [SSH tunnel](/docs/connections/ssh-tunnels/) to connect securely through a jump server.
 
 ## MariaDB
 

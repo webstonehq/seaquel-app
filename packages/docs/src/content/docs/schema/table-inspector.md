@@ -7,7 +7,7 @@ The table inspector shows the full structural details of a table — columns, ke
 
 ## Opening the inspector
 
-1. Click a table in the [schema browser](/schema/schema-browser/).
+1. Click a table in the [schema browser](/docs/schema/schema-browser/).
 2. The inspector panel displays the table's metadata.
 
 ## Column details
@@ -35,4 +35,4 @@ View CHECK constraints, UNIQUE constraints, and exclusion constraints defined on
 
 ## Canvas integration
 
-Drag a table from the schema browser or inspector onto the [canvas](/visual-tools/canvas/) to create a table node. The node shows the same column and key information in a compact visual format, useful for building analysis workflows.
+Drag a table from the schema browser or inspector onto the [canvas](/docs/visual-tools/canvas/) to create a table node. The node shows the same column and key information in a compact visual format, useful for building analysis workflows.
