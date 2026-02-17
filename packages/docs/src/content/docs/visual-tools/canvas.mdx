@@ -1,0 +1,44 @@
+---
+title: Canvas
+description: Build analysis workflows on an infinite visual canvas.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+The canvas is Seaquel's signature feature — an infinite visual workspace where you build analysis pipelines by connecting nodes together. It's powered by XYFlow and designed for exploring data interactively.
+
+## Node types
+
+The canvas supports four node types that chain together into pipelines:
+
+- **Table nodes** — display table metadata including columns with types, nullability, defaults, primary key and foreign key indicators, indexes, and row count.
+- **Query nodes** — SQL editor nodes with a name, SQL text, execution state, and execution time.
+- **Result nodes** — display query output with columns, rows, and pagination. Connected to a query node.
+- **Chart nodes** — visualize results as charts. Connected to a result node.
+
+## Building a pipeline
+
+1. Drag a table from the schema browser onto the canvas to create a table node.
+2. Add a query node and write SQL referencing that table.
+3. Execute the query — a result node appears automatically with your data.
+4. Add a chart node connected to the result to visualize the output.
+
+When upstream data changes, all downstream nodes update automatically. Edit a query and re-run it — the result and chart nodes refresh in place.
+
+## Working with the canvas
+
+- **Pan**: click and drag the background, or use two-finger scroll.
+- **Zoom**: pinch to zoom or use the zoom controls in the toolbar.
+- **Connect nodes**: drag from a node's output handle to another node's input handle.
+- **Move nodes**: click and drag any node to reposition it.
+
+<Aside>
+Canvas state saves automatically and persists across sessions. Your workflows are always where you left them.
+</Aside>
+
+## Use cases
+
+- Build multi-step analysis workflows visually
+- Compare results across related queries side by side
+- Create reusable dashboards with charts that update on demand
+- Explore unfamiliar schemas by dragging tables onto the canvas and inspecting their structure

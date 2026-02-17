@@ -1,0 +1,48 @@
+---
+title: Formatting
+description: Auto-format SQL with one shortcut.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Seaquel can format your SQL instantly with a single keyboard shortcut.
+
+## Format your SQL
+
+<Tabs>
+<TabItem label="Mac">
+
+Press `Cmd+Shift+F` to format the entire editor contents.
+
+</TabItem>
+<TabItem label="Windows / Linux">
+
+Press `Ctrl+Shift+F` to format the entire editor contents.
+
+</TabItem>
+</Tabs>
+
+The formatter applies proper indentation, line breaks, and uppercases SQL keywords for readability.
+
+**Before:**
+
+```sql
+select u.name,count(o.id) as order_count from users u left join orders o on o.user_id=u.id where u.active=true group by u.name order by order_count desc
+```
+
+**After:**
+
+```sql
+SELECT
+  u.name,
+  COUNT(o.id) AS order_count
+FROM
+  users u
+  LEFT JOIN orders o ON o.user_id = u.id
+WHERE
+  u.active = TRUE
+GROUP BY
+  u.name
+ORDER BY
+  order_count DESC
+```
