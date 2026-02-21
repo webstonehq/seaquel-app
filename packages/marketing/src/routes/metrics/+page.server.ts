@@ -49,14 +49,29 @@ export const load: PageServerLoad = async () => {
 	try {
 		const [releasesRes, repoRes] = await Promise.all([
 			fetch('https://api.github.com/repos/WebstoneHQ/seaquel/releases', {
-				headers: { Accept: 'application/vnd.github.v3+json' },
+				headers: { Accept: 'application/vnd.github.v3+json', 'User-Agent': 'seaquel-app' },
 			}),
 			fetch('https://api.github.com/repos/WebstoneHQ/seaquel', {
-				headers: { Accept: 'application/vnd.github.v3+json' },
+				headers: { Accept: 'application/vnd.github.v3+json', 'User-Agent': 'seaquel-app' },
 			}),
 		]);
 
 		if (!releasesRes.ok || !repoRes.ok) {
+			const failedRes = !releasesRes.ok ? releasesRes : repoRes;
+			const body = await failedRes.text().catch(() => '(unreadable)');
+			const remaining = failedRes.headers.get('X-RateLimit-Remaining');
+			const resetEpoch = failedRes.headers.get('X-RateLimit-Reset');
+			const resetIn = resetEpoch
+				? `${Math.ceil((Number(resetEpoch) * 1000 - Date.now()) / 60000)}min`
+				: 'unknown';
+
+			console.error(
+				'[metrics] GitHub API returned non-OK status:',
+				`releases=${releasesRes.status} ${releasesRes.statusText},`,
+				`repo=${repoRes.status} ${repoRes.statusText},`,
+				`rateLimit remaining=${remaining}, resets in ${resetIn},`,
+				`body=${body}`,
+			);
 			return { metrics: null, error: 'Unable to fetch data from GitHub.' };
 		}
 
