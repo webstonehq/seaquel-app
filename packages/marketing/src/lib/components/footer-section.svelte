@@ -117,6 +117,13 @@
                             >Report Issue</a
                         >
                     </li>
+                    <li>
+                        <a
+                            href="/metrics"
+                            class="hover:text-foreground transition-colors"
+                            >Metrics</a
+                        >
+                    </li>
                 </ul>
             </div>
         </div>
