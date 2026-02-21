@@ -7,32 +7,40 @@
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "binding": "ASSETS",
-    "directory": ".svelte-kit/cloudflare",
+    "directory": ".svelte-kit/cloudflare"
   },
   "routes": [
     {
       "pattern": "seaquel.app",
-      "custom_domain": true,
-    },
+      "custom_domain": true
+    }
   ],
   "vars": {
     "BETTER_AUTH_URL": "https://seaquel.app",
     "DODO_MODE": "live",
-    "PUBLIC_DODO_PRODUCT_MAP": "{\"pdt_0NYVr6Fe7j3GenJdKuTwb\":\"individual\",\"pdt_0NYVr5YOwzPkhLqn0rCsA\":\"business\"}",
+    "PUBLIC_DODO_PRODUCT_MAP": "{\"pdt_0NYVr6Fe7j3GenJdKuTwb\":\"individual\",\"pdt_0NYVr5YOwzPkhLqn0rCsA\":\"business\"}"
   },
   "observability": {
     "logs": {
       "enabled": true,
       "head_sampling_rate": 1,
       "invocation_logs": true,
-      "persist": true,
-    },
+      "persist": true
+    }
   },
+  "kv_namespaces": [
+    {
+      "binding": "GITHUB_API_CACHE",
+      // Run: npx wrangler kv namespace create CACHE
+      // Then replace this placeholder with the returned ID.
+      "id": "5976fa05cc2f4072997652a0403d1b97"
+    }
+  ],
   "d1_databases": [
     {
       "binding": "SEAQUEL_DB",
       "database_name": "seaquel-db",
-      "database_id": "5304ee29-52f5-4995-96e2-f5683809099f",
-    },
-  ],
+      "database_id": "5304ee29-52f5-4995-96e2-f5683809099f"
+    }
+  ]
 }

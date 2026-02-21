@@ -1,4 +1,4 @@
-import type { D1Database } from "@cloudflare/workers-types";
+import type { D1Database, KVNamespace } from "@cloudflare/workers-types";
 
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
@@ -11,6 +11,7 @@ declare global {
     interface Platform {
       env: {
         SEAQUEL_DB: D1Database;
+        GITHUB_API_CACHE: KVNamespace;
       };
     }
   }
