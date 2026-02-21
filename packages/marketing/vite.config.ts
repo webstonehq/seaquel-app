@@ -11,5 +11,9 @@ export default defineConfig({
 			// Allow serving files from static/demo
 			allow: ['static/demo']
 		}
+	},
+	ssr: {
+		// layerchart ships .svelte files that Node.js can't import natively
+		noExternal: ['layerchart', '@layerstack/tailwind']
 	}
 });

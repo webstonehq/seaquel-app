@@ -6,6 +6,7 @@ interface GitHubAsset {
 }
 
 interface GitHubRelease {
+	tag_name: string;
 	published_at: string;
 	assets: GitHubAsset[];
 }
@@ -14,6 +15,15 @@ interface GitHubRepo {
 	stargazers_count: number;
 	forks_count: number;
 	open_issues_count: number;
+}
+
+export interface ReleaseDownloads {
+	tag: string;
+	publishedAt: string;
+	total: number;
+	macOS: number;
+	windows: number;
+	linux: number;
 }
 
 export interface PlatformDownloads {
@@ -72,7 +82,7 @@ export const load: PageServerLoad = async () => {
 				`rateLimit remaining=${remaining}, resets in ${resetIn},`,
 				`body=${body}`,
 			);
-			return { metrics: null, error: 'Unable to fetch data from GitHub.' };
+			return { metrics: null, releaseBreakdowns: [], error: 'Unable to fetch data from GitHub.' };
 		}
 
 		const releases: GitHubRelease[] = await releasesRes.json();
@@ -84,15 +94,26 @@ export const load: PageServerLoad = async () => {
 		let totalDownloads = 0;
 		let thirtyDayDownloads = 0;
 		const platformDownloads: PlatformDownloads = { macOS: 0, windows: 0, linux: 0 };
+		const releaseBreakdowns: ReleaseDownloads[] = [];
 
 		for (const release of releases) {
 			const publishedAt = new Date(release.published_at).getTime();
 			const isRecent = publishedAt >= thirtyDaysAgo;
 
+			const perRelease: ReleaseDownloads = {
+				tag: release.tag_name,
+				publishedAt: release.published_at,
+				total: 0,
+				macOS: 0,
+				windows: 0,
+				linux: 0,
+			};
+
 			for (const asset of release.assets) {
 				if (!isRealDownload(asset.name)) continue;
 
 				totalDownloads += asset.download_count;
+				perRelease.total += asset.download_count;
 
 				if (isRecent) {
 					thirtyDayDownloads += asset.download_count;
@@ -101,9 +122,17 @@ export const load: PageServerLoad = async () => {
 				const platform = getPlatform(asset.name);
 				if (platform) {
 					platformDownloads[platform] += asset.download_count;
+					perRelease[platform] += asset.download_count;
 				}
 			}
+
+			releaseBreakdowns.push(perRelease);
 		}
+
+		// Sort chronologically (oldest first) for left-to-right chart reading
+		releaseBreakdowns.sort(
+			(a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime(),
+		);
 
 		// Compute release cadence
 		const sortedDates = releases
@@ -131,9 +160,9 @@ export const load: PageServerLoad = async () => {
 			avgDaysBetweenReleases,
 		};
 
-		return { metrics, error: null };
+		return { metrics, releaseBreakdowns, error: null };
 	} catch (e) {
 		console.error('[open] Failed to fetch GitHub data:', e);
-		return { metrics: null, error: 'Unable to load metrics. Please try again later.' };
+		return { metrics: null, releaseBreakdowns: [], error: 'Unable to load metrics. Please try again later.' };
 	}
 };
