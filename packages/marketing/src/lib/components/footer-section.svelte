@@ -29,7 +29,7 @@
                         <GithubIcon class="size-4" />
                     </Button>
                     <Button
-                        href="https://discord.gg/QuzUESE8x4"
+                        href="/discord"
                         target="_blank"
                         size="icon"
                         variant="ghost"
@@ -103,7 +103,7 @@
                     </li>
                     <li>
                         <a
-                            href="https://discord.gg/QuzUESE8x4"
+                            href="/discord"
                             target="_blank"
                             class="hover:text-foreground transition-colors"
                             >Discord Community</a

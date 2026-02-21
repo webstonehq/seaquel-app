@@ -13,7 +13,7 @@ export default defineConfig({
 			customCss: ['./src/styles/custom.css'],
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/webstonehq/seaquel' },
-				{ icon: 'discord', label: 'Discord', href: 'https://discord.gg/QuzUESE8x4' },
+				{ icon: 'discord', label: 'Discord', href: 'https://seaquel.app/discord' },
 			],
 			lastUpdated: true,
 			sidebar: [

@@ -118,7 +118,7 @@
 									If you have any issues with your license or
 									need assistance, reach out on our
 									<a
-										href="https://discord.gg/QuzUESE8x4"
+										href="/discord"
 										target="_blank"
 										class="text-primary hover:underline"
 										>Discord community</a
