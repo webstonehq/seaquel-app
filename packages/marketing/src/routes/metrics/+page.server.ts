@@ -45,11 +45,7 @@ function getPlatform(name: string): keyof PlatformDownloads | null {
 	return null;
 }
 
-export const load: PageServerLoad = async ({ setHeaders }) => {
-	setHeaders({
-		'cache-control': 'public, max-age=900, s-maxage=3600',
-	});
-
+export const load: PageServerLoad = async () => {
 	try {
 		const [releasesRes, repoRes] = await Promise.all([
 			fetch('https://api.github.com/repos/WebstoneHQ/seaquel/releases', {
