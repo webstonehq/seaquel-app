@@ -5,7 +5,10 @@ import { mdsvex } from "mdsvex";
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   extensions: [".svelte", ".md"],
-  kit: { adapter: adapter(), alias: { $modules: "./src/modules" } },
+  kit: {
+    adapter: adapter({ platformProxy: { persist: { path: "../metrics-collector/.wrangler/state/v3" } } }),
+    alias: { $modules: "./src/modules" },
+  },
   preprocess: [vitePreprocess(), mdsvex({ extensions: [".md"] })],
 };
 

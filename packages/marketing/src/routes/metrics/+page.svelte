@@ -1,22 +1,17 @@
 <script lang="ts">
 	import NavHeader from "$lib/components/nav-header.svelte";
 	import FooterSection from "$lib/components/footer-section.svelte";
-	import MetricsChartDialog from "$lib/components/metrics-chart-dialog.svelte";
 	import { Card, CardHeader, CardTitle, CardContent } from "$lib/components/ui/card";
+	import { ChartContainer, type ChartConfig } from "$lib/components/ui/chart";
+	import { AreaChart, BarChart } from "layerchart";
 	import { fly } from "svelte/transition";
 	import {
 		DownloadIcon,
 		StarIcon,
 		GitForkIcon,
-		CircleDotIcon,
-		MonitorIcon,
 		TagIcon,
-		CalendarIcon,
-		ClockIcon,
-		TrendingUpIcon,
-		BarChart3Icon,
 	} from "lucide-svelte";
-	import type { OpenMetrics, ReleaseDownloads } from "./+page.server";
+	import type { OpenMetrics, HistoricalEntry } from "./+page.server";
 
 	let { data } = $props();
 
@@ -31,125 +26,54 @@
 		return dateFmt.format(new Date(iso));
 	}
 
-	type ChartKey = "total" | "thirtyDay" | "macOS" | "windows" | "linux";
-
-	interface MetricCard {
-		icon: typeof DownloadIcon;
-		label: string;
-		value: string;
-		subtitle?: string;
-		chartKey?: ChartKey;
+	function trendData(key: (entry: HistoricalEntry) => number) {
+		return (data.history ?? []).map((entry: HistoricalEntry) => ({
+			date: entry.date,
+			value: key(entry),
+		}));
 	}
 
-	function buildCards(m: OpenMetrics): MetricCard[] {
-		return [
-			{
-				icon: DownloadIcon,
-				label: "Total Downloads",
-				value: fmt.format(m.totalDownloads),
-				chartKey: "total",
-			},
-			{
-				icon: TrendingUpIcon,
-				label: "30-Day Downloads",
-				value: fmt.format(m.thirtyDayDownloads),
-				subtitle: "Based on releases published in the last 30 days",
-				chartKey: "thirtyDay",
-			},
-			{
-				icon: StarIcon,
-				label: "GitHub Stars",
-				value: fmt.format(m.stars),
-			},
-			{
-				icon: GitForkIcon,
-				label: "GitHub Forks",
-				value: fmt.format(m.forks),
-			},
-			{
-				icon: CircleDotIcon,
-				label: "Open Issues",
-				value: fmt.format(m.openIssues),
-			},
-			{
-				icon: MonitorIcon,
-				label: "macOS Downloads",
-				value: fmt.format(m.platformDownloads.macOS),
-				chartKey: "macOS",
-			},
-			{
-				icon: MonitorIcon,
-				label: "Windows Downloads",
-				value: fmt.format(m.platformDownloads.windows),
-				chartKey: "windows",
-			},
-			{
-				icon: MonitorIcon,
-				label: "Linux Downloads",
-				value: fmt.format(m.platformDownloads.linux),
-				chartKey: "linux",
-			},
-			{
-				icon: TagIcon,
-				label: "Total Releases",
-				value: fmt.format(m.totalReleases),
-			},
-			{
-				icon: CalendarIcon,
-				label: "Latest Release",
-				value: m.latestRelease ? formatDate(m.latestRelease) : "N/A",
-			},
-			{
-				icon: ClockIcon,
-				label: "Avg. Days Between Releases",
-				value: m.avgDaysBetweenReleases > 0 ? `${m.avgDaysBetweenReleases} days` : "N/A",
-			},
-		];
-	}
+	const downloadsTrend = $derived(trendData((e) => e.totalDownloads));
+	const starsTrend = $derived(trendData((e) => e.stars));
+	const openIssueTrend = $derived(trendData((e) => e.openIssues));
+	const releasesTrend = $derived(trendData((e) => e.totalReleases));
 
-	// Chart dialog state
-	let dialogOpen = $state(false);
-	let dialogTitle = $state("");
-	let dialogData: { label: string; value: number }[] = $state([]);
-	let dialogColor = $state("var(--chart-1)");
-
-	const chartColors: Record<ChartKey, string> = {
-		total: "var(--chart-1)",
-		thirtyDay: "var(--chart-2)",
-		macOS: "var(--chart-3)",
-		windows: "var(--chart-4)",
-		linux: "var(--chart-5)",
+	const trendChartConfig: ChartConfig = {
+		value: { label: "Value", color: "var(--chart-1)" },
 	};
 
-	function openChart(key: ChartKey, label: string) {
-		const breakdowns = data.releaseBreakdowns;
-		const now = Date.now();
-		const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000;
+	const releaseBarData = $derived(
+		(data.releaseBreakdowns ?? []).map((r) => ({
+			label: r.tag,
+			macOS: r.macOS,
+			windows: r.windows,
+			linux: r.linux,
+		})),
+	);
 
-		let filtered: ReleaseDownloads[];
-		if (key === "thirtyDay") {
-			filtered = breakdowns.filter(
-				(r) => new Date(r.publishedAt).getTime() >= thirtyDaysAgo,
-			);
-		} else {
-			filtered = breakdowns;
-		}
+	const barChartConfig: ChartConfig = {
+		macOS: { label: "macOS", color: "var(--chart-1)" },
+		windows: { label: "Windows", color: "var(--chart-2)" },
+		linux: { label: "Linux", color: "var(--chart-3)" },
+	};
 
-		const field: keyof ReleaseDownloads =
-			key === "total" || key === "thirtyDay" ? "total" : key;
+	const platformTotal = $derived(
+		data.metrics
+			? data.metrics.platformDownloads.macOS +
+				data.metrics.platformDownloads.windows +
+				data.metrics.platformDownloads.linux
+			: 0,
+	);
 
-		dialogData = filtered.map((r) => ({ label: r.tag, value: r[field] as number }));
-		dialogTitle = `${label} per Release`;
-		dialogColor = chartColors[key];
-		dialogOpen = true;
-	}
-
-	function handleCardKeydown(e: KeyboardEvent, key: ChartKey, label: string) {
-		if (e.key === "Enter" || e.key === " ") {
-			e.preventDefault();
-			openChart(key, label);
-		}
-	}
+	const platforms = $derived(
+		data.metrics
+			? [
+					{ name: "macOS", value: data.metrics.platformDownloads.macOS },
+					{ name: "Windows", value: data.metrics.platformDownloads.windows },
+					{ name: "Linux", value: data.metrics.platformDownloads.linux },
+				]
+			: [],
+	);
 </script>
 
 <svelte:head>
@@ -179,7 +103,7 @@
 			</div>
 		</section>
 
-		<!-- Metrics Grid -->
+		<!-- Metrics Sections -->
 		<section class="py-16">
 			<div class="container mx-auto px-4 md:px-6">
 				{#if data.error}
@@ -187,58 +111,258 @@
 						<p class="text-muted-foreground">{data.error}</p>
 					</div>
 				{:else if data.metrics}
-					{@const cards = buildCards(data.metrics)}
-					<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-						{#each cards as card, index (card.label)}
-							<div in:fly={{ y: 30, delay: 100 + index * 50, duration: 600 }}>
-								{#if card.chartKey}
-									<Card
-										class="h-full hover:shadow-md transition-shadow duration-300 cursor-pointer group"
-										role="button"
-										tabindex={0}
-										onclick={() => openChart(card.chartKey!, card.label)}
-										onkeydown={(e) => handleCardKeydown(e, card.chartKey!, card.label)}
-									>
-										<CardHeader class="pb-2">
-											<div class="flex items-center gap-3">
-												<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
-													<card.icon class="size-5 text-primary" />
-												</div>
-												<CardTitle class="text-sm font-medium text-muted-foreground flex-1">
-													{card.label}
-												</CardTitle>
-												<BarChart3Icon class="size-4 text-muted-foreground/50 group-hover:text-primary transition-colors" />
+					{@const m = data.metrics}
+					<div class="max-w-5xl mx-auto flex flex-col gap-6">
+
+						<!-- Downloads -->
+						<div in:fly={{ y: 30, delay: 100, duration: 600 }}>
+							<Card>
+								<CardHeader class="pb-2">
+									<div class="flex items-center gap-3">
+										<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+											<DownloadIcon class="size-5 text-primary" />
+										</div>
+										<CardTitle>Downloads</CardTitle>
+									</div>
+								</CardHeader>
+								<CardContent>
+									<div class="flex flex-col md:flex-row gap-6">
+										<div class="flex flex-col gap-4 md:w-1/3 shrink-0">
+											<div>
+												<p class="text-4xl font-bold tracking-tight">{fmt.format(m.totalDownloads)}</p>
+												<p class="text-sm text-muted-foreground mt-1">Total Downloads</p>
 											</div>
-										</CardHeader>
-										<CardContent>
-											<p class="text-3xl font-bold tracking-tight">{card.value}</p>
-											{#if card.subtitle}
-												<p class="text-xs text-muted-foreground mt-1">{card.subtitle}</p>
-											{/if}
-										</CardContent>
-									</Card>
-								{:else}
-									<Card class="h-full hover:shadow-md transition-shadow duration-300">
-										<CardHeader class="pb-2">
-											<div class="flex items-center gap-3">
-												<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
-													<card.icon class="size-5 text-primary" />
-												</div>
-												<CardTitle class="text-sm font-medium text-muted-foreground">
-													{card.label}
-												</CardTitle>
+											<div>
+												<p class="text-xl font-semibold">{fmt.format(m.thirtyDayDownloads)}</p>
+												<p class="text-sm text-muted-foreground">30-Day Downloads</p>
 											</div>
-										</CardHeader>
-										<CardContent>
-											<p class="text-3xl font-bold tracking-tight">{card.value}</p>
-											{#if card.subtitle}
-												<p class="text-xs text-muted-foreground mt-1">{card.subtitle}</p>
+
+											{#if platformTotal > 0}
+												<div class="flex flex-col gap-2 mt-2">
+													{#each platforms as p (p.name)}
+														<div class="flex items-center gap-3">
+															<div class="w-24 text-xs text-muted-foreground">{p.name}</div>
+															<div class="flex-1 h-2 bg-muted rounded-full overflow-hidden">
+																<div
+																	class="h-full bg-primary rounded-full transition-all"
+																	style="width: {(p.value / platformTotal) * 100}%"
+																></div>
+															</div>
+															<div class="w-16 text-xs text-right text-muted-foreground">{fmt.format(p.value)}</div>
+														</div>
+													{/each}
+												</div>
 											{/if}
-										</CardContent>
-									</Card>
-								{/if}
-							</div>
-						{/each}
+										</div>
+
+										<div class="flex-1 min-w-0">
+											{#if downloadsTrend.length <= 1}
+												<div class="flex h-[200px] items-center justify-center text-muted-foreground text-sm text-center px-4">
+													Trend data will appear after two daily snapshots.
+												</div>
+											{:else}
+												<ChartContainer config={trendChartConfig} class="h-[200px] w-full">
+													<AreaChart
+														data={downloadsTrend}
+														x="date"
+														y="value"
+														props={{
+															area: { fill: "var(--chart-1)", opacity: 0.2 },
+															line: { stroke: "var(--chart-1)", class: "stroke-2" },
+														}}
+													/>
+												</ChartContainer>
+											{/if}
+										</div>
+									</div>
+								</CardContent>
+							</Card>
+						</div>
+
+						<!-- GitHub Stars -->
+						<div in:fly={{ y: 30, delay: 200, duration: 600 }}>
+							<Card>
+								<CardHeader class="pb-2">
+									<div class="flex items-center gap-3">
+										<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+											<StarIcon class="size-5 text-primary" />
+										</div>
+										<CardTitle>GitHub Stars</CardTitle>
+									</div>
+								</CardHeader>
+								<CardContent>
+									<div class="flex flex-col md:flex-row gap-6">
+										<div class="flex flex-col gap-4 md:w-1/3 shrink-0">
+											<div>
+												<p class="text-4xl font-bold tracking-tight">{fmt.format(m.stars)}</p>
+												<p class="text-sm text-muted-foreground mt-1">Stars</p>
+											</div>
+										</div>
+										<div class="flex-1 min-w-0">
+											{#if starsTrend.length <= 1}
+												<div class="flex h-[200px] items-center justify-center text-muted-foreground text-sm text-center px-4">
+													Trend data will appear after two daily snapshots.
+												</div>
+											{:else}
+												<ChartContainer config={trendChartConfig} class="h-[200px] w-full">
+													<AreaChart
+														data={starsTrend}
+														x="date"
+														y="value"
+														props={{
+															area: { fill: "var(--chart-2)", opacity: 0.2 },
+															line: { stroke: "var(--chart-2)", class: "stroke-2" },
+														}}
+													/>
+												</ChartContainer>
+											{/if}
+										</div>
+									</div>
+								</CardContent>
+							</Card>
+						</div>
+
+						<!-- GitHub Activity -->
+						<div in:fly={{ y: 30, delay: 300, duration: 600 }}>
+							<Card>
+								<CardHeader class="pb-2">
+									<div class="flex items-center gap-3">
+										<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+											<GitForkIcon class="size-5 text-primary" />
+										</div>
+										<CardTitle>GitHub Activity</CardTitle>
+									</div>
+								</CardHeader>
+								<CardContent>
+									<div class="flex flex-col md:flex-row gap-6">
+										<div class="flex flex-col gap-4 md:w-1/3 shrink-0">
+											<div>
+												<p class="text-4xl font-bold tracking-tight">{fmt.format(m.openIssues)}</p>
+												<p class="text-sm text-muted-foreground mt-1">Open Issues</p>
+											</div>
+											<div>
+												<p class="text-xl font-semibold">{fmt.format(m.forks)}</p>
+												<p class="text-sm text-muted-foreground">Forks</p>
+											</div>
+										</div>
+										<div class="flex-1 min-w-0">
+											{#if openIssueTrend.length <= 1}
+												<div class="flex h-[200px] items-center justify-center text-muted-foreground text-sm text-center px-4">
+													Trend data will appear after two daily snapshots.
+												</div>
+											{:else}
+												<ChartContainer config={trendChartConfig} class="h-[200px] w-full">
+													<AreaChart
+														data={openIssueTrend}
+														x="date"
+														y="value"
+														props={{
+															area: { fill: "var(--chart-3)", opacity: 0.2 },
+															line: { stroke: "var(--chart-3)", class: "stroke-2" },
+														}}
+													/>
+												</ChartContainer>
+											{/if}
+										</div>
+									</div>
+								</CardContent>
+							</Card>
+						</div>
+
+						<!-- Releases -->
+						<div in:fly={{ y: 30, delay: 400, duration: 600 }}>
+							<Card>
+								<CardHeader class="pb-2">
+									<div class="flex items-center gap-3">
+										<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+											<TagIcon class="size-5 text-primary" />
+										</div>
+										<CardTitle>Releases</CardTitle>
+									</div>
+								</CardHeader>
+								<CardContent>
+									<div class="flex flex-col md:flex-row gap-6">
+										<div class="flex flex-col gap-4 md:w-1/3 shrink-0">
+											<div>
+												<p class="text-4xl font-bold tracking-tight">{fmt.format(m.totalReleases)}</p>
+												<p class="text-sm text-muted-foreground mt-1">Total Releases</p>
+											</div>
+											<div>
+												<p class="text-xl font-semibold">
+													{m.avgDaysBetweenReleases > 0 ? `${m.avgDaysBetweenReleases} days` : "N/A"}
+												</p>
+												<p class="text-sm text-muted-foreground">Avg. Days Between Releases</p>
+											</div>
+											<div>
+												<p class="text-xl font-semibold">
+													{m.latestRelease ? formatDate(m.latestRelease) : "N/A"}
+												</p>
+												<p class="text-sm text-muted-foreground">Latest Release</p>
+											</div>
+										</div>
+										<div class="flex-1 min-w-0">
+											{#if releasesTrend.length <= 1}
+												<div class="flex h-[200px] items-center justify-center text-muted-foreground text-sm text-center px-4">
+													Trend data will appear after two daily snapshots.
+												</div>
+											{:else}
+												<ChartContainer config={trendChartConfig} class="h-[200px] w-full">
+													<AreaChart
+														data={releasesTrend}
+														x="date"
+														y="value"
+														props={{
+															area: { fill: "var(--chart-4)", opacity: 0.2 },
+															line: { stroke: "var(--chart-4)", class: "stroke-2" },
+														}}
+													/>
+												</ChartContainer>
+											{/if}
+										</div>
+									</div>
+								</CardContent>
+							</Card>
+						</div>
+
+						<!-- Per-Release Downloads -->
+						<div in:fly={{ y: 30, delay: 500, duration: 600 }}>
+							<Card>
+								<CardHeader class="pb-2">
+									<div class="flex items-center gap-3">
+										<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+											<DownloadIcon class="size-5 text-primary" />
+										</div>
+										<CardTitle>Per-Release Downloads</CardTitle>
+									</div>
+								</CardHeader>
+								<CardContent>
+									{#if releaseBarData.length > 0}
+										<ChartContainer config={barChartConfig} class="h-[300px] w-full">
+											<BarChart
+												data={releaseBarData}
+												x="label"
+												series={[
+													{ key: "macOS", value: (d) => d.macOS, color: "var(--chart-1)" },
+													{ key: "windows", value: (d) => d.windows, color: "var(--chart-2)" },
+													{ key: "linux", value: (d) => d.linux, color: "var(--chart-3)" },
+												]}
+												seriesLayout="stack"
+												padding={{ top: 20, right: 10, bottom: 60, left: 40 }}
+												props={{
+													bars: { radius: 4 },
+													xAxis: { tickLabelProps: { rotate: -45, textAnchor: "end" } },
+												}}
+											/>
+										</ChartContainer>
+									{:else}
+										<div class="flex h-[300px] items-center justify-center text-muted-foreground text-sm">
+											No per-release download data available.
+										</div>
+									{/if}
+								</CardContent>
+							</Card>
+						</div>
+
 					</div>
 				{/if}
 			</div>
@@ -247,5 +371,3 @@
 		<FooterSection />
 	</div>
 </div>
-
-<MetricsChartDialog bind:open={dialogOpen} title={dialogTitle} data={dialogData} barColor={dialogColor} />
