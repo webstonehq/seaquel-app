@@ -3,7 +3,7 @@
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import { Card, CardHeader, CardTitle, CardContent } from "$lib/components/ui/card";
 	import { ChartContainer, type ChartConfig } from "$lib/components/ui/chart";
-	import { AreaChart, BarChart } from "layerchart";
+	import { AreaChart } from "layerchart";
 	import { fly } from "svelte/transition";
 	import {
 		DownloadIcon,
@@ -42,7 +42,7 @@
 		value: { label: "Value", color: "var(--chart-1)" },
 	};
 
-	const releaseBarData = $derived(
+	const releaseData = $derived(
 		(data.releaseBreakdowns ?? []).map((r) => ({
 			label: r.tag,
 			macOS: r.macOS,
@@ -51,7 +51,7 @@
 		})),
 	);
 
-	const barChartConfig: ChartConfig = {
+	const areaChartConfig: ChartConfig = {
 		macOS: { label: "macOS", color: "var(--chart-1)" },
 		windows: { label: "Windows", color: "var(--chart-2)" },
 		linux: { label: "Linux", color: "var(--chart-3)" },
@@ -336,10 +336,10 @@
 									</div>
 								</CardHeader>
 								<CardContent>
-									{#if releaseBarData.length > 0}
-										<ChartContainer config={barChartConfig} class="h-[300px] w-full">
-											<BarChart
-												data={releaseBarData}
+									{#if releaseData.length > 0}
+										<ChartContainer config={areaChartConfig} class="h-[300px] w-full">
+											<AreaChart
+												data={releaseData}
 												x="label"
 												series={[
 													{ key: "macOS", value: (d) => d.macOS, color: "var(--chart-1)" },
@@ -347,9 +347,10 @@
 													{ key: "linux", value: (d) => d.linux, color: "var(--chart-3)" },
 												]}
 												seriesLayout="stack"
-												padding={{ top: 20, right: 10, bottom: 60, left: 40 }}
+												legend
 												props={{
-													bars: { radius: 4 },
+													area: { opacity: 0.3 },
+													legend: { placement: "top-right" },
 													xAxis: { tickLabelProps: { rotate: -45, textAnchor: "end" } },
 												}}
 											/>
