@@ -110,6 +110,7 @@ export async function fetchFromGitHub(env: Env): Promise<CachedData> {
 		'User-Agent': 'seaquel-metrics-collector',
 	};
 	if (env.GITHUB_TOKEN) {
+		console.log('GITHUB_TOKEN present, sending an authenticated request to GitHub');
 		headers['Authorization'] = `Bearer ${env.GITHUB_TOKEN}`;
 	}
 
