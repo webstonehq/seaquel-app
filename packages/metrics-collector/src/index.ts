@@ -10,7 +10,7 @@ export default {
 	},
 
 	async scheduled(controller: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
-		const data = await fetchFromGitHub();
+		const data = await fetchFromGitHub(env);
 
 		const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
 

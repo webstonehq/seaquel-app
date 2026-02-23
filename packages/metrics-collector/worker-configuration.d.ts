@@ -7,6 +7,7 @@ declare namespace Cloudflare {
 	}
 	interface Env {
 		GITHUB_API_CACHE: KVNamespace;
+		GITHUB_TOKEN: string;
 	}
 }
 interface Env extends Cloudflare.Env {}

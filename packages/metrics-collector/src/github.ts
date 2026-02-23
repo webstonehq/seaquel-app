@@ -104,14 +104,18 @@ function computeMetrics(releases: GitHubRelease[], repo: GitHubRepo): CachedData
 	return { metrics, releaseBreakdowns };
 }
 
-export async function fetchFromGitHub(): Promise<CachedData> {
+export async function fetchFromGitHub(env: Env): Promise<CachedData> {
+	const headers: Record<string, string> = {
+		Accept: 'application/vnd.github.v3+json',
+		'User-Agent': 'seaquel-metrics-collector',
+	};
+	if (env.GITHUB_TOKEN) {
+		headers['Authorization'] = `Bearer ${env.GITHUB_TOKEN}`;
+	}
+
 	const [releasesRes, repoRes] = await Promise.all([
-		fetch('https://api.github.com/repos/WebstoneHQ/seaquel/releases', {
-			headers: { Accept: 'application/vnd.github.v3+json', 'User-Agent': 'seaquel-metrics-collector' },
-		}),
-		fetch('https://api.github.com/repos/WebstoneHQ/seaquel', {
-			headers: { Accept: 'application/vnd.github.v3+json', 'User-Agent': 'seaquel-metrics-collector' },
-		}),
+		fetch('https://api.github.com/repos/WebstoneHQ/seaquel/releases', { headers }),
+		fetch('https://api.github.com/repos/WebstoneHQ/seaquel', { headers }),
 	]);
 
 	if (!releasesRes.ok || !repoRes.ok) {
