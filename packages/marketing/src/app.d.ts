@@ -12,6 +12,7 @@ declare global {
       env: {
         SEAQUEL_DB: D1Database;
         GITHUB_API_CACHE: KVNamespace;
+        GITHUB_TOKEN: string;
       };
     }
   }
