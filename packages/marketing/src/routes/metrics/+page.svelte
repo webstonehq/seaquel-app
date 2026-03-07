@@ -11,7 +11,7 @@
 		GitForkIcon,
 		TagIcon,
 	} from "lucide-svelte";
-	import type { OpenMetrics, HistoricalEntry } from "./+page.server";
+	import type { HistoricalEntry } from "./+page.server";
 
 	let { data } = $props();
 
@@ -33,7 +33,14 @@
 		}));
 	}
 
-	const downloadsTrend = $derived(trendData((e) => e.totalDownloads));
+	const downloadsTrend = $derived(
+		(data.history ?? []).map((entry: HistoricalEntry) => ({
+			date: entry.date,
+			macOS: entry.platformDownloads.macOS,
+			windows: entry.platformDownloads.windows,
+			linux: entry.platformDownloads.linux,
+		})),
+	);
 	const starsTrend = $derived(trendData((e) => e.stars));
 	const openIssueTrend = $derived(trendData((e) => e.openIssues));
 	const releasesTrend = $derived(trendData((e) => e.totalReleases));
@@ -56,24 +63,6 @@
 		windows: { label: "Windows", color: "var(--chart-2)" },
 		linux: { label: "Linux", color: "var(--chart-3)" },
 	};
-
-	const platformTotal = $derived(
-		data.metrics
-			? data.metrics.platformDownloads.macOS +
-				data.metrics.platformDownloads.windows +
-				data.metrics.platformDownloads.linux
-			: 0,
-	);
-
-	const platforms = $derived(
-		data.metrics
-			? [
-					{ name: "macOS", value: data.metrics.platformDownloads.macOS },
-					{ name: "Windows", value: data.metrics.platformDownloads.windows },
-					{ name: "Linux", value: data.metrics.platformDownloads.linux },
-				]
-			: [],
-	);
 </script>
 
 <svelte:head>
@@ -136,39 +125,29 @@
 												<p class="text-xl font-semibold">{fmt.format(m.thirtyDayDownloads)}</p>
 												<p class="text-sm text-muted-foreground">30-Day Downloads</p>
 											</div>
-
-											{#if platformTotal > 0}
-												<div class="flex flex-col gap-2 mt-2">
-													{#each platforms as p (p.name)}
-														<div class="flex items-center gap-3">
-															<div class="w-24 text-xs text-muted-foreground">{p.name}</div>
-															<div class="flex-1 h-2 bg-muted rounded-full overflow-hidden">
-																<div
-																	class="h-full bg-primary rounded-full transition-all"
-																	style="width: {(p.value / platformTotal) * 100}%"
-																></div>
-															</div>
-															<div class="w-16 text-xs text-right text-muted-foreground">{fmt.format(p.value)}</div>
-														</div>
-													{/each}
-												</div>
-											{/if}
 										</div>
 
 										<div class="flex-1 min-w-0">
 											{#if downloadsTrend.length <= 1}
-												<div class="flex h-[200px] items-center justify-center text-muted-foreground text-sm text-center px-4">
+												<div class="flex h-[300px] items-center justify-center text-muted-foreground text-sm text-center px-4">
 													Trend data will appear after two daily snapshots.
 												</div>
 											{:else}
-												<ChartContainer config={trendChartConfig} class="h-[200px] w-full">
+												<ChartContainer config={areaChartConfig} class="h-[300px] w-full">
 													<AreaChart
 														data={downloadsTrend}
 														x="date"
-														y="value"
+														series={[
+															{ key: "macOS", value: (d) => d.macOS, color: "var(--chart-1)" },
+															{ key: "windows", value: (d) => d.windows, color: "var(--chart-2)" },
+															{ key: "linux", value: (d) => d.linux, color: "var(--chart-3)" },
+														]}
+														seriesLayout="stack"
+														legend
 														props={{
-															area: { fill: "var(--chart-1)", opacity: 0.2 },
-															line: { stroke: "var(--chart-1)", class: "stroke-2" },
+															area: { opacity: 0.3 },
+															legend: { placement: "top-right" },
+															xAxis: { tickLabelProps: { rotate: -45, textAnchor: "end" } },
 														}}
 													/>
 												</ChartContainer>
