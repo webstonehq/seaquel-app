@@ -7,9 +7,9 @@
 
 <footer class="border-t bg-muted/30">
     <div class="container mx-auto px-4 md:px-6 py-12 md:py-16">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
             <!-- Brand Column -->
-            <div class="md:col-span-2 flex flex-col gap-4">
+            <div class="col-span-2 flex flex-col gap-4">
                 <div class="flex items-center gap-2">
                     <Logo class="size-8 text-primary" />
                     <span class="text-xl font-bold">Seaquel</span>
