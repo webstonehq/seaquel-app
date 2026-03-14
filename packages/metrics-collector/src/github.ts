@@ -53,17 +53,16 @@ function computeMetrics(releases: GitHubRelease[], repo: GitHubRepo): CachedData
 		for (const asset of release.assets) {
 			if (!isRealDownload(asset.name)) continue;
 
+			const platform = getPlatform(asset.name);
+			if (!platform) continue;
+
 			totalDownloads += asset.download_count;
 			perRelease.total += asset.download_count;
+			platformDownloads[platform] += asset.download_count;
+			perRelease[platform] += asset.download_count;
 
 			if (isRecent) {
 				thirtyDayDownloads += asset.download_count;
-			}
-
-			const platform = getPlatform(asset.name);
-			if (platform) {
-				platformDownloads[platform] += asset.download_count;
-				perRelease[platform] += asset.download_count;
 			}
 		}
 
