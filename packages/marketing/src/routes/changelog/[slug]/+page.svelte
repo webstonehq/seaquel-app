@@ -6,14 +6,15 @@
 	import { CalendarIcon, ArrowLeftIcon, MousePointerClickIcon } from "lucide-svelte";
 	import { fly } from "svelte/transition";
 	import type { PageData } from "./$types";
+	import Seo from "$lib/components/seo.svelte";
 
 	let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head>
-	<title>{data.entry.title} - Changelog - Seaquel</title>
-	<meta name="description" content="Seaquel changelog: {data.entry.title}" />
-</svelte:head>
+<Seo
+	title="{data.entry.title} - Changelog - Seaquel"
+	description="Seaquel changelog: {data.entry.title}"
+/>
 
 <div class="min-h-screen bg-background text-foreground">
 	<NavHeader />

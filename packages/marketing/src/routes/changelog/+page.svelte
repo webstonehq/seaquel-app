@@ -5,14 +5,15 @@
 	import { CalendarIcon, ArrowRightIcon } from "lucide-svelte";
 	import { fly } from "svelte/transition";
 	import type { PageData } from "./$types";
+	import Seo from "$lib/components/seo.svelte";
 
 	let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head>
-	<title>Changelog - Seaquel</title>
-	<meta name="description" content="See what's new in Seaquel. Latest updates, features, and improvements." />
-</svelte:head>
+<Seo
+	title="Changelog - Seaquel"
+	description="See what's new in Seaquel. Latest updates, features, and improvements."
+/>
 
 <div class="min-h-screen bg-background text-foreground">
 	<NavHeader />

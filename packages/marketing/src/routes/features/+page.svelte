@@ -64,6 +64,7 @@
 		FunctionSquareIcon,
 		MonitorIcon,
 	} from "lucide-svelte";
+	import Seo from "$lib/components/seo.svelte";
 
 	const visualTools = [
 		{
@@ -407,10 +408,10 @@
 	];
 </script>
 
-<svelte:head>
-	<title>Features - Seaquel</title>
-	<meta name="description" content="Explore all Seaquel features: interactive SQL tutorials, shared query library, visual query builder, canvas workspace, query plans, ERD viewer, and more." />
-</svelte:head>
+<Seo
+	title="Features - Seaquel"
+	description="Explore all Seaquel features: interactive SQL tutorials, shared query library, visual query builder, canvas workspace, query plans, ERD viewer, and more."
+/>
 
 <div class="min-h-screen bg-background text-foreground">
 	<NavHeader />

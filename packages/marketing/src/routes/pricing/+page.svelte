@@ -6,6 +6,7 @@
     import { Card } from "$lib/components/ui/card";
     import { fly } from "svelte/transition";
     import { CheckIcon, XIcon, UserIcon, BuildingIcon } from "lucide-svelte";
+    import Seo from "$lib/components/seo.svelte";
 
     let { data } = $props();
 
@@ -68,13 +69,10 @@
     );
 </script>
 
-<svelte:head>
-    <title>Pricing - Seaquel</title>
-    <meta
-        name="description"
-        content="Simple, transparent pricing for Seaquel commercial licenses. Individual and Business plans available."
-    />
-</svelte:head>
+<Seo
+    title="Pricing - Seaquel"
+    description="Simple, transparent pricing for Seaquel commercial licenses. Individual and Business plans available."
+/>
 
 <div class="min-h-screen bg-background text-foreground">
     <NavHeader />

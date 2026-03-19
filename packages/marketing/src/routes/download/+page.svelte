@@ -7,6 +7,7 @@
 	import { fly, fade } from "svelte/transition";
 	import { DownloadIcon, AppleIcon, MonitorIcon, ExternalLinkIcon } from "lucide-svelte";
 	import LogoLinux from "$lib/components/logo-linux.svelte";
+	import Seo from "$lib/components/seo.svelte";
 
 	const osIcons = {
 		macos: AppleIcon,
@@ -15,10 +16,10 @@
 	};
 </script>
 
-<svelte:head>
-	<title>Download Seaquel - Free Database Client for macOS, Windows & Linux</title>
-	<meta name="description" content="Download Seaquel for your platform. Available for macOS (Apple Silicon & Intel), Windows (MSI & EXE), and Linux (DEB, RPM, AppImage)." />
-</svelte:head>
+<Seo
+	title="Download Seaquel - Free Database Client for macOS, Windows & Linux"
+	description="Download Seaquel for your platform. Available for macOS (Apple Silicon & Intel), Windows (MSI & EXE), and Linux (DEB, RPM, AppImage)."
+/>
 
 <div class="min-h-screen bg-background text-foreground">
 	<NavHeader />

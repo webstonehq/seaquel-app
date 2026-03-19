@@ -12,14 +12,15 @@
 		HelpCircleIcon,
 	} from "lucide-svelte";
 	import { page } from "$app/state";
+	import Seo from "$lib/components/seo.svelte";
 
 	const sessionId = page.url.searchParams.get("session_id") || page.url.searchParams.get("order_id");
 </script>
 
-<svelte:head>
-	<title>Payment Successful - Seaquel</title>
-	<meta name="description" content="Your Seaquel license purchase was successful." />
-</svelte:head>
+<Seo
+	title="Payment Successful - Seaquel"
+	description="Your Seaquel license purchase was successful."
+/>
 
 <div class="min-h-screen bg-background text-foreground">
 	<NavHeader />

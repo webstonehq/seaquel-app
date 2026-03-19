@@ -14,21 +14,14 @@
 		TerminalIcon,
 	} from "lucide-svelte";
 	import { fly, fade } from "svelte/transition";
+	import Seo from "$lib/components/seo.svelte";
 </script>
 
-<svelte:head>
-	<title>Learn SQL Interactively - Free SQL Tutorial | Seaquel</title>
-	<meta
-		name="description"
-		content="Learn SQL for free with Seaquel's interactive tutorial. Practice writing queries on a real database with visual exercises, progressive challenges, and a drag-and-drop sandbox. No signup required."
-	/>
-	<meta property="og:title" content="Learn SQL Interactively - Free SQL Tutorial | Seaquel" />
-	<meta property="og:description" content="Master SQL through hands-on practice. Write real queries, solve progressive challenges, and build visual queries in a drag-and-drop sandbox. Free, no account required." />
-	<meta property="og:type" content="website" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Learn SQL Interactively - Free SQL Tutorial | Seaquel" />
-	<meta name="twitter:description" content="Master SQL through hands-on practice. Write real queries, solve progressive challenges, and build visual queries in a drag-and-drop sandbox." />
-</svelte:head>
+<Seo
+	title="Learn SQL Interactively - Free SQL Tutorial | Seaquel"
+	description="Learn SQL for free with Seaquel's interactive tutorial. Practice writing queries on a real database with visual exercises, progressive challenges, and a drag-and-drop sandbox. No signup required."
+	ogDescription="Master SQL through hands-on practice. Write real queries, solve progressive challenges, and build visual queries in a drag-and-drop sandbox. Free, no account required."
+/>
 
 <div class="min-h-screen bg-background text-foreground">
 	<NavHeader />

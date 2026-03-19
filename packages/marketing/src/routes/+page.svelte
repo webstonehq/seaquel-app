@@ -6,7 +6,13 @@
 	import ComparisonSection from "$lib/components/comparison-section.svelte";
 	import CtaSection from "$lib/components/cta-section.svelte";
 	import FooterSection from "$lib/components/footer-section.svelte";
+	import Seo from "$lib/components/seo.svelte";
 </script>
+
+<Seo
+	title="Seaquel - Database Management, Reimagined"
+	description="Lightning-fast, resource-efficient database client with AI-powered assistance. Work offline, query smarter, and manage your data with unprecedented speed."
+/>
 
 <div class="min-h-screen bg-background text-foreground">
 	<NavHeader />

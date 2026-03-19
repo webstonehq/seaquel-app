@@ -14,6 +14,7 @@
         LoaderCircleIcon,
     } from "lucide-svelte";
     import type { ThemeConfig, ThemeModeConfig } from "dodopayments-checkout";
+    import Seo from "$lib/components/seo.svelte";
 
     let { data } = $props();
 
@@ -149,13 +150,10 @@
     });
 </script>
 
-<svelte:head>
-    <title>Buy {data.plan.name} - Seaquel</title>
-    <meta
-        name="description"
-        content="Purchase a {data.plan.name} license for Seaquel."
-    />
-</svelte:head>
+<Seo
+    title="Buy {data.plan.name} - Seaquel"
+    description="Purchase a {data.plan.name} license for Seaquel."
+/>
 
 <div class="min-h-screen bg-background text-foreground">
     <NavHeader />

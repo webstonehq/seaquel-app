@@ -12,6 +12,7 @@
 		TagIcon,
 	} from "lucide-svelte";
 	import type { HistoricalEntry } from "./+page.server";
+	import Seo from "$lib/components/seo.svelte";
 
 	let { data } = $props();
 
@@ -65,13 +66,10 @@
 	};
 </script>
 
-<svelte:head>
-	<title>Metrics - Seaquel</title>
-	<meta
-		name="description"
-		content="Seaquel's public metrics dashboard. See download stats, GitHub activity, release cadence, and platform breakdown — all in the open."
-	/>
-</svelte:head>
+<Seo
+	title="Metrics - Seaquel"
+	description="Seaquel's public metrics dashboard. See download stats, GitHub activity, release cadence, and platform breakdown — all in the open."
+/>
 
 <div class="min-h-screen bg-background text-foreground">
 	<NavHeader />

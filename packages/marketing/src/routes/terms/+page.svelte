@@ -1,15 +1,13 @@
 <script lang="ts">
     import NavHeader from "$lib/components/nav-header.svelte";
     import FooterSection from "$lib/components/footer-section.svelte";
+    import Seo from "$lib/components/seo.svelte";
 </script>
 
-<svelte:head>
-    <title>Terms of Service - Seaquel</title>
-    <meta
-        name="description"
-        content="Terms of Service for Seaquel, the modern database client by Webstone Technologies Inc."
-    />
-</svelte:head>
+<Seo
+    title="Terms of Service - Seaquel"
+    description="Terms of Service for Seaquel, the modern database client by Webstone Technologies Inc."
+/>
 
 <div class="min-h-screen bg-background text-foreground">
     <NavHeader />
