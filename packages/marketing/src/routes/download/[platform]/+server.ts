@@ -33,11 +33,9 @@ interface GitHubRelease {
 	assets: GitHubAsset[];
 }
 
-export const GET = async ({ params }) => {
-	const { platform } = params;
-
+export const GET = async ({ params, platform }) => {
 	// Validate platform parameter
-	if (!platform || !Object.keys(ASSET_PATTERNS).includes(platform)) {
+	if (!params.platform || !Object.keys(ASSET_PATTERNS).includes(params.platform)) {
 		// For unknown platforms, redirect to releases page
 		return redirect(302, FALLBACK_URL);
 	}
@@ -46,7 +44,8 @@ export const GET = async ({ params }) => {
 		const response = await fetch(GITHUB_RELEASES_URL, {
 			headers: {
 				"User-Agent": "seaquel-website",
-				"Accept": "application/vnd.github.v3+json",
+        "Accept": "application/vnd.github.v3+json",
+				"Authorization": `Bearer ${platform?.env.GITHUB_TOKEN_FETCH_RELEASES_URL}`,
 			},
 		});
 
@@ -67,14 +66,14 @@ export const GET = async ({ params }) => {
 		}
 
 		// Find matching asset for the requested platform
-		const pattern = ASSET_PATTERNS[platform];
+		const pattern = ASSET_PATTERNS[params.platform];
 		let asset = latestRelease.assets.find((a) => pattern.test(a.name));
 
 		// For generic "macos", prefer Apple Silicon (aarch64) if available
-		if (platform === "macos" && !asset) {
+		if (params.platform === "macos" && !asset) {
 			asset = latestRelease.assets.find((a) => /aarch64\.dmg$/i.test(a.name));
 		}
-		if (platform === "macos" && !asset) {
+		if (params.platform === "macos" && !asset) {
 			asset = latestRelease.assets.find((a) => /\.dmg$/i.test(a.name));
 		}
 

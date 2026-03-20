@@ -13,6 +13,7 @@ declare global {
         SEAQUEL_DB: D1Database;
         GITHUB_API_CACHE: KVNamespace;
         GITHUB_TOKEN: string;
+        GITHUB_TOKEN_FETCH_RELEASES_URL: string;
       };
     }
   }
