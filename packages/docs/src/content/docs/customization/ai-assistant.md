@@ -1,6 +1,6 @@
 ---
 title: AI Assistant
-description: Get SQL help with natural language queries powered by AI.
+description: Use Seaquel's AI assistant to write SQL with plain English prompts. It understands your schema and generates queries tailored to your data.
 ---
 
 Seaquel's AI assistant helps you write SQL by describing what you need in plain English. It understands your database schema and generates queries tailored to your actual tables and columns.

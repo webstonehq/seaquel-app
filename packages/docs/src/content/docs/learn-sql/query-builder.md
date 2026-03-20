@@ -1,6 +1,6 @@
 ---
 title: Query Builder
-description: Build SQL visually with drag-and-drop tables, joins, and filters.
+description: Build SQL queries visually with a drag-and-drop canvas. Add tables, draw joins, set filters, and Seaquel generates the SQL in real time.
 ---
 
 The Query Builder lets you construct SQL queries on a visual canvas. Drag tables, draw joins, and configure filters — Seaquel generates the SQL in real time.

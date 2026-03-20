@@ -1,6 +1,6 @@
 ---
 title: Table Inspector
-description: View detailed column information, keys, indexes, and constraints.
+description: View detailed column information including types, nullability, defaults, primary keys, foreign keys, indexes, and constraints.
 ---
 
 The table inspector shows the full structural details of a table — columns, keys, indexes, and constraints — all in one place.

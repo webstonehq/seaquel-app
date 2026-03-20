@@ -1,6 +1,6 @@
 ---
 title: Quick Start
-description: Connect to a database and run your first query in under 5 minutes.
+description: Connect to a database and run your first SQL query in under 5 minutes. Supports PostgreSQL, MySQL, SQLite, DuckDB, and MSSQL.
 ---
 
 This guide walks you through connecting to a database and executing your first query.

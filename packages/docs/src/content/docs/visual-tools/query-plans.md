@@ -1,6 +1,6 @@
 ---
 title: Query Plans
-description: Visualize EXPLAIN and EXPLAIN ANALYZE output as interactive diagrams.
+description: Visualize EXPLAIN and EXPLAIN ANALYZE output as interactive tree diagrams to find bottlenecks and optimize query performance.
 ---
 
 Seaquel renders query execution plans as interactive diagrams, making it straightforward to find bottlenecks and understand how the database executes your SQL.

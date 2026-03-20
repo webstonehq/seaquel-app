@@ -1,6 +1,6 @@
 ---
 title: SQLite
-description: Open SQLite database files in Seaquel.
+description: Open and query SQLite database files in Seaquel. No server needed — just pick a .db or .sqlite file and connect instantly on your local machine.
 ---
 
 SQLite connections are file-based — no server required. Seaquel runs SQLite embedded, so you can work with local databases anywhere.

@@ -1,6 +1,6 @@
 ---
 title: Row Operations
-description: Insert, update, and delete rows with intuitive dialogs.
+description: Perform full CRUD operations from the result grid — insert, update, and delete rows using guided dialogs without writing SQL by hand.
 ---
 
 Seaquel provides full CRUD support directly from the result grid.

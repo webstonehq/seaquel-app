@@ -1,6 +1,6 @@
 ---
 title: Practice Database
-description: A built-in e-commerce sample database for learning SQL.
+description: Seaquel includes a built-in e-commerce sample database with users, products, orders, and more — no setup or data import needed.
 ---
 
 Seaquel ships with a built-in sample database so you can start writing queries immediately — no server setup, no configuration, no sample data to import.

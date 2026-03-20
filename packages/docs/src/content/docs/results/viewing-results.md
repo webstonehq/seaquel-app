@@ -1,6 +1,6 @@
 ---
 title: Viewing Results
-description: Navigate query results with virtual scrolling and pagination.
+description: Browse query results in a responsive grid with virtual scrolling, sortable and resizable columns, and support for large result sets.
 ---
 
 After executing a query, results appear in a grid below the editor.

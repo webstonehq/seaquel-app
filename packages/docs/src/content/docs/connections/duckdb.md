@@ -1,6 +1,6 @@
 ---
 title: DuckDB
-description: Connect to DuckDB for embedded analytics in Seaquel.
+description: Connect to DuckDB for fast embedded analytics in Seaquel. Run queries on local database files or spin up an in-memory database instantly.
 ---
 
 DuckDB is a fast, embedded analytics database. Seaquel provides full DuckDB support in the desktop app.

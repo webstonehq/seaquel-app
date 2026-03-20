@@ -1,6 +1,6 @@
 ---
 title: Microsoft SQL Server
-description: Connect to SQL Server and Azure SQL with Seaquel.
+description: Connect to Microsoft SQL Server and Azure SQL databases in Seaquel. Configure host, port, authentication, and optional SSL encryption.
 ---
 
 Seaquel supports Microsoft SQL Server connections in the desktop app.

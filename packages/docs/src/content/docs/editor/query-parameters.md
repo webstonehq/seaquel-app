@@ -1,6 +1,6 @@
 ---
 title: Query Parameters
-description: Use template variables for reusable, parameterized queries.
+description: Use double curly brace template variables to write reusable, parameterized SQL queries with values filled in at execution time.
 ---
 
 Query parameters let you write reusable SQL with placeholder values that you fill in at execution time.

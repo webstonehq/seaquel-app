@@ -1,6 +1,6 @@
 ---
 title: Command Palette
-description: Quick access to commands, navigation, and connections with Cmd+K.
+description: Open the command palette with Cmd+K to instantly access commands, navigate connections, and search across all of Seaquel's features.
 ---
 
 The command palette is the fastest way to navigate Seaquel. Press `Cmd+K` (Mac) or `Ctrl+K` (Windows/Linux) to open it from anywhere in the app.

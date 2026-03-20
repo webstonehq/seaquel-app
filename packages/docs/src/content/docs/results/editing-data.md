@@ -1,6 +1,6 @@
 ---
 title: Editing Data
-description: Edit cell values directly in the result grid.
+description: Click any cell in the result grid to edit its value inline — Seaquel generates and runs the UPDATE statement automatically for you.
 ---
 
 Seaquel lets you edit data inline without writing UPDATE statements by hand.

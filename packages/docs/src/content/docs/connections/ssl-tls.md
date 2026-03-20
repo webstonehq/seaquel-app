@@ -1,6 +1,6 @@
 ---
 title: SSL / TLS
-description: Configure SSL/TLS encryption for database connections.
+description: Configure SSL/TLS encryption for your database connections in Seaquel. Choose from disable, allow, prefer, require, or verify-full SSL modes.
 ---
 
 SSL/TLS encrypts the connection between Seaquel and your database server, preventing eavesdropping and man-in-the-middle attacks.

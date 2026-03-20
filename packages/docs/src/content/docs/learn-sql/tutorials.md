@@ -1,6 +1,6 @@
 ---
 title: Tutorials
-description: Learn SQL interactively with progressive lessons and challenges.
+description: Learn SQL interactively with Seaquel's built-in curriculum — progressive lessons from basics to advanced, running against a practice database.
 ---
 
 Seaquel includes a built-in SQL curriculum that teaches you from the basics through advanced topics. Every lesson runs against a [practice database](/docs/learn-sql/practice-database/) — no external setup needed.

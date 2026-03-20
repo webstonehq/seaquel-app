@@ -1,6 +1,6 @@
 ---
 title: Sample Queries
-description: Get started with pre-populated sample queries for each database type.
+description: Explore your data immediately with built-in sample queries covering SELECTs, JOINs, aggregations, and CTEs for every supported database type.
 ---
 
 Seaquel includes sample queries for every supported database type so you can start exploring your data right away.

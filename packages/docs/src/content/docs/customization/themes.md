@@ -1,6 +1,6 @@
 ---
 title: Themes
-description: Choose from 20 built-in themes or create your own.
+description: Personalize Seaquel with 20 built-in light and dark theme presets, or create a custom theme that switches automatically with your system.
 ---
 
 Seaquel comes with 20 theme presets and a custom theme editor. You can set separate themes for light and dark mode — Seaquel switches automatically based on your system preference.

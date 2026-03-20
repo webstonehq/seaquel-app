@@ -1,6 +1,6 @@
 ---
 title: SSH Tunnels
-description: Connect to remote databases through SSH tunnels.
+description: Connect to remote databases through SSH tunnels in Seaquel. Reach databases behind firewalls, private networks, or bastion jump servers securely.
 ---
 
 Use SSH tunnels to reach databases behind firewalls, on private networks, or accessible only through a bastion/jump server.

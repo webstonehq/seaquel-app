@@ -1,6 +1,6 @@
 ---
 title: Charts
-description: Create bar, line, pie, and scatter charts from query results.
+description: Turn query results into bar, line, pie, and scatter charts instantly — map your columns and visualize data without leaving the app.
 ---
 
 Seaquel lets you turn query results into charts without leaving the app. Pick a chart type, map your columns, and visualize your data in seconds.

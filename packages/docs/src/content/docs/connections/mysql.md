@@ -1,6 +1,6 @@
 ---
 title: MySQL
-description: Connect to MySQL and MariaDB databases with Seaquel.
+description: Connect to MySQL and MariaDB databases in Seaquel. Both database types use the same connection type with host, port, and credential settings.
 ---
 
 Seaquel supports both MySQL and MariaDB with the same connection type.

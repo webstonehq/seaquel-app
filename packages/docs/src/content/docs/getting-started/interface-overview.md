@@ -1,6 +1,6 @@
 ---
 title: Interface Overview
-description: "A tour of the Seaquel interface: sidebar, editor, results, and more."
+description: "A tour of the Seaquel interface covering the sidebar, schema browser, Monaco query editor, results grid, and multi-tab workflow."
 ---
 
 Seaquel's interface is organized around a few key areas. Here's what you'll find in each.

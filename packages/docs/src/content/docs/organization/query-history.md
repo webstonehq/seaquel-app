@@ -1,6 +1,6 @@
 ---
 title: Query History
-description: Browse and search your recent queries with timestamps and execution times.
+description: Automatically browse and search your recent queries with full SQL text, timestamps, execution times, and row counts per entry.
 ---
 
 Seaquel automatically records every query you execute, so you can always find and re-run past work. History persists across sessions and is stored locally on your machine.

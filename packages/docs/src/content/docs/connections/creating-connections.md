@@ -1,6 +1,6 @@
 ---
 title: Creating Connections
-description: Create and configure database connections in Seaquel.
+description: Learn how to create, configure, and test database connections in Seaquel, with secure local keychain storage and no cloud required.
 ---
 
 Seaquel stores all connections securely on your device using keychain integration. No cloud accounts, no telemetry.

@@ -1,6 +1,6 @@
 ---
 title: Query Visualizer
-description: See SQL queries as visual diagrams showing tables, joins, and filters.
+description: Parse and visualize SQL queries as interactive diagrams that clearly show tables, joins, filters, and column relationships.
 ---
 
 The query visualizer parses your SQL and renders it as a diagram, making it easy to understand the structure of complex queries at a glance.

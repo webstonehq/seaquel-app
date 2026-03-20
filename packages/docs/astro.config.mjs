@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import svelte from '@astrojs/svelte';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,6 +15,15 @@ export default defineConfig({
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/webstonehq/seaquel' },
 				{ icon: 'discord', label: 'Discord', href: 'https://seaquel.app/discord' },
+			],
+			head: [
+				{
+					tag: 'meta',
+					attrs: {
+						property: 'og:image',
+						content: 'https://seaquel.app/product-screenshot.png',
+					},
+				},
 			],
 			lastUpdated: true,
 			sidebar: [
@@ -108,5 +118,6 @@ export default defineConfig({
 			],
 		}),
 		svelte(),
+		sitemap(),
 	],
 });

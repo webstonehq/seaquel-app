@@ -1,6 +1,6 @@
 ---
 title: Updates
-description: Keep Seaquel up to date with automatic updates.
+description: Keep Seaquel up to date with automatic background update checks. Review release notes and install new versions with a single click.
 ---
 
 Seaquel checks for updates automatically so you always have the latest features and fixes. This is a desktop app feature — updates are handled entirely within the application.

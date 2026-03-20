@@ -1,6 +1,6 @@
 ---
 title: Shared Library
-description: Collaborate with your team through Git-synced query repositories.
+description: Share SQL queries across your team through Git-synced repositories with full version control and branch-based collaboration.
 ---
 
 The Shared Library lets your team share SQL queries through Git repositories. Everyone works from the same collection of queries, with full version control and conflict resolution.

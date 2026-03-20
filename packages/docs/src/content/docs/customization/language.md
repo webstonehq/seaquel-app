@@ -1,6 +1,6 @@
 ---
 title: Language
-description: Use Seaquel in English, German, French, Spanish, Arabic, or Korean.
+description: Switch Seaquel's interface language to English, German, French, Spanish, Arabic, or Korean — all UI text and messages are fully translated.
 ---
 
 Seaquel supports multiple interface languages. All UI labels, buttons, error messages, and help text are fully translated.

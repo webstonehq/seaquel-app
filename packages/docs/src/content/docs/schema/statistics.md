@@ -1,6 +1,6 @@
 ---
 title: Statistics
-description: Monitor database size, table metrics, and index usage.
+description: Monitor database size, table metrics, and index usage to find optimization opportunities without writing diagnostic queries.
 ---
 
 The statistics view gives you a high-level overview of your database's size, table metrics, and index efficiency. Use it to find optimization opportunities without writing diagnostic queries.

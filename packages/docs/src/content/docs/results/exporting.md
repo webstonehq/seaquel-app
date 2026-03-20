@@ -1,6 +1,6 @@
 ---
 title: Exporting Data
-description: Export query results to CSV, JSON, SQL, or Markdown.
+description: Export query results to CSV, JSON, SQL insert statements, or Markdown tables to use in spreadsheets, scripts, or documentation.
 ---
 
 Seaquel supports exporting query results in four formats, so you can move data into spreadsheets, scripts, documentation, or other tools.

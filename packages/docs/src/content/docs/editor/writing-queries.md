@@ -1,6 +1,6 @@
 ---
 title: Writing Queries
-description: Use the Monaco-powered SQL editor with autocomplete and syntax highlighting.
+description: Write SQL in a Monaco-powered editor with schema-aware autocomplete, syntax highlighting, and code folding for all supported databases.
 ---
 
 Seaquel's query editor is built on Monaco — the same engine behind VS Code. It gives you syntax highlighting, autocomplete, and code folding for SQL across all supported databases.

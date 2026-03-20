@@ -1,6 +1,6 @@
 ---
 title: Schema Browser
-description: Navigate your database schema with the sidebar tree.
+description: Navigate your database schema using the sidebar tree, which lists every schema, table, view, and row count at a glance.
 ---
 
 The schema browser lives in the left sidebar and gives you a tree view of every schema, table, and view in your database.

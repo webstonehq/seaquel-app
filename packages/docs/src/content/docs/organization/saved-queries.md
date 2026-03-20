@@ -1,6 +1,6 @@
 ---
 title: Saved Queries
-description: Save, name, and organize frequently used queries.
+description: Save, name, and organize frequently used queries per connection so you can find and re-run them from the sidebar anytime.
 ---
 
 Save queries you use often so you can find and re-run them without rewriting SQL from scratch. Saved queries are stored per-connection and accessible from the sidebar.

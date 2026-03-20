@@ -1,6 +1,6 @@
 ---
 title: PostgreSQL
-description: Connect to PostgreSQL databases with Seaquel.
+description: Connect to PostgreSQL databases in Seaquel. Configure host, port, credentials, SSL, and connection strings for local or remote servers.
 ---
 
 ## Connection details

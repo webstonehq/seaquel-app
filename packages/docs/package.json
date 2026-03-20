@@ -16,5 +16,8 @@
     "sharp": "^0.34.2",
     "svelte": "^5.51.2",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "^3.7.1"
   }
 }

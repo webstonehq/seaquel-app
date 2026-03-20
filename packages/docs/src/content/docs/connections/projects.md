@@ -1,6 +1,6 @@
 ---
 title: Projects
-description: Organize connections into projects with labels.
+description: Organize your database connections into projects in Seaquel. Group connections by team, client, or application and switch between them easily.
 ---
 
 Projects help you group related connections together — by team, client, application, or however you organize your work.
