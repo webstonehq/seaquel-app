@@ -16,7 +16,7 @@
                 </div>
                 <p class="text-sm text-muted-foreground max-w-sm">
                     The modern database client built for speed, efficiency, and
-                    intelligence. Free and open source.
+                    intelligence. Open source.
                 </p>
                 <div class="flex gap-2">
                     <Button

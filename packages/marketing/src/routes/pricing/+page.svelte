@@ -92,7 +92,7 @@
                     <p
                         class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
                     >
-                        Seaquel is free and open source for personal use.
+                        Seaquel is free for personal use and open source.
                         Commercial licenses are available for professional and
                         business use.
                     </p>

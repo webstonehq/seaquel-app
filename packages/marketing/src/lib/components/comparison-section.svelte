@@ -15,17 +15,21 @@
 		{ feature: "Startup Time", seaquel: "<2 seconds", others: "5-15 seconds" },
 		{ feature: "Interactive SQL Tutorials", seaquel: true, others: false },
 		{ feature: "Visual Query Builder", seaquel: true, others: false },
-		{ feature: "Shared Query Library", seaquel: true, others: "Paid only" },
+		{ feature: "Git-Based Project Sharing", seaquel: true, others: "Paid only" },
+		{ feature: "Custom Dashboards", seaquel: true, others: "Paid only" },
 		{ feature: "Visual Query Plans", seaquel: true, others: "Paid only" },
 		{ feature: "ERD Viewer", seaquel: true, others: "Paid only" },
 		{ feature: "Canvas Workspace", seaquel: true, others: false },
 		{ feature: "Built-in Charts", seaquel: true, others: "Paid only" },
 		{ feature: "AI SQL Assistant", seaquel: true, others: "Limited" },
+		{ feature: "Version History & Diffs", seaquel: true, others: false },
+		{ feature: "Split Panes", seaquel: true, others: true },
+		{ feature: "Deep Links", seaquel: true, others: false },
 		{ feature: "Windows, macOS & Linux", seaquel: true, others: true },
 		{ feature: "Works Fully Offline", seaquel: true, others: "Partial" },
 		{ feature: "100% Open Source", seaquel: true, others: "Partial" },
 		{ feature: "Native Performance", seaquel: true, others: false },
-		{ feature: "Price", seaquel: "Free forever", others: "$0 - $229/year" },
+		{ feature: "Price", seaquel: "Free for personal", others: "$0 - $229/year" },
 	];
 </script>
 

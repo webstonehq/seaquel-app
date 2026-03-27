@@ -63,6 +63,16 @@
 		AsteriskIcon,
 		FunctionSquareIcon,
 		MonitorIcon,
+		SparklesIcon,
+		AtSignIcon,
+		LayoutPanelLeftIcon,
+		ShareIcon,
+		DiffIcon,
+		SplitIcon,
+		ExternalLinkIcon,
+		ShieldAlertIcon,
+		ToggleRightIcon,
+		FolderInputIcon,
 	} from "lucide-svelte";
 	import Seo from "$lib/components/seo.svelte";
 
@@ -202,7 +212,7 @@
 		{
 			icon: DatabaseIcon,
 			title: "Multi-Database",
-			description: "PostgreSQL, MySQL, and SQLite support with a unified interface. More databases coming soon.",
+			description: "PostgreSQL, MySQL, MariaDB, SQLite, DuckDB, and SQL Server support with a unified interface.",
 		},
 		{
 			icon: LockIcon,
@@ -284,6 +294,75 @@
 		},
 	];
 
+	const aiAssistant = [
+		{
+			icon: SparklesIcon,
+			title: "Natural Language to SQL",
+			description: "Ask questions about your data in plain English and get SQL queries generated in context. The assistant understands your schema, connections, and active query.",
+		},
+		{
+			icon: AtSignIcon,
+			title: "@-Mentions",
+			description: "Reference tables, columns, and connections directly in the AI prompt input for more precise and targeted results.",
+		},
+		{
+			icon: LayoutPanelLeftIcon,
+			title: "Dashboard Generation",
+			description: "The AI assistant can create and update dashboards on your behalf, turning a description into a fully configured layout of widgets and queries.",
+		},
+		{
+			icon: ToggleRightIcon,
+			title: "Optional by Design",
+			description: "AI features can be disabled entirely from the settings panel if you prefer a traditional workflow.",
+		},
+		{
+			icon: ShieldAlertIcon,
+			title: "Privacy At The Core",
+			description: "AI privacy settings can be configured globally and overridden for each connection, so you stay in control of what data is shared.",
+		},
+	];
+
+	const dashboards = [
+		{
+			icon: LayoutPanelLeftIcon,
+			title: "Custom Dashboards",
+			description: "Create dashboards with KPI widgets, charts, and tables powered by live queries against your connected databases. Add, resize, and delete widgets to build the view you need.",
+		},
+		{
+			icon: ShareIcon,
+			title: "Shared Dashboards",
+			description: "Share dashboards with your team through Git-based project sharing, just like queries and connections.",
+		},
+		{
+			icon: DiffIcon,
+			title: "Version History & Visual Diff",
+			description: "Browse previous versions of a dashboard and see exactly what changed with a side-by-side visual diff.",
+		},
+	];
+
+	const splitPanesAndNavigation = [
+		{
+			icon: SplitIcon,
+			title: "Split Panes",
+			description: "Split the editor area to view and work on multiple queries, results, or dashboards side by side.",
+		},
+		{
+			icon: ExternalLinkIcon,
+			title: "Deep Links",
+			description: "Open projects, connections, queries, and dashboards from a URL. Share direct links to specific resources with your team.",
+		},
+		{
+			icon: DiffIcon,
+			title: "Query Version History",
+			description: "View the history of changes to any query with a visual diff, making it easy to understand what changed and when.",
+		},
+		{
+			icon: FolderInputIcon,
+			title: "Project Import",
+			description: "Import projects from other Seaquel installations to quickly get set up on a new machine.",
+		},
+	];
+
 	const learnSql = [
 		{
 			icon: GraduationCapIcon,
@@ -302,21 +381,21 @@
 		},
 	];
 
-	const sharedQueryLibrary = [
+	const projectSharing = [
 		{
 			icon: GitForkIcon,
-			title: "Git-Synced Repositories",
-			description: "Share SQL queries across your team with Git-backed query repositories. Push and pull query collections to keep everyone in sync.",
+			title: "Per-Project Git Integration",
+			description: "Link a project to a Git directory containing a .seaquel/ structure to share connections, queries, and dashboards with your team.",
 		},
 		{
 			icon: FolderGit2Icon,
-			title: "Managed Repositories",
-			description: "Browse, search, and organize shared queries directly from the Manage panel without leaving Seaquel.",
+			title: "Inline Sharing Controls",
+			description: "Share or unshare connections and queries directly from the sidebar. Credentials are stored locally while shared resources sync through Git.",
 		},
 		{
 			icon: UsersIcon,
 			title: "Team Collaboration",
-			description: "Build a shared library of queries your whole team can rely on. Review, update, and version control your SQL together.",
+			description: "Build a shared library of queries and dashboards your whole team can rely on. Review, update, and version control your SQL together.",
 		},
 	];
 
@@ -410,7 +489,7 @@
 
 <Seo
 	title="Features - Seaquel"
-	description="Explore all Seaquel features: interactive SQL tutorials, shared query library, visual query builder, canvas workspace, query plans, ERD viewer, and more."
+	description="Explore all Seaquel features: AI assistant, dashboards, split panes, version history, interactive SQL tutorials, visual query builder, canvas workspace, query plans, ERD viewer, and more."
 />
 
 <div class="min-h-screen bg-background text-foreground">
@@ -465,16 +544,35 @@
 
 		<!-- Feature Categories -->
 		<FeatureCategory
-			title="Learn SQL"
-			description="Master SQL interactively with built-in tutorials, challenges, and a visual query builder sandbox."
-			features={learnSql}
+			title="AI Assistant"
+			description="Get AI-powered help writing SQL, generating dashboards, and exploring your data — with privacy you control."
+			features={aiAssistant}
 		/>
 
 		<FeatureCategory
-			title="Shared Query Library"
-			description="Collaborate with your team through Git-synced query repositories."
-			features={sharedQueryLibrary}
+			title="Dashboards"
+			description="Build, share, and version custom dashboards powered by live database queries."
+			features={dashboards}
 			variant="highlight"
+		/>
+
+		<FeatureCategory
+			title="Split Panes & Navigation"
+			description="Work on multiple things at once, link directly to resources, and track changes over time."
+			features={splitPanesAndNavigation}
+		/>
+
+		<FeatureCategory
+			title="Learn SQL"
+			description="Master SQL interactively with built-in tutorials, challenges, and a visual query builder sandbox."
+			features={learnSql}
+			variant="highlight"
+		/>
+
+		<FeatureCategory
+			title="Git-Based Project Sharing"
+			description="Collaborate with your team through per-project Git integration."
+			features={projectSharing}
 		/>
 
 		<FeatureCategory

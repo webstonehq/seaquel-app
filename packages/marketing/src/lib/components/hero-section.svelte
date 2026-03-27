@@ -25,7 +25,7 @@
                     class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary border border-primary/20"
                 >
                     <HeartIcon class="size-4" />
-                    <span>Free & Open Source</span>
+                    <span>Open Source</span>
                 </div>
             </div>
 

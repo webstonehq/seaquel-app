@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
-	import { ZapIcon, CpuIcon, WifiOffIcon, BrainCircuitIcon, DatabaseIcon, ShieldCheckIcon, ActivityIcon, NetworkIcon, LayoutDashboardIcon, GitBranchIcon, BarChart3Icon, GraduationCapIcon, UsersIcon } from "lucide-svelte";
+	import { ZapIcon, CpuIcon, WifiOffIcon, BrainCircuitIcon, DatabaseIcon, ShieldCheckIcon, ActivityIcon, NetworkIcon, LayoutDashboardIcon, GitBranchIcon, BarChart3Icon, GraduationCapIcon, UsersIcon, SparklesIcon, LayoutPanelLeftIcon } from "lucide-svelte";
 	import { fly } from "svelte/transition";
 
 	const heroFeatures = [
 		{
-			icon: GraduationCapIcon,
-			title: "Learn SQL",
-			description: "Master SQL with built-in interactive tutorials. Solve progressive challenges, build queries visually in a drag-and-drop sandbox, and practice on a ready-to-go sample database.",
-			gradient: "from-amber-500/10 to-orange-500/10",
-			badge: "New in 2026.4",
+			icon: SparklesIcon,
+			title: "AI Assistant",
+			description: "Ask questions about your data in plain English. The AI understands your schema and active query to generate SQL, create dashboards, and help you work faster — with privacy controls per connection.",
+			gradient: "from-purple-500/10 to-pink-500/10",
+			badge: "New in 2026.4.5",
 		},
 		{
-			icon: UsersIcon,
-			title: "Shared Query Library",
-			description: "Collaborate with your team through Git-synced query repositories. Push, pull, and organize shared SQL collections without leaving Seaquel.",
+			icon: LayoutPanelLeftIcon,
+			title: "Dashboards",
+			description: "Build custom dashboards with KPI widgets, charts, and tables powered by live queries. Share them with your team through Git-based project sharing, with full version history and visual diffs.",
 			gradient: "from-sky-500/10 to-blue-500/10",
-			badge: "New in 2026.4",
+			badge: "New in 2026.4.5",
 		},
 		{
 			icon: LayoutDashboardIcon,
@@ -56,7 +56,7 @@
 		{
 			icon: BrainCircuitIcon,
 			title: "AI-Powered Assistant",
-			description: "Describe what you want in plain English and get working SQL. Let AI help you write complex JOINs and optimize slow queries.",
+			description: "Describe what you want in plain English and get working SQL. Use @-mentions for precision, generate dashboards from a description, and configure privacy per connection.",
 			gradient: "from-purple-500/10 to-pink-500/10",
 		},
 		{

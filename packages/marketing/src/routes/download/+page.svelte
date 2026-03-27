@@ -17,7 +17,7 @@
 </script>
 
 <Seo
-	title="Download Seaquel - Free Database Client for macOS, Windows & Linux"
+	title="Download Seaquel - Database Client for macOS, Windows & Linux"
 	description="Download Seaquel for your platform. Available for macOS (Apple Silicon & Intel), Windows (MSI & EXE), and Linux (DEB, RPM, AppImage)."
 />
 
@@ -31,7 +31,7 @@
 				<div in:fade={{ duration: 600 }}>
 					<div class="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary border border-primary/20 mb-6">
 						<DownloadIcon class="size-4" />
-						<span>Free & Open Source</span>
+						<span>Open Source</span>
 					</div>
 					<h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4">
 						Download Seaquel

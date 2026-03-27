@@ -33,7 +33,7 @@
                 <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 pt-4 text-sm text-muted-foreground">
                     <div class="flex items-center gap-2">
                         <CheckIcon class="size-4 text-green-500" />
-                        <span>Free forever</span>
+                        <span>Unrestricted free personal use</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <CheckIcon class="size-4 text-green-500" />
