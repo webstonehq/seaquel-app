@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
 	import { fly } from "svelte/transition";
+	import { ArrowRightIcon } from "lucide-svelte";
 	import type { Component, ComponentType, SvelteComponent } from "svelte";
 
 	interface Feature {
@@ -14,9 +15,10 @@
 		description: string;
 		features: Feature[];
 		variant?: "default" | "highlight";
+		slug?: string;
 	}
 
-	let { title, description, features, variant = "default" }: Props = $props();
+	let { title, description, features, variant = "default", slug }: Props = $props();
 </script>
 
 <section class="py-16 {variant === 'highlight' ? 'bg-muted/30' : ''}">
@@ -24,6 +26,11 @@
 		<div class="mb-10">
 			<h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-2">{title}</h2>
 			<p class="text-muted-foreground">{description}</p>
+			{#if slug}
+				<a href="/features/{slug}" class="inline-flex items-center gap-1 text-sm text-primary hover:underline mt-2">
+					Learn more <ArrowRightIcon class="size-3.5" />
+				</a>
+			{/if}
 		</div>
 
 		<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
