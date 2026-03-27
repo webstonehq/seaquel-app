@@ -1,1 +1,0 @@
-const e={local:{id:"local",name:"Local",isPredefined:!0,color:"#22c55e"},staging:{id:"staging",name:"Staging",isPredefined:!0,color:"#f59e0b"},prod:{id:"prod",name:"Production",isPredefined:!0,color:"#ef4444"}},o="default-seaquel",a="Seaquel";export{o as D,e as P,a};
