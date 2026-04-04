@@ -66,7 +66,12 @@ import {
 	ExternalLinkIcon,
 	ShieldAlertIcon,
 	ToggleRightIcon,
-	FolderInputIcon
+	FolderInputIcon,
+	ClipboardCheckIcon,
+	TableIcon,
+	PlusCircleIcon,
+	Columns3Icon,
+	ShieldBanIcon
 } from 'lucide-svelte';
 
 export interface Feature {
@@ -266,6 +271,65 @@ export const featureCategories: FeatureCategory[] = [
 					'Import projects from other Seaquel installations to quickly get set up on a new machine.',
 				extendedDescription:
 					'Moving to a new machine? Export your entire project — connections, queries, dashboards, and settings — and import it into a fresh Seaquel installation. The import wizard handles everything, letting you get back to work in seconds.'
+			}
+		]
+	},
+	{
+		slug: 'pending-changes',
+		icon: ClipboardCheckIcon,
+		title: 'Pending Changes',
+		description:
+			'Stage data edits and review them before committing, with built-in protection against destructive queries.',
+		variant: 'highlight',
+		features: [
+			{
+				icon: ClipboardCheckIcon,
+				title: 'Staged Edits',
+				description:
+					'Data edits (inserts, updates, deletes) are staged as pending changes instead of executing immediately. Review all queued modifications before applying them.',
+				extendedDescription:
+					'When you edit cells, insert rows, or delete records, changes are queued as pending modifications instead of hitting the database immediately. A dedicated panel shows every staged change with a human-readable description. Review the full batch, discard individual changes, or apply them all at once — giving you a safety net for bulk data work.'
+			},
+			{
+				icon: ShieldBanIcon,
+				title: 'Destructive Query Protection',
+				description:
+					'Running DROP, DELETE, TRUNCATE, or ALTER queries triggers a confirmation dialog to prevent accidental data loss.',
+				extendedDescription:
+					'Seaquel detects destructive SQL statements — DROP, DELETE, TRUNCATE, and ALTER — and presents a confirmation dialog before executing them. The dialog shows the exact statement that will run, so you can double-check before committing to an irreversible operation. This catches accidental executions and provides a last line of defense against data loss.'
+			}
+		]
+	},
+	{
+		slug: 'table-management',
+		icon: TableIcon,
+		title: 'Table Management',
+		description:
+			'Create tables, edit schemas, and insert rows visually — across PostgreSQL, MySQL, SQLite, DuckDB, and MSSQL.',
+		features: [
+			{
+				icon: PlusCircleIcon,
+				title: 'Create Tables',
+				description:
+					'Design and create new tables with a visual form. Define columns, types, constraints, and primary keys without writing DDL.',
+				extendedDescription:
+					'Create new tables directly in the app with a visual form builder. Add columns, pick data types from a database-specific list, set nullability and default values, and designate primary keys — all without writing a single line of DDL. The generated CREATE TABLE statement is previewed before execution so you can verify it.'
+			},
+			{
+				icon: Columns3Icon,
+				title: 'Schema Editing',
+				description:
+					'Add, rename, or drop columns on existing tables across all supported database engines.',
+				extendedDescription:
+					'Modify existing table schemas through a visual interface. Add new columns with type and constraint configuration, rename columns, or drop columns you no longer need. Seaquel generates the appropriate ALTER TABLE statements for each database engine — PostgreSQL, MySQL, SQLite, DuckDB, and MSSQL — handling syntax differences automatically.'
+			},
+			{
+				icon: RowsIcon,
+				title: 'Inline Row Insertion',
+				description:
+					'Add rows to tables with a form-based UX that respects column types, constraints, and default values.',
+				extendedDescription:
+					'Insert new rows through an improved form dialog that adapts to your table schema. Each field is typed according to its column — text inputs for strings, number fields for integers, date pickers for timestamps. Required fields are clearly marked, default values are pre-filled, and validation runs before submission to catch errors early.'
 			}
 		]
 	},

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
-	import { ZapIcon, CpuIcon, WifiOffIcon, BrainCircuitIcon, DatabaseIcon, ShieldCheckIcon, ActivityIcon, NetworkIcon, LayoutDashboardIcon, GitBranchIcon, BarChart3Icon, GraduationCapIcon, UsersIcon, SparklesIcon, LayoutPanelLeftIcon } from "lucide-svelte";
+	import { ZapIcon, CpuIcon, WifiOffIcon, BrainCircuitIcon, DatabaseIcon, ShieldCheckIcon, ActivityIcon, NetworkIcon, LayoutDashboardIcon, GitBranchIcon, BarChart3Icon, GraduationCapIcon, UsersIcon, SparklesIcon, LayoutPanelLeftIcon, ClipboardCheckIcon, TableIcon } from "lucide-svelte";
 	import { fly } from "svelte/transition";
 
 	const heroFeatures = [
@@ -16,6 +16,20 @@
 			title: "Dashboards",
 			description: "Build custom dashboards with KPI widgets, charts, and tables powered by live queries. Share them with your team through Git-based project sharing, with full version history and visual diffs.",
 			gradient: "from-sky-500/10 to-blue-500/10",
+			badge: "New in 2026.4.5",
+		},
+		{
+			icon: ClipboardCheckIcon,
+			title: "Pending Changes",
+			description: "Stage data edits and review them before committing. Inserts, updates, and deletes are queued so you can review the full batch before applying — with built-in protection against destructive queries.",
+			gradient: "from-amber-500/10 to-orange-500/10",
+			badge: "New in 2026.4.5",
+		},
+		{
+			icon: TableIcon,
+			title: "Table Management",
+			description: "Create tables, edit schemas, and insert rows visually across PostgreSQL, MySQL, SQLite, DuckDB, and MSSQL — no DDL required.",
+			gradient: "from-emerald-500/10 to-teal-500/10",
 			badge: "New in 2026.4.5",
 		},
 		{

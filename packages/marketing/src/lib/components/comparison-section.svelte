@@ -16,6 +16,8 @@
 		{ feature: "Interactive SQL Tutorials", seaquel: true, others: false },
 		{ feature: "Visual Query Builder", seaquel: true, others: false },
 		{ feature: "Git-Based Project Sharing", seaquel: true, others: "Paid only" },
+		{ feature: "Pending Changes", seaquel: true, others: false },
+		{ feature: "Table Management", seaquel: true, others: "Paid only" },
 		{ feature: "Custom Dashboards", seaquel: true, others: "Paid only" },
 		{ feature: "Visual Query Plans", seaquel: true, others: "Paid only" },
 		{ feature: "ERD Viewer", seaquel: true, others: "Paid only" },
