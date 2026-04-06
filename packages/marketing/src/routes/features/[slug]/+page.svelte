@@ -2,6 +2,7 @@
 	import NavHeader from "$lib/components/nav-header.svelte";
 	import CtaSection from "$lib/components/cta-section.svelte";
 	import FooterSection from "$lib/components/footer-section.svelte";
+	import FullscreenOverlay from "$lib/components/fullscreen-overlay.svelte";
 	import { Button } from "$lib/components/ui/button";
 	import { ArrowLeftIcon, ArrowRightIcon, ImageIcon } from "lucide-svelte";
 	import { fly } from "svelte/transition";
@@ -9,6 +10,26 @@
 	import Seo from "$lib/components/seo.svelte";
 
 	let { data }: { data: PageData } = $props();
+
+	const images: Record<string, { default: string }> = import.meta.glob(
+		'$lib/assets/features/*/*.webp',
+		{ eager: true, query: { enhanced: true } }
+	);
+	const animatedImages: Record<string, { default: string }> = import.meta.glob(
+		'$lib/assets/features/*/*.gif',
+		{ eager: true }
+	);
+
+	let fullscreenOpen = $state(false);
+	let fullscreenScreenshot: { src: string; alt: string, isAnimated?: boolean } | null = $state(null);
+
+	function toKebabCase(s: string) {
+		return s
+		    .toLowerCase()
+			.split(/[^a-z0-9]+/)
+			.filter(Boolean)
+			.join('-');
+	}
 </script>
 
 <Seo
@@ -63,6 +84,8 @@
 			<div class="container mx-auto px-4 md:px-6 max-w-5xl">
 				<div class="space-y-24 md:space-y-32">
 					{#each data.category.features as feature, index (feature.title)}
+					    {@const screenshot = images[`/src/lib/assets/features/${data.category.slug}/${toKebabCase(feature.title)}.webp`]?.default}
+					    {@const animatedScreenshot = animatedImages[`/src/lib/assets/features/${data.category.slug}/${toKebabCase(feature.title)}.gif`]?.default}
 						<section
 							class="grid md:grid-cols-2 gap-8 md:gap-12 items-center"
 							in:fly={{ y: 30, delay: 150 + index * 100, duration: 600 }}
@@ -84,12 +107,25 @@
 
 							<!-- Screenshot placeholder -->
 							<div class={index % 2 === 1 ? 'md:order-1' : ''}>
-								{#if feature.screenshot}
-									<img
-										src={feature.screenshot}
-										alt="{feature.title} screenshot"
-										class="rounded-xl border shadow-lg"
-									/>
+								{#if screenshot}
+									<button
+										class="cursor-pointer border-0 bg-transparent p-0"
+										onclick={() => { fullscreenScreenshot = { src: screenshot, alt: feature.title }; fullscreenOpen = true; }}
+										aria-label="View {feature.title} screenshot fullscreen"
+									>
+										<enhanced:img
+											src={screenshot}
+											alt={feature.title}
+										/>
+									</button>
+								{:else if animatedScreenshot}
+    								<button
+    									class="cursor-pointer border-0 bg-transparent p-0"
+    									onclick={() => { fullscreenScreenshot = { src: animatedScreenshot, alt: feature.title, isAnimated: true }; fullscreenOpen = true; }}
+    									aria-label="View {feature.title} screenshot fullscreen"
+    								>
+    				                    <img src={animatedScreenshot} alt={feature.title}>
+    								</button>
 								{:else}
 									<div class="aspect-video rounded-xl border-2 border-dashed border-muted-foreground/25 bg-muted/50 flex flex-col items-center justify-center gap-3">
 										<ImageIcon class="size-8 text-muted-foreground/50" />
@@ -107,3 +143,21 @@
 		<FooterSection />
 	</div>
 </div>
+
+<FullscreenOverlay bind:open={fullscreenOpen}>
+	{#if fullscreenScreenshot}
+	    {#if fullscreenScreenshot.isAnimated}
+    		<img
+    			src={fullscreenScreenshot.src}
+    			alt={fullscreenScreenshot.alt}
+    			class="w-full h-full object-contain"
+    		/>		
+		{:else}
+    		<enhanced:img
+    			src={fullscreenScreenshot.src}
+    			alt={fullscreenScreenshot.alt}
+    			class="w-full h-full object-contain"
+    		/>		
+		{/if}
+	{/if}
+</FullscreenOverlay>

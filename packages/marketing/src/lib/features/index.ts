@@ -34,8 +34,9 @@ import {
 	GlobeIcon,
 	FileCodeIcon,
 	PlugIcon,
-	ImportIcon,
+  ImportIcon,
 	LayoutDashboardIcon,
+	WorkflowIcon,
 	GitBranchIcon,
 	BarChart3Icon,
 	LineChartIcon,
@@ -79,7 +80,6 @@ export interface Feature {
 	title: string;
 	description: string;
 	extendedDescription: string;
-	screenshot?: string;
 }
 
 export interface FeatureCategory {
@@ -101,12 +101,12 @@ export const featureCategories: FeatureCategory[] = [
 		variant: 'highlight',
 		features: [
 			{
-				icon: LayoutDashboardIcon,
-				title: 'Canvas Workspace',
+				icon: WorkflowIcon,
+				title: 'Workflows',
 				description:
-					'An infinite visual canvas powered by XYFlow. Drag tables to inspect data, write SQL in query nodes, view results, and create charts - all connected in a visual workflow.',
+					'An infinite visual canvas to create workflows. Drag tables to inspect data, write SQL in query nodes, view results, and create charts - all connected in a visual workflow.',
 				extendedDescription:
-					'The Canvas Workspace is an infinite, zoomable surface where you can drag tables from the sidebar to instantly inspect their data, place SQL query nodes to write and execute queries, and wire the results into chart nodes for immediate visualization. Every element is connected — change a query and the downstream chart updates automatically. It turns your database exploration into a visual, spatial workflow instead of a linear series of tabs.'
+					'Workflows is an infinite, zoomable surface where you can drag tables from the sidebar to instantly inspect their data, place SQL query nodes to write and execute queries, and wire the results into chart nodes for immediate visualization. Every element is connected - change a query and the downstream chart updates automatically. It turns your database exploration into a visual, spatial workflow instead of a linear series of tabs. Coming soon: Stream data to 3rd party systems.'
 			},
 			{
 				icon: GitBranchIcon,
@@ -213,7 +213,7 @@ export const featureCategories: FeatureCategory[] = [
 				description:
 					'Create dashboards with KPI widgets, charts, and tables powered by live queries against your connected databases. Add, resize, and delete widgets to build the view you need.',
 				extendedDescription:
-					'Build custom dashboards with a drag-and-drop grid layout. Add KPI widgets that display a single metric, chart widgets (bar, line, pie, scatter) powered by SQL queries, and table widgets that show live query results. Each widget is independently resizable, and you can connect different widgets to different databases within the same dashboard.'
+					'Build custom dashboards with a drag-and-drop canvas. Add KPI widgets that display a single metric, chart widgets (bar, line, pie, scatter) powered by SQL queries, and table widgets that show live query results. Each widget is independently resizable, and you can connect different widgets to different databases within the same dashboard.'
 			},
 			{
 				icon: ShareIcon,
@@ -263,14 +263,6 @@ export const featureCategories: FeatureCategory[] = [
 					'View the history of changes to any query with a visual diff, making it easy to understand what changed and when.',
 				extendedDescription:
 					'Every saved query maintains a version history. Browse previous versions and view a side-by-side diff showing exactly what changed in the SQL. Restore any previous version with one click, so you never lose a working query after an experimental edit.'
-			},
-			{
-				icon: FolderInputIcon,
-				title: 'Project Import',
-				description:
-					'Import projects from other Seaquel installations to quickly get set up on a new machine.',
-				extendedDescription:
-					'Moving to a new machine? Export your entire project — connections, queries, dashboards, and settings — and import it into a fresh Seaquel installation. The import wizard handles everything, letting you get back to work in seconds.'
 			}
 		]
 	},
@@ -327,9 +319,9 @@ export const featureCategories: FeatureCategory[] = [
 				icon: RowsIcon,
 				title: 'Inline Row Insertion',
 				description:
-					'Add rows to tables with a form-based UX that respects column types, constraints, and default values.',
+					'Add rows to tables with an inline UX that respects column types, constraints, and default values.',
 				extendedDescription:
-					'Insert new rows through an improved form dialog that adapts to your table schema. Each field is typed according to its column — text inputs for strings, number fields for integers, date pickers for timestamps. Required fields are clearly marked, default values are pre-filled, and validation runs before submission to catch errors early.'
+					'Insert new rows inline through a UX that adapts to your table schema. Each field is typed according to its column - text inputs for strings, number fields for integers, date pickers for timestamps. Required fields are clearly marked, default values are pre-filled, and validation runs before submission to catch errors early.'
 			}
 		]
 	},
@@ -433,14 +425,6 @@ export const featureCategories: FeatureCategory[] = [
 					'Toggle between AND and OR operators in your WHERE clauses with a single click. The visual query builder displays each condition as a row, and you can switch the combining operator between them. Nest conditions to build complex filter logic without writing SQL by hand.'
 			},
 			{
-				icon: AsteriskIcon,
-				title: 'SELECT * Expansion',
-				description:
-					'Expand wildcard selects into explicit column lists with one click for precise control over your output.',
-				extendedDescription:
-					'Click the expand button next to a SELECT * and Seaquel replaces it with an explicit list of all columns in the table. This gives you precise control over which columns appear in your results and in what order — just uncheck the columns you don\'t need.'
-			},
-			{
 				icon: ArrowLeftRightIcon,
 				title: 'Two-Way SQL Sync',
 				description:
@@ -528,7 +512,7 @@ export const featureCategories: FeatureCategory[] = [
 				description:
 					'Statistics available for both DuckDB and PostgreSQL connections.',
 				extendedDescription:
-					'The Statistics Dashboard works with both DuckDB and PostgreSQL connections. Each database engine reports its own set of metrics through a unified interface, so you get consistent monitoring regardless of which database you\'re connected to.'
+					'The Statistics Dashboard works with all database engines. Each database engine reports its own set of metrics through a unified interface, so you get consistent monitoring regardless of which database you\'re connected to.'
 			}
 		]
 	},
@@ -742,7 +726,7 @@ export const featureCategories: FeatureCategory[] = [
 				description:
 					'Two ways to connect: paste a connection string for quick setup, or use the detailed configuration form.',
 				extendedDescription:
-					'Connect to your database in two ways: paste a connection string (like postgres://user:pass@host:5432/db) for instant setup, or use the detailed configuration form to set each parameter individually. The form and connection string stay in sync — edit one and the other updates automatically.'
+          'Connect to your database in two ways: paste a connection string (like postgres://user:pass@host:5432/db) for instant setup, or use the detailed configuration form to set each parameter individually. The form and connection string stay in sync — edit one and the other updates automatically.',
 			},
 			{
 				icon: ShieldCheckIcon,
@@ -769,12 +753,20 @@ export const featureCategories: FeatureCategory[] = [
 					'Switching from DBeaver? Import all your connection configurations in bulk with one click. Seaquel reads DBeaver\'s connection export format and creates matching connections for each entry. Review the import preview, deselect any connections you don\'t need, and import the rest.'
 			},
 			{
+				icon: ImportIcon,
+				title: 'TablePlus Import',
+				description:
+					'Migrate from TablePlus effortlessly. Bulk import your existing connection configurations with one click.',
+				extendedDescription:
+					'Switching from TablePlus? Import all your connection configurations in bulk with one click. Seaquel reads TablePlus\' connection export format and creates matching connections for each entry. Review the import preview, deselect any connections you don\'t need, and import the rest.'
+			},
+			{
 				icon: HardDriveIcon,
 				title: 'DuckDB Desktop Support',
 				description:
 					'Full support for DuckDB connections in the desktop app. Fast, embedded analytics at your fingertips.',
 				extendedDescription:
-					'Connect to DuckDB databases directly in the desktop app. Open .duckdb files from disk or create new in-memory databases for quick analysis. DuckDB connections support all Seaquel features — query editing, visualization, export, and the canvas workspace — with the blazing-fast performance DuckDB is known for.'
+					'Connect to DuckDB databases directly in the desktop app. Open .duckdb files from disk or create new in-memory databases for quick analysis. DuckDB connections support all Seaquel features — query editing, visualization, export, and workflows - with the blazing-fast performance DuckDB is known for.'
 			}
 		]
 	},
@@ -796,7 +788,7 @@ export const featureCategories: FeatureCategory[] = [
 			},
 			{
 				icon: PaletteIcon,
-				title: 'Custom Themes',
+        title: 'Custom Themes',
 				description:
 					'Choose from preset themes like Nord, or create your own. Import and export themes, with full light and dark mode support.',
 				extendedDescription:

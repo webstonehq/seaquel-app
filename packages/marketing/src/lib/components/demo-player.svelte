@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { MousePointerClickIcon, Maximize2Icon, XIcon } from "lucide-svelte";
-    import { fade, scale } from "svelte/transition";
-    import { cubicOut } from "svelte/easing";
+    import { MousePointerClickIcon, Maximize2Icon } from "lucide-svelte";
+    import { fade } from "svelte/transition";
     import { onMount } from "svelte";
+    import FullscreenOverlay from "./fullscreen-overlay.svelte";
 
     let {
         hash = "fullscreen",
@@ -42,24 +42,13 @@
     function openTheater() {
         dismissHint();
         theaterMode = true;
-        document.body.style.overflow = 'hidden';
         history.replaceState(null, '', `#${hash}`);
     }
 
-    function closeTheater() {
-        theaterMode = false;
-        document.body.style.overflow = '';
+    function onTheaterClose() {
         history.replaceState(null, '', window.location.pathname);
     }
-
-    function handleKeydown(event: KeyboardEvent) {
-        if (event.key === 'Escape' && theaterMode) {
-            closeTheater();
-        }
-    }
 </script>
-
-<svelte:window onkeydown={handleKeydown} />
 
 <div class="relative group w-full">
     <!-- Glow effect -->
@@ -109,54 +98,10 @@
     Click anywhere to start exploring · <button class="underline hover:text-foreground transition-colors cursor-pointer" onclick={openTheater}>Open fullscreen</button>
 </p>
 
-<!-- Theater Mode Overlay -->
-{#if theaterMode}
-    <div
-        class="fixed inset-0 z-50 flex items-center justify-center"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Demo in fullscreen mode"
-    >
-        <!-- Backdrop -->
-        <button
-            class="absolute inset-0 bg-black/90 backdrop-blur-md cursor-default border-0"
-            onclick={closeTheater}
-            aria-label="Close fullscreen demo"
-            transition:fade={{ duration: 300 }}
-        ></button>
-
-        <!-- Demo container -->
-        <div
-            class="relative w-[95vw] h-[90vh] max-w-[1800px]"
-            transition:scale={{ duration: 400, easing: cubicOut, start: 0.8 }}
-        >
-            <!-- Amplified glow effect -->
-            <div
-                class="absolute -inset-2 bg-linear-to-r from-primary via-accent to-primary rounded-2xl blur-3xl opacity-40"
-            ></div>
-
-            <!-- Close button -->
-            <button
-                class="absolute -top-12 right-0 z-10 flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white/80 hover:text-white hover:bg-white/20 transition-all duration-200 cursor-pointer"
-                onclick={closeTheater}
-            >
-                <span class="text-sm">Close</span>
-                <XIcon class="size-4" />
-            </button>
-
-            <!-- Click outside hint -->
-            <p class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-sm text-white/50">
-                Click outside to close
-            </p>
-
-            <!-- Demo frame -->
-            <div class="relative w-full h-full rounded-2xl overflow-hidden border-2 border-primary/30 shadow-2xl bg-card">
-                <iframe
-                    src={demoSrc}
-                    title="Seaquel Demo - Interactive Database Client (Fullscreen)"
-                    class="w-full h-full border-0"
-                ></iframe>
-            </div>
-        </div>
-    </div>
-{/if}
+<FullscreenOverlay bind:open={theaterMode} onclose={onTheaterClose}>
+    <iframe
+        src={demoSrc}
+        title="Seaquel Demo - Interactive Database Client (Fullscreen)"
+        class="w-full h-full border-0"
+    ></iframe>
+</FullscreenOverlay>
