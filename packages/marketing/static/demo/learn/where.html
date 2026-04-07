@@ -6,9 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Explore, query, and visualize your databases — all in one app.</title>
     <script>
-      // Prevent flash of wrong theme on initial load
+      // Prevent flash of wrong theme/direction on initial load
       (function () {
         var root = document.documentElement;
+
+        // Handle RTL direction from persisted locale
+        var locale = localStorage.getItem("PARAGLIDE_LOCALE");
+        if (locale) {
+          root.lang = locale;
+          if (["ar", "he", "fa", "ur"].indexOf(locale) !== -1) {
+            root.dir = "rtl";
+          }
+        }
 
         // Handle dark mode
         var mode = localStorage.getItem("mode-watcher-mode");
@@ -73,12 +82,12 @@
         }
       })();
     </script>
-    <link href="../_app/immutable/entry/start.BJaWxont.js" rel="modulepreload">
-		<link href="../_app/immutable/chunks/BsT9-Ab2.js" rel="modulepreload">
+    <link href="../_app/immutable/entry/start.UT5BZWwN.js" rel="modulepreload">
+		<link href="../_app/immutable/chunks/BCBm-N3l.js" rel="modulepreload">
 		<link href="../_app/immutable/chunks/XOPl3CLQ.js" rel="modulepreload">
-		<link href="../_app/immutable/entry/app.C4XC4Fww.js" rel="modulepreload">
+		<link href="../_app/immutable/entry/app.Cz_x0_gX.js" rel="modulepreload">
 		<link href="../_app/immutable/chunks/PPVm8Dsz.js" rel="modulepreload">
-		<link href="../_app/immutable/chunks/BY9dULxn.js" rel="modulepreload">
+		<link href="../_app/immutable/chunks/QjsDHNh2.js" rel="modulepreload">
 		<link href="../_app/immutable/chunks/CizfC3pO.js" rel="modulepreload">
 		<link href="../_app/immutable/chunks/C_Uvb4WO.js" rel="modulepreload">
 		<link href="../_app/immutable/chunks/DsnmJJEf.js" rel="modulepreload">
@@ -91,7 +100,7 @@
     <div style="display: contents">
 			<script>
 				{
-					__sveltekit_1112ro0 = {
+					__sveltekit_dmoh1x = {
 						base: new URL("..", location).pathname.slice(0, -1),
 						assets: "/demo"
 					};
@@ -99,8 +108,8 @@
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../_app/immutable/entry/start.BJaWxont.js"),
-						import("../_app/immutable/entry/app.C4XC4Fww.js")
+						import("../_app/immutable/entry/start.UT5BZWwN.js"),
+						import("../_app/immutable/entry/app.Cz_x0_gX.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element);
 					});

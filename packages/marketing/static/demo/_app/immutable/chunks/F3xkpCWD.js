@@ -1,0 +1,1 @@
+import{g as s}from"./QjsDHNh2.js";const r=()=>"View Logs",n=()=>"Ver registros",o=()=>"عرض السجلات",i=()=>"Protokolle anzeigen",_=()=>"로그 보기",g=()=>"Voir les journaux",c=((l={},t={})=>{const e=t.locale??s();return e==="en"?r():e==="es"?n():e==="ar"?o():e==="de"?i():e==="ko"?_():g()});export{c as s};
