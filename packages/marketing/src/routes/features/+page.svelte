@@ -15,7 +15,7 @@
 
 <Seo
 	title="Features - Seaquel"
-	description="Explore all Seaquel features: AI assistant, dashboards, pending changes, table management, split panes, version history, interactive SQL tutorials, visual query builder, canvas workspace, query plans, ERD viewer, and more."
+	description="Explore all Seaquel features: AI assistant, dashboards, pending changes, table management, split panes, version history, interactive SQL tutorials, visual query builder, workflows, query plans, ERD viewer, and more."
 />
 
 <div class="min-h-screen bg-background text-foreground">

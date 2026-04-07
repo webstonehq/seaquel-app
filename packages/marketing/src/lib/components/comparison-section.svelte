@@ -21,7 +21,7 @@
 		{ feature: "Custom Dashboards", seaquel: true, others: "Paid only" },
 		{ feature: "Visual Query Plans", seaquel: true, others: "Paid only" },
 		{ feature: "ERD Viewer", seaquel: true, others: "Paid only" },
-		{ feature: "Canvas Workspace", seaquel: true, others: false },
+		{ feature: "Workflows", seaquel: true, others: false },
 		{ feature: "Built-in Charts", seaquel: true, others: "Paid only" },
 		{ feature: "AI SQL Assistant", seaquel: true, others: "Limited" },
 		{ feature: "Version History & Diffs", seaquel: true, others: false },
