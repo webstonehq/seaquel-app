@@ -14,7 +14,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	}
 
 	const body = await request.json();
-	const { productId, quantity, returnUrl } = body;
+	const { productId, quantity, returnUrl, discountCode } = body;
 
 	if (!productId) {
 		return json({ message: 'Missing product ID' }, { status: 400 });
@@ -32,6 +32,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		body: JSON.stringify({
 			product_cart: [{ product_id: productId, quantity: quantity || 1 }],
 			return_url: returnUrl,
+			...(discountCode && { discount_code: discountCode }),
 		}),
 	});
 

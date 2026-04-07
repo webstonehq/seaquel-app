@@ -1,5 +1,6 @@
 <script lang="ts">
     import { tick, onDestroy } from "svelte";
+    import { page } from "$app/state";
     import NavHeader from "$lib/components/nav-header.svelte";
     import FooterSection from "$lib/components/footer-section.svelte";
     import { Button } from "$lib/components/ui/button";
@@ -24,11 +25,19 @@
     let step = $state<"configure" | "checkout">("configure");
     let sessionId = $state("");
 
+    // Extract discount code from URL hash (e.g. #discount=CODE)
+    let discountCode = $derived(
+        page.url.hash.startsWith("#discount=")
+            ? decodeURIComponent(page.url.hash.slice("#discount=".length))
+            : "",
+    );
+
     let total = $derived(data.plan.price * units);
 
     // Pricing breakdown from checkout.breakdown event (values in minor units / cents)
     let breakdown = $state<{
         total: number;
+        discount?: number;
         currency: string;
     } | null>(null);
 
@@ -64,6 +73,7 @@
                     productId: data.productId,
                     quantity: data.plan.allowMultipleUnits ? units : 1,
                     returnUrl: `${window.location.origin}/buy/success`,
+                    ...(discountCode && { discountCode }),
                 }),
             });
 
@@ -357,6 +367,15 @@
                                     </span>
                                     <span>{formatPrice(total)}</span>
                                 </div>
+
+                                {#if breakdown?.discount}
+                                    <div
+                                        class="flex items-center justify-between text-green-600 dark:text-green-400"
+                                    >
+                                        <span>Discount</span>
+                                        <span>&minus;{new Intl.NumberFormat('en-US', { style: 'currency', currency: breakdown.currency, minimumFractionDigits: 2 }).format(breakdown.discount / 100)}</span>
+                                    </div>
+                                {/if}
 
                                 <div
                                     class="border-t pt-2 mt-2 flex items-center justify-between font-semibold"
