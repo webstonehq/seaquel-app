@@ -573,6 +573,14 @@ export const featureCategories: FeatureCategory[] = [
 					'Every new connection comes with a set of sample queries tailored to its database type. PostgreSQL connections include queries for listing tables, checking index usage, and viewing active queries. DuckDB connections include examples for CSV import, Parquet reading, and analytical functions. Use them as starting points to explore your schema.'
 			},
 			{
+				icon: KeyboardIcon,
+				title: 'Vim & Emacs Keybindings',
+				description:
+					'Switch the query editor to Vim or Emacs keybindings from the settings panel. Your preference is persisted across sessions.',
+				extendedDescription:
+					'Seaquel supports Vim and Emacs keybinding modes in the query editor for developers who prefer modal or Emacs-style editing. Switch modes from the editor settings panel — your choice is saved and applied automatically in every tab. Vim mode includes normal, insert, and visual modes with common motions and commands. Emacs mode supports standard keybindings like Ctrl+A, Ctrl+E, Ctrl+K, and more.'
+			},
+			{
 				icon: FlameIcon,
 				title: 'Hot Path Analysis',
 				description:
@@ -628,6 +636,14 @@ export const featureCategories: FeatureCategory[] = [
 					'Copy individual rows as JSON, copy entire column values to clipboard. Multiple formats for seamless data transfer.',
 				extendedDescription:
 					'Copy data in the format you need. Select a single row and copy it as a JSON object. Select a column header and copy all values in that column. Copy a range of cells as tab-separated values for pasting into spreadsheets. Each copy operation respects the data type and formats values appropriately.'
+			},
+			{
+				icon: FolderInputIcon,
+				title: 'Drag & Drop Files',
+				description:
+					'Drop Parquet, CSV, JSON, Excel, or DuckDB files into the app to instantly query them in an in-memory DuckDB instance.',
+				extendedDescription:
+					'Drag and drop data files directly into Seaquel to start querying them immediately. Supported formats include Parquet, CSV, JSON, Excel, and DuckDB database files. Each dropped file opens in an in-memory DuckDB instance, so you can explore and analyze data without setting up a connection first. A visual overlay guides you through the process.'
 			},
 			{
 				icon: GaugeIcon,
