@@ -138,7 +138,7 @@
 		{
 			icon: DatabaseIcon,
 			title: "Multi-Database Support",
-			description: "Connect to PostgreSQL, MySQL, SQLite, and more from one beautiful interface. Even import your DBeaver connections with one click.",
+			description: "Connect to PostgreSQL, MySQL, SQLite, and more from one beautiful interface. Even import your DBeaver or TablePlus connections with one click.",
 			gradient: "from-indigo-500/10 to-blue-500/10",
 			slug: "connection-features",
 			screenshots: [
