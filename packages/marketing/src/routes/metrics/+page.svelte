@@ -59,6 +59,22 @@
 		})),
 	);
 
+	const thirtyDayDownloads = $derived.by(() => {
+		const history = data.history ?? [];
+		if (history.length < 2) return 0;
+		const latest = history[history.length - 1];
+		const cutoff = new Date(latest.date);
+		cutoff.setDate(cutoff.getDate() - 30);
+		const cutoffIso = cutoff.toISOString().slice(0, 10);
+		// Find the closest entry at or before the cutoff
+		let baseline = history[0];
+		for (const entry of history) {
+			if (entry.date <= cutoffIso) baseline = entry;
+			else break;
+		}
+		return latest.totalDownloads - baseline.totalDownloads;
+	});
+
 	const areaChartConfig: ChartConfig = {
 		macOS: { label: "macOS", color: "var(--chart-1)" },
 		windows: { label: "Windows", color: "var(--chart-2)" },
@@ -120,7 +136,7 @@
 												<p class="text-sm text-muted-foreground mt-1">Total Downloads</p>
 											</div>
 											<div>
-												<p class="text-xl font-semibold">{fmt.format(m.thirtyDayDownloads)}</p>
+												<p class="text-xl font-semibold">{fmt.format(thirtyDayDownloads)}</p>
 												<p class="text-sm text-muted-foreground">30-Day Downloads</p>
 											</div>
 										</div>
