@@ -783,6 +783,14 @@ export const featureCategories: FeatureCategory[] = [
 					'Full support for DuckDB connections in the desktop app. Fast, embedded analytics at your fingertips.',
 				extendedDescription:
 					'Connect to DuckDB databases directly in the desktop app. Open .duckdb files from disk or create new in-memory databases for quick analysis. DuckDB connections support all Seaquel features — query editing, visualization, export, and workflows - with the blazing-fast performance DuckDB is known for.'
+			},
+			{
+				icon: BoxesIcon,
+				title: 'DuckDB Extensions',
+				description:
+					'Browse, install, and load DuckDB extensions from a dedicated UI. See installed, loaded, and available extension counts at a glance.',
+				extendedDescription:
+					'Manage DuckDB extensions without writing SQL. A dedicated panel lists every available extension with its current status — installed, loaded, or not yet added. Install and load extensions with a single click, and see at a glance how many extensions are installed, loaded, and available in total. All DuckDB data types provided by extensions are fully supported.'
 			}
 		]
 	},
