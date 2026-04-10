@@ -17,7 +17,7 @@
 		ogTitle,
 		ogDescription,
 		ogType = "website",
-		ogImage = "/product-screenshot.png",
+		ogImage = "/product-screenshot.jpg",
 		twitterCard = "summary_large_image",
 	}: Props = $props();
 

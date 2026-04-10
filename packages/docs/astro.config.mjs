@@ -21,7 +21,7 @@ export default defineConfig({
 					tag: 'meta',
 					attrs: {
 						property: 'og:image',
-						content: 'https://seaquel.app/product-screenshot.png',
+						content: 'https://seaquel.app/product-screenshot.jpg',
 					},
 				},
 			],
