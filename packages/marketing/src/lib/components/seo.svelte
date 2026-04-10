@@ -34,6 +34,7 @@
 	<meta property="og:type" content={ogType} />
 	<meta property="og:url" content={canonicalUrl} />
 	<meta property="og:image" content={absoluteImage} />
+	<meta property="og:logo" content="{origin}/seaquel-logo.png" />
 	<meta name="twitter:card" content={twitterCard} />
 	<meta name="twitter:title" content={ogTitle ?? title} />
 	<meta name="twitter:description" content={ogDescription ?? description} />
