@@ -16,6 +16,37 @@
 	description={data.entry.description}
 />
 
+<style>
+	.changelog-content :global(h2[id]),
+	.changelog-content :global(h3[id]) {
+		position: relative;
+		scroll-margin-top: 6rem;
+	}
+	.changelog-content :global(h2[id] > a),
+	.changelog-content :global(h3[id] > a) {
+		color: inherit;
+		text-decoration: none;
+	}
+	.changelog-content :global(h2[id] > a:hover),
+	.changelog-content :global(h3[id] > a:hover) {
+		text-decoration: none;
+	}
+	.changelog-content :global(h2[id])::before,
+	.changelog-content :global(h3[id])::before {
+		content: '#';
+		position: absolute;
+		right: 100%;
+		margin-right: 0.25rem;
+		opacity: 0;
+		color: var(--color-primary);
+		transition: opacity 0.2s;
+	}
+	.changelog-content :global(h2[id]:hover)::before,
+	.changelog-content :global(h3[id]:hover)::before {
+		opacity: 0.5;
+	}
+</style>
+
 <div class="min-h-screen bg-background text-foreground">
 	<NavHeader />
 
@@ -63,7 +94,7 @@
 				<!-- Content -->
 				<div
 					in:fly={{ y: 30, delay: 200, duration: 600 }}
-					class="prose prose-lg dark:prose-invert max-w-none
+					class="changelog-content prose prose-lg dark:prose-invert max-w-none
 						prose-headings:font-bold prose-headings:tracking-tight
 						prose-a:text-primary prose-a:no-underline hover:prose-a:underline
 						prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
