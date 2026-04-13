@@ -13,7 +13,7 @@
 
 <Seo
 	title="{data.entry.title} - Changelog - Seaquel"
-	description="Seaquel changelog: {data.entry.title}"
+	description={data.entry.description}
 />
 
 <div class="min-h-screen bg-background text-foreground">

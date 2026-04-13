@@ -162,7 +162,7 @@
 
 <Seo
     title="Buy {data.plan.name} - Seaquel"
-    description="Purchase a {data.plan.name} license for Seaquel."
+    description="Purchase {data.plan.name === 'Individual' ? 'an' : 'a'} {data.plan.name} license for Seaquel. Download and start managing your databases today."
 />
 
 <div class="min-h-screen bg-background text-foreground">

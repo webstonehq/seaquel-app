@@ -5,6 +5,7 @@ export interface ChangelogEntry {
 	title: string;
 	date: string;
 	dateFormatted: string;
+	description: string;
 }
 
 export interface ChangelogEntryWithContent extends ChangelogEntry {
@@ -25,7 +26,7 @@ function formatDate(dateString: string): string {
  */
 export async function getChangelogEntries(): Promise<ChangelogEntry[]> {
 	const modules = import.meta.glob<{
-		metadata: { title: string; date: string };
+		metadata: { title: string; date: string; description?: string };
 	}>('/src/content/changelog/*.md', { eager: true });
 
 	const entries: ChangelogEntry[] = [];
@@ -34,13 +35,14 @@ export async function getChangelogEntries(): Promise<ChangelogEntry[]> {
 		const filename = path.split('/').pop()?.replace('.md', '') ?? '';
 		const slug = filename;
 
-		const { title, date } = module.metadata;
+		const { title, date, description } = module.metadata;
 
 		entries.push({
 			slug,
 			title,
 			date,
-			dateFormatted: formatDate(date)
+			dateFormatted: formatDate(date),
+			description: description ?? `Seaquel changelog: ${title}`
 		});
 	}
 
@@ -54,7 +56,7 @@ export async function getChangelogEntries(): Promise<ChangelogEntry[]> {
 export async function getChangelogEntry(slug: string): Promise<ChangelogEntryWithContent | null> {
 	const modules = import.meta.glob<{
 		default: Component;
-		metadata: { title: string; date: string };
+		metadata: { title: string; date: string; description?: string };
 	}>('/src/content/changelog/*.md');
 
 	const path = `/src/content/changelog/${slug}.md`;
@@ -64,13 +66,14 @@ export async function getChangelogEntry(slug: string): Promise<ChangelogEntryWit
 	}
 
 	const module = await modules[path]();
-	const { title, date } = module.metadata;
+	const { title, date, description } = module.metadata;
 
 	return {
 		slug,
 		title,
 		date,
 		dateFormatted: formatDate(date),
+		description: description ?? `Seaquel changelog: ${title}`,
 		content: module.default
 	};
 }
