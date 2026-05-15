@@ -6,6 +6,7 @@
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev --test-scheduled",
 		"start": "wrangler dev --test-scheduled",
+		"seed:local": "node scripts/seed-local-kv.mjs",
 		"cf-typegen": "wrangler types"
 	},
 	"devDependencies": {
