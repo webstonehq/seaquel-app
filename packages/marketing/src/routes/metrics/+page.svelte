@@ -29,14 +29,14 @@
 
 	function trendData(key: (entry: HistoricalEntry) => number) {
 		return (data.history ?? []).map((entry: HistoricalEntry) => ({
-			date: entry.date,
+			date: new Date(entry.date),
 			value: key(entry),
 		}));
 	}
 
 	const downloadsTrend = $derived(
 		(data.history ?? []).map((entry: HistoricalEntry) => ({
-			date: entry.date,
+			date: new Date(entry.date),
 			macOS: entry.platformDownloads.macOS,
 			windows: entry.platformDownloads.windows,
 			linux: entry.platformDownloads.linux,
@@ -80,6 +80,11 @@
 		windows: { label: "Windows", color: "var(--chart-2)" },
 		linux: { label: "Linux", color: "var(--chart-3)" },
 	};
+
+	// The trend `date` values are Date objects, so layerchart uses a time
+	// scale and spaces/formats a handful of ticks (e.g. "Jun", "Sep", "Mar '26")
+	// instead of rendering one rotated label per daily data point.
+	const xTrendAxis = { ticks: 6 };
 </script>
 
 <Seo
@@ -161,7 +166,7 @@
 														props={{
 															area: { opacity: 0.3 },
 															legend: { placement: "top-right" },
-															xAxis: { tickLabelProps: { rotate: -45, textAnchor: "end" } },
+															xAxis: xTrendAxis,
 														}}
 													/>
 												</ChartContainer>
@@ -205,6 +210,7 @@
 														props={{
 															area: { fill: "var(--chart-2)", opacity: 0.2 },
 															line: { stroke: "var(--chart-2)", class: "stroke-2" },
+															xAxis: xTrendAxis,
 														}}
 													/>
 												</ChartContainer>
@@ -252,6 +258,7 @@
 														props={{
 															area: { fill: "var(--chart-3)", opacity: 0.2 },
 															line: { stroke: "var(--chart-3)", class: "stroke-2" },
+															xAxis: xTrendAxis,
 														}}
 													/>
 												</ChartContainer>
@@ -307,6 +314,7 @@
 														props={{
 															area: { fill: "var(--chart-4)", opacity: 0.2 },
 															line: { stroke: "var(--chart-4)", class: "stroke-2" },
+															xAxis: xTrendAxis,
 														}}
 													/>
 												</ChartContainer>
