@@ -79,6 +79,24 @@
 					{/each}
 				</div>
 
+				<!-- License notice -->
+				<div class="text-center mt-10" in:fade={{ delay: 400, duration: 600 }}>
+					<p class="text-sm text-muted-foreground">
+						Free for personal use.
+						<a
+							href="/pricing"
+							class="text-foreground underline underline-offset-4 hover:text-primary transition-colors"
+							>Using Seaquel at work?</a
+						>
+						&middot;
+						<a
+							href="/terms"
+							class="text-foreground underline underline-offset-4 hover:text-primary transition-colors"
+							>Terms</a
+						>
+					</p>
+				</div>
+
 				<!-- GitHub Releases Link -->
 				<div class="text-center mt-12" in:fade={{ delay: 500, duration: 600 }}>
 					<p class="text-muted-foreground mb-4">

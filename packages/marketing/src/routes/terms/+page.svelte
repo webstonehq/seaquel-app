@@ -21,7 +21,7 @@
                     Terms of Service
                 </h1>
                 <p class="text-sm text-muted-foreground mb-12">
-                    Effective date: February 15, 2026
+                    Effective date: September 18, 2026
                 </p>
 
                 <div
@@ -50,9 +50,26 @@
                     <h2>2. Definitions</h2>
                     <ul>
                         <li>
-                            <strong>"Software"</strong> means the Seaquel
-                            database client application, including all updates
-                            and documentation.
+                            <strong>"Source Code"</strong> means the contents
+                            of the Seaquel source repository at
+                            github.com/webstonehq/seaquel.
+                        </li>
+                        <li>
+                            <strong>"Official Binaries"</strong> means the
+                            Seaquel desktop application builds distributed by
+                            Webstone through the Website, our GitHub Releases
+                            page, and the in-application updater, including all
+                            updates and documentation.
+                        </li>
+                        <li>
+                            <strong>"Official Server"</strong> means the
+                            Seaquel container image published by Webstone at
+                            ghcr.io/webstonehq/seaquel and the hosted Seaquel
+                            Cloud service.
+                        </li>
+                        <li>
+                            <strong>"Software"</strong> means the Official
+                            Binaries and the Official Server collectively.
                         </li>
                         <li>
                             <strong>"Website"</strong> means the Seaquel
@@ -73,17 +90,29 @@
 
                     <h2>3. License Grant</h2>
                     <p>
-                        The Software source code is released under the MIT
-                        License and is free to use for personal,
-                        non-commercial purposes. You may view, modify, and
-                        distribute the source code in accordance with the MIT
-                        License terms.
+                        <strong>Source Code.</strong> The Source Code is
+                        released under the MIT License. You may view, modify,
+                        distribute it, and build and run your own binaries from
+                        it in accordance with the MIT License terms, including
+                        for Commercial Use, without any license from Webstone.
+                        These Terms do not restrict your rights under the MIT
+                        License.
                     </p>
                     <p>
-                        Commercial Use of the Software requires a valid
-                        commercial license purchased through the Website. Using
-                        the Software for Commercial Use without a valid license
-                        is a violation of these Terms.
+                        <strong>Official Binaries.</strong> The Official
+                        Binaries are distributed under these Terms rather than
+                        the MIT License. They are free to use for personal,
+                        non-commercial purposes. Commercial Use of the Official
+                        Binaries requires a valid commercial license purchased
+                        through the Website. Using the Official Binaries for
+                        Commercial Use without a valid license is a violation of
+                        these Terms.
+                    </p>
+                    <p>
+                        <strong>Official Server.</strong> Use of the Official
+                        Server requires a valid subscription purchased through
+                        the Website, including for personal, non-commercial
+                        purposes.
                     </p>
 
                     <h2>4. Commercial License Terms</h2>
@@ -156,16 +185,17 @@
 
                     <h2>7. Intellectual Property</h2>
                     <p>
-                        The Software source code is licensed under the MIT
-                        License. The Seaquel name, logo, branding, website
+                        The Source Code is licensed under the MIT License. The Seaquel name, logo, branding, website
                         content, and documentation are the property of Webstone
                         Technologies Inc. and are protected by applicable
                         intellectual property laws.
                     </p>
                     <p>
-                        The MIT License applies to the Software source code
-                        only. It does not grant any rights to the Seaquel
-                        trademarks or branding.
+                        The MIT License applies to the Source Code only. It
+                        does not grant any rights to the Seaquel trademarks or
+                        branding. Binaries you build from the Source Code may
+                        not be distributed under the Seaquel name, logo, or
+                        branding.
                     </p>
 
                     <h2>8. Disclaimer of Warranties</h2>
