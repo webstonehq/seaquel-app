@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { remultAdapter } from "@nerdfolio/remult-better-auth";
-import { authEntities } from "./auth-entities";
+import { authEntities } from "$lib/entities/auth-entities";
+import { linkByVerifiedEmail } from "./auth-helpers";
 
 export const auth = betterAuth({
   database: remultAdapter({
@@ -20,5 +21,21 @@ export const auth = betterAuth({
   // config example:
   emailAndPassword: {
     enabled: true,
+  },
+
+  // Link licenses / invites bought under the user's email once — on
+  // sign-in and when the email becomes verified — instead of on every
+  // request.
+  databaseHooks: {
+    session: {
+      create: { after: async (session) => linkByVerifiedEmail(session.userId) },
+    },
+    user: {
+      update: {
+        after: async (user) => {
+          if (user.emailVerified) await linkByVerifiedEmail(user.id);
+        },
+      },
+    },
   },
 });

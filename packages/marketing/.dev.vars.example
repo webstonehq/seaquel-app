@@ -1,0 +1,76 @@
+# Local-only env vars. Copy to `.dev.vars` (gitignored) when running
+# `wrangler dev` so these are surfaced via `event.platform.env`.
+#
+# `vite dev` (no wrangler) reads `.env.local` instead — same key names,
+# different file, see SvelteKit docs on `$env/dynamic/private`.
+#
+# Production secrets are set via `wrangler secret put`:
+#   wrangler secret put BETTER_AUTH_SECRET
+#   wrangler secret put DODO_API_KEY
+#   wrangler secret put DODO_WEBHOOK_SECRET
+#   wrangler secret put CF_API_TOKEN
+#   wrangler secret put CF_ZONE_ID
+#   wrangler secret put FLY_API_TOKEN
+#   wrangler secret put FLY_IMAGE
+# Verify with `wrangler secret list`.
+# (BETTER_AUTH_URL, CF_ROOT_DOMAIN, DODO_MODE, FLY_ORG and
+#  PUBLIC_DODO_PRODUCT_MAP are non-secret and live in wrangler.jsonc.)
+
+# ---- Better Auth ------------------------------------------------------------
+# Cookie/session signing secret. Required — better-auth otherwise falls back
+# to a random per-boot value, which invalidates every session on each cold
+# start. Generate via `openssl rand -base64 32`.
+BETTER_AUTH_SECRET=
+
+# ---- Dodo Payments ----------------------------------------------------------
+# Get from https://app.dodopayments.com → Developer →
+# API Keys. Use the test key locally; the live key is only set as a
+# wrangler secret.
+DODO_API_KEY=
+# Get from the webhook configuration in the Dodo dashboard.
+DODO_WEBHOOK_SECRET=
+
+# ---- Cloudflare DNS (control plane writes *.seaquel.app records) ------------
+# Token scope: Zone:DNS:Edit on the seaquel.app zone.
+CF_API_TOKEN=
+# The zone id for seaquel.app — find via wrangler whoami or CF dashboard.
+CF_ZONE_ID=
+# Optional override; defaults to "seaquel.app".
+# CF_ROOT_DOMAIN=seaquel.app
+
+# ---- Fly.io platform adapter ------------------------------------------------
+# Org-scoped Fly API token with write access to apps + machines.
+FLY_API_TOKEN=
+# Fly org slug — each tenant gets its own app (seaquel-{slug}) in this org.
+FLY_ORG=seaquel
+# Container image ref for tenant containers.
+FLY_IMAGE=ghcr.io/webstonehq/seaquel:latest
+
+# ---- Cloudflare Containers (alternative platform) ---------------------------
+# CF_ACCOUNT_ID=
+# CF_CONTAINER_IMAGE=ghcr.io/webstonehq/seaquel:latest
+
+# ---- Air-gapped bundle signing ----------------------------------------------
+# 32-byte Ed25519 seed (hex, with or without `0x` prefix) used by
+# `/api/control/airgap/bundle` to sign offline license bundles. Generate
+# with `openssl rand -hex 32` and set in prod via
+# `wrangler secret put SEAQUEL_BUNDLE_SIGNING_PRIVATE_KEY`.
+#
+# The dev seed below is the deterministic test vector from
+# `bundle-signer.test.ts` — fine for local development, NEVER commit a
+# real production seed. The matching public key fingerprint is pinned
+# into the seaquel verifier as a trust anchor.
+SEAQUEL_BUNDLE_SIGNING_PRIVATE_KEY=000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f
+
+# Optional override; defaults to 2592000 (30 days). Bundle `not_after`
+# is computed as `License.currentPeriodEnd + SEAQUEL_AIRGAP_GRACE_SECONDS`.
+# SEAQUEL_AIRGAP_GRACE_SECONDS=2592000
+
+# ---- Notes ------------------------------------------------------------------
+# When BOTH FLY_* are unset (or any one is missing), the platform adapter
+# falls back to an in-memory mock that simulates a 2-second provision and
+# reports `ready`. Useful for end-to-end UI testing without real Fly
+# credentials. Same for the CF adapter.
+#
+# When CF_API_TOKEN / CF_ZONE_ID are unset, the DNS client is also a
+# no-op mock. In production these MUST be set or DNS won't be written.

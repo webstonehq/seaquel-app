@@ -7,6 +7,8 @@ import { enhancedImages } from '@sveltejs/enhanced-img';
 export default defineConfig({
 	plugins: [tailwindcss(), enhancedImages(), sveltekit(), devtoolsJson()],
 	server: {
+		// Lets a locally running tenant container reach the dev control plane.
+		allowedHosts: ['host.docker.internal'],
 		fs: {
 			// Allow serving files from static/demo
 			allow: ['static/demo']

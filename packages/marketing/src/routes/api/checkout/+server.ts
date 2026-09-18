@@ -1,5 +1,6 @@
 import { json } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
+import { auth as betterAuth } from '$lib/server/remult/better-auth';
 import type { RequestHandler } from './$types';
 
 const BASE_URLS: Record<string, string> = {
@@ -20,6 +21,15 @@ export const POST: RequestHandler = async ({ request }) => {
 		return json({ message: 'Missing product ID' }, { status: 400 });
 	}
 
+	// Best-effort: if the buyer is signed in, stamp their userId into the
+	// Dodo checkout metadata. The webhook reads it back to set
+	// `License.ownerUserId` directly, skipping the email auto-link path.
+	// Anonymous buyers (someone hitting /pricing without an account) still
+	// work — their License lands with `ownerUserId = ""` and gets claimed
+	// by email match on first dashboard visit.
+	const session = await betterAuth.api.getSession({ headers: request.headers });
+	const ownerUserId = session?.user.id ?? '';
+
 	const mode = env.DODO_MODE || 'test';
 	const baseUrl = BASE_URLS[mode] || BASE_URLS.test;
 
@@ -33,6 +43,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			product_cart: [{ product_id: productId, quantity: quantity || 1 }],
 			return_url: returnUrl,
 			...(discountCode && { discount_code: discountCode }),
+			...(ownerUserId && { metadata: { userId: ownerUserId } }),
 		}),
 	});
 

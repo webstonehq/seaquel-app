@@ -16,7 +16,6 @@
 
     function close() {
         open = false;
-        document.body.style.overflow = '';
         onclose?.();
     }
 
@@ -27,9 +26,11 @@
     }
 
     $effect(() => {
-        if (open) {
-            document.body.style.overflow = 'hidden';
-        }
+        if (!open) return;
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = '';
+        };
     });
 </script>
 

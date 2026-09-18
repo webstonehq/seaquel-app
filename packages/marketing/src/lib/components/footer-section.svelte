@@ -95,6 +95,13 @@
                 <ul class="flex flex-col gap-2 text-sm text-muted-foreground">
                     <li>
                         <a
+                            href="/blog"
+                            class="hover:text-foreground transition-colors"
+                            >Blog</a
+                        >
+                    </li>
+                    <li>
+                        <a
                             href="https://github.com/webstonehq/seaquel"
                             target="_blank"
                             class="hover:text-foreground transition-colors"

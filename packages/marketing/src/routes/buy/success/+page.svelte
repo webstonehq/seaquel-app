@@ -10,6 +10,7 @@
 		MailIcon,
 		DownloadIcon,
 		HelpCircleIcon,
+		CloudIcon,
 	} from "lucide-svelte";
 	import { page } from "$app/state";
 	import Seo from "$lib/components/seo.svelte";
@@ -97,6 +98,36 @@
 									size="sm"
 									label="Download Seaquel"
 								/>
+							</div>
+						</div>
+					</Card>
+
+					<!-- Seaquel Cloud -->
+					<Card class="border-2 p-6">
+						<div class="flex items-start gap-4">
+							<div
+								class="shrink-0 size-10 rounded-lg bg-primary/10 flex items-center justify-center"
+							>
+								<CloudIcon class="size-5 text-primary" />
+							</div>
+							<div class="flex-1">
+								<h2 class="font-semibold mb-1">
+									Seaquel Cloud
+								</h2>
+								<p
+									class="text-sm text-muted-foreground leading-relaxed mb-4"
+								>
+									Prefer a hosted version? Your license also
+									gives you access to Seaquel Cloud — the same
+									app, in the browser, with zero installs.
+								</p>
+								<Button
+									href="/dashboard"
+									variant="outline"
+									size="sm"
+								>
+									Set up Seaquel Cloud
+								</Button>
 							</div>
 						</div>
 					</Card>

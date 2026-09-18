@@ -1,0 +1,1 @@
+const e={};function n(){return typeof window>"u"?!1:"__TAURI_INTERNALS__"in window||"__TAURI__"in window||window.location.protocol==="tauri:"}function i(){return!1}function t(){return!n()&&!i()}export{i as a,t as b,n as i};

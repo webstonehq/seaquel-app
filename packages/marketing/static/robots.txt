@@ -1,3 +1,10 @@
-# allow crawling everything by default
 User-agent: *
-Disallow:
+Content-Signal: search=yes, ai-train=no, ai-input=yes
+# Private surfaces — authenticated dashboard, API endpoints, and the
+# post-checkout success page. Sitemap is the canonical list of indexable
+# routes; everything else marketing-relevant is linked from there.
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /buy/
+
+Sitemap: https://seaquel.app/sitemap.xml

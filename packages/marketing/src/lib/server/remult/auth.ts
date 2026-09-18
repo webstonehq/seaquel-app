@@ -1,5 +1,5 @@
 import { Module } from "remult/server";
-import { authEntities } from "./auth-entities";
+import { authEntities } from "$lib/entities/auth-entities";
 import { Roles } from "./auth-roles";
 import { addRolesToUser } from "./auth-helpers";
 import { auth as betterAuth } from "./better-auth";
@@ -34,6 +34,11 @@ export const auth = (o?: { SUPER_ADMIN_EMAILS?: string }) =>
           name: s.user.name,
           roles,
         };
+
+        // Stash email on the Remult context so entity BackendMethods can
+        // stamp `TenantMember.email` for the owner row without a second
+        // better-auth round-trip. UserInfo doesn't carry email itself.
+        if (s.user.email) remult.context.userEmail = s.user.email;
       }
     },
   });

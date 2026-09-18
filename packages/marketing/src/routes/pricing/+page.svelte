@@ -7,15 +7,18 @@
     import { fly } from "svelte/transition";
     import { CheckIcon, XIcon, UserIcon, BuildingIcon } from "lucide-svelte";
     import Seo from "$lib/components/seo.svelte";
+    import { PLAN_META } from "$lib/plans";
 
     let { data } = $props();
 
+    // `name` and `description` come from `$lib/plans.ts` — shared with
+    // the dashboard's tenant-creation form so both surfaces use the
+    // same wording. Everything else here (period, features, icon,
+    // highlight, originalPrice) is pricing-page-specific.
     const tierConfig: Record<
         string,
         {
-            name: string;
             period: string;
-            description: string;
             icon: typeof UserIcon;
             features: { text: string; included: boolean }[];
             highlight: boolean;
@@ -23,10 +26,7 @@
         }
     > = {
         individual: {
-            name: "Individual",
             period: "/ year",
-            description:
-                "For individual developers using Seaquel commercially or as freelancers.",
             originalPrice: "$80",
             icon: UserIcon,
             features: [
@@ -40,10 +40,7 @@
             highlight: false,
         },
         business: {
-            name: "Business",
             period: "/ year / seat",
-            description:
-                "For teams and organizations. Reassign seats as your team changes.",
             originalPrice: "$130",
             icon: BuildingIcon,
             features: [
@@ -60,12 +57,19 @@
 
     const plans = $derived(
         data.plans
-            ?.map((p) => ({
-                ...tierConfig[p.tier],
-                productId: p.productId,
-                formattedPrice: p.formattedPrice,
-            }))
-            .filter((p) => p.name) ?? [],
+            ?.map((p) => {
+                const meta = PLAN_META[p.tier];
+                const extras = tierConfig[p.tier];
+                if (!meta || !extras) return null;
+                return {
+                    name: meta.name,
+                    description: meta.description,
+                    ...extras,
+                    productId: p.productId,
+                    formattedPrice: p.formattedPrice,
+                };
+            })
+            .filter((p): p is NonNullable<typeof p> => p !== null) ?? [],
     );
 </script>
 

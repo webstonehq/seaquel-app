@@ -1,0 +1,1 @@
+function a(r,n){const e={};for(let t=0;t<n.length;t++)e[n[t]]=r[t];return e}function d(r,n){return r.map(e=>a(e,n))}function i(r){const n=new Set(r),e=new Set;return r.map(t=>{if(!e.has(t))return e.add(t),t;let s=2,o=`${t}_${s}`;for(;n.has(o)||e.has(o);)s++,o=`${t}_${s}`;return e.add(o),o})}export{a,i as d,d as r};

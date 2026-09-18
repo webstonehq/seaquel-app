@@ -7,6 +7,7 @@
  *   - provide consistent error handling and response shape
  *   - control which environment (test/live) is used
  */
+import { BASE_URLS } from "$lib/server/control/dodo";
 
 export interface LicenseProxyResponse {
 	id: string;
@@ -17,6 +18,9 @@ export interface LicenseProxyResponse {
 	activation_limit: number;
 	expires_at: string | null;
 	instance_id: string | null;
+	product_id: string | null;
+	customer_id: string | null;
+	customer_email: string | null;
 }
 
 interface DodoActivateResponse {
@@ -34,9 +38,7 @@ interface DodoValidateResponse {
 }
 
 function getBaseUrl(mode: string): string {
-	return mode === 'live'
-		? 'https://live.dodopayments.com'
-		: 'https://test.dodopayments.com';
+	return BASE_URLS[mode] ?? BASE_URLS.test;
 }
 
 function generateRequestId(): string {
@@ -113,6 +115,9 @@ export async function activateLicense(
 			activation_limit: 0,
 			expires_at: null,
 			instance_id: result.id,
+			product_id: result.product?.product_id ?? null,
+			customer_id: result.customer?.customer_id ?? null,
+			customer_email: result.customer?.email ?? null,
 		};
 
 		return Response.json(response);
@@ -144,6 +149,9 @@ export async function validateLicense(
 			activation_limit: 0,
 			expires_at: null,
 			instance_id: instanceId || null,
+			product_id: null,
+			customer_id: null,
+			customer_email: null,
 		};
 
 		return Response.json(response);
@@ -173,6 +181,9 @@ export async function deactivateLicense(
 			tier: '',
 			activation: 0,
 			activation_limit: 0,
+			product_id: null,
+			customer_id: null,
+			customer_email: null,
 			expires_at: null,
 			instance_id: instanceId,
 		};

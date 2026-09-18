@@ -1,4 +1,4 @@
-import { Roles_Auth } from "./auth-entities";
+import { Roles_Auth } from "$lib/entities/auth-entities";
 
 /** ALL ROLES of your application. [Learn more](https://remult.dev/docs/modules#roles) */
 export const Roles = {

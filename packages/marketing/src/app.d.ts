@@ -14,6 +14,24 @@ declare global {
         GITHUB_API_CACHE: KVNamespace;
         GITHUB_TOKEN: string;
         GITHUB_TOKEN_FETCH_RELEASES_URL: string;
+        // Dodo Payments — already declared in wrangler.jsonc.
+        DODO_MODE: "test" | "live";
+        PUBLIC_DODO_PRODUCT_MAP: string;
+        DODO_API_KEY?: string; // wrangler secret
+        DODO_WEBHOOK_SECRET?: string; // wrangler secret
+        // Control-plane platform credentials — wrangler secrets.
+        // Missing values trigger the in-memory mock platform adapter.
+        FLY_API_TOKEN?: string;
+        FLY_ORG?: string;
+        FLY_IMAGE?: string;
+        CF_API_TOKEN?: string;
+        CF_ACCOUNT_ID?: string;
+        CF_CONTAINER_IMAGE?: string;
+        CF_ZONE_ID?: string;
+        CF_ROOT_DOMAIN?: string;
+      };
+      context: {
+        waitUntil(promise: Promise<unknown>): void;
       };
     }
   }

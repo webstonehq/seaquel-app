@@ -26,7 +26,7 @@
 						<NavigationMenu.Trigger class="bg-transparent">Product</NavigationMenu.Trigger>
 						<NavigationMenu.Content class="p-0">
 							<div class="bg-muted/50 p-1 pr-1.5 dark:bg-background">
-								<div class="grid w-[42rem] grid-cols-2 gap-2 rounded-lg border bg-popover p-2 shadow">
+								<div class="grid w-2xl grid-cols-2 gap-2 rounded-lg border bg-popover p-2 shadow">
 									{#each featureCategories as category (category.slug)}
 										<NavigationMenu.Link>
 											<a href="/features/{category.slug}" class="flex items-center gap-x-2 rounded-md p-2 hover:bg-muted transition-colors">
@@ -70,6 +70,13 @@
 						<NavigationMenu.Link class="rounded-md p-2 px-4 hover:bg-accent">
 							{#snippet child({ props })}
 								<a href="/changelog" {...props}>Changelog</a>
+							{/snippet}
+						</NavigationMenu.Link>
+					</NavigationMenu.Item>
+					<NavigationMenu.Item>
+						<NavigationMenu.Link class="rounded-md p-2 px-4 hover:bg-accent">
+							{#snippet child({ props })}
+								<a href="/blog" {...props}>Blog</a>
 							{/snippet}
 						</NavigationMenu.Link>
 					</NavigationMenu.Item>
@@ -126,6 +133,7 @@
 					<a href="/learn-sql" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted" onclick={() => mobileMenuOpen = false}>Learn SQL</a>
 					<a href="/pricing" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted" onclick={() => mobileMenuOpen = false}>Pricing</a>
 					<a href="/changelog" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted" onclick={() => mobileMenuOpen = false}>Changelog</a>
+					<a href="/blog" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted" onclick={() => mobileMenuOpen = false}>Blog</a>
 					<a href="/docs" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted" onclick={() => mobileMenuOpen = false}>Docs</a>
 					<a href="https://github.com/webstonehq/seaquel" target="_blank" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted flex items-center gap-2">
 						<GithubIcon class="size-4" />
