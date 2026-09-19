@@ -1,16 +1,15 @@
 import { Entity, Fields, Validators } from "remult";
 
 /**
- * A marketing-site newsletter signup. All CRUD over the generic Remult
- * REST endpoint is denied — public signup goes through
- * `/api/newsletter/subscribe` instead, which can apply rate limiting and
- * email validation before reaching the table. Admin tooling that needs
- * to enumerate subscribers should go through the D1 console or a
- * server-side handler.
+ * DEPRECATED — superseded by `EmailConsent` (`email_consents`).
  *
- * `email` is UNIQUE. The signup endpoint swallows duplicate-insert
- * errors and always shows a success state, so resubscribing looks the
- * same as a first-time signup.
+ * Migration 0005 copied these rows across as `purpose='newsletter'`.
+ * Nothing reads or writes this table any more; it is kept only so the
+ * backfill can be re-checked, and is dropped in a later migration.
+ *
+ * It recorded that someone signed up but never what they agreed to, and
+ * nothing could set `status` to 'unsubscribed' — which is why it was
+ * replaced.
  */
 @Entity<NewsletterSubscriber>("newsletter_subscribers", {
   // Fully closed: Remult's `allowApiRead` defaults to `true`, so only

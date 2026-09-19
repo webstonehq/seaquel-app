@@ -38,3 +38,17 @@ export const downloadGroups: DownloadGroup[] = [
 		]
 	}
 ];
+
+/**
+ * Display names for a `/download/[platform]` id. Covers the dropdown
+ * options plus the generic per-OS ids (`macos`, `windows`, `linux`),
+ * which have no option label of their own.
+ */
+export function describePlatform(id: string): { os: string; variant: string | null } | null {
+	for (const group of downloadGroups) {
+		if (group.os === id) return { os: group.label, variant: null };
+		const option = group.options.find((o) => o.id === id);
+		if (option) return { os: group.label, variant: `${option.label} · ${option.format}` };
+	}
+	return null;
+}

@@ -8,6 +8,8 @@
 	import { DownloadIcon, AppleIcon, MonitorIcon, ExternalLinkIcon } from "lucide-svelte";
 	import LogoLinux from "$lib/components/logo-linux.svelte";
 	import Seo from "$lib/components/seo.svelte";
+	import ConsentSignup from "$lib/components/consent-signup.svelte";
+	import { CONSENT_COPY } from "$lib/consent-copy";
 
 	const osIcons = {
 		macos: AppleIcon,
@@ -111,6 +113,21 @@
 						View all releases on GitHub
 					</Button>
 				</div>
+			</div>
+		</section>
+
+		<!-- Research contact. Sits below the grid rather than gating the
+		     download: nothing here blocks getting the app. -->
+		<section class="pb-16 md:pb-24">
+			<div class="container mx-auto px-4 md:px-6">
+				<ConsentSignup
+					purpose="research"
+					source="download"
+					heading="Help shape Seaquel"
+					description="We're talking to people using Seaquel right now. What works, what's missing, and what it's worth to you."
+					consentLabel={CONSENT_COPY.research}
+					submitLabel="Count me in"
+				/>
 			</div>
 		</section>
 

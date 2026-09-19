@@ -78,6 +78,32 @@
                         any other data you work with in the Software.
                     </p>
 
+                    <h3>Email sign-ups</h3>
+                    <p>
+                        If you tick a box asking us to email you &mdash; either
+                        for product feedback and pricing research, or for new
+                        blog posts &mdash; we record, alongside your email
+                        address, the exact wording you agreed to, the date and
+                        time, your IP address, and your browser's user-agent
+                        string. We keep the IP address and user-agent solely as
+                        evidence of when and how consent was given, and we do
+                        not use them to profile or track you.
+                    </p>
+                    <p>
+                        Each purpose is stored separately, so unsubscribing
+                        from one does not affect the other. Every email we send
+                        includes a one-click unsubscribe link, and you can
+                        withdraw consent at any time by using that link or by
+                        emailing us. We keep these records until you
+                        unsubscribe, and for up to 24 months afterwards as
+                        proof that consent existed and was withdrawn.
+                    </p>
+                    <p>
+                        We never add you to an email list because you
+                        downloaded, purchased, or contacted us &mdash; only
+                        because you explicitly asked us to.
+                    </p>
+
                     <h2>3. How We Use Your Information</h2>
                     <p>We use the information we collect to:</p>
                     <ul>
@@ -94,6 +120,11 @@
                         </li>
                         <li>
                             Respond to support requests you initiate.
+                        </li>
+                        <li>
+                            Email you about product feedback, pricing, or new
+                            blog posts &mdash; only where you have given
+                            consent, and only for the purpose you consented to.
                         </li>
                     </ul>
                     <p>
