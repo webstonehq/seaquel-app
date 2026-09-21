@@ -5,7 +5,8 @@
 	import Seo from "$lib/components/seo.svelte";
 	import ConsentSignup from "$lib/components/consent-signup.svelte";
 	import { CONSENT_COPY } from "$lib/consent-copy";
-	import { MessageCircleIcon, MailIcon } from "lucide-svelte";
+	import LogoDiscord from "$lib/components/logo-discord.svelte";
+	import { MailIcon } from "lucide-svelte";
 
 	// `?from=` attributes the signup to whichever CTA sent them here, so
 	// it's visible which surface actually works. Sanitised because it
@@ -43,7 +44,10 @@
 		<section class="pb-8">
 			<div class="container mx-auto px-4 md:px-6 max-w-2xl">
 				<div class="prose prose-neutral dark:prose-invert max-w-none mb-10">
-					<p>Two questions, about ten minutes, by email or a call — whichever suits:</p>
+					<p>
+						Two questions, about ten minutes, by email, a call, or on Discord — whichever
+						suits:
+					</p>
 					<ul>
 						<li>What are you actually using Seaquel for, and where does it get in your way?</li>
 						<li>What would it be worth to you, and what would justify that?</li>
@@ -72,15 +76,18 @@
 		<section class="pb-20 md:pb-28">
 			<div class="container mx-auto px-4 md:px-6 max-w-2xl text-center">
 				<p class="text-sm text-muted-foreground mb-4">
-					Prefer not to leave an email? These work just as well:
+					Prefer not to leave an email? Join the Discord and answer the two questions there —
+					post in the server or send us a DM. Or just email us.
 				</p>
 				<div class="flex flex-col sm:flex-row gap-3 justify-center">
 					<a
 						href="/discord"
+						target="_blank"
+						rel="noopener"
 						class="inline-flex items-center justify-center gap-2 rounded-md border px-4 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
 					>
-						<MessageCircleIcon class="size-4" />
-						Tell us on Discord
+						<LogoDiscord class="size-4 fill-current" />
+						Answer on Discord
 					</a>
 					<a
 						href="mailto:seaquel@webstonehq.com?subject=Seaquel%20feedback"
