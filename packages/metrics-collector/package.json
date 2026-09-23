@@ -7,11 +7,14 @@
 		"dev": "wrangler dev --test-scheduled",
 		"start": "wrangler dev --test-scheduled",
 		"seed:local": "node scripts/seed-local-kv.mjs",
-		"cf-typegen": "wrangler types"
+		"cf-typegen": "wrangler types",
+		"test": "vitest run",
+		"test:watch": "vitest"
 	},
 	"devDependencies": {
 		"@types/node": "^25.3.0",
 		"typescript": "^5.5.2",
+		"vitest": "^4.1.7",
 		"wrangler": "^4.67.0"
 	}
 }

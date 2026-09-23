@@ -1,3 +1,6 @@
+// Mirrors packages/metrics-collector/src/types.ts — the collector writes these
+// shapes into KV and this app reads them back.
+
 export interface PlatformDownloads {
 	macOS: number;
 	windows: number;
@@ -7,7 +10,7 @@ export interface PlatformDownloads {
 export interface OpenMetrics {
 	/** Installer downloads only — updater bundles are tracked separately. */
 	totalDownloads: number;
-	/** macOS auto-updater bundles (.app.tar.gz): existing users updating, not new installs. */
+	/** macOS auto-updater bundles: existing users updating, not new installs. */
 	updaterDownloads: number;
 	/** latest.json hits — every running install polls this, so it is a rough floor for active installs. */
 	updaterChecks: number;
@@ -33,11 +36,6 @@ export interface ReleaseDownloads {
 	updater: number;
 }
 
-export interface CachedData {
-	metrics: OpenMetrics;
-	releaseBreakdowns: ReleaseDownloads[];
-}
-
 export interface HistoricalEntry {
 	date: string;
 	totalDownloads: number;
@@ -50,6 +48,6 @@ export interface HistoricalEntry {
 	platformDownloads: PlatformDownloads;
 	totalReleases: number;
 	avgDaysBetweenReleases: number;
-	/** Cumulative installer downloads per release tag, so the page can diff two days to see which version people are actually taking. */
-	releaseTotals: Record<string, number>;
+	/** Cumulative installer downloads per release tag. Absent on snapshots written before this was collected. */
+	releaseTotals?: Record<string, number>;
 }

@@ -1,43 +1,5 @@
 import type { PageServerLoad } from './$types';
-
-export interface PlatformDownloads {
-	macOS: number;
-	windows: number;
-	linux: number;
-}
-
-export interface OpenMetrics {
-	totalDownloads: number;
-	thirtyDayDownloads: number;
-	stars: number;
-	forks: number;
-	openIssues: number;
-	platformDownloads: PlatformDownloads;
-	totalReleases: number;
-	latestRelease: string;
-	avgDaysBetweenReleases: number;
-}
-
-export interface ReleaseDownloads {
-	tag: string;
-	publishedAt: string;
-	total: number;
-	macOS: number;
-	windows: number;
-	linux: number;
-}
-
-export interface HistoricalEntry {
-	date: string;
-	totalDownloads: number;
-	thirtyDayDownloads: number;
-	stars: number;
-	forks: number;
-	openIssues: number;
-	platformDownloads: PlatformDownloads;
-	totalReleases: number;
-	avgDaysBetweenReleases: number;
-}
+import type { HistoricalEntry, OpenMetrics, ReleaseDownloads } from '$lib/metrics/types';
 
 interface CachedData {
 	metrics: OpenMetrics;
@@ -49,25 +11,25 @@ const CACHE_KEY = 'metrics:github';
 export const load: PageServerLoad = async ({ platform }) => {
 	const kv = platform?.env?.GITHUB_API_CACHE;
 
+	const empty = {
+		metrics: null,
+		releaseBreakdowns: [] as ReleaseDownloads[],
+		history: [] as HistoricalEntry[],
+		collectedAt: null as string | null,
+	};
+
 	if (!kv) {
-		return {
-			metrics: null,
-			releaseBreakdowns: [],
-			history: [] as HistoricalEntry[],
-			error: 'Metrics are unavailable (KV not configured).',
-		};
+		return { ...empty, error: 'Metrics are unavailable (KV not configured).' };
 	}
 
 	try {
 		// Read current snapshot
-		const snapshotRaw = await kv.get(CACHE_KEY, 'text');
+		const { value: snapshotRaw, metadata } = await kv.getWithMetadata<{ cachedAt: number }>(
+			CACHE_KEY,
+			'text',
+		);
 		if (!snapshotRaw) {
-			return {
-				metrics: null,
-				releaseBreakdowns: [],
-				history: [] as HistoricalEntry[],
-				error: 'No metrics data available yet. The collector has not run.',
-			};
+			return { ...empty, error: 'No metrics data available yet. The collector has not run.' };
 		}
 
 		const snapshot: CachedData = JSON.parse(snapshotRaw);
@@ -91,15 +53,11 @@ export const load: PageServerLoad = async ({ platform }) => {
 			metrics: snapshot.metrics,
 			releaseBreakdowns: snapshot.releaseBreakdowns,
 			history,
+			collectedAt: metadata?.cachedAt ? new Date(metadata.cachedAt).toISOString() : null,
 			error: null,
 		};
 	} catch (e) {
 		console.error('[metrics] Failed to read from KV:', e);
-		return {
-			metrics: null,
-			releaseBreakdowns: [],
-			history: [] as HistoricalEntry[],
-			error: 'Unable to load metrics. Please try again later.',
-		};
+		return { ...empty, error: 'Unable to load metrics. Please try again later.' };
 	}
 };

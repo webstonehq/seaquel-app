@@ -3,25 +3,33 @@
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import { Card, CardHeader, CardTitle, CardContent } from "$lib/components/ui/card";
 	import { ChartContainer, type ChartConfig } from "$lib/components/ui/chart";
-	import { AreaChart } from "layerchart";
+	import { AreaChart, BarChart } from "layerchart";
 	import { fly } from "svelte/transition";
 	import {
 		DownloadIcon,
 		StarIcon,
 		GitForkIcon,
 		TagIcon,
+		RefreshCwIcon,
 	} from "lucide-svelte";
-	import type { HistoricalEntry } from "./+page.server";
+	import type { HistoricalEntry } from "$lib/metrics/types";
+	import {
+		dailyDownloads,
+		downloadsInWindow,
+		latestReleaseAdoption,
+	} from "$lib/metrics/derive";
 	import Seo from "$lib/components/seo.svelte";
 
 	let { data } = $props();
 
 	const fmt = new Intl.NumberFormat("en-US");
+	const pct = new Intl.NumberFormat("en-US", { style: "percent", maximumFractionDigits: 0 });
 	const dateFmt = new Intl.DateTimeFormat("en-US", {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
 	});
+	const shortDateFmt = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" });
 
 	function formatDate(iso: string): string {
 		return dateFmt.format(new Date(iso));
@@ -34,17 +42,18 @@
 		}));
 	}
 
-	const downloadsTrend = $derived(
-		(data.history ?? []).map((entry: HistoricalEntry) => ({
-			date: new Date(entry.date),
-			macOS: entry.platformDownloads.macOS,
-			windows: entry.platformDownloads.windows,
-			linux: entry.platformDownloads.linux,
-		})),
+	const history = $derived(data.history ?? []);
+
+	// GitHub only reports lifetime counters, so the rates below are diffs
+	// between daily snapshots rather than anything the API hands us directly.
+	const perDayDownloads = $derived(dailyDownloads(history));
+	const recentDownloads = $derived(downloadsInWindow(history, 30));
+	const adoption = $derived(
+		latestReleaseAdoption(history, data.metrics?.latestReleaseTag ?? "", 14),
 	);
+
 	const starsTrend = $derived(trendData((e) => e.stars));
 	const openIssueTrend = $derived(trendData((e) => e.openIssues));
-	const releasesTrend = $derived(trendData((e) => e.totalReleases));
 
 	const trendChartConfig: ChartConfig = {
 		value: { label: "Value", color: "var(--chart-1)" },
@@ -59,26 +68,17 @@
 		})),
 	);
 
-	const thirtyDayDownloads = $derived.by(() => {
-		const history = data.history ?? [];
-		if (history.length < 2) return 0;
-		const latest = history[history.length - 1];
-		const cutoff = new Date(latest.date);
-		cutoff.setDate(cutoff.getDate() - 30);
-		const cutoffIso = cutoff.toISOString().slice(0, 10);
-		// Find the closest entry at or before the cutoff
-		let baseline = history[0];
-		for (const entry of history) {
-			if (entry.date <= cutoffIso) baseline = entry;
-			else break;
-		}
-		return latest.totalDownloads - baseline.totalDownloads;
-	});
+	// The series key is what the legend prints, so it carries the display casing.
+	const platformSeries = [
+		{ key: "macOS", value: (d: { macOS: number }) => d.macOS, color: "var(--chart-1)" },
+		{ key: "Windows", value: (d: { windows: number }) => d.windows, color: "var(--chart-2)" },
+		{ key: "Linux", value: (d: { linux: number }) => d.linux, color: "var(--chart-3)" },
+	];
 
 	const areaChartConfig: ChartConfig = {
 		macOS: { label: "macOS", color: "var(--chart-1)" },
-		windows: { label: "Windows", color: "var(--chart-2)" },
-		linux: { label: "Linux", color: "var(--chart-3)" },
+		Windows: { label: "Windows", color: "var(--chart-2)" },
+		Linux: { label: "Linux", color: "var(--chart-3)" },
 	};
 
 	// The trend `date` values are Date objects, so layerchart uses a time
@@ -104,9 +104,15 @@
 						Metrics
 					</h1>
 					<p class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-						Transparency is a core value. Here are Seaquel's real-time download statistics,
-						GitHub activity, and release cadence — pulled straight from the source.
+						Transparency is a core value. Here are Seaquel's download statistics,
+						GitHub activity, and release cadence — pulled straight from the source
+						and refreshed once a day.
 					</p>
+					{#if data.collectedAt}
+						<p class="text-sm text-muted-foreground mt-4">
+							Last collected {formatDate(data.collectedAt)}
+						</p>
+					{/if}
 				</div>
 			</div>
 		</section>
@@ -138,29 +144,33 @@
 										<div class="flex flex-col gap-4 md:w-1/3 shrink-0">
 											<div>
 												<p class="text-4xl font-bold tracking-tight">{fmt.format(m.totalDownloads)}</p>
-												<p class="text-sm text-muted-foreground mt-1">Total Downloads</p>
+												<p class="text-sm text-muted-foreground mt-1">Installer downloads</p>
 											</div>
 											<div>
-												<p class="text-xl font-semibold">{fmt.format(thirtyDayDownloads)}</p>
-												<p class="text-sm text-muted-foreground">30-Day Downloads</p>
+												<p class="text-xl font-semibold">{fmt.format(recentDownloads.downloads)}</p>
+												<p class="text-sm text-muted-foreground">
+													{#if recentDownloads.spansFullWindow}
+														Last 30 days
+													{:else if recentDownloads.since}
+														Since {formatDate(recentDownloads.since)}
+													{:else}
+														Awaiting a second daily snapshot
+													{/if}
+												</p>
 											</div>
 										</div>
 
 										<div class="flex-1 min-w-0">
-											{#if downloadsTrend.length <= 1}
+											{#if perDayDownloads.length === 0}
 												<div class="flex h-[300px] items-center justify-center text-muted-foreground text-sm text-center px-4">
 													Trend data will appear after two daily snapshots.
 												</div>
 											{:else}
 												<ChartContainer config={areaChartConfig} class="h-[300px] w-full">
 													<AreaChart
-														data={downloadsTrend}
+														data={perDayDownloads}
 														x="date"
-														series={[
-															{ key: "macOS", value: (d) => d.macOS, color: "var(--chart-1)" },
-															{ key: "windows", value: (d) => d.windows, color: "var(--chart-2)" },
-															{ key: "linux", value: (d) => d.linux, color: "var(--chart-3)" },
-														]}
+														series={platformSeries}
 														seriesLayout="stack"
 														legend
 														props={{
@@ -171,6 +181,60 @@
 													/>
 												</ChartContainer>
 											{/if}
+										</div>
+									</div>
+									<p class="text-xs text-muted-foreground mt-4">
+										New downloads per day, by platform. Counts installers only — the macOS
+										auto-updater bundle is excluded so updates aren't mistaken for installs.
+									</p>
+								</CardContent>
+							</Card>
+						</div>
+
+						<!-- Adoption -->
+						<div in:fly={{ y: 30, delay: 150, duration: 600 }}>
+							<Card>
+								<CardHeader class="pb-2">
+									<div class="flex items-center gap-3">
+										<div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+											<RefreshCwIcon class="size-5 text-primary" />
+										</div>
+										<CardTitle>Adoption</CardTitle>
+									</div>
+								</CardHeader>
+								<CardContent>
+									<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+										<div>
+											<p class="text-4xl font-bold tracking-tight">{fmt.format(m.updaterChecks)}</p>
+											<p class="text-sm text-muted-foreground mt-1">Update checks</p>
+											<p class="text-xs text-muted-foreground mt-2">
+												Every running install polls for updates, so this is a rough floor
+												for how many copies are out there.
+											</p>
+										</div>
+										<div>
+											<p class="text-4xl font-bold tracking-tight">
+												{adoption ? pct.format(adoption.share) : "—"}
+											</p>
+											<p class="text-sm text-muted-foreground mt-1">
+												On {m.latestReleaseTag || "the latest release"}
+											</p>
+											<p class="text-xs text-muted-foreground mt-2">
+												{#if adoption}
+													{fmt.format(adoption.onLatest)} of {fmt.format(adoption.total)}
+													downloads since {formatDate(adoption.since)}.
+												{:else}
+													Needs two weeks of daily snapshots.
+												{/if}
+											</p>
+										</div>
+										<div>
+											<p class="text-4xl font-bold tracking-tight">{fmt.format(m.updaterDownloads)}</p>
+											<p class="text-sm text-muted-foreground mt-1">macOS auto-updates</p>
+											<p class="text-xs text-muted-foreground mt-2">
+												Existing macOS users updating in place. Windows and Linux updates
+												are indistinguishable from fresh installs.
+											</p>
 										</div>
 									</div>
 								</CardContent>
@@ -237,7 +301,11 @@
 										<div class="flex flex-col gap-4 md:w-1/3 shrink-0">
 											<div>
 												<p class="text-4xl font-bold tracking-tight">{fmt.format(m.openIssues)}</p>
-												<p class="text-sm text-muted-foreground mt-1">Open Issues</p>
+												<p class="text-sm text-muted-foreground mt-1">Open issues</p>
+											</div>
+											<div>
+												<p class="text-xl font-semibold">{fmt.format(m.openPullRequests)}</p>
+												<p class="text-sm text-muted-foreground">Open pull requests</p>
 											</div>
 											<div>
 												<p class="text-xl font-semibold">{fmt.format(m.forks)}</p>
@@ -281,44 +349,24 @@
 									</div>
 								</CardHeader>
 								<CardContent>
-									<div class="flex flex-col md:flex-row gap-6">
-										<div class="flex flex-col gap-4 md:w-1/3 shrink-0">
-											<div>
-												<p class="text-4xl font-bold tracking-tight">{fmt.format(m.totalReleases)}</p>
-												<p class="text-sm text-muted-foreground mt-1">Total Releases</p>
-											</div>
-											<div>
-												<p class="text-xl font-semibold">
-													{m.avgDaysBetweenReleases > 0 ? `${m.avgDaysBetweenReleases} days` : "N/A"}
-												</p>
-												<p class="text-sm text-muted-foreground">Avg. Days Between Releases</p>
-											</div>
-											<div>
-												<p class="text-xl font-semibold">
-													{m.latestRelease ? formatDate(m.latestRelease) : "N/A"}
-												</p>
-												<p class="text-sm text-muted-foreground">Latest Release</p>
-											</div>
+									<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+										<div>
+											<p class="text-4xl font-bold tracking-tight">{fmt.format(m.totalReleases)}</p>
+											<p class="text-sm text-muted-foreground mt-1">Total releases</p>
 										</div>
-										<div class="flex-1 min-w-0">
-											{#if releasesTrend.length <= 1}
-												<div class="flex h-[200px] items-center justify-center text-muted-foreground text-sm text-center px-4">
-													Trend data will appear after two daily snapshots.
-												</div>
-											{:else}
-												<ChartContainer config={trendChartConfig} class="h-[200px] w-full">
-													<AreaChart
-														data={releasesTrend}
-														x="date"
-														y="value"
-														props={{
-															area: { fill: "var(--chart-4)", opacity: 0.2 },
-															line: { stroke: "var(--chart-4)", class: "stroke-2" },
-															xAxis: xTrendAxis,
-														}}
-													/>
-												</ChartContainer>
-											{/if}
+										<div>
+											<p class="text-4xl font-bold tracking-tight">
+												{m.avgDaysBetweenReleases > 0 ? `${m.avgDaysBetweenReleases} days` : "N/A"}
+											</p>
+											<p class="text-sm text-muted-foreground mt-1">Avg. between releases</p>
+										</div>
+										<div>
+											<p class="text-4xl font-bold tracking-tight">
+												{m.latestRelease ? shortDateFmt.format(new Date(m.latestRelease)) : "N/A"}
+											</p>
+											<p class="text-sm text-muted-foreground mt-1">
+												Latest release{m.latestReleaseTag ? ` (${m.latestReleaseTag})` : ""}
+											</p>
 										</div>
 									</div>
 								</CardContent>
@@ -339,18 +387,16 @@
 								<CardContent>
 									{#if releaseData.length > 0}
 										<ChartContainer config={areaChartConfig} class="h-[300px] w-full">
-											<AreaChart
+											<BarChart
 												data={releaseData}
 												x="label"
-												series={[
-													{ key: "macOS", value: (d) => d.macOS, color: "var(--chart-1)" },
-													{ key: "windows", value: (d) => d.windows, color: "var(--chart-2)" },
-													{ key: "linux", value: (d) => d.linux, color: "var(--chart-3)" },
-												]}
+												series={platformSeries}
 												seriesLayout="stack"
 												legend
 												props={{
-													area: { opacity: 0.3 },
+													// Bars default to a black stroke, which outlines every
+													// segment in dark mode.
+													bars: { stroke: "none" },
 													legend: { placement: "top-right" },
 													xAxis: { tickLabelProps: { rotate: -45, textAnchor: "end" } },
 												}}
@@ -361,6 +407,10 @@
 											No per-release download data available.
 										</div>
 									{/if}
+									<p class="text-xs text-muted-foreground mt-4">
+										Lifetime downloads per release. Older releases spent longer as the
+										current version, so this tracks release age as much as popularity.
+									</p>
 								</CardContent>
 							</Card>
 						</div>

@@ -69,12 +69,18 @@ const releaseTimes = releases.map((r) => new Date(r.publishedAt).getTime());
 
 // --- daily series --------------------------------------------------------
 const PLATFORM_RATIO = { macOS: 0.5, linux: 0.32, windows: 0.18 };
+// Share of a day's downloads that lands on the newest release; the rest trickles
+// onto older tags the way stale links and pinned versions do.
+const LATEST_RELEASE_SHARE = 0.85;
 const history = [];
 
 let cumDownloads = 0;
+let cumUpdaterChecks = 0;
 let cumStars = 1;
 let cumForks = 0;
 let openIssues = 3;
+let openPullRequests = 1;
+const releaseTotals = new Map();
 
 for (let i = 0; i < DAYS; i++) {
 	const d = dates[i];
@@ -87,7 +93,25 @@ for (let i = 0; i < DAYS; i++) {
 		(rt) => dayMs >= rt && dayMs - rt <= 4 * MS_DAY,
 	);
 	const spike = releasedRecently ? randInt(20, 70) : 0;
-	cumDownloads += Math.round(baseDaily + spike + rand(0, baseDaily * 0.6));
+	const newDownloads = Math.round(baseDaily + spike + rand(0, baseDaily * 0.6));
+	cumDownloads += newDownloads;
+
+	// updater checks: every install already out there polls, most days
+	cumUpdaterChecks += Math.round(cumDownloads * rand(0.25, 0.4));
+
+	// attribute the day's downloads across the releases published so far
+	const publishedTags = releases.filter((_, idx) => releaseTimes[idx] <= dayMs).map((r) => r.tag);
+	if (publishedTags.length > 0) {
+		const newest = publishedTags[publishedTags.length - 1];
+		const older = publishedTags.slice(0, -1);
+		let spread = 0;
+		for (const tag of older) {
+			const share = Math.round(((1 - LATEST_RELEASE_SHARE) * newDownloads) / older.length);
+			spread += share;
+			releaseTotals.set(tag, (releaseTotals.get(tag) ?? 0) + share);
+		}
+		releaseTotals.set(newest, (releaseTotals.get(newest) ?? 0) + (newDownloads - spread));
+	}
 
 	// stars / forks: slow monotonic growth
 	if (rng() < 0.35 + 0.4 * t) cumStars += randInt(1, 2 + Math.round(3 * t));
@@ -98,6 +122,7 @@ for (let i = 0; i < DAYS; i++) {
 		0,
 		Math.min(30, openIssues + randInt(-2, 2) + (rng() < 0.15 ? 1 : 0)),
 	);
+	openPullRequests = Math.max(0, Math.min(6, openPullRequests + randInt(-1, 1)));
 
 	// platform split that sums exactly to cumDownloads
 	const macOS = Math.round(cumDownloads * PLATFORM_RATIO.macOS);
@@ -115,40 +140,34 @@ for (let i = 0; i < DAYS; i++) {
 	history.push({
 		date: isoDate(d),
 		totalDownloads: cumDownloads,
-		thirtyDayDownloads: 0, // filled in below
+		updaterDownloads: Math.round(cumDownloads * 0.06),
+		updaterChecks: cumUpdaterChecks,
 		stars: cumStars,
 		forks: cumForks,
 		openIssues,
+		openPullRequests,
 		platformDownloads: { macOS, windows, linux },
 		totalReleases: releasesSoFar,
 		avgDaysBetweenReleases: avgGap,
+		releaseTotals: Object.fromEntries(releaseTotals),
 	});
 }
 
-// thirtyDayDownloads = total(today) - total(~30 days earlier)
-for (let i = 0; i < history.length; i++) {
-	const base = history[Math.max(0, i - 30)];
-	history[i].thirtyDayDownloads = history[i].totalDownloads - base.totalDownloads;
-}
-
-// --- per-release breakdown (older releases have accumulated more) ---------
-const finalTotal = history[history.length - 1].totalDownloads;
-const weights = releases.map((_, idx) => {
-	const ageDays = (today.getTime() - releaseTimes[idx]) / MS_DAY;
-	return Math.max(1, ageDays) * rand(0.7, 1.3);
-});
-const weightSum = weights.reduce((a, b) => a + b, 0);
-let allocated = 0;
-const releaseBreakdowns = releases.map((r, idx) => {
-	const isLast = idx === releases.length - 1;
-	const total = isLast
-		? finalTotal - allocated
-		: Math.round((weights[idx] / weightSum) * finalTotal);
-	allocated += total;
+// --- per-release breakdown (from the per-day attribution above) -----------
+const releaseBreakdowns = releases.map((r) => {
+	const total = releaseTotals.get(r.tag) ?? 0;
 	const macOS = Math.round(total * PLATFORM_RATIO.macOS);
 	const windows = Math.round(total * PLATFORM_RATIO.windows);
 	const linux = total - macOS - windows;
-	return { tag: r.tag, publishedAt: r.publishedAt, total, macOS, windows, linux };
+	return {
+		tag: r.tag,
+		publishedAt: r.publishedAt,
+		total,
+		macOS,
+		windows,
+		linux,
+		updater: Math.round(total * 0.06),
+	};
 });
 
 // --- snapshot ------------------------------------------------------------
@@ -156,13 +175,16 @@ const last = history[history.length - 1];
 const snapshot = {
 	metrics: {
 		totalDownloads: last.totalDownloads,
-		thirtyDayDownloads: last.thirtyDayDownloads,
+		updaterDownloads: last.updaterDownloads,
+		updaterChecks: last.updaterChecks,
 		stars: last.stars,
 		forks: last.forks,
 		openIssues: last.openIssues,
+		openPullRequests: last.openPullRequests,
 		platformDownloads: last.platformDownloads,
 		totalReleases: releases.length,
 		latestRelease: releases[releases.length - 1].publishedAt,
+		latestReleaseTag: releases[releases.length - 1].tag,
 		avgDaysBetweenReleases: last.avgDaysBetweenReleases,
 	},
 	releaseBreakdowns,

@@ -14,16 +14,24 @@ export default {
 
 		const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
 
+		const releaseTotals: Record<string, number> = {};
+		for (const release of data.releaseBreakdowns) {
+			releaseTotals[release.tag] = release.total;
+		}
+
 		const historicalEntry: HistoricalEntry = {
 			date: today,
 			totalDownloads: data.metrics.totalDownloads,
-			thirtyDayDownloads: data.metrics.thirtyDayDownloads,
+			updaterDownloads: data.metrics.updaterDownloads,
+			updaterChecks: data.metrics.updaterChecks,
 			stars: data.metrics.stars,
 			forks: data.metrics.forks,
 			openIssues: data.metrics.openIssues,
+			openPullRequests: data.metrics.openPullRequests,
 			platformDownloads: data.metrics.platformDownloads,
 			totalReleases: data.metrics.totalReleases,
 			avgDaysBetweenReleases: data.metrics.avgDaysBetweenReleases,
+			releaseTotals,
 		};
 
 		// Write all KV entries concurrently where possible
