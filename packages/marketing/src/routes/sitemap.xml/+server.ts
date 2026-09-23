@@ -1,6 +1,7 @@
 import type { RequestHandler } from "./$types";
 import { getChangelogEntries } from "$lib/changelog";
 import { getBlogEntries } from "$lib/blog";
+import { getLessons } from "$lib/learn-sql";
 
 export const prerender = true;
 
@@ -33,6 +34,7 @@ function xmlEscape(value: string): string {
 export const GET: RequestHandler = async () => {
   const changelog = await getChangelogEntries();
   const blog = await getBlogEntries();
+  const lessons = await getLessons();
   const latestChangelog = changelog[0]?.date;
   const latestBlog = blog[0]?.date;
 
@@ -61,6 +63,10 @@ export const GET: RequestHandler = async () => {
       loc: `${ORIGIN}/blog/${entry.slug}`,
       lastmod: entry.date,
     });
+  }
+
+  for (const lesson of lessons) {
+    urls.push({ loc: `${ORIGIN}/learn-sql/${lesson.slug}` });
   }
 
   const body =

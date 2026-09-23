@@ -15,6 +15,10 @@
 	} from "lucide-svelte";
 	import { fly, fade } from "svelte/transition";
 	import Seo from "$lib/components/seo.svelte";
+	import { ArrowRightIcon, ClockIcon } from "lucide-svelte";
+	import type { PageData } from "./$types";
+
+	let { data }: { data: PageData } = $props();
 </script>
 
 <Seo
@@ -151,6 +155,55 @@
 				</div>
 			</div>
 		</section>
+
+		<!--
+			Written lessons. Each one is a server-rendered page, which is what makes
+			the course findable — the interactive exercises live in an iframe and
+			are invisible to search engines on their own.
+		-->
+		{#if data.lessons.length > 0}
+			<section class="py-20 md:py-28 bg-linear-to-b from-background to-muted/20">
+				<div class="container mx-auto px-4 md:px-6">
+					<div class="text-center flex flex-col gap-4 mb-12">
+						<h2 class="text-3xl md:text-5xl font-bold tracking-tight">
+							The <span class="text-primary">Lessons</span>
+						</h2>
+						<p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+							Read the explanation, then run the queries yourself. Each lesson works on its
+							own, so you can start anywhere.
+						</p>
+					</div>
+
+					<div class="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+						{#each data.lessons as lesson, index (lesson.slug)}
+							<a
+								href="/learn-sql/{lesson.slug}"
+								class="group rounded-lg border bg-card p-6 hover:border-primary transition-colors flex flex-col gap-2"
+								in:fly={{ y: 20, delay: 100 + index * 60, duration: 500 }}
+							>
+								<div class="flex items-center justify-between gap-3">
+									<h3
+										class="text-xl font-semibold tracking-tight group-hover:text-primary transition-colors"
+									>
+										{lesson.title}
+									</h3>
+									<ArrowRightIcon
+										class="size-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors"
+									/>
+								</div>
+								<p class="text-muted-foreground text-pretty">{lesson.description}</p>
+								<div
+									class="inline-flex items-center gap-1.5 text-xs text-muted-foreground mt-auto pt-2"
+								>
+									<ClockIcon class="size-3.5" />
+									{lesson.readTime} read
+								</div>
+							</a>
+						{/each}
+					</div>
+				</div>
+			</section>
+		{/if}
 
 		<!-- Interactive Demo Section -->
 		<section id="try-it" class="py-20 md:py-28 bg-linear-to-b from-muted/20 to-background">

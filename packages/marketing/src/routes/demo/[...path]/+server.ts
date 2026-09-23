@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { readFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { readFileSync, existsSync, statSync } from 'fs';
+import { extname, join, resolve, sep } from 'path';
 
 const MIME_TYPES: Record<string, string> = {
 	'.html': 'text/html',
@@ -16,27 +16,48 @@ const MIME_TYPES: Record<string, string> = {
 	'.wasm': 'application/wasm'
 };
 
+const DEMO_ROOT = resolve(join(process.cwd(), 'static', 'demo'));
+
+function isFile(candidate: string): boolean {
+	return existsSync(candidate) && statSync(candidate).isFile();
+}
+
+/**
+ * Resolve a request path against the prerendered demo build.
+ *
+ * SvelteKit writes a prerendered route as `<route>.html` next to a `<route>/`
+ * directory holding its `__data.json`, so a bare path like `learn/intro` hits
+ * the directory first and has to fall through to `learn/intro.html`.
+ */
+function resolveFile(path: string): string | null {
+	for (const candidate of [
+		join(DEMO_ROOT, path),
+		join(DEMO_ROOT, `${path}.html`),
+		join(DEMO_ROOT, path, 'index.html')
+	]) {
+		// Keep `..` segments in the request path from escaping the demo build.
+		const full = resolve(candidate);
+		if (full !== DEMO_ROOT && !full.startsWith(DEMO_ROOT + sep)) continue;
+		if (isFile(full)) return full;
+	}
+	return null;
+}
+
 export const GET: RequestHandler = async ({ params }) => {
 	const path = params.path || 'index.html';
-	const filePath = join(process.cwd(), 'static', 'demo', path);
 
-	if (!existsSync(filePath)) {
-		// For SPA fallback, serve index.html for non-file paths
-		const indexPath = join(process.cwd(), 'static', 'demo', 'index.html');
-		if (existsSync(indexPath)) {
-			const content = readFileSync(indexPath);
-			return new Response(content, {
-				headers: { 'Content-Type': 'text/html' }
-			});
-		}
+	// Anything unresolved falls back to the SPA shell so client-side routes work.
+	const filePath = resolveFile(path) ?? join(DEMO_ROOT, 'index.html');
+
+	if (!isFile(filePath)) {
 		throw error(404, 'Not found');
 	}
 
-	const ext = '.' + path.split('.').pop();
-	const mimeType = MIME_TYPES[ext] || 'application/octet-stream';
-	const content = readFileSync(filePath);
+	// Derive the type from the file actually served, not from the request path:
+	// `learn/intro` has no extension but resolves to an .html file.
+	const mimeType = MIME_TYPES[extname(filePath)] || 'application/octet-stream';
 
-	return new Response(content, {
+	return new Response(readFileSync(filePath), {
 		headers: { 'Content-Type': mimeType }
 	});
 };

@@ -1,0 +1,2 @@
+const r={async load(e,a){const t=await e.query("SELECT has_offered_import, last_check_timestamp FROM import_state WHERE source = ?",[a]);return t.length===0?null:{hasOfferedImport:t[0].has_offered_import===1,lastCheckTimestamp:t[0].last_check_timestamp}},async save(e,a,t,s){await e.execute(`INSERT OR REPLACE INTO import_state (source, has_offered_import, last_check_timestamp)
+       VALUES (?, ?, ?)`,[a,t?1:0,s])}};export{r as i};

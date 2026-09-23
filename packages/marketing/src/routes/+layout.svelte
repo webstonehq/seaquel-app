@@ -5,6 +5,7 @@
     import { remult, Remult } from "remult";
     import { createSubscriber } from "svelte/reactivity";
     import { untrack } from "svelte";
+    import { handleCodeCopy } from "$lib/copy-code";
 
     let { children, data } = $props();
 
@@ -48,6 +49,8 @@
 <svelte:head>
     <link rel="icon" href={favicon} />
 </svelte:head>
+
+<svelte:document onclick={handleCodeCopy} />
 
 <ModeWatcher />
 {@render children()}

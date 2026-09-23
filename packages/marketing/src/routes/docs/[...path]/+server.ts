@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { readFileSync, existsSync, statSync } from 'fs';
-import { join } from 'path';
+import { join, resolve, sep } from 'path';
 
 const MIME_TYPES: Record<string, string> = {
 	'.html': 'text/html',
@@ -16,13 +16,21 @@ const MIME_TYPES: Record<string, string> = {
 	'.wasm': 'application/wasm'
 };
 
+const DOCS_ROOT = resolve(join(process.cwd(), 'static', 'docs'));
+
 export const GET: RequestHandler = async ({ params }) => {
 	const path = params.path || 'index.html';
-	const filePath = join(process.cwd(), 'static', 'docs', path);
+	const filePath = join(DOCS_ROOT, path);
+
+	// Keep `..` segments in the request path from escaping the docs build.
+	const full = resolve(filePath);
+	if (full !== DOCS_ROOT && !full.startsWith(DOCS_ROOT + sep)) {
+		throw error(404, 'Not found');
+	}
 
 	// If the path is a directory or doesn't exist, try serving index.html
 	if (!existsSync(filePath) || statSync(filePath).isDirectory()) {
-		const indexPath = join(process.cwd(), 'static', 'docs', path, 'index.html');
+		const indexPath = join(DOCS_ROOT, path, 'index.html');
 		if (existsSync(indexPath)) {
 			const content = readFileSync(indexPath);
 			return new Response(content, {
