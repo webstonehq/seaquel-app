@@ -8,13 +8,15 @@
 		ChevronRightIcon,
 		ClockIcon,
 		ListIcon,
-		Maximize2Icon,
-		PlayIcon
+		PlayIcon,
+		TriangleAlertIcon
 	} from "lucide-svelte";
 	import { onMount } from "svelte";
 	import type { PageData } from "./$types";
 	import Seo from "$lib/components/seo.svelte";
-	import FullscreenOverlay from "$lib/components/fullscreen-overlay.svelte";
+	import SqlChallenge from "$lib/components/sql-challenge.svelte";
+	import { getChallenges } from "$lib/learn-sql/challenges";
+	import { getSolved, markSolved } from "$lib/learn-sql/progress";
 
 	let { data }: { data: PageData } = $props();
 
@@ -24,22 +26,23 @@
 	// field, so gaps in the sequence never surface as "Lesson 8 of 2".
 	const position = $derived(data.all.findIndex((l) => l.slug === data.lesson.slug) + 1);
 
-	// The exercise expands in place rather than navigating to /demo, so readers
-	// keep their scroll position and the lesson text. Same #fullscreen hash
-	// convention the demo player uses on /learn-sql and the landing page.
-	let theaterMode = $state(false);
+	const challenges = $derived(getChallenges(data.lesson.slug));
+
+	// Progress lives in localStorage, which SSR can't see, so this stays empty
+	// until hydration. The page is prerendered — reading it during render would
+	// bake one visitor's progress into the static HTML.
+	let solved = $state<string[]>([]);
 
 	onMount(() => {
-		if (window.location.hash === "#fullscreen") theaterMode = true;
+		solved = getSolved(data.lesson.slug);
 	});
 
-	function openTheater() {
-		theaterMode = true;
-		history.replaceState(null, "", "#fullscreen");
-	}
+	const solvedCount = $derived(challenges.filter((c) => solved.includes(c.id)).length);
+	const allSolved = $derived(challenges.length > 0 && solvedCount === challenges.length);
 
-	function onTheaterClose() {
-		history.replaceState(null, "", window.location.pathname);
+	function recordSolved(id: string) {
+		markSolved(data.lesson.slug, id);
+		if (!solved.includes(id)) solved = [...solved, id];
 	}
 
 	// LearningResource markup: each lesson is a standalone unit of the course,
@@ -162,64 +165,87 @@
 							<data.lesson.content />
 						</div>
 
-						{#if data.lesson.demo}
+						{#if challenges.length > 0}
 							<section class="mt-14 scroll-mt-24" id="practice">
 								<div class="flex items-center gap-2 mb-2">
 									<PlayIcon class="size-4 text-primary" />
-									<h2 class="text-2xl font-bold tracking-tight">Try it yourself</h2>
+									<h2 class="text-2xl font-bold tracking-tight">Your turn</h2>
+									{#if solvedCount > 0}
+										<span class="ml-auto text-sm font-medium {allSolved ? 'text-green-600 dark:text-green-400' : 'text-muted-foreground'}">
+											{solvedCount} of {challenges.length} solved
+										</span>
+									{/if}
 								</div>
 								<p class="text-muted-foreground mb-6">
-									Run the queries from this lesson against a real database. Nothing to install,
-									no account needed.
+									Write the query, run it, and it gets checked against a real PostgreSQL database
+									running in this tab. Your answer is graded on the rows it returns, so any correct
+									phrasing passes.
 								</p>
-								<!--
-									The anchor needs a real target: prerendering rejects a link
-									to #fullscreen with no matching id, and without JS the link
-									should still land the reader on the exercise.
-								-->
-								<div
-									id="fullscreen"
-									class="relative group rounded-lg border overflow-hidden bg-card shadow-sm scroll-mt-24"
-								>
-									<button
-										class="absolute top-3 right-3 z-20 p-2 rounded-lg bg-background/80 backdrop-blur-sm border border-border/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-background hover:border-primary/50 cursor-pointer"
-										onclick={openTheater}
-										aria-label="Expand exercise to fullscreen"
-									>
-										<Maximize2Icon class="size-4 text-foreground" />
-									</button>
-									<iframe
-										src="/demo/learn/{data.lesson.demo}"
-										title="Interactive {data.lesson.title} exercise"
-										loading="lazy"
-										class="w-full h-[600px] border-0"
-									></iframe>
+
+								<div class="flex flex-col gap-5">
+									{#each challenges as challenge, index (challenge.id)}
+										<SqlChallenge
+											{challenge}
+											{index}
+											solved={solved.includes(challenge.id)}
+											onsolved={recordSolved}
+										/>
+									{/each}
 								</div>
-								<p class="text-sm text-muted-foreground mt-3">
-									Need more room?
-									<a
-										href="#fullscreen"
-										onclick={(event) => {
-											event.preventDefault();
-											openTheater();
-										}}
-										class="text-primary hover:underline"
-									>
-										Expand it to full screen
-									</a>
-									, or
-									<a href="/download" class="text-primary hover:underline">download Seaquel</a>
-									to practise against your own database.
+
+								{#if allSolved}
+									<div class="mt-6 rounded-lg border border-green-500/40 bg-green-500/5 px-4 py-4 text-sm">
+										<p class="font-medium text-green-700 dark:text-green-400">
+											Lesson complete.
+										</p>
+										<p class="mt-1 text-muted-foreground">
+											Progress is kept in this browser, no account needed.
+											{#if data.lesson.next}
+												<a href="/learn-sql/{data.lesson.next.slug}" class="text-primary hover:underline">
+													On to {data.lesson.next.title}.
+												</a>
+											{/if}
+										</p>
+									</div>
+								{/if}
+
+								<p class="text-sm text-muted-foreground mt-6">
+									Want the full editor, schema browser and query visualiser?
+									<a href="/download" class="text-primary hover:underline">Download Seaquel</a>
+									and point it at your own database.
 								</p>
 							</section>
+						{/if}
 
-							<FullscreenOverlay bind:open={theaterMode} onclose={onTheaterClose}>
-								<iframe
-									src="/demo/learn/{data.lesson.demo}"
-									title="Interactive {data.lesson.title} exercise (fullscreen)"
-									class="w-full h-full border-0"
-								></iframe>
-							</FullscreenOverlay>
+						{#if data.errors.length > 0}
+							<section class="mt-14">
+								<div class="flex items-center gap-2 mb-2">
+									<TriangleAlertIcon class="size-4 text-primary" />
+									<h2 class="text-2xl font-bold tracking-tight">Errors you might hit</h2>
+								</div>
+								<p class="text-muted-foreground mb-6">
+									What these messages mean and how to fix them, each with a sandbox to try the fix.
+								</p>
+								<ul class="flex flex-col gap-2">
+									{#each data.errors as error (error.slug)}
+										<li>
+											<a
+												href="/sql-errors/{error.slug}"
+												class="group flex items-center justify-between gap-4 rounded-lg border px-4 py-3 hover:border-primary transition-colors"
+											>
+												<span
+													class="font-mono text-sm break-words group-hover:text-primary transition-colors"
+												>
+													{error.title}
+												</span>
+												<ArrowRightIcon
+													class="size-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors"
+												/>
+											</a>
+										</li>
+									{/each}
+								</ul>
+							</section>
 						{/if}
 
 						<!-- Prev / next keeps crawlers moving through the whole course -->

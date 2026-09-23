@@ -45,6 +45,9 @@ importers:
       '@cloudflare/workers-types':
         specifier: ^4.20260214.0
         version: 4.20260217.0
+      '@electric-sql/pglite':
+        specifier: ^0.5.8
+        version: 0.5.8
       '@internationalized/date':
         specifier: ^3.12.0
         version: 3.12.0
@@ -319,6 +322,9 @@ packages:
   '@dagrejs/graphlib@2.2.4':
     resolution: {integrity: sha512-mepCf/e9+SKYy1d02/UkvSy6+6MoyXhVxP8lLDfA7BPE1X1d4dR0sZznmbM8/XVJ1GPM+Svnx7Xj6ZweByWUkw==}
     engines: {node: '>17.0.0'}
+
+  '@electric-sql/pglite@0.5.8':
+    resolution: {integrity: sha512-n9tsbUOhwx2epK1V0ZG9Ar4SHWUju04dhmzZXiSBXwBoleOvIfals33NAaWgagQVAL4Rbvx/Ptsu3P+pA09f6Q==}
 
   '@emnapi/runtime@1.8.1':
     resolution: {integrity: sha512-mehfKSMWjjNol8659Z8KxEMrdSJDDot5SXMq00dM8BN4o+CLNXQ0xH2V7EchNHV4RmbZLmmPdEaXZc5H2FXmDg==}
@@ -3678,6 +3684,8 @@ snapshots:
       '@dagrejs/graphlib': 2.2.4
 
   '@dagrejs/graphlib@2.2.4': {}
+
+  '@electric-sql/pglite@0.5.8': {}
 
   '@emnapi/runtime@1.8.1':
     dependencies:

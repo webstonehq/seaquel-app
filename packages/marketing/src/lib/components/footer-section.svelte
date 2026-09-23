@@ -67,6 +67,13 @@
                     </li>
                     <li>
                         <a
+                            href="/sql-errors"
+                            class="hover:text-foreground transition-colors"
+                            >SQL Errors</a
+                        >
+                    </li>
+                    <li>
+                        <a
                             href="/pricing"
                             class="hover:text-foreground transition-colors"
                             >Pricing</a

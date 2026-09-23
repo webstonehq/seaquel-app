@@ -113,7 +113,7 @@ David comes top at 249.97 of the 1,289.81 total, a little over 19%. Grace follow
 
 `CROSS JOIN` against a single-row CTE is the normal way to make one scalar available to every row. No join condition, so every row pairs with the one row.
 
-Watch the `100.0` rather than `100`. In PostgreSQL, integer division truncates, so `100 * 2 / 10` is fine but a percentage calculation on integer columns silently floors to 0. Forcing one side to a decimal avoids it. DuckDB and SQLite are more forgiving here; Postgres is not.
+Watch the `100.0` rather than `100`. In PostgreSQL, integer division truncates, so `100 * 2 / 10` is fine but a percentage calculation on integer columns silently floors to 0. Forcing one side to a decimal avoids it. SQLite is more forgiving here; Postgres is not.
 
 ## Performance
 

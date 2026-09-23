@@ -14,6 +14,11 @@ export default defineConfig({
 			allow: ['static/demo']
 		}
 	},
+	optimizeDeps: {
+		// PGlite resolves its WASM and data files relative to its own module;
+		// pre-bundling moves the module and breaks those URLs.
+		exclude: ['@electric-sql/pglite']
+	},
 	ssr: {
 		// layerchart ships .svelte files that Node.js can't import natively
 		noExternal: ['layerchart', '@layerstack/tailwind']

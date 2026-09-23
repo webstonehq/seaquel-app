@@ -26,7 +26,7 @@ FROM demo.products
 WHERE category <> 'Electronics';
 ```
 
-Text comparisons are case sensitive in PostgreSQL and DuckDB. `'electronics'` matches nothing here. MySQL's default collation is case insensitive, so the same query behaves differently there, which is a genuinely annoying source of bugs when moving queries between engines.
+Text comparisons are case sensitive in PostgreSQL. `'electronics'` matches nothing here. MySQL's default collation is case insensitive, so the same query behaves differently there, which is a genuinely annoying source of bugs when moving queries between engines.
 
 ## Combining conditions
 
@@ -82,7 +82,7 @@ SELECT email FROM demo.customers WHERE email LIKE 'a%';
 
 One: alice@example.com.
 
-`LIKE` is case sensitive on PostgreSQL and DuckDB. Postgres offers `ILIKE` for the case-insensitive version; elsewhere you wrap both sides in `LOWER()`. A leading `%` also means the database can't use an index on that column, so on a large table `LIKE '%thing%'` is a full scan. Fine on twelve products, less fine on twelve million.
+`LIKE` is case sensitive on PostgreSQL. Postgres offers `ILIKE` for the case-insensitive version; elsewhere you wrap both sides in `LOWER()`. A leading `%` also means the database can't use an index on that column, so on a large table `LIKE '%thing%'` is a full scan. Fine on twelve products, less fine on twelve million.
 
 ## NULL
 
@@ -116,7 +116,7 @@ They do here, because `status` is never null. If it were, the null rows would fa
 WHERE status <> 'pending' OR status IS NULL
 ```
 
-Some engines give you `IS DISTINCT FROM`, which treats null as a normal comparable value and does the above in one operator. PostgreSQL and DuckDB have it, MySQL spells it `<=>` with inverted meaning.
+Some engines give you `IS DISTINCT FROM`, which treats null as a normal comparable value and does the above in one operator. PostgreSQL has it, MySQL spells it `<=>` with inverted meaning.
 
 ## Filtering on computed values
 

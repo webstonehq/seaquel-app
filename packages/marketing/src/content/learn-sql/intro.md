@@ -73,11 +73,11 @@ Most clauses are optional. The order of the ones you do use is not.
 
 ## Which SQL?
 
-There is no single SQL. There's a standard that nobody implements completely, and then there's PostgreSQL, MySQL, SQLite, SQL Server, Oracle, DuckDB and a few dozen others, each with its own additions and omissions.
+There is no single SQL. There's a standard that nobody implements completely, and then there's PostgreSQL, MySQL, SQLite, SQL Server, Oracle and a few dozen others, each with its own additions and omissions. This course teaches PostgreSQL.
 
 The overlap is large. `SELECT`, `WHERE`, `JOIN`, `GROUP BY` and window functions work essentially the same everywhere, and that's most of what you'll write. The differences show up around the edges: string functions, date arithmetic, how you limit rows, what happens when you divide by zero. Where a query in this course only works on some engines, it says so.
 
-The exercises here run DuckDB compiled to WebAssembly, so the database is genuinely running in your browser tab. Nothing is sent anywhere.
+The exercises here run PostgreSQL 18 compiled to WebAssembly, so there's a real Postgres in your browser tab rather than something imitating one. Nothing is sent anywhere.
 
 ## Getting things wrong
 

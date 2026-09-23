@@ -82,7 +82,7 @@ SELECT name, price FROM demo.products ORDER BY 2 DESC;
 
 ## Where NULLs go
 
-Null isn't greater or less than anything, so each database just picks a convention. PostgreSQL, DuckDB and Oracle sort nulls last in ascending order. MySQL and SQLite sort them first. Nobody remembers which is which.
+Null isn't greater or less than anything, so each database just picks a convention. PostgreSQL and Oracle sort nulls last in ascending order. MySQL and SQLite sort them first. Nobody remembers which is which.
 
 Five orders have no `shipped_at`:
 
@@ -100,7 +100,7 @@ FROM demo.orders
 ORDER BY shipped_at DESC NULLS LAST;
 ```
 
-`NULLS FIRST` and `NULLS LAST` are supported by PostgreSQL, DuckDB, SQLite and Oracle. MySQL doesn't have them, and the workaround there is to sort on `shipped_at IS NULL` first, which yields a 0 or 1 you can order by.
+`NULLS FIRST` and `NULLS LAST` are supported by PostgreSQL, SQLite and Oracle. MySQL doesn't have them, and the workaround there is to sort on `shipped_at IS NULL` first, which yields a 0 or 1 you can order by.
 
 ## Custom orderings
 
@@ -134,6 +134,6 @@ LIMIT 3;
 
 Headphones, External SSD, Mechanical Keyboard.
 
-Two warnings. `LIMIT` without `ORDER BY` gives arbitrary rows, as covered earlier. And `LIMIT 3` after ordering by price gives exactly three rows even if the fourth product is tied with the third on price, silently cutting a tie in half. Standard SQL has `FETCH FIRST 3 ROWS WITH TIES` for this, which PostgreSQL and DuckDB support; otherwise you need a window function, which is where this course ends up.
+Two warnings. `LIMIT` without `ORDER BY` gives arbitrary rows, as covered earlier. And `LIMIT 3` after ordering by price gives exactly three rows even if the fourth product is tied with the third on price, silently cutting a tie in half. Standard SQL has `FETCH FIRST 3 ROWS WITH TIES` for this, which PostgreSQL supports; otherwise you need a window function, which is where this course ends up.
 
 One last thing worth internalising: `ORDER BY` runs near the end of the pipeline, after `WHERE` and `GROUP BY` have already done their work. Sorting a million rows and then throwing most of them away is expensive, so filter first and sort what's left.

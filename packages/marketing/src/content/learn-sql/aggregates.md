@@ -103,7 +103,7 @@ SELECT
 FROM demo.orders;
 ```
 
-The trick is that a `CASE` with no `ELSE` returns null when nothing matches, and `COUNT` skips nulls. So each `COUNT(CASE ...)` counts only the rows that matched. PostgreSQL and DuckDB also support `COUNT(*) FILTER (WHERE status = 'pending')`, which does the same thing and reads better.
+The trick is that a `CASE` with no `ELSE` returns null when nothing matches, and `COUNT` skips nulls. So each `COUNT(CASE ...)` counts only the rows that matched. PostgreSQL also supports `COUNT(*) FILTER (WHERE status = 'pending')`, which does the same thing and reads better.
 
 ## Mixing aggregates with plain columns
 

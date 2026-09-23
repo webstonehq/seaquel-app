@@ -8,7 +8,7 @@ demo: "sandbox"
 
 No new concepts here. This is the reference page for the dataset the course runs on, plus exercises to practise against.
 
-The sandbox at the bottom accepts any query. Nothing is saved and nothing leaves your browser, so you can `DROP TABLE` if you want to. Reloading brings it back.
+The sandbox at the bottom accepts any query. Nothing is saved and nothing leaves your browser, so you can `DROP TABLE` if you want to. Each run happens inside a transaction that gets rolled back afterwards, so the next one starts from the original data.
 
 ## Schema
 
@@ -107,7 +107,7 @@ Exercise 14 can be done with a correlated subquery or a window function. Doing i
 
 The schema browser shows all four tables and their columns without typing anything. Run `EXPLAIN` in front of any query to see the plan the engine chose. Select a query that returns two numeric columns and the visualiser will chart it.
 
-If you break the data, reload the page.
+If you break the data, the next run has it back.
 
 ## Where to go next
 

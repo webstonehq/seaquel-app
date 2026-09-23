@@ -201,6 +201,13 @@
 							</a>
 						{/each}
 					</div>
+
+					<p class="text-center text-muted-foreground mt-10">
+						Stuck on an error message?
+						<a href="/sql-errors" class="text-primary hover:underline">
+							See common SQL errors and how to fix them
+						</a>
+					</p>
 				</div>
 			</section>
 		{/if}

@@ -58,7 +58,7 @@ SELECT
 FROM demo.products;
 ```
 
-Concatenation joins text. Standard SQL, PostgreSQL and DuckDB use `||`:
+Concatenation joins text. Standard SQL and PostgreSQL use `||`:
 
 ```sql
 SELECT
@@ -103,7 +103,7 @@ LIMIT 5;
 
 Those are five arbitrary products. Not the first five, not the cheapest five, just whichever five the engine produced first, and that can change between runs. Ask for the five cheapest and you have to say so, which is `ORDER BY`, two lessons along.
 
-SQL Server spells this `SELECT TOP 5`. Older Oracle uses `ROWNUM`. PostgreSQL, MySQL, SQLite and DuckDB all use `LIMIT`.
+SQL Server spells this `SELECT TOP 5`. Older Oracle uses `ROWNUM`. PostgreSQL, MySQL and SQLite all use `LIMIT`.
 
 ## The order SQL actually runs in
 

@@ -54,7 +54,7 @@ WHERE o.id IS NULL;
 
 Iris Taylor and Jack Anderson. Join everything, then keep only the rows where the right side came back empty. It's called an anti-join and it's worth being able to spot.
 
-`RIGHT JOIN` mirrors it, keeping everything from the right table. You'll see it rarely, because swapping the table order and writing `LEFT` is easier to reason about. `FULL OUTER JOIN` keeps unmatched rows from both sides at once; PostgreSQL and DuckDB have it, MySQL doesn't.
+`RIGHT JOIN` mirrors it, keeping everything from the right table. You'll see it rarely, because swapping the table order and writing `LEFT` is easier to reason about. `FULL OUTER JOIN` keeps unmatched rows from both sides at once; PostgreSQL has it, MySQL doesn't.
 
 ## Filtering a LEFT JOIN in WHERE
 

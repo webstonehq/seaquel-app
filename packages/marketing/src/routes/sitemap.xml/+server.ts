@@ -2,6 +2,7 @@ import type { RequestHandler } from "./$types";
 import { getChangelogEntries } from "$lib/changelog";
 import { getBlogEntries } from "$lib/blog";
 import { getLessons } from "$lib/learn-sql";
+import { getSqlErrors } from "$lib/sql-errors";
 
 export const prerender = true;
 
@@ -12,6 +13,7 @@ const STATIC_PATHS = [
   "/features",
   "/pricing",
   "/learn-sql",
+  "/sql-errors",
   "/docs",
   "/changelog",
   "/blog",
@@ -35,6 +37,7 @@ export const GET: RequestHandler = async () => {
   const changelog = await getChangelogEntries();
   const blog = await getBlogEntries();
   const lessons = await getLessons();
+  const sqlErrors = await getSqlErrors();
   const latestChangelog = changelog[0]?.date;
   const latestBlog = blog[0]?.date;
 
@@ -67,6 +70,10 @@ export const GET: RequestHandler = async () => {
 
   for (const lesson of lessons) {
     urls.push({ loc: `${ORIGIN}/learn-sql/${lesson.slug}` });
+  }
+
+  for (const entry of sqlErrors) {
+    urls.push({ loc: `${ORIGIN}/sql-errors/${entry.slug}` });
   }
 
   const body =

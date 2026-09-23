@@ -21,6 +21,7 @@
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20260214.0",
+		"@electric-sql/pglite": "^0.5.8",
 		"@internationalized/date": "^3.12.0",
 		"@lucide/svelte": "^1.7.0",
 		"@nerdfolio/remult-better-auth": "^0.3.3",

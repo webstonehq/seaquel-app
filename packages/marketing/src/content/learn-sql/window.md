@@ -77,7 +77,7 @@ Headphones for Electronics at 149.99, Laptop Stand for Accessories at 59.99, Ext
 
 The CTE is not optional, and this is the rule that trips everyone: **you cannot filter on a window function in `WHERE`.** Window functions are computed after `WHERE` and after `GROUP BY`, so `WHERE rn = 1` fails with "column rn does not exist". Compute in one step, filter in the next.
 
-PostgreSQL 11+ and DuckDB support `QUALIFY`, which does the filtering in place:
+Postgres has no shortcut for this, so the CTE is the way you write it. Some other engines have `QUALIFY`, which does the filtering in place:
 
 ```sql
 SELECT name, category, price
@@ -85,7 +85,7 @@ FROM demo.products
 QUALIFY ROW_NUMBER() OVER (PARTITION BY category ORDER BY price DESC) = 1;
 ```
 
-Nice when you have it. The CTE version works everywhere.
+That's Snowflake and BigQuery, among others. It won't run here, and the CTE version works everywhere anyway.
 
 ## Running totals
 
