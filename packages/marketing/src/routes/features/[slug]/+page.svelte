@@ -33,8 +33,8 @@
 </script>
 
 <Seo
-	title="{data.category.title} - Features - Seaquel"
-	description={data.category.description}
+	title={data.category.seoTitle ?? `${data.category.title} — Seaquel SQL Client`}
+	description={data.category.seoDescription ?? data.category.description}
 />
 
 <div class="min-h-screen bg-background text-foreground">

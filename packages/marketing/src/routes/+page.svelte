@@ -10,8 +10,8 @@
 </script>
 
 <Seo
-	title="Seaquel - Database Management, Reimagined"
-	description="Lightning-fast, resource-efficient database client with AI-powered assistance. Work offline, query smarter, and manage your data with unprecedented speed."
+	title="Seaquel — Fast SQL Client for Postgres, MySQL & SQLite"
+	description="A fast, offline-first SQL client for Postgres, MySQL and SQLite. Browse schemas, visualize queries, and add AI assistance only when you want it."
 />
 
 <div class="min-h-screen bg-background text-foreground">

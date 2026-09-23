@@ -74,8 +74,8 @@
 </script>
 
 <Seo
-    title="Pricing - Seaquel"
-    description="Simple, transparent pricing for Seaquel commercial licenses. Individual and Business plans available."
+    title="Seaquel Pricing — Free for Personal Use, Paid for Work"
+    description="Seaquel is free and open source for personal use. Individual and Business licenses cover commercial use, with transferable seats on Business."
 />
 
 <div class="min-h-screen bg-background text-foreground">

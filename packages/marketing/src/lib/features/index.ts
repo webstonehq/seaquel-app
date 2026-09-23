@@ -89,6 +89,10 @@ export interface FeatureCategory {
 	description: string;
 	features: Feature[];
 	variant?: 'default' | 'highlight';
+	/** Overrides the page <title>. Lead with the search term, not the brand. */
+	seoTitle?: string;
+	/** Overrides the meta description. Aim for 140-155 characters. */
+	seoDescription?: string;
 }
 
 export const featureCategories: FeatureCategory[] = [
@@ -98,6 +102,9 @@ export const featureCategories: FeatureCategory[] = [
 		title: 'Visual Tools',
 		description:
 			'Understand your database like never before with interactive visual tools.',
+		seoTitle: 'SQL Query Visualizer, ERD Viewer & Schema Browser | Seaquel',
+		seoDescription:
+			'See your queries and schema as diagrams: a visual query builder, ERD viewer, query plan visualizer, schema tree browser and table inspector.',
 		variant: 'highlight',
 		features: [
 			{
@@ -156,6 +163,9 @@ export const featureCategories: FeatureCategory[] = [
 		title: 'AI Assistant',
 		description:
 			'Get AI-powered help writing SQL, generating dashboards, and exploring your data — with privacy you control.',
+		seoTitle: 'AI SQL Assistant — Natural Language to SQL | Seaquel',
+		seoDescription:
+			'Turn plain English into SQL, generate dashboards, and @-mention tables for context. Entirely optional, and your schema stays under your control.',
 		features: [
 			{
 				icon: SparklesIcon,
@@ -703,6 +713,9 @@ export const featureCategories: FeatureCategory[] = [
 		title: 'Connection Features',
 		description:
 			'Connect securely to your databases with flexible authentication options.',
+		seoTitle: 'SSH Tunnel & Secure Database Connections | Seaquel',
+		seoDescription:
+			'Connect to remote Postgres and MySQL databases through SSH tunnels with password or key-based authentication, plus saved connection profiles.',
 		features: [
 			{
 				icon: TerminalIcon,

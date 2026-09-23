@@ -19,8 +19,8 @@
 </script>
 
 <Seo
-	title="Download Seaquel - Database Client for macOS, Windows & Linux"
-	description="Download Seaquel for your platform. Available for macOS (Apple Silicon & Intel), Windows (MSI & EXE), and Linux (DEB, RPM, AppImage)."
+	title="Free SQL Client Download — macOS, Windows & Linux | Seaquel"
+	description="Download Seaquel free for macOS (Apple Silicon & Intel), Windows and Linux. Native, fast, and fully functional without an account or license."
 />
 
 <div class="min-h-screen bg-background text-foreground">

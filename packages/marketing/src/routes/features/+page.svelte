@@ -14,8 +14,8 @@
 </script>
 
 <Seo
-	title="Features - Seaquel"
-	description="Explore all Seaquel features: AI assistant, dashboards, pending changes, table management, split panes, version history, interactive SQL tutorials, visual query builder, workflows, query plans, ERD viewer, and more."
+	title="SQL Client Features — Visual Queries, Schemas & AI | Seaquel"
+	description="Visual query builder, ERD viewer, schema browser, dashboards, staged edits and an optional AI assistant — every Seaquel feature in one place."
 />
 
 <div class="min-h-screen bg-background text-foreground">
