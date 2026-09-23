@@ -1,3 +1,5 @@
+export { Certificate } from "./certificate";
+export { LessonProgress } from "./lesson-progress";
 export { Tenant } from "./tenant";
 export { TenantMember } from "./tenant-member";
 export { ProvisionEvent } from "./provision-event";
@@ -9,6 +11,8 @@ export { Install } from "./install";
 export { IssuedBundle } from "./issued-bundle";
 export { Revocation } from "./revocation";
 
+import { Certificate } from "./certificate";
+import { LessonProgress } from "./lesson-progress";
 import { Tenant } from "./tenant";
 import { TenantMember } from "./tenant-member";
 import { ProvisionEvent } from "./provision-event";
@@ -22,9 +26,11 @@ import { Revocation } from "./revocation";
 
 export const entities = [
   AppliedEvent,
+  Certificate,
   EmailConsent,
   Install,
   IssuedBundle,
+  LessonProgress,
   License,
   NewsletterSubscriber,
   ProvisionEvent,

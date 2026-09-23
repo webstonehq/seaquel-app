@@ -17,6 +17,8 @@
 	import Seo from "$lib/components/seo.svelte";
 	import { ArrowRightIcon, ClockIcon } from "lucide-svelte";
 	import type { PageData } from "./$types";
+	import { AwardIcon } from "lucide-svelte";
+	import { TOTAL_CHALLENGES } from "$lib/learn-sql/challenges";
 
 	let { data }: { data: PageData } = $props();
 </script>
@@ -211,6 +213,23 @@
 				</div>
 			</section>
 		{/if}
+
+		<section id="certificate" class="py-12 md:py-16 scroll-mt-24">
+			<div class="container mx-auto px-4 md:px-6 max-w-3xl">
+				<a
+					href="/learn-sql/certificate"
+					class="block rounded-lg border bg-card p-6 transition-colors hover:border-primary"
+				>
+					<div class="flex items-center gap-2 text-lg font-semibold tracking-tight">
+						<AwardIcon class="size-5 text-amber-500" />
+						Certificate of completion
+					</div>
+					<p class="mt-1 text-muted-foreground">
+						Solve all {TOTAL_CHALLENGES} challenges and claim a certificate with your name on it.
+					</p>
+				</a>
+			</div>
+		</section>
 
 		<!-- Interactive Demo Section -->
 		<section id="try-it" class="py-20 md:py-28 bg-linear-to-b from-muted/20 to-background">

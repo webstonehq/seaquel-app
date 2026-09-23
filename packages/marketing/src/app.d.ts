@@ -1,4 +1,4 @@
-import type { D1Database, KVNamespace } from "@cloudflare/workers-types";
+import type { D1Database, Fetcher, KVNamespace } from "@cloudflare/workers-types";
 
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
@@ -11,6 +11,9 @@ declare global {
     interface Platform {
       env: {
         SEAQUEL_DB: D1Database;
+        // Static-asset binding from wrangler.jsonc. Used to read files we ship
+        // (fonts, resvg.wasm) without a same-origin subrequest.
+        ASSETS: Fetcher;
         GITHUB_API_CACHE: KVNamespace;
         GITHUB_TOKEN: string;
         GITHUB_TOKEN_FETCH_RELEASES_URL: string;

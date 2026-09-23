@@ -74,7 +74,11 @@
         {/if}
       </Button>
       <p class="text-sm text-muted-foreground text-center">
-        New here? <a href="/dashboard/signup" class="underline">Create an account</a
+        New here? <a
+          href={page.url.searchParams.get("redirect")
+            ? `/dashboard/signup?redirect=${encodeURIComponent(page.url.searchParams.get("redirect")!)}`
+            : "/dashboard/signup"}
+          class="underline">Create an account</a
         >.
       </p>
     </form>

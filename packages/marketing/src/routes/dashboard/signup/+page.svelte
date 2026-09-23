@@ -6,6 +6,13 @@
   import { remult } from "remult";
   import { License } from "$lib/entities/license";
   import TenantForm from "$lib/components/dashboard/tenant-form.svelte";
+  import { page } from "$app/state";
+
+  // Signing up from somewhere other than the dashboard (claiming a course
+  // certificate, for instance) should return there rather than dropping the
+  // person into the license wizard, which has nothing to do with why they
+  // came. Mirrors the ?redirect= that /dashboard/signin already honours.
+  const redirectTo = $derived(page.url.searchParams.get("redirect"));
 
   let step = $state<"account" | "license" | "tenant">("account");
   let name = $state("");
@@ -28,6 +35,10 @@
     busy = false;
     if (error) {
       errorMessage = error.message ?? "Sign-up failed.";
+      return;
+    }
+    if (redirectTo) {
+      window.location.href = redirectTo;
       return;
     }
     step = "license";
@@ -152,7 +163,11 @@
           {/if}
         </Button>
         <p class="text-sm text-muted-foreground text-center">
-          Already have an account? <a href="/dashboard/signin" class="underline"
+          Already have an account? <a
+            href={redirectTo
+              ? `/dashboard/signin?redirect=${encodeURIComponent(redirectTo)}`
+              : "/dashboard/signin"}
+            class="underline"
             >Sign in</a
           >.
         </p>

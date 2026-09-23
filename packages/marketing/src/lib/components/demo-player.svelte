@@ -29,7 +29,13 @@
             demoSrc = `/demo/?mode=${encodeURIComponent(urlMode)}`;
         }
 
-        if (autoOpen || window.location.hash === `#${hash}`) {
+        // An explicit deep link wins over autoOpen. Arriving at
+        // /learn-sql#certificate should land on that section, not be covered by
+        // the demo overlay with the hash rewritten out from under it.
+        const arrivedElsewhere =
+            window.location.hash !== "" && window.location.hash !== `#${hash}`;
+
+        if (window.location.hash === `#${hash}` || (autoOpen && !arrivedElsewhere)) {
             openTheater();
         }
     });

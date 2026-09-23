@@ -4,6 +4,7 @@
 	import { Button } from "$lib/components/ui/button";
 	import {
 		ArrowLeftIcon,
+		AwardIcon,
 		ArrowRightIcon,
 		ChevronRightIcon,
 		ClockIcon,
@@ -15,8 +16,8 @@
 	import type { PageData } from "./$types";
 	import Seo from "$lib/components/seo.svelte";
 	import SqlChallenge from "$lib/components/sql-challenge.svelte";
-	import { getChallenges } from "$lib/learn-sql/challenges";
-	import { getSolved, markSolved } from "$lib/learn-sql/progress";
+	import { getChallenges, TOTAL_CHALLENGES } from "$lib/learn-sql/challenges";
+	import { exportProgress, getSolved, markSolved } from "$lib/learn-sql/progress";
 
 	let { data }: { data: PageData } = $props();
 
@@ -33,9 +34,16 @@
 	// bake one visitor's progress into the static HTML.
 	let solved = $state<string[]>([]);
 
+	// Course-wide total for the sidebar, so the certificate shows real progress
+	// from any lesson rather than only counting this one.
+	let courseSolved = $state(0);
+
 	onMount(() => {
 		solved = getSolved(data.lesson.slug);
+		courseSolved = Object.values(exportProgress()).reduce((n, ids) => n + ids.length, 0);
 	});
+
+	const courseComplete = $derived(courseSolved >= TOTAL_CHALLENGES);
 
 	const solvedCount = $derived(challenges.filter((c) => solved.includes(c.id)).length);
 	const allSolved = $derived(challenges.length > 0 && solvedCount === challenges.length);
@@ -125,6 +133,41 @@
 								</li>
 							{/each}
 						</ul>
+
+						<!--
+							The certificate sits below the lesson list rather than in it: it
+							isn't a lesson, and counting it as one would make every page say
+							"Lesson n of 13". Without this, someone who lands on a lesson from
+							search never learns the certificate exists.
+						-->
+						<a
+							href="/learn-sql/certificate"
+							class="mt-6 block rounded-lg border p-3 transition-colors hover:border-primary {courseComplete
+								? 'border-green-500/40 bg-green-500/5'
+								: ''}"
+						>
+							<div class="flex items-center gap-2 text-sm font-medium">
+								<AwardIcon
+									class="size-4 {courseComplete ? 'text-green-600 dark:text-green-400' : 'text-amber-500'}"
+								/>
+								Certificate
+							</div>
+							<p class="mt-1 text-xs text-muted-foreground">
+								{#if courseComplete}
+									Ready to claim.
+								{:else}
+									{courseSolved} of {TOTAL_CHALLENGES} challenges
+								{/if}
+							</p>
+							{#if !courseComplete}
+								<div class="mt-2 h-1.5 rounded-full bg-muted overflow-hidden">
+									<div
+										class="h-full bg-amber-500 transition-all"
+										style="width: {Math.round((courseSolved / TOTAL_CHALLENGES) * 100)}%"
+									></div>
+								</div>
+							{/if}
+						</a>
 					</aside>
 
 					<div class="min-w-0">
