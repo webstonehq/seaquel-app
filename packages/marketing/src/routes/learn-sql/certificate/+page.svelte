@@ -8,9 +8,8 @@
 	import { exportProgress } from "$lib/learn-sql/progress";
 	import { onMount } from "svelte";
 
-	// The claim lives on its own page rather than on /learn-sql: that page
-	// auto-opens the demo in a fullscreen overlay, which would cover the card
-	// on every visit and swallow the click.
+	// The claim lives on its own page rather than buried in /learn-sql so it
+	// can be linked to and returned to directly after sign-in.
 	let solvedCount = $state(0);
 
 	onMount(() => {

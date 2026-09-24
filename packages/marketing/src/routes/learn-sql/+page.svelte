@@ -248,7 +248,7 @@
 						<LayersIcon class="size-4" />
 						<span>Live Interactive Tutorial</span>
 					</div>
-					<DemoPlayer mode="learn" autoOpen hintText="Click to open the SQL tutorial" />
+					<DemoPlayer mode="learn" hintText="Click to open the SQL tutorial" />
 				</div>
 			</div>
 		</section>

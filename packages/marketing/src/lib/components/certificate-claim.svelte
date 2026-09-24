@@ -38,9 +38,6 @@
 	// Progress lives in this browser, so claiming has to hand it to the server.
 	// Signing in first would lose the page, hence the round trip through
 	// ?redirect= back to here.
-	//
-	// Back to the dedicated claim page, not /learn-sql: that page auto-opens
-	// the demo in a fullscreen overlay, which would cover this card on arrival.
 	const signInHref = `/dashboard/signin?redirect=${encodeURIComponent("/learn-sql/certificate")}`;
 
 	async function claim() {

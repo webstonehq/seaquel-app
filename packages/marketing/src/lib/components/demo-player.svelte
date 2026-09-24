@@ -8,12 +8,10 @@
         hash = "fullscreen",
         hintText = "Live app — click to explore",
         mode,
-        autoOpen = false,
     }: {
         hash?: string;
         hintText?: string;
         mode?: string;
-        autoOpen?: boolean;
     } = $props();
 
     let showCursorHint = $state(true);
@@ -29,13 +27,9 @@
             demoSrc = `/demo/?mode=${encodeURIComponent(urlMode)}`;
         }
 
-        // An explicit deep link wins over autoOpen. Arriving at
-        // /learn-sql#certificate should land on that section, not be covered by
-        // the demo overlay with the hash rewritten out from under it.
-        const arrivedElsewhere =
-            window.location.hash !== "" && window.location.hash !== `#${hash}`;
-
-        if (window.location.hash === `#${hash}` || (autoOpen && !arrivedElsewhere)) {
+        // Only a deep link to #{hash} opens the overlay; a plain visit leaves
+        // the page as-is.
+        if (window.location.hash === `#${hash}`) {
             openTheater();
         }
     });
