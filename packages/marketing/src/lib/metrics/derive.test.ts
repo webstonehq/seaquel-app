@@ -20,7 +20,6 @@ function entry(
 		platformDownloads: { macOS, windows: totalDownloads - macOS, linux: 0 },
 		totalReleases: 1,
 		avgDaysBetweenReleases: 0,
-		releaseTotals: {},
 		...overrides,
 	};
 }
@@ -47,6 +46,22 @@ describe('downloadsInWindow', () => {
 		expect(downloadsInWindow(history, 30)).toEqual({
 			downloads: 300,
 			since: '2026-09-10',
+			spansFullWindow: false,
+		});
+	});
+
+	test('skips the day the collector started counting different assets', () => {
+		const history = [
+			entry('2026-09-21', 3267),
+			entry('2026-09-22', 3286),
+			entry('2026-09-23', 3307),
+			entry('2026-09-24', 3436, { releaseTotals: { v1: 3436 } }),
+			entry('2026-09-25', 3450, { releaseTotals: { v1: 3450 } }),
+		];
+
+		expect(downloadsInWindow(history, 30)).toEqual({
+			downloads: 19 + 21 + 14,
+			since: '2026-09-21',
 			spansFullWindow: false,
 		});
 	});
@@ -82,6 +97,25 @@ describe('dailyDownloads', () => {
 
 		expect(dailyDownloads(history)).toEqual([
 			{ date: new Date('2026-09-02'), macOS: 0, windows: 0, linux: 0 },
+		]);
+	});
+
+	test('reports zero on the day the collector started counting different assets', () => {
+		const history = [
+			entry('2026-09-23', 3307, { platformDownloads: { macOS: 1078, windows: 1545, linux: 684 } }),
+			entry('2026-09-24', 3436, {
+				platformDownloads: { macOS: 864, windows: 1556, linux: 1016 },
+				releaseTotals: { v1: 3436 },
+			}),
+			entry('2026-09-25', 3450, {
+				platformDownloads: { macOS: 870, windows: 1560, linux: 1020 },
+				releaseTotals: { v1: 3450 },
+			}),
+		];
+
+		expect(dailyDownloads(history)).toEqual([
+			{ date: new Date('2026-09-24'), macOS: 0, windows: 0, linux: 0 },
+			{ date: new Date('2026-09-25'), macOS: 6, windows: 4, linux: 4 },
 		]);
 	});
 

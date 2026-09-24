@@ -7,6 +7,16 @@ const MS_DAY = 86400000;
  * two daily snapshots rather than something the API reports directly.
  */
 
+/**
+ * The collector's asset rules changed on 2026-09-24: .rpm files started
+ * counting as Linux and macOS updater bundles left the macOS count. Only
+ * snapshots written under the new rules carry `releaseTotals`, so a diff
+ * across that boundary measures the rule change, not downloads.
+ */
+function comparable(a: HistoricalEntry, b: HistoricalEntry): boolean {
+	return (a.releaseTotals === undefined) === (b.releaseTotals === undefined);
+}
+
 function baselineFor(history: HistoricalEntry[], days: number): HistoricalEntry | null {
 	if (history.length < 2) return null;
 
@@ -40,8 +50,17 @@ export function downloadsInWindow(history: HistoricalEntry[], days: number): Win
 	const latest = history[history.length - 1];
 	const elapsed = (new Date(latest.date).getTime() - new Date(baseline.date).getTime()) / MS_DAY;
 
+	// Summed day by day so a change in counting rules inside the window can be skipped.
+	let downloads = 0;
+	for (let i = history.indexOf(baseline) + 1; i < history.length; i++) {
+		const previous = history[i - 1];
+		const current = history[i];
+		if (!comparable(previous, current)) continue;
+		downloads += Math.max(0, current.totalDownloads - previous.totalDownloads);
+	}
+
 	return {
-		downloads: Math.max(0, latest.totalDownloads - baseline.totalDownloads),
+		downloads,
 		since: baseline.date,
 		spansFullWindow: elapsed >= days,
 	};
@@ -61,6 +80,11 @@ export function dailyDownloads(history: HistoricalEntry[]): DailyDownloads[] {
 	for (let i = 1; i < history.length; i++) {
 		const previous = history[i - 1].platformDownloads;
 		const current = history[i].platformDownloads;
+
+		if (!comparable(history[i - 1], history[i])) {
+			days.push({ date: new Date(history[i].date), macOS: 0, windows: 0, linux: 0 });
+			continue;
+		}
 
 		days.push({
 			date: new Date(history[i].date),
