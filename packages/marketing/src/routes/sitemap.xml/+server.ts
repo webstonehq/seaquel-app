@@ -3,6 +3,7 @@ import { getChangelogEntries } from "$lib/changelog";
 import { getBlogEntries } from "$lib/blog";
 import { getLessons } from "$lib/learn-sql";
 import { getSqlErrors } from "$lib/sql-errors";
+import { getAlternatives, getComparisons } from "$lib/competitors";
 
 export const prerender = true;
 
@@ -14,6 +15,8 @@ const STATIC_PATHS = [
   "/pricing",
   "/learn-sql",
   "/sql-errors",
+  "/compare",
+  "/alternatives",
   "/docs",
   "/changelog",
   "/blog",
@@ -38,6 +41,8 @@ export const GET: RequestHandler = async () => {
   const blog = await getBlogEntries();
   const lessons = await getLessons();
   const sqlErrors = await getSqlErrors();
+  const comparisons = await getComparisons();
+  const alternatives = await getAlternatives();
   const latestChangelog = changelog[0]?.date;
   const latestBlog = blog[0]?.date;
 
@@ -74,6 +79,16 @@ export const GET: RequestHandler = async () => {
 
   for (const entry of sqlErrors) {
     urls.push({ loc: `${ORIGIN}/sql-errors/${entry.slug}` });
+  }
+
+  // Comparison pages carry the date they were last checked against the
+  // vendor's own pages, which is exactly what lastmod is for.
+  for (const entry of comparisons) {
+    urls.push({ loc: `${ORIGIN}/compare/${entry.slug}`, lastmod: entry.verifiedOn });
+  }
+
+  for (const entry of alternatives) {
+    urls.push({ loc: `${ORIGIN}/alternatives/${entry.slug}`, lastmod: entry.verifiedOn });
   }
 
   const body =

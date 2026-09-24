@@ -10,17 +10,19 @@
 		others: FeatureValue;
 	}
 
+	// Values here are checked against each vendor's own pages, the same as the
+	// per-competitor pages under /compare. Anything we cannot source — memory
+	// and startup figures, for instance, which no vendor in this category
+	// publishes — stays off the table until we have measured it ourselves.
 	const features: ComparisonRow[] = [
-		{ feature: "Memory Usage", seaquel: "~200MB", others: "500MB - 1GB" },
-		{ feature: "Startup Time", seaquel: "<2 seconds", others: "5-15 seconds" },
 		{ feature: "Interactive SQL Tutorials", seaquel: true, others: false },
-		{ feature: "Visual Query Builder", seaquel: true, others: false },
+		{ feature: "Visual Query Builder", seaquel: true, others: "Paid only" },
 		{ feature: "Git-Based Project Sharing", seaquel: true, others: "Paid only" },
-		{ feature: "Pending Changes", seaquel: true, others: false },
-		{ feature: "Table Management", seaquel: true, others: "Paid only" },
+		{ feature: "Pending Changes", seaquel: true, others: "Varies" },
+		{ feature: "Table Management", seaquel: true, others: true },
 		{ feature: "Custom Dashboards", seaquel: true, others: "Paid only" },
 		{ feature: "Visual Query Plans", seaquel: true, others: "Paid only" },
-		{ feature: "ERD Viewer", seaquel: true, others: "Paid only" },
+		{ feature: "ERD Viewer", seaquel: true, others: "Varies" },
 		{ feature: "Workflows", seaquel: true, others: false },
 		{ feature: "Built-in Charts", seaquel: true, others: "Paid only" },
 		{ feature: "AI SQL Assistant", seaquel: true, others: "Limited" },
@@ -28,10 +30,9 @@
 		{ feature: "Split Panes", seaquel: true, others: true },
 		{ feature: "Deep Links", seaquel: true, others: false },
 		{ feature: "Windows, macOS & Linux", seaquel: true, others: true },
-		{ feature: "Works Fully Offline", seaquel: true, others: "Partial" },
-		{ feature: "100% Open Source", seaquel: true, others: "Partial" },
-		{ feature: "Native Performance", seaquel: true, others: false },
-		{ feature: "Price", seaquel: "Free for personal", others: "$0 - $229/year" },
+		{ feature: "Works Fully Offline", seaquel: true, others: "Varies" },
+		{ feature: "Source Available", seaquel: "MIT", others: "Varies" },
+		{ feature: "Price", seaquel: "Free for personal", others: "Free to $510/year" },
 	];
 </script>
 
@@ -91,7 +92,11 @@
 			</div>
 
 			<p class="text-center text-sm text-muted-foreground mt-6">
-				Comparison based on DBeaver Community/Pro and JetBrains DataGrip as of 2025
+				Compared against TablePlus, DBeaver, DataGrip and Beekeeper Studio, verified
+				23 September 2026.
+				<a href="/compare" class="text-primary hover:underline">
+					See the sourced comparisons
+				</a>, including where each of them beats Seaquel.
 			</p>
 		</div>
 	</div>

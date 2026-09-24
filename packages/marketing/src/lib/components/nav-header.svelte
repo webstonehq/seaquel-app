@@ -69,6 +69,13 @@
 					<NavigationMenu.Item>
 						<NavigationMenu.Link class="rounded-md p-2 px-4 hover:bg-accent">
 							{#snippet child({ props })}
+								<a href="/compare" {...props}>Compare</a>
+							{/snippet}
+						</NavigationMenu.Link>
+					</NavigationMenu.Item>
+					<NavigationMenu.Item>
+						<NavigationMenu.Link class="rounded-md p-2 px-4 hover:bg-accent">
+							{#snippet child({ props })}
 								<a href="/changelog" {...props}>Changelog</a>
 							{/snippet}
 						</NavigationMenu.Link>
@@ -132,6 +139,7 @@
 					<a href="/features" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted" onclick={() => mobileMenuOpen = false}>Product</a>
 					<a href="/learn-sql" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted" onclick={() => mobileMenuOpen = false}>Learn SQL</a>
 					<a href="/pricing" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted" onclick={() => mobileMenuOpen = false}>Pricing</a>
+					<a href="/compare" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted" onclick={() => mobileMenuOpen = false}>Compare</a>
 					<a href="/changelog" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted" onclick={() => mobileMenuOpen = false}>Changelog</a>
 					<a href="/blog" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted" onclick={() => mobileMenuOpen = false}>Blog</a>
 					<a href="/docs" class="text-sm font-medium px-2 py-1.5 rounded-md hover:bg-muted" onclick={() => mobileMenuOpen = false}>Docs</a>
