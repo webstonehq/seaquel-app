@@ -10,9 +10,9 @@ export const load: PageServerLoad = async ({ params, setHeaders }) => {
   const certificate = await remult.repo(Certificate).findId(params.id);
   if (!certificate) throw error(404, "Certificate not found");
 
-  // Shareable and immutable apart from the name, so let crawlers and
-  // repeat visits cache it.
-  setHeaders({ "Cache-Control": "public, max-age=300, s-maxage=3600" });
+  // Shareable and immutable apart from the name, but the HTML still points at
+  // per-deploy asset hashes, so it gets the same short TTL as every other page.
+  setHeaders({ "Cache-Control": "public, max-age=0, must-revalidate, s-maxage=60" });
 
   return {
     certificate: {

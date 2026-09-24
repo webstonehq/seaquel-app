@@ -3,14 +3,15 @@ import { remult } from "remult";
 import type { LayoutServerLoad } from "./$types";
 
 const ONE_MINUTE = 60;
-const FIFTEEN_MINUTES = ONE_MINUTE * 15;
-const ONE_HOUR = ONE_MINUTE * 60;
-const ONE_DAY = ONE_HOUR * 24;
 
 export const load: LayoutServerLoad = ({ setHeaders }) => {
   if (!dev) {
+    // Pages reference content-hashed /_app/immutable/ assets that only exist
+    // for the current deploy, so HTML must not outlive it by much. Browsers
+    // always revalidate; the edge absorbs the traffic but goes stale within a
+    // minute of a deploy.
     setHeaders({
-      "Cache-Control": `public, max-age=${FIFTEEN_MINUTES}, s-maxage=${ONE_DAY}`,
+      "Cache-Control": `public, max-age=0, must-revalidate, s-maxage=${ONE_MINUTE}`,
       Vary: "Accept-Encoding",
     });
   }
