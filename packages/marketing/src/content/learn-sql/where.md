@@ -40,7 +40,7 @@ WHERE category = 'Electronics' OR category = 'Storage' AND price < 50;
 
 It reads as `Electronics OR (Storage AND price < 50)`, so every Electronics product comes back regardless of price. If you wanted cheap items from either category, parenthesise:
 
-```sql
+```sql static
 WHERE (category = 'Electronics' OR category = 'Storage') AND price < 50;
 ```
 
@@ -112,7 +112,7 @@ SELECT COUNT(*) FROM demo.orders WHERE status <> 'pending';  -- 7
 
 They do here, because `status` is never null. If it were, the null rows would fall out of *both* counts and the totals wouldn't add up. Any time a `<>` filter returns fewer rows than you expect, check whether the column is nullable. To include nulls explicitly you have to ask:
 
-```sql
+```sql static
 WHERE status <> 'pending' OR status IS NULL
 ```
 

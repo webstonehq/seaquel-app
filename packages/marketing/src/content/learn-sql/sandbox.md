@@ -12,7 +12,7 @@ The sandbox at the bottom accepts any query. Nothing is saved and nothing leaves
 
 ## Schema
 
-```sql
+```sql static
 CREATE TABLE demo.customers (
   id          INTEGER PRIMARY KEY,
   email       VARCHAR(255) NOT NULL,

@@ -1,0 +1,204 @@
+/* Styles for the <seaquel-sql> shadow root. Colors use light-dark(), so the
+   theme is just color-scheme: the reader's OS setting by default, pinned by
+   theme="light" or theme="dark". */
+:host {
+	color-scheme: light dark;
+	--sq-bg: light-dark(#ffffff, #18181b);
+	--sq-fg: light-dark(#18181b, #fafafa);
+	--sq-muted: light-dark(#71717a, #a1a1aa);
+	--sq-subtle: light-dark(#f4f4f5, #27272a);
+	--sq-border: light-dark(#e4e4e7, #3f3f46);
+	--sq-accent: #f5b400;
+	--sq-accent-fg: #3f2a06;
+	--sq-error: light-dark(#b91c1c, #fca5a5);
+	--sq-error-bg: light-dark(#fef2f2, #3b1515);
+	--sq-keyword: light-dark(#0550ae, #79c0ff);
+	--sq-string: light-dark(#116329, #7ee787);
+	--sq-number: light-dark(#9a3412, #f0b72f);
+	--sq-comment: light-dark(#6e7781, #8b949e);
+	--sq-function: light-dark(#8250df, #d2a8ff);
+	--sq-operator: light-dark(#cf222e, #ff9492);
+	--sq-radius: 10px;
+	--sq-font: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--sq-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+	display: block;
+	margin: 1.5em 0;
+}
+:host([hidden]) { display: none; }
+:host([theme='light']) { color-scheme: light; }
+:host([theme='dark']) { color-scheme: dark; }
+* { box-sizing: border-box; }
+/* The host page's CSS can style <seaquel-sql> itself and beats :host, so
+   nothing is inherited from it: .frame resets every inherited property and
+   sets its own. */
+.frame {
+	all: initial;
+	/* all: initial also resets color-scheme, which light-dark() above needs. */
+	color-scheme: inherit;
+	display: block;
+	color: var(--sq-fg);
+	font: 14px/1.5 var(--sq-font);
+	text-align: left;
+	background: var(--sq-bg);
+	border: 1px solid var(--sq-border);
+	border-radius: var(--sq-radius);
+	overflow: hidden;
+}
+.bar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 6px 8px 6px 12px;
+	border-bottom: 1px solid var(--sq-border);
+	background: var(--sq-subtle);
+}
+.label {
+	flex: 1;
+	font-size: 12px;
+	color: var(--sq-muted);
+	letter-spacing: 0.02em;
+}
+button {
+	font: inherit;
+	font-size: 13px;
+	border-radius: 6px;
+	cursor: pointer;
+	padding: 4px 10px;
+	border: 1px solid transparent;
+	line-height: 1.4;
+}
+button:focus-visible, a:focus-visible {
+	outline: 2px solid var(--sq-accent);
+	outline-offset: 1px;
+}
+.reset {
+	background: transparent;
+	color: var(--sq-muted);
+}
+.reset:hover { color: var(--sq-fg); }
+.reset[hidden] { display: none; }
+.run {
+	background: var(--sq-accent);
+	color: var(--sq-accent-fg);
+	font-weight: 600;
+}
+.run:hover { filter: brightness(1.05); }
+.run:disabled { opacity: 0.7; cursor: progress; }
+kbd {
+	font: inherit;
+	font-size: 11px;
+	opacity: 0.7;
+	margin-left: 4px;
+}
+/* The editor is a transparent textarea laid exactly over a highlighted copy
+   of its text. Both sit in one grid cell, so the cell grows with the text and
+   the two layers can't drift apart. Anything that changes where glyphs land
+   (font, padding, wrapping) has to be identical on both. */
+.editor {
+	display: grid;
+	background: var(--sq-bg);
+}
+.editor > * {
+	grid-area: 1 / 1;
+	min-width: 0;
+	min-height: 3.5em;
+	margin: 0;
+	padding: 12px;
+	border: 0;
+	font: 13px/1.6 var(--sq-mono);
+	letter-spacing: normal;
+	tab-size: 2;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+.highlight {
+	color: var(--sq-fg);
+	pointer-events: none;
+}
+textarea {
+	display: block;
+	width: 100%;
+	resize: none;
+	overflow: hidden;
+	background: transparent;
+	color: transparent;
+	caret-color: var(--sq-fg);
+}
+textarea::selection {
+	color: transparent;
+	background: color-mix(in srgb, var(--sq-accent) 35%, transparent);
+}
+textarea:focus { outline: none; }
+.editor:focus-within {
+	outline: 2px solid var(--sq-accent);
+	outline-offset: -2px;
+}
+.t-keyword { color: var(--sq-keyword); }
+.t-string { color: var(--sq-string); }
+.t-number { color: var(--sq-number); }
+.t-comment { color: var(--sq-comment); font-style: italic; }
+.t-function { color: var(--sq-function); }
+.t-operator { color: var(--sq-operator); }
+.output:empty { display: none; }
+.output {
+	border-top: 1px solid var(--sq-border);
+	max-height: 360px;
+	overflow: auto;
+}
+/* Pages without a doctype run in quirks mode, where tables don't inherit
+   color or text styles; ask for them explicitly. */
+table {
+	color: inherit;
+	line-height: inherit;
+	text-align: inherit;
+	white-space: inherit;
+	border-collapse: collapse;
+	width: 100%;
+	font: 12.5px/1.5 var(--sq-mono);
+}
+th, td {
+	padding: 5px 12px;
+	text-align: left;
+	white-space: nowrap;
+	border-bottom: 1px solid var(--sq-border);
+}
+th {
+	position: sticky;
+	top: 0;
+	background: var(--sq-subtle);
+	font-weight: 600;
+}
+th.num, td.num { text-align: right; }
+td.null { color: var(--sq-muted); font-style: italic; }
+tr:last-child td { border-bottom: 0; }
+.message {
+	padding: 10px 12px;
+	color: var(--sq-muted);
+}
+.error {
+	padding: 10px 12px;
+	background: var(--sq-error-bg);
+	color: var(--sq-error);
+	font-family: var(--sq-mono);
+	font-size: 12.5px;
+	white-space: pre-wrap;
+}
+.hint { margin-top: 4px; opacity: 0.85; }
+.foot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 6px 12px;
+	border-top: 1px solid var(--sq-border);
+	font-size: 12px;
+	color: var(--sq-muted);
+}
+.foot a {
+	color: inherit;
+	text-decoration: none;
+	white-space: nowrap;
+}
+.foot a:hover { color: var(--sq-fg); }
+.foot a strong { color: var(--sq-fg); font-weight: 600; }

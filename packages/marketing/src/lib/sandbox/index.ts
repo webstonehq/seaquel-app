@@ -1,26 +1,18 @@
 import type { PGlite } from '@electric-sql/pglite';
-import { SEED_SQL } from './seed';
+import * as shared from '../../embed/database';
 
-export type RunResult =
-	| { ok: true; columns: string[]; rows: unknown[][]; rowCount: number; elapsed: number }
-	| { ok: false; message: string; hint?: string; elapsed: number };
+import type { RunResult } from '../../embed/database';
 
-let instance: Promise<PGlite> | null = null;
+export type { RunResult };
 
 /**
- * One Postgres per page, started on first use. PGlite is a few MB of WASM, so
- * it's only fetched once someone actually reaches for the sandbox.
+ * The sample-shop Postgres, started on first use. It's the same instance the
+ * <seaquel-sql> widgets use, so a lesson page with runnable examples and
+ * challenges downloads and boots PGlite once, and their runs never interleave.
  */
-export function getDatabase(): Promise<PGlite> {
-	instance ??= (async () => {
-		const { PGlite } = await import('@electric-sql/pglite');
-		const db = new PGlite();
-		await db.exec(SEED_SQL);
-		return db;
-	})();
-	// A failed start (offline, blocked WASM) shouldn't stick for the whole visit.
-	instance.catch(() => (instance = null));
-	return instance;
+export async function getDatabase(): Promise<PGlite> {
+	await shared.prepareSchema(null);
+	return shared.getDatabase();
 }
 
 /**
@@ -28,33 +20,7 @@ export function getDatabase(): Promise<PGlite> {
  * DROP in one run never changes what the next run sees.
  */
 export async function runQuery(sql: string): Promise<RunResult> {
-	const db = await getDatabase();
-	const started = performance.now();
-	try {
-		await db.exec('BEGIN');
-		// Array rows keep `SELECT c.id, o.id` from collapsing into one column.
-		const results = await db.exec(sql, { rowMode: 'array' });
-		const last = results.at(-1);
-		const columns = last?.fields.map((f) => f.name) ?? [];
-		const rows = (last?.rows ?? []) as unknown[][];
-		return {
-			ok: true,
-			columns,
-			rows,
-			rowCount: last?.affectedRows || rows.length,
-			elapsed: performance.now() - started
-		};
-	} catch (err) {
-		const e = err as { message?: string; hint?: string };
-		return {
-			ok: false,
-			message: e.message ?? String(err),
-			hint: e.hint,
-			elapsed: performance.now() - started
-		};
-	} finally {
-		await db.exec('ROLLBACK').catch(() => {});
-	}
+	return shared.runQuery(sql, await shared.prepareSchema(null));
 }
 
 /* ------------------------------------------------------------------ */

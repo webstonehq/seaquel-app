@@ -170,6 +170,11 @@
   color: var(--primary);
 }
 
+/* <seaquel-sql> widgets follow the reader's OS setting by default; on this
+   site, match the site's own theme toggle instead. */
+seaquel-sql { color-scheme: light; }
+.dark seaquel-sql { color-scheme: dark; }
+
 /* Syntax highlighting for Prism tokens emitted by mdsvex at build time */
 .prose pre code {
   padding: 0;
@@ -188,6 +193,13 @@
 .token.variable { color: var(--code-number); }
 .token.operator,
 .token.punctuation { color: var(--muted-foreground); }
+/* HTML and CSS blocks (embed snippets in blog posts) */
+.token.tag,
+.token.selector,
+.token.atrule { color: var(--code-keyword); }
+.token.attr-name,
+.token.property { color: var(--code-function); }
+.token.attr-value { color: var(--code-string); }
 .token.comment {
   color: var(--muted-foreground);
   font-style: italic;

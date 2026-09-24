@@ -71,7 +71,7 @@ Notice `lines` gets used twice. A subquery would have to be written out twice or
 
 CTEs are separated by commas, and each one can reference any CTE defined before it. Only the first gets the `WITH` keyword.
 
-```sql
+```sql static
 WITH a AS ( ... ),
      b AS ( SELECT * FROM a ... ),
      c AS ( SELECT * FROM b ... )

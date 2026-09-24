@@ -1,2 +1,5 @@
 static/docs/
 static/blog/*/og-*.webp
+
+# Built by `pnpm embed:build`
+static/embed/

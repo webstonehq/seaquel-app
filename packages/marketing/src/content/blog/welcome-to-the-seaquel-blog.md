@@ -28,9 +28,9 @@ Posts will fall into a few rough buckets:
 
 ## What this isn't
 
-This won't be SEO bait. It won't be "10 Tips to Write Better SQL." It won't be written by a content team because there isn't one 😅. It also won't be written by AI, despite the use of the Em dash `—`. Every post comes from Mike, hand-crafted on a laptop, likely at a coffee shop or library.
+This won't be SEO bait. It won't be "10 Tips to Write Better SQL." It won't be written by a content team because there isn't one 😅. Every post comes from Mike, on a laptop, likely at a coffee shop or library.
 
-If that sounds like something you'd like to read, subscribe below. I'll email you when there's a new post — (look, an Em dash) usually once a week, sometimes less. No spam, no sales pitches.
+If that sounds like something you'd like to read, subscribe below. I'll email you when there's a new post, usually once a week, sometimes less. No spam, no sales pitches.
 
 And if you'd rather just read product updates, the [changelog](/changelog) is where they live.
 

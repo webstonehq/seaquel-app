@@ -25,7 +25,7 @@ Twelve rows in, twelve rows out, each carrying its own category's average alongs
 
 `OVER` is what makes a function a window function. Inside it, two optional parts:
 
-```sql
+```sql static
 OVER (PARTITION BY category ORDER BY price)
 ```
 
@@ -79,7 +79,7 @@ The CTE is not optional, and this is the rule that trips everyone: **you cannot 
 
 Postgres has no shortcut for this, so the CTE is the way you write it. Some other engines have `QUALIFY`, which does the filtering in place:
 
-```sql
+```sql static
 SELECT name, category, price
 FROM demo.products
 QUALIFY ROW_NUMBER() OVER (PARTITION BY category ORDER BY price DESC) = 1;
@@ -153,7 +153,7 @@ Only Alice and Bob have a second order, so everyone else gets null.
 
 The full syntax has a third part after `ORDER BY`:
 
-```sql
+```sql static
 SUM(total_amount) OVER (
   ORDER BY created_at
   ROWS BETWEEN 2 PRECEDING AND CURRENT ROW

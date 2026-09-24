@@ -50,7 +50,7 @@ LIMIT     →  truncate
 
 It also explains why `HAVING` can't normally use a `SELECT` alias: `SELECT` runs after it. Repeat the aggregate expression instead.
 
-```sql
+```sql static
 HAVING COUNT(*) > 3        -- works everywhere
 HAVING product_count > 3   -- works in MySQL and SQLite, not PostgreSQL
 ```

@@ -39,6 +39,8 @@
 	let courseSolved = $state(0);
 
 	onMount(() => {
+		// Registers <seaquel-sql>, which the lesson's SQL blocks are built into.
+		import("../../../embed/seaquel-sql");
 		solved = getSolved(data.lesson.slug);
 		courseSolved = Object.values(exportProgress()).reduce((n, ids) => n + ids.length, 0);
 	});

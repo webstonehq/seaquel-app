@@ -319,13 +319,9 @@ function renderFooter(theme: Theme): string {
 	const size = 13;
 	const tracking = 2;
 	const y = HEIGHT - 36;
-	const handCraftedWidth = trackedWidth('bold', 'HAND-CRAFTED.', size, tracking);
-	const handCrafted = trackedText('bold', 'HAND-CRAFTED.', EDGE_X, y, size, tracking, theme.subtle);
-	const notAI = trackedText('bold', ' NOT AI-WRITTEN.', EDGE_X + handCraftedWidth, y, size, tracking, theme.accent);
 	const right = 'SEAQUEL.APP/BLOG';
 	const rightWidth = trackedWidth('bold', right, size, tracking);
-	const rightSvg = trackedText('bold', right, WIDTH - EDGE_X - rightWidth, y, size, tracking, theme.subtle);
-	return handCrafted + notAI + rightSvg;
+	return trackedText('bold', right, WIDTH - EDGE_X - rightWidth, y, size, tracking, theme.subtle);
 }
 
 export function renderOgSvg(data: OgData, variant: Variant): string {

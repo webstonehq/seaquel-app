@@ -69,7 +69,7 @@ February has four orders, March has six.
 
 Repeating the expression is tedious. PostgreSQL, MySQL and SQLite all let you group by the output alias or by column position:
 
-```sql
+```sql static
 GROUP BY month      -- alias, widely supported though not standard
 GROUP BY 1          -- first column in the select list
 ```

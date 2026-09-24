@@ -178,7 +178,7 @@
 
 			<!-- 3-column layout -->
 			<div class="container mx-auto px-4 md:px-6 max-w-6xl">
-				<div class="grid lg:grid-cols-[220px_minmax(0,1fr)_220px] gap-10 lg:gap-12 items-start">
+				<div class="grid grid-cols-1 lg:grid-cols-[220px_minmax(0,1fr)_220px] gap-10 lg:gap-12 items-start">
 					<!-- TOC -->
 					<aside class="hidden lg:block sticky top-24">
 						{#if data.entry.sections.length > 0}
@@ -207,7 +207,7 @@
 					<!-- Article -->
 					<div
 						in:fly={{ y: 30, delay: 200, duration: 600 }}
-						class="article-content prose prose-lg dark:prose-invert max-w-none mx-auto
+						class="article-content prose prose-lg dark:prose-invert max-w-none w-full mx-auto
 							prose-headings:font-semibold prose-headings:tracking-tight
 							prose-h2:scroll-mt-24 prose-h3:scroll-mt-24
 							prose-a:text-primary prose-a:no-underline hover:prose-a:underline
