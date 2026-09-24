@@ -10,6 +10,10 @@ broken: |
 fixed: |
   SELECT first_name, country
   FROM demo.customers;
+codes:
+  postgresql: '42P01'
+  mysql: '1146'
+  sql-server: '208'
 messages:
   - engine: MySQL
     text: "ERROR 1146 (42S02): Table 'mydb.customers' doesn't exist"

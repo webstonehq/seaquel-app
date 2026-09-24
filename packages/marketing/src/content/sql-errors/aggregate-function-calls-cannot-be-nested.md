@@ -15,6 +15,10 @@ fixed: |
     FROM demo.products
     GROUP BY category
   ) per_category;
+codes:
+  postgresql: '42803'
+  mysql: '1111'
+  sql-server: '130'
 messages:
   - engine: MySQL
     text: "ERROR 1111 (HY000): Invalid use of group function"

@@ -22,6 +22,10 @@ fixed: |
   LEFT JOIN demo.orders o ON o.customer_id = c.id
   GROUP BY c.id, c.first_name
   ORDER BY c.id;
+codes:
+  postgresql: '22012'
+  mysql: '1365'
+  sql-server: '8134'
 messages:
   - engine: SQL Server
     text: "Msg 8134: Divide by zero error encountered."

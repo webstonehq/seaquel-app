@@ -1,0 +1,1836 @@
+[
+	{
+		"code": "00000",
+		"name": "successful_completion",
+		"sqlstate": "00000",
+		"category": "Class 00 — Successful Completion",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "01000",
+		"name": "warning",
+		"sqlstate": "01000",
+		"category": "Class 01 — Warning",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "0100C",
+		"name": "dynamic_result_sets_returned",
+		"sqlstate": "0100C",
+		"category": "Class 01 — Warning",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "01008",
+		"name": "implicit_zero_bit_padding",
+		"sqlstate": "01008",
+		"category": "Class 01 — Warning",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "01003",
+		"name": "null_value_eliminated_in_set_function",
+		"sqlstate": "01003",
+		"category": "Class 01 — Warning",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "01007",
+		"name": "privilege_not_granted",
+		"sqlstate": "01007",
+		"category": "Class 01 — Warning",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "01006",
+		"name": "privilege_not_revoked",
+		"sqlstate": "01006",
+		"category": "Class 01 — Warning",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "01004",
+		"name": "string_data_right_truncation",
+		"sqlstate": "01004",
+		"category": "Class 01 — Warning",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "01P01",
+		"name": "deprecated_feature",
+		"sqlstate": "01P01",
+		"category": "Class 01 — Warning",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "02000",
+		"name": "no_data",
+		"sqlstate": "02000",
+		"category": "Class 02 — No Data (this is also a warning class per the SQL standard)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "02001",
+		"name": "no_additional_dynamic_result_sets_returned",
+		"sqlstate": "02001",
+		"category": "Class 02 — No Data (this is also a warning class per the SQL standard)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "03000",
+		"name": "sql_statement_not_yet_complete",
+		"sqlstate": "03000",
+		"category": "Class 03 — SQL Statement Not Yet Complete",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "08000",
+		"name": "connection_exception",
+		"sqlstate": "08000",
+		"category": "Class 08 — Connection Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "08003",
+		"name": "connection_does_not_exist",
+		"sqlstate": "08003",
+		"category": "Class 08 — Connection Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "08006",
+		"name": "connection_failure",
+		"sqlstate": "08006",
+		"category": "Class 08 — Connection Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "08001",
+		"name": "sqlclient_unable_to_establish_sqlconnection",
+		"sqlstate": "08001",
+		"category": "Class 08 — Connection Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "08004",
+		"name": "sqlserver_rejected_establishment_of_sqlconnection",
+		"sqlstate": "08004",
+		"category": "Class 08 — Connection Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "08007",
+		"name": "transaction_resolution_unknown",
+		"sqlstate": "08007",
+		"category": "Class 08 — Connection Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "08P01",
+		"name": "protocol_violation",
+		"sqlstate": "08P01",
+		"category": "Class 08 — Connection Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "09000",
+		"name": "triggered_action_exception",
+		"sqlstate": "09000",
+		"category": "Class 09 — Triggered Action Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "0A000",
+		"name": "feature_not_supported",
+		"sqlstate": "0A000",
+		"category": "Class 0A — Feature Not Supported",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "0B000",
+		"name": "invalid_transaction_initiation",
+		"sqlstate": "0B000",
+		"category": "Class 0B — Invalid Transaction Initiation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "0F000",
+		"name": "locator_exception",
+		"sqlstate": "0F000",
+		"category": "Class 0F — Locator Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "0F001",
+		"name": "invalid_locator_specification",
+		"sqlstate": "0F001",
+		"category": "Class 0F — Locator Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "0L000",
+		"name": "invalid_grantor",
+		"sqlstate": "0L000",
+		"category": "Class 0L — Invalid Grantor",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "0LP01",
+		"name": "invalid_grant_operation",
+		"sqlstate": "0LP01",
+		"category": "Class 0L — Invalid Grantor",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "0P000",
+		"name": "invalid_role_specification",
+		"sqlstate": "0P000",
+		"category": "Class 0P — Invalid Role Specification",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "0Z000",
+		"name": "diagnostics_exception",
+		"sqlstate": "0Z000",
+		"category": "Class 0Z — Diagnostics Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "0Z002",
+		"name": "stacked_diagnostics_accessed_without_active_handler",
+		"sqlstate": "0Z002",
+		"category": "Class 0Z — Diagnostics Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "10608",
+		"name": "invalid_argument_for_xquery",
+		"sqlstate": "10608",
+		"category": "Class 10 — XQuery Error",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "20000",
+		"name": "case_not_found",
+		"sqlstate": "20000",
+		"category": "Class 20 — Case Not Found",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "21000",
+		"name": "cardinality_violation",
+		"sqlstate": "21000",
+		"category": "Class 21 — Cardinality Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22000",
+		"name": "data_exception",
+		"sqlstate": "22000",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2202E",
+		"name": "array_subscript_error",
+		"sqlstate": "2202E",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22021",
+		"name": "character_not_in_repertoire",
+		"sqlstate": "22021",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22008",
+		"name": "datetime_field_overflow",
+		"sqlstate": "22008",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22012",
+		"name": "division_by_zero",
+		"sqlstate": "22012",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22005",
+		"name": "error_in_assignment",
+		"sqlstate": "22005",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2200B",
+		"name": "escape_character_conflict",
+		"sqlstate": "2200B",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22022",
+		"name": "indicator_overflow",
+		"sqlstate": "22022",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22015",
+		"name": "interval_field_overflow",
+		"sqlstate": "22015",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2201E",
+		"name": "invalid_argument_for_logarithm",
+		"sqlstate": "2201E",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22014",
+		"name": "invalid_argument_for_ntile_function",
+		"sqlstate": "22014",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22016",
+		"name": "invalid_argument_for_nth_value_function",
+		"sqlstate": "22016",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2201F",
+		"name": "invalid_argument_for_power_function",
+		"sqlstate": "2201F",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2201G",
+		"name": "invalid_argument_for_width_bucket_function",
+		"sqlstate": "2201G",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22018",
+		"name": "invalid_character_value_for_cast",
+		"sqlstate": "22018",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22007",
+		"name": "invalid_datetime_format",
+		"sqlstate": "22007",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22019",
+		"name": "invalid_escape_character",
+		"sqlstate": "22019",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2200D",
+		"name": "invalid_escape_octet",
+		"sqlstate": "2200D",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22025",
+		"name": "invalid_escape_sequence",
+		"sqlstate": "22025",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22P06",
+		"name": "nonstandard_use_of_escape_character",
+		"sqlstate": "22P06",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22010",
+		"name": "invalid_indicator_parameter_value",
+		"sqlstate": "22010",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22023",
+		"name": "invalid_parameter_value",
+		"sqlstate": "22023",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22013",
+		"name": "invalid_preceding_or_following_size",
+		"sqlstate": "22013",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2201B",
+		"name": "invalid_regular_expression",
+		"sqlstate": "2201B",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2201W",
+		"name": "invalid_row_count_in_limit_clause",
+		"sqlstate": "2201W",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2201X",
+		"name": "invalid_row_count_in_result_offset_clause",
+		"sqlstate": "2201X",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2202H",
+		"name": "invalid_tablesample_argument",
+		"sqlstate": "2202H",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2202G",
+		"name": "invalid_tablesample_repeat",
+		"sqlstate": "2202G",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22009",
+		"name": "invalid_time_zone_displacement_value",
+		"sqlstate": "22009",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2200C",
+		"name": "invalid_use_of_escape_character",
+		"sqlstate": "2200C",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2200G",
+		"name": "most_specific_type_mismatch",
+		"sqlstate": "2200G",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22004",
+		"name": "null_value_not_allowed",
+		"sqlstate": "22004",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22002",
+		"name": "null_value_no_indicator_parameter",
+		"sqlstate": "22002",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22003",
+		"name": "numeric_value_out_of_range",
+		"sqlstate": "22003",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2200H",
+		"name": "sequence_generator_limit_exceeded",
+		"sqlstate": "2200H",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22026",
+		"name": "string_data_length_mismatch",
+		"sqlstate": "22026",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22001",
+		"name": "string_data_right_truncation",
+		"sqlstate": "22001",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22011",
+		"name": "substring_error",
+		"sqlstate": "22011",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22027",
+		"name": "trim_error",
+		"sqlstate": "22027",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22024",
+		"name": "unterminated_c_string",
+		"sqlstate": "22024",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2200F",
+		"name": "zero_length_character_string",
+		"sqlstate": "2200F",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22P01",
+		"name": "floating_point_exception",
+		"sqlstate": "22P01",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22P02",
+		"name": "invalid_text_representation",
+		"sqlstate": "22P02",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22P03",
+		"name": "invalid_binary_representation",
+		"sqlstate": "22P03",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22P04",
+		"name": "bad_copy_file_format",
+		"sqlstate": "22P04",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22P05",
+		"name": "untranslatable_character",
+		"sqlstate": "22P05",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2200L",
+		"name": "not_an_xml_document",
+		"sqlstate": "2200L",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2200M",
+		"name": "invalid_xml_document",
+		"sqlstate": "2200M",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2200N",
+		"name": "invalid_xml_content",
+		"sqlstate": "2200N",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2200S",
+		"name": "invalid_xml_comment",
+		"sqlstate": "2200S",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2200T",
+		"name": "invalid_xml_processing_instruction",
+		"sqlstate": "2200T",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22030",
+		"name": "duplicate_json_object_key_value",
+		"sqlstate": "22030",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22031",
+		"name": "invalid_argument_for_sql_json_datetime_function",
+		"sqlstate": "22031",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22032",
+		"name": "invalid_json_text",
+		"sqlstate": "22032",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22033",
+		"name": "invalid_sql_json_subscript",
+		"sqlstate": "22033",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22034",
+		"name": "more_than_one_sql_json_item",
+		"sqlstate": "22034",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22035",
+		"name": "no_sql_json_item",
+		"sqlstate": "22035",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22036",
+		"name": "non_numeric_sql_json_item",
+		"sqlstate": "22036",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22037",
+		"name": "non_unique_keys_in_a_json_object",
+		"sqlstate": "22037",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22038",
+		"name": "singleton_sql_json_item_required",
+		"sqlstate": "22038",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "22039",
+		"name": "sql_json_array_not_found",
+		"sqlstate": "22039",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2203A",
+		"name": "sql_json_member_not_found",
+		"sqlstate": "2203A",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2203B",
+		"name": "sql_json_number_not_found",
+		"sqlstate": "2203B",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2203C",
+		"name": "sql_json_object_not_found",
+		"sqlstate": "2203C",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2203D",
+		"name": "too_many_json_array_elements",
+		"sqlstate": "2203D",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2203E",
+		"name": "too_many_json_object_members",
+		"sqlstate": "2203E",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2203F",
+		"name": "sql_json_scalar_required",
+		"sqlstate": "2203F",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2203G",
+		"name": "sql_json_item_cannot_be_cast_to_target_type",
+		"sqlstate": "2203G",
+		"category": "Class 22 — Data Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "23000",
+		"name": "integrity_constraint_violation",
+		"sqlstate": "23000",
+		"category": "Class 23 — Integrity Constraint Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "23001",
+		"name": "restrict_violation",
+		"sqlstate": "23001",
+		"category": "Class 23 — Integrity Constraint Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "23502",
+		"name": "not_null_violation",
+		"sqlstate": "23502",
+		"category": "Class 23 — Integrity Constraint Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "23503",
+		"name": "foreign_key_violation",
+		"sqlstate": "23503",
+		"category": "Class 23 — Integrity Constraint Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "23505",
+		"name": "unique_violation",
+		"sqlstate": "23505",
+		"category": "Class 23 — Integrity Constraint Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "23514",
+		"name": "check_violation",
+		"sqlstate": "23514",
+		"category": "Class 23 — Integrity Constraint Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "23P01",
+		"name": "exclusion_violation",
+		"sqlstate": "23P01",
+		"category": "Class 23 — Integrity Constraint Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "24000",
+		"name": "invalid_cursor_state",
+		"sqlstate": "24000",
+		"category": "Class 24 — Invalid Cursor State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25000",
+		"name": "invalid_transaction_state",
+		"sqlstate": "25000",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25001",
+		"name": "active_sql_transaction",
+		"sqlstate": "25001",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25002",
+		"name": "branch_transaction_already_active",
+		"sqlstate": "25002",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25008",
+		"name": "held_cursor_requires_same_isolation_level",
+		"sqlstate": "25008",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25003",
+		"name": "inappropriate_access_mode_for_branch_transaction",
+		"sqlstate": "25003",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25004",
+		"name": "inappropriate_isolation_level_for_branch_transaction",
+		"sqlstate": "25004",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25005",
+		"name": "no_active_sql_transaction_for_branch_transaction",
+		"sqlstate": "25005",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25006",
+		"name": "read_only_sql_transaction",
+		"sqlstate": "25006",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25007",
+		"name": "schema_and_data_statement_mixing_not_supported",
+		"sqlstate": "25007",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25P01",
+		"name": "no_active_sql_transaction",
+		"sqlstate": "25P01",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25P02",
+		"name": "in_failed_sql_transaction",
+		"sqlstate": "25P02",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25P03",
+		"name": "idle_in_transaction_session_timeout",
+		"sqlstate": "25P03",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "25P04",
+		"name": "transaction_timeout",
+		"sqlstate": "25P04",
+		"category": "Class 25 — Invalid Transaction State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "26000",
+		"name": "invalid_sql_statement_name",
+		"sqlstate": "26000",
+		"category": "Class 26 — Invalid SQL Statement Name",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "27000",
+		"name": "triggered_data_change_violation",
+		"sqlstate": "27000",
+		"category": "Class 27 — Triggered Data Change Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "28000",
+		"name": "invalid_authorization_specification",
+		"sqlstate": "28000",
+		"category": "Class 28 — Invalid Authorization Specification",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "28P01",
+		"name": "invalid_password",
+		"sqlstate": "28P01",
+		"category": "Class 28 — Invalid Authorization Specification",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2B000",
+		"name": "dependent_privilege_descriptors_still_exist",
+		"sqlstate": "2B000",
+		"category": "Class 2B — Dependent Privilege Descriptors Still Exist",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2BP01",
+		"name": "dependent_objects_still_exist",
+		"sqlstate": "2BP01",
+		"category": "Class 2B — Dependent Privilege Descriptors Still Exist",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2D000",
+		"name": "invalid_transaction_termination",
+		"sqlstate": "2D000",
+		"category": "Class 2D — Invalid Transaction Termination",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2F000",
+		"name": "sql_routine_exception",
+		"sqlstate": "2F000",
+		"category": "Class 2F — SQL Routine Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2F005",
+		"name": "function_executed_no_return_statement",
+		"sqlstate": "2F005",
+		"category": "Class 2F — SQL Routine Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2F002",
+		"name": "modifying_sql_data_not_permitted",
+		"sqlstate": "2F002",
+		"category": "Class 2F — SQL Routine Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2F003",
+		"name": "prohibited_sql_statement_attempted",
+		"sqlstate": "2F003",
+		"category": "Class 2F — SQL Routine Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "2F004",
+		"name": "reading_sql_data_not_permitted",
+		"sqlstate": "2F004",
+		"category": "Class 2F — SQL Routine Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "34000",
+		"name": "invalid_cursor_name",
+		"sqlstate": "34000",
+		"category": "Class 34 — Invalid Cursor Name",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "38000",
+		"name": "external_routine_exception",
+		"sqlstate": "38000",
+		"category": "Class 38 — External Routine Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "38001",
+		"name": "containing_sql_not_permitted",
+		"sqlstate": "38001",
+		"category": "Class 38 — External Routine Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "38002",
+		"name": "modifying_sql_data_not_permitted",
+		"sqlstate": "38002",
+		"category": "Class 38 — External Routine Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "38003",
+		"name": "prohibited_sql_statement_attempted",
+		"sqlstate": "38003",
+		"category": "Class 38 — External Routine Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "38004",
+		"name": "reading_sql_data_not_permitted",
+		"sqlstate": "38004",
+		"category": "Class 38 — External Routine Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "39000",
+		"name": "external_routine_invocation_exception",
+		"sqlstate": "39000",
+		"category": "Class 39 — External Routine Invocation Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "39001",
+		"name": "invalid_sqlstate_returned",
+		"sqlstate": "39001",
+		"category": "Class 39 — External Routine Invocation Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "39004",
+		"name": "null_value_not_allowed",
+		"sqlstate": "39004",
+		"category": "Class 39 — External Routine Invocation Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "39P01",
+		"name": "trigger_protocol_violated",
+		"sqlstate": "39P01",
+		"category": "Class 39 — External Routine Invocation Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "39P02",
+		"name": "srf_protocol_violated",
+		"sqlstate": "39P02",
+		"category": "Class 39 — External Routine Invocation Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "39P03",
+		"name": "event_trigger_protocol_violated",
+		"sqlstate": "39P03",
+		"category": "Class 39 — External Routine Invocation Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "3B000",
+		"name": "savepoint_exception",
+		"sqlstate": "3B000",
+		"category": "Class 3B — Savepoint Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "3B001",
+		"name": "invalid_savepoint_specification",
+		"sqlstate": "3B001",
+		"category": "Class 3B — Savepoint Exception",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "3D000",
+		"name": "invalid_catalog_name",
+		"sqlstate": "3D000",
+		"category": "Class 3D — Invalid Catalog Name",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "3F000",
+		"name": "invalid_schema_name",
+		"sqlstate": "3F000",
+		"category": "Class 3F — Invalid Schema Name",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "40000",
+		"name": "transaction_rollback",
+		"sqlstate": "40000",
+		"category": "Class 40 — Transaction Rollback",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "40002",
+		"name": "transaction_integrity_constraint_violation",
+		"sqlstate": "40002",
+		"category": "Class 40 — Transaction Rollback",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "40001",
+		"name": "serialization_failure",
+		"sqlstate": "40001",
+		"category": "Class 40 — Transaction Rollback",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "40003",
+		"name": "statement_completion_unknown",
+		"sqlstate": "40003",
+		"category": "Class 40 — Transaction Rollback",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "40P01",
+		"name": "deadlock_detected",
+		"sqlstate": "40P01",
+		"category": "Class 40 — Transaction Rollback",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42000",
+		"name": "syntax_error_or_access_rule_violation",
+		"sqlstate": "42000",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42601",
+		"name": "syntax_error",
+		"sqlstate": "42601",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42501",
+		"name": "insufficient_privilege",
+		"sqlstate": "42501",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42846",
+		"name": "cannot_coerce",
+		"sqlstate": "42846",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42803",
+		"name": "grouping_error",
+		"sqlstate": "42803",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P20",
+		"name": "windowing_error",
+		"sqlstate": "42P20",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P19",
+		"name": "invalid_recursion",
+		"sqlstate": "42P19",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42830",
+		"name": "invalid_foreign_key",
+		"sqlstate": "42830",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42602",
+		"name": "invalid_name",
+		"sqlstate": "42602",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42622",
+		"name": "name_too_long",
+		"sqlstate": "42622",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42939",
+		"name": "reserved_name",
+		"sqlstate": "42939",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42804",
+		"name": "datatype_mismatch",
+		"sqlstate": "42804",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P18",
+		"name": "indeterminate_datatype",
+		"sqlstate": "42P18",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P21",
+		"name": "collation_mismatch",
+		"sqlstate": "42P21",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P22",
+		"name": "indeterminate_collation",
+		"sqlstate": "42P22",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42809",
+		"name": "wrong_object_type",
+		"sqlstate": "42809",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "428C9",
+		"name": "generated_always",
+		"sqlstate": "428C9",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42703",
+		"name": "undefined_column",
+		"sqlstate": "42703",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42883",
+		"name": "undefined_function",
+		"sqlstate": "42883",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P01",
+		"name": "undefined_table",
+		"sqlstate": "42P01",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P02",
+		"name": "undefined_parameter",
+		"sqlstate": "42P02",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42704",
+		"name": "undefined_object",
+		"sqlstate": "42704",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42701",
+		"name": "duplicate_column",
+		"sqlstate": "42701",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P03",
+		"name": "duplicate_cursor",
+		"sqlstate": "42P03",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P04",
+		"name": "duplicate_database",
+		"sqlstate": "42P04",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42723",
+		"name": "duplicate_function",
+		"sqlstate": "42723",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P05",
+		"name": "duplicate_prepared_statement",
+		"sqlstate": "42P05",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P06",
+		"name": "duplicate_schema",
+		"sqlstate": "42P06",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P07",
+		"name": "duplicate_table",
+		"sqlstate": "42P07",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42712",
+		"name": "duplicate_alias",
+		"sqlstate": "42712",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42710",
+		"name": "duplicate_object",
+		"sqlstate": "42710",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42702",
+		"name": "ambiguous_column",
+		"sqlstate": "42702",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42725",
+		"name": "ambiguous_function",
+		"sqlstate": "42725",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P08",
+		"name": "ambiguous_parameter",
+		"sqlstate": "42P08",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P09",
+		"name": "ambiguous_alias",
+		"sqlstate": "42P09",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P10",
+		"name": "invalid_column_reference",
+		"sqlstate": "42P10",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42611",
+		"name": "invalid_column_definition",
+		"sqlstate": "42611",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P11",
+		"name": "invalid_cursor_definition",
+		"sqlstate": "42P11",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P12",
+		"name": "invalid_database_definition",
+		"sqlstate": "42P12",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P13",
+		"name": "invalid_function_definition",
+		"sqlstate": "42P13",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P14",
+		"name": "invalid_prepared_statement_definition",
+		"sqlstate": "42P14",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P15",
+		"name": "invalid_schema_definition",
+		"sqlstate": "42P15",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P16",
+		"name": "invalid_table_definition",
+		"sqlstate": "42P16",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "42P17",
+		"name": "invalid_object_definition",
+		"sqlstate": "42P17",
+		"category": "Class 42 — Syntax Error or Access Rule Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "44000",
+		"name": "with_check_option_violation",
+		"sqlstate": "44000",
+		"category": "Class 44 — WITH CHECK OPTION Violation",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "53000",
+		"name": "insufficient_resources",
+		"sqlstate": "53000",
+		"category": "Class 53 — Insufficient Resources",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "53100",
+		"name": "disk_full",
+		"sqlstate": "53100",
+		"category": "Class 53 — Insufficient Resources",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "53200",
+		"name": "out_of_memory",
+		"sqlstate": "53200",
+		"category": "Class 53 — Insufficient Resources",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "53300",
+		"name": "too_many_connections",
+		"sqlstate": "53300",
+		"category": "Class 53 — Insufficient Resources",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "53400",
+		"name": "configuration_limit_exceeded",
+		"sqlstate": "53400",
+		"category": "Class 53 — Insufficient Resources",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "54000",
+		"name": "program_limit_exceeded",
+		"sqlstate": "54000",
+		"category": "Class 54 — Program Limit Exceeded",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "54001",
+		"name": "statement_too_complex",
+		"sqlstate": "54001",
+		"category": "Class 54 — Program Limit Exceeded",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "54011",
+		"name": "too_many_columns",
+		"sqlstate": "54011",
+		"category": "Class 54 — Program Limit Exceeded",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "54023",
+		"name": "too_many_arguments",
+		"sqlstate": "54023",
+		"category": "Class 54 — Program Limit Exceeded",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "55000",
+		"name": "object_not_in_prerequisite_state",
+		"sqlstate": "55000",
+		"category": "Class 55 — Object Not In Prerequisite State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "55006",
+		"name": "object_in_use",
+		"sqlstate": "55006",
+		"category": "Class 55 — Object Not In Prerequisite State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "55P02",
+		"name": "cant_change_runtime_param",
+		"sqlstate": "55P02",
+		"category": "Class 55 — Object Not In Prerequisite State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "55P03",
+		"name": "lock_not_available",
+		"sqlstate": "55P03",
+		"category": "Class 55 — Object Not In Prerequisite State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "55P04",
+		"name": "unsafe_new_enum_value_usage",
+		"sqlstate": "55P04",
+		"category": "Class 55 — Object Not In Prerequisite State",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "57000",
+		"name": "operator_intervention",
+		"sqlstate": "57000",
+		"category": "Class 57 — Operator Intervention",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "57014",
+		"name": "query_canceled",
+		"sqlstate": "57014",
+		"category": "Class 57 — Operator Intervention",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "57P01",
+		"name": "admin_shutdown",
+		"sqlstate": "57P01",
+		"category": "Class 57 — Operator Intervention",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "57P02",
+		"name": "crash_shutdown",
+		"sqlstate": "57P02",
+		"category": "Class 57 — Operator Intervention",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "57P03",
+		"name": "cannot_connect_now",
+		"sqlstate": "57P03",
+		"category": "Class 57 — Operator Intervention",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "57P04",
+		"name": "database_dropped",
+		"sqlstate": "57P04",
+		"category": "Class 57 — Operator Intervention",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "57P05",
+		"name": "idle_session_timeout",
+		"sqlstate": "57P05",
+		"category": "Class 57 — Operator Intervention",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "58000",
+		"name": "system_error",
+		"sqlstate": "58000",
+		"category": "Class 58 — System Error (errors external to PostgreSQL itself)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "58030",
+		"name": "io_error",
+		"sqlstate": "58030",
+		"category": "Class 58 — System Error (errors external to PostgreSQL itself)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "58P01",
+		"name": "undefined_file",
+		"sqlstate": "58P01",
+		"category": "Class 58 — System Error (errors external to PostgreSQL itself)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "58P02",
+		"name": "duplicate_file",
+		"sqlstate": "58P02",
+		"category": "Class 58 — System Error (errors external to PostgreSQL itself)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "58P03",
+		"name": "file_name_too_long",
+		"sqlstate": "58P03",
+		"category": "Class 58 — System Error (errors external to PostgreSQL itself)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "F0000",
+		"name": "config_file_error",
+		"sqlstate": "F0000",
+		"category": "Class F0 — Configuration File Error",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "F0001",
+		"name": "lock_file_exists",
+		"sqlstate": "F0001",
+		"category": "Class F0 — Configuration File Error",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV000",
+		"name": "fdw_error",
+		"sqlstate": "HV000",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV005",
+		"name": "fdw_column_name_not_found",
+		"sqlstate": "HV005",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV002",
+		"name": "fdw_dynamic_parameter_value_needed",
+		"sqlstate": "HV002",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV010",
+		"name": "fdw_function_sequence_error",
+		"sqlstate": "HV010",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV021",
+		"name": "fdw_inconsistent_descriptor_information",
+		"sqlstate": "HV021",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV024",
+		"name": "fdw_invalid_attribute_value",
+		"sqlstate": "HV024",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV007",
+		"name": "fdw_invalid_column_name",
+		"sqlstate": "HV007",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV008",
+		"name": "fdw_invalid_column_number",
+		"sqlstate": "HV008",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV004",
+		"name": "fdw_invalid_data_type",
+		"sqlstate": "HV004",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV006",
+		"name": "fdw_invalid_data_type_descriptors",
+		"sqlstate": "HV006",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV091",
+		"name": "fdw_invalid_descriptor_field_identifier",
+		"sqlstate": "HV091",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV00B",
+		"name": "fdw_invalid_handle",
+		"sqlstate": "HV00B",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV00C",
+		"name": "fdw_invalid_option_index",
+		"sqlstate": "HV00C",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV00D",
+		"name": "fdw_invalid_option_name",
+		"sqlstate": "HV00D",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV090",
+		"name": "fdw_invalid_string_length_or_buffer_length",
+		"sqlstate": "HV090",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV00A",
+		"name": "fdw_invalid_string_format",
+		"sqlstate": "HV00A",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV009",
+		"name": "fdw_invalid_use_of_null_pointer",
+		"sqlstate": "HV009",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV014",
+		"name": "fdw_too_many_handles",
+		"sqlstate": "HV014",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV001",
+		"name": "fdw_out_of_memory",
+		"sqlstate": "HV001",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV00P",
+		"name": "fdw_no_schemas",
+		"sqlstate": "HV00P",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV00J",
+		"name": "fdw_option_name_not_found",
+		"sqlstate": "HV00J",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV00K",
+		"name": "fdw_reply_handle",
+		"sqlstate": "HV00K",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV00Q",
+		"name": "fdw_schema_not_found",
+		"sqlstate": "HV00Q",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV00R",
+		"name": "fdw_table_not_found",
+		"sqlstate": "HV00R",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV00L",
+		"name": "fdw_unable_to_create_execution",
+		"sqlstate": "HV00L",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV00M",
+		"name": "fdw_unable_to_create_reply",
+		"sqlstate": "HV00M",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "HV00N",
+		"name": "fdw_unable_to_establish_connection",
+		"sqlstate": "HV00N",
+		"category": "Class HV — Foreign Data Wrapper Error (SQL/MED)",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "P0000",
+		"name": "plpgsql_error",
+		"sqlstate": "P0000",
+		"category": "Class P0 — PL/pgSQL Error",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "P0001",
+		"name": "raise_exception",
+		"sqlstate": "P0001",
+		"category": "Class P0 — PL/pgSQL Error",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "P0002",
+		"name": "no_data_found",
+		"sqlstate": "P0002",
+		"category": "Class P0 — PL/pgSQL Error",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "P0003",
+		"name": "too_many_rows",
+		"sqlstate": "P0003",
+		"category": "Class P0 — PL/pgSQL Error",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "P0004",
+		"name": "assert_failure",
+		"sqlstate": "P0004",
+		"category": "Class P0 — PL/pgSQL Error",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "XX000",
+		"name": "internal_error",
+		"sqlstate": "XX000",
+		"category": "Class XX — Internal Error",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "XX001",
+		"name": "data_corrupted",
+		"sqlstate": "XX001",
+		"category": "Class XX — Internal Error",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	},
+	{
+		"code": "XX002",
+		"name": "index_corrupted",
+		"sqlstate": "XX002",
+		"category": "Class XX — Internal Error",
+		"docsUrl": "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+	}
+]

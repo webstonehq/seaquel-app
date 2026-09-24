@@ -2,7 +2,7 @@
 	import NavHeader from "$lib/components/nav-header.svelte";
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import Seo from "$lib/components/seo.svelte";
-	import { ArrowRightIcon, TriangleAlertIcon } from "lucide-svelte";
+	import { ArrowRightIcon, DatabaseIcon, TriangleAlertIcon } from "lucide-svelte";
 	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();
@@ -26,8 +26,8 @@
 </script>
 
 <Seo
-	title="Common SQL Errors Explained, with Fixes You Can Run | Seaquel"
-	description="What common SQL error messages mean and how to fix them: GROUP BY, ambiguous columns, subqueries returning more than one row, division by zero and more. Each has a runnable sandbox."
+	title="SQL Errors Explained, with Fixes You Can Run, and Every Error Code | Seaquel"
+	description="What common SQL error messages mean and how to fix them, each with a runnable sandbox. Plus every error code for PostgreSQL, MySQL, SQLite and SQL Server."
 />
 
 <div class="min-h-screen bg-background text-foreground">
@@ -46,8 +46,35 @@
 				</h1>
 				<p class="text-lg md:text-xl text-muted-foreground max-w-2xl text-pretty">
 					Find the message your database printed. Each page explains what caused it, shows the
-					fix, and has a sandbox where you can run the broken query and the fixed one.
+					fix, and has a sandbox where you can run the broken query and the fixed one. Only have a
+					code? Look it up in the full list for your database.
 				</p>
+			</div>
+		</section>
+
+		<section class="pt-16 md:pt-20">
+			<div class="container mx-auto px-4 md:px-6 max-w-4xl">
+				<div class="flex items-baseline justify-between gap-4 mb-4 border-b pb-2">
+					<h2 class="text-xl font-semibold tracking-tight">Error codes by database</h2>
+				</div>
+				<ul class="grid grid-cols-2 md:grid-cols-4 gap-3">
+					{#each data.engines as engine (engine.slug)}
+						<li>
+							<a
+								href="/sql-errors/{engine.slug}"
+								class="group flex h-full flex-col gap-2 rounded-lg border bg-card p-4 hover:border-primary transition-colors"
+							>
+								<DatabaseIcon
+									class="size-4 text-muted-foreground group-hover:text-primary transition-colors"
+								/>
+								<span class="font-medium group-hover:text-primary transition-colors">{engine.name}</span>
+								<span class="text-sm text-muted-foreground">
+									{engine.count.toLocaleString("en-US")} codes
+								</span>
+							</a>
+						</li>
+					{/each}
+				</ul>
 			</div>
 		</section>
 

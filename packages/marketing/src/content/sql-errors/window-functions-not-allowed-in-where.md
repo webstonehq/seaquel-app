@@ -17,6 +17,10 @@ fixed: |
     FROM demo.products
   ) ranked
   WHERE price_rank = 1;
+codes:
+  postgresql: '42P20'
+  mysql: '3593'
+  sql-server: '4108'
 messages:
   - engine: MySQL
     text: "ERROR 3593 (HY000): You cannot use the window function 'rank' in this context.'"

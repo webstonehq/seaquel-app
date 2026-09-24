@@ -12,6 +12,9 @@ fixed: |
   SELECT o.id, c.first_name
   FROM demo.orders o
   JOIN demo.customers c ON c.id = o.customer_id;
+codes:
+  postgresql: '42883'
+  sql-server: '245'
 messages:
   - engine: SQL Server
     text: "Msg 245: Conversion failed when converting the varchar value 'alice@example.com' to data type int."

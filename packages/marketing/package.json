@@ -15,6 +15,7 @@
 		"demo:update": "(rm -fr ./static/demo && cd ../../../../seaquel/ && npm run build:demo && cp -r ./build-demo ../seaquel-app/main/packages/marketing/static/demo)",
 		"docs:update": "pnpm -C ../docs build && rm -rf ./static/docs && cp -r ../docs/dist ./static/docs",
 		"og:generate": "tsx scripts/generate-blog-og.ts",
+		"errors:update": "tsx scripts/fetch-sql-error-codes.ts",
 		"embed:build": "vite build -c vite.embed.config.ts",
 		"contacts:research": "wrangler d1 execute SEAQUEL_DB --remote --json --command \"SELECT email, source, unsubscribeToken, consentedAt FROM email_consents WHERE purpose='research' AND status='active' ORDER BY consentedAt DESC\"",
 		"migrate:local": "wrangler d1 migrations apply SEAQUEL_DB --local",

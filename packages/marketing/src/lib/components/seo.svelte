@@ -9,6 +9,8 @@
 		ogType?: string;
 		ogImage?: string;
 		twitterCard?: string;
+		/** Keeps the page out of search results while crawlers still follow its links. */
+		noindex?: boolean;
 	}
 
 	let {
@@ -19,6 +21,7 @@
 		ogType = "website",
 		ogImage = "/product-screenshot.jpg",
 		twitterCard = "summary_large_image",
+		noindex = false,
 	}: Props = $props();
 
 	const origin = "https://seaquel.app";
@@ -29,6 +32,9 @@
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={description} />
+	{#if noindex}
+		<meta name="robots" content="noindex, follow" />
+	{/if}
 	<meta property="og:title" content={ogTitle ?? title} />
 	<meta property="og:description" content={ogDescription ?? description} />
 	<meta property="og:type" content={ogType} />

@@ -12,6 +12,8 @@ fixed: |
   SELECT c.first_name, o.total_amount
   FROM demo.customers c
   JOIN demo.orders o ON o.customer_id = c.id;
+codes:
+  postgresql: '42P01'
 messages:
   - engine: SQLite
     text: "no such column: o.total_amount"

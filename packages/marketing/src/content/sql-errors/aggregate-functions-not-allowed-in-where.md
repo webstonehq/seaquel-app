@@ -14,6 +14,10 @@ fixed: |
   FROM demo.products
   GROUP BY category
   HAVING COUNT(*) > 2;
+codes:
+  postgresql: '42803'
+  mysql: '1111'
+  sql-server: '147'
 messages:
   - engine: MySQL
     text: "ERROR 1111 (HY000): Invalid use of group function"

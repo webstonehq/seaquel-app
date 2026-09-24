@@ -12,6 +12,10 @@ fixed: |
   SELECT name, price * stock_quantity AS stock_value
   FROM demo.products
   WHERE price * stock_quantity > 5000;
+codes:
+  postgresql: '42703'
+  mysql: '1054'
+  sql-server: '207'
 messages:
   - engine: MySQL
     text: "ERROR 1054 (42S22): Unknown column 'stock_value' in 'where clause'"

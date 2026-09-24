@@ -12,6 +12,10 @@ fixed: |
   SELECT o.id, c.first_name, o.status, o.total_amount
   FROM demo.customers c
   JOIN demo.orders o ON o.customer_id = c.id;
+codes:
+  postgresql: '42702'
+  mysql: '1052'
+  sql-server: '209'
 messages:
   - engine: MySQL
     text: "ERROR 1052 (23000): Column 'id' in field list is ambiguous"

@@ -13,11 +13,13 @@
 	} from "lucide-svelte";
 	import type { PageData } from "./$types";
 	import Seo from "$lib/components/seo.svelte";
+	import { codeLinks } from "$lib/sql-errors";
 
 	let { data }: { data: PageData } = $props();
 
 	const origin = "https://seaquel.app";
 	const entry = $derived(data.entry);
+	const codes = $derived(codeLinks(entry.codes));
 
 	const jsonLd = $derived(
 		JSON.stringify([
@@ -99,23 +101,33 @@
 							</p>
 						</header>
 
+						{#snippet engineCell(engine: string)}
+							<th class="px-4 py-2.5 text-left font-medium align-top whitespace-nowrap w-32">
+								{engine}
+								{#if codes[engine]}
+									<a
+										href={codes[engine].href}
+										class="block font-mono text-xs font-normal text-muted-foreground hover:text-primary transition-colors"
+									>
+										{codes[engine].label}
+									</a>
+								{/if}
+							</th>
+						{/snippet}
+
 						{#if entry.messages.length > 0}
 							<section class="mb-10 rounded-lg border overflow-hidden" aria-label="Error text by database">
 								<table class="w-full text-sm">
 									<tbody>
 										<tr class="bg-muted/40">
-											<th class="px-4 py-2.5 text-left font-medium align-top whitespace-nowrap w-32">
-												PostgreSQL
-											</th>
+											{@render engineCell("PostgreSQL")}
 											<td class="px-4 py-2.5 font-mono text-xs md:text-sm break-words">
 												ERROR: {entry.error}
 											</td>
 										</tr>
 										{#each entry.messages as message (message.engine)}
 											<tr class="border-t">
-												<th class="px-4 py-2.5 text-left font-medium align-top whitespace-nowrap">
-													{message.engine}
-												</th>
+												{@render engineCell(message.engine)}
 												{#if message.text}
 													<td class="px-4 py-2.5 font-mono text-xs md:text-sm break-words">
 														{message.text}

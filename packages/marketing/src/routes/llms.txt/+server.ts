@@ -5,6 +5,7 @@ import { getChangelogEntries } from "$lib/changelog";
 import { getBlogEntries } from "$lib/blog";
 import { getLessons } from "$lib/learn-sql";
 import { getSqlErrors } from "$lib/sql-errors";
+import { ENGINE_SLUGS, ENGINES, getEngineCodes } from "$lib/server/sql-error-codes";
 import { getAlternatives, getComparisons } from "$lib/competitors";
 
 // https://llmstxt.org — a markdown index of the site for LLMs and AI tools.
@@ -106,11 +107,19 @@ export const GET: RequestHandler = async () => {
     ),
     section(
       "SQL errors",
-      sqlErrors.map((e) => ({
-        title: e.title,
-        url: `${ORIGIN}/sql-errors/${e.slug}`,
-        description: e.description,
-      })),
+      [
+        ...sqlErrors.map((e) => ({
+          title: e.title,
+          url: `${ORIGIN}/sql-errors/${e.slug}`,
+          description: e.description,
+        })),
+        // The code lists, not each code: they link on to all of them.
+        ...ENGINE_SLUGS.map((slug) => ({
+          title: `${ENGINES[slug].name} error codes`,
+          url: `${ORIGIN}/sql-errors/${slug}`,
+          description: `All ${getEngineCodes(slug).length.toLocaleString("en-US")} ${ENGINES[slug].name} error codes, each with its own page.`,
+        })),
+      ],
     ),
     section("Docs", getDocsPages()),
     section(

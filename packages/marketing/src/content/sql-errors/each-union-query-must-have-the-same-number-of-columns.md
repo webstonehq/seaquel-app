@@ -15,6 +15,10 @@ fixed: |
   UNION ALL
   SELECT name, 'product'
   FROM demo.products;
+codes:
+  postgresql: '42601'
+  mysql: '1222'
+  sql-server: '205'
 messages:
   - engine: MySQL
     text: "ERROR 1222 (21000): The used SELECT statements have a different number of columns"

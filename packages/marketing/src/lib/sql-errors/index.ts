@@ -1,5 +1,6 @@
 import type { Component } from 'svelte';
 import { getLessons, type LessonLink } from '$lib/learn-sql';
+import { ENGINE_NAMES, codeHref, codeSlug, isEngine, type EngineSlug } from './engines';
 
 export interface EngineMessage {
 	engine: string;
@@ -23,6 +24,11 @@ export interface SqlError {
 	fixed: string;
 	/** The same mistake as other engines word it. */
 	messages: EngineMessage[];
+	/**
+	 * The error code each engine reports for `broken`, linking the guide to
+	 * /sql-errors/{engine}/{code}. SQLite codes are given by name.
+	 */
+	codes: Partial<Record<EngineSlug, string>>;
 }
 
 export interface SqlErrorWithContent extends SqlError {
@@ -31,7 +37,10 @@ export interface SqlErrorWithContent extends SqlError {
 	related: Array<{ slug: string; title: string }>;
 }
 
-type SqlErrorFrontmatter = Omit<SqlError, 'slug' | 'seoTitle'> & { seoTitle?: string };
+type SqlErrorFrontmatter = Omit<SqlError, 'slug' | 'seoTitle' | 'codes'> & {
+	seoTitle?: string;
+	codes?: SqlError['codes'];
+};
 
 function slugFromPath(path: string): string {
 	return path.split('/').pop()?.replace('.md', '') ?? '';
@@ -48,7 +57,8 @@ function buildError(path: string, frontmatter: SqlErrorFrontmatter): SqlError {
 		// YAML block scalars keep a trailing newline; the editor shouldn't.
 		broken: frontmatter.broken.trim(),
 		fixed: frontmatter.fixed.trim(),
-		messages: frontmatter.messages ?? []
+		messages: frontmatter.messages ?? [],
+		codes: frontmatter.codes ?? {}
 	};
 }
 
@@ -103,4 +113,16 @@ export async function getSqlErrorsForLesson(lesson: string): Promise<SqlError[]>
 export function getSqlErrorSlugs(): string[] {
 	const modules = import.meta.glob('/src/content/sql-errors/*.md');
 	return Object.keys(modules).map(slugFromPath);
+}
+
+/** A guide's codes as links, keyed by engine name as `messages` spells it. */
+export function codeLinks(
+	codes: SqlError['codes']
+): Record<string, { href: string; label: string }> {
+	const links: Record<string, { href: string; label: string }> = {};
+	for (const [engine, value] of Object.entries(codes)) {
+		if (!isEngine(engine) || !value) continue;
+		links[ENGINE_NAMES[engine]] = { href: codeHref(engine, codeSlug(engine, value, value)), label: value };
+	}
+	return links;
 }

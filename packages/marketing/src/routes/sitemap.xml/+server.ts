@@ -3,6 +3,7 @@ import { getChangelogEntries } from "$lib/changelog";
 import { getBlogEntries } from "$lib/blog";
 import { getLessons } from "$lib/learn-sql";
 import { getSqlErrors } from "$lib/sql-errors";
+import { ENGINE_SLUGS, getAllCodePages } from "$lib/server/sql-error-codes";
 import { getAlternatives, getComparisons } from "$lib/competitors";
 
 export const prerender = true;
@@ -79,6 +80,16 @@ export const GET: RequestHandler = async () => {
 
   for (const entry of sqlErrors) {
     urls.push({ loc: `${ORIGIN}/sql-errors/${entry.slug}` });
+  }
+
+  for (const engine of ENGINE_SLUGS) {
+    urls.push({ loc: `${ORIGIN}/sql-errors/${engine}` });
+  }
+
+  // Code pages with nothing beyond the one-line message are noindex; listing
+  // them here would only send crawlers to pages they're told to drop.
+  for (const page of await getAllCodePages()) {
+    if (page.indexable) urls.push({ loc: `${ORIGIN}/sql-errors/${page.engine}/${page.slug}` });
   }
 
   // Comparison pages carry the date they were last checked against the

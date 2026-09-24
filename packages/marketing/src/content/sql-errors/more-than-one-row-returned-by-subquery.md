@@ -12,6 +12,10 @@ fixed: |
   SELECT name, price
   FROM demo.products
   WHERE id IN (SELECT product_id FROM demo.order_items WHERE order_id = 3);
+codes:
+  postgresql: '21000'
+  mysql: '1242'
+  sql-server: '512'
 messages:
   - engine: MySQL
     text: "ERROR 1242 (21000): Subquery returns more than 1 row"

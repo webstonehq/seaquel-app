@@ -4,6 +4,8 @@ import matter from 'gray-matter';
 import { PGlite } from '@electric-sql/pglite';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { SEED_SQL } from './seed';
+import { ENGINE_SLUGS, codeSlug, isEngine } from './engines';
+import { getEngineCodes } from '$lib/server/sql-error-codes';
 
 // Every error page promises that its broken query produces the quoted error
 // and its fixed query runs. Holding the content to that here keeps a typo in
@@ -35,6 +37,19 @@ async function run(sql: string) {
 }
 
 describe.each(pages)('$slug', ({ slug, data }) => {
+	it('does not shadow an engine code reference', () => {
+		expect(ENGINE_SLUGS as readonly string[]).not.toContain(slug);
+	});
+
+	it('maps to codes that exist', () => {
+		for (const [engine, value] of Object.entries<string>(data.codes ?? {})) {
+			expect(isEngine(engine), `${slug}: unknown engine ${engine}`).toBe(true);
+			if (!isEngine(engine)) continue;
+			const slugs = getEngineCodes(engine).map((c) => codeSlug(engine, c.code, c.name));
+			expect(slugs, `${slug}: ${engine} ${value}`).toContain(codeSlug(engine, value, value));
+		}
+	});
+
 	it('has the required frontmatter', () => {
 		for (const key of ['title', 'description', 'error', 'broken', 'fixed']) {
 			expect(data[key], `${slug}: ${key}`).toBeTypeOf('string');
@@ -52,6 +67,11 @@ describe.each(pages)('$slug', ({ slug, data }) => {
 		await expect(run(data.broken)).rejects.toThrow(data.error);
 		// toThrow matches substrings; the page quotes the whole message.
 		await run(data.broken).catch((err) => expect(err.message).toBe(data.error));
+	});
+
+	it('reports the SQLSTATE the page maps it to', async () => {
+		if (!data.codes?.postgresql) return;
+		await run(data.broken).catch((err) => expect(err.code).toBe(data.codes.postgresql));
 	});
 
 	it('fixed query runs', async () => {

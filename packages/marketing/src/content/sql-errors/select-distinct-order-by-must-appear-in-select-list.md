@@ -13,6 +13,10 @@ fixed: |
   FROM demo.customers
   GROUP BY country
   ORDER BY MIN(created_at);
+codes:
+  postgresql: '42P10'
+  mysql: '3065'
+  sql-server: '145'
 messages:
   - engine: MySQL
     text: "ERROR 3065 (HY000): Expression #1 of ORDER BY clause is not in SELECT list, references column 'demo.customers.created_at' which is not in SELECT list; this is incompatible with DISTINCT"

@@ -15,6 +15,10 @@ fixed: |
     STRING_AGG(name, ', ' ORDER BY name) AS names
   FROM demo.products
   GROUP BY category;
+codes:
+  postgresql: '42803'
+  mysql: '1055'
+  sql-server: '8120'
 messages:
   - engine: MySQL
     text: "ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'demo.products.name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by"
