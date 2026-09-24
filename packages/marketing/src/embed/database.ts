@@ -2,7 +2,7 @@ import type { PGlite } from '@electric-sql/pglite';
 
 export type RunResult =
 	| { ok: true; columns: string[]; rows: unknown[][]; rowCount: number; elapsed: number }
-	| { ok: false; message: string; hint?: string; elapsed: number };
+	| { ok: false; message: string; hint?: string; code?: string; elapsed: number };
 
 /**
  * Everything a page shares across widgets. It hangs off globalThis so two
@@ -121,11 +121,13 @@ export function runQuery(sql: string, schema: string): Promise<RunResult> {
 				elapsed: performance.now() - started
 			};
 		} catch (err) {
-			const e = err as { message?: string; hint?: string };
+			const e = err as { message?: string; hint?: string; code?: string };
 			return {
 				ok: false,
 				message: e.message ?? String(err),
 				hint: e.hint,
+				// The SQLSTATE; /sql-errors tests hold their examples to it.
+				code: e.code,
 				elapsed: performance.now() - started
 			};
 		} finally {

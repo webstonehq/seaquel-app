@@ -1,9 +1,8 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import matter from 'gray-matter';
-import { PGlite } from '@electric-sql/pglite';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { SEED_SQL } from './seed';
+import { prepareSchema, runQuery } from '../../embed/database';
 import { ENGINE_SLUGS, codeSlug, isEngine } from './engines';
 import { getEngineCodes } from '$lib/server/sql-error-codes';
 
@@ -20,20 +19,18 @@ const lessonSlugs = readdirSync(join(import.meta.dirname, '../../content/learn-s
 	f.replace(/\.md$/, '')
 );
 
-let db: PGlite;
+// Through the <seaquel-sql> widget's own runner, so the test sees what a
+// reader's Run does: sample shop on the search_path, every run rolled back.
+let schema: string;
 
 beforeAll(async () => {
-	db = new PGlite();
-	await db.exec(SEED_SQL);
+	schema = await prepareSchema(null);
 }, 30_000);
 
 async function run(sql: string) {
-	await db.exec('BEGIN');
-	try {
-		return await db.exec(sql);
-	} finally {
-		await db.exec('ROLLBACK');
-	}
+	const result = await runQuery(sql.trim(), schema);
+	if (!result.ok) throw Object.assign(new Error(result.message), { code: result.code });
+	return result;
 }
 
 describe.each(pages)('$slug', ({ slug, data }) => {

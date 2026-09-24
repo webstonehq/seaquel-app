@@ -2,6 +2,7 @@ import postgresql from '../../content/sql-error-codes/postgresql.json';
 import mysql from '../../content/sql-error-codes/mysql.json';
 import sqlite from '../../content/sql-error-codes/sqlite.json';
 import sqlServer from '../../content/sql-error-codes/sql-server.json';
+import { examples as postgresqlExamples } from '../../content/sql-error-codes/examples/postgresql';
 import { getSqlErrors } from '$lib/sql-errors';
 import { ENGINE_NAMES, ENGINE_SLUGS, codeSlug as slugFor, isEngine, type EngineSlug } from '$lib/sql-errors/engines';
 
@@ -122,13 +123,45 @@ async function guidesByCode(): Promise<Map<string, GuideRef[]>> {
 	return map;
 }
 
+export interface Example {
+	note?: string;
+	setup?: string;
+	broken: string;
+	fixed: string;
+}
+
+/**
+ * The broken and fixed queries shown as runnable widgets. Only PostgreSQL has
+ * them, since the widget runs PostgreSQL. Codes a guide covers reuse the
+ * guide's queries; the rest come from the hand-written examples.
+ */
+async function getExample(engine: EngineSlug, code: ErrorCode): Promise<Example | null> {
+	if (engine !== 'postgresql') return null;
+	const own = postgresqlExamples[code.code];
+	if (own) {
+		return {
+			note: own.note,
+			setup: own.setup?.trim(),
+			broken: own.broken.trim(),
+			fixed: own.fixed.trim()
+		};
+	}
+	const guide = (await getSqlErrors()).find((g) => g.codes.postgresql === code.code);
+	return guide ? { broken: guide.broken, fixed: guide.fixed } : null;
+}
+
+function hasExample(engine: EngineSlug, code: ErrorCode): boolean {
+	return engine === 'postgresql' && code.code in postgresqlExamples;
+}
+
 /**
  * A code page earns a place in the index when it has something beyond the
- * one-line message: a guide, or an explanation from the engine's own docs.
- * The rest stay reachable but noindex, so they don't count as thin content.
+ * one-line message: a guide, a runnable example, or an explanation from the
+ * engine's own docs. The rest stay reachable but noindex, so they don't count
+ * as thin content.
  */
-function indexable(code: ErrorCode, guides: GuideRef[]): boolean {
-	return guides.length > 0 || Boolean(code.description);
+function indexable(engine: EngineSlug, code: ErrorCode, guides: GuideRef[]): boolean {
+	return guides.length > 0 || hasExample(engine, code) || Boolean(code.description);
 }
 
 export interface CodeListing {
@@ -154,7 +187,7 @@ export async function getEngineIndex(engine: EngineSlug): Promise<EngineIndex> {
 			code: code.code,
 			name: code.name,
 			message: code.message,
-			indexable: indexable(code, guides.get(`${engine}:${codeSlug(engine, code)}`) ?? [])
+			indexable: indexable(engine, code, guides.get(`${engine}:${codeSlug(engine, code)}`) ?? [])
 		};
 		categories.set(code.category, [...(categories.get(code.category) ?? []), listing]);
 	}
@@ -178,6 +211,7 @@ export interface CodePage {
 	code: ErrorCode;
 	title: string;
 	indexable: boolean;
+	example: Example | null;
 	guides: GuideRef[];
 	/** The same mistake in other engines, from guides and matching SQLSTATEs. */
 	equivalents: CodeRef[];
@@ -235,7 +269,8 @@ export async function getCodePage(engine: EngineSlug, slug: string): Promise<Cod
 		engine: ENGINES[engine],
 		code,
 		title: codeTitle(engine, code),
-		indexable: indexable(code, guides),
+		indexable: indexable(engine, code, guides),
+		example: await getExample(engine, code),
 		guides,
 		equivalents: [...equivalents.values()],
 		siblings
@@ -251,7 +286,7 @@ export async function getAllCodePages(): Promise<
 		CODES[engine].map((code) => ({
 			engine,
 			slug: codeSlug(engine, code),
-			indexable: indexable(code, guides.get(`${engine}:${codeSlug(engine, code)}`) ?? [])
+			indexable: indexable(engine, code, guides.get(`${engine}:${codeSlug(engine, code)}`) ?? [])
 		}))
 	);
 }

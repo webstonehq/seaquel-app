@@ -5,9 +5,11 @@ description: "The table exists, but PostgreSQL can't find it. Usually the cause 
 lesson: select
 error: 'relation "customers" does not exist'
 broken: |
+  SET search_path TO "$user", public;  -- PostgreSQL's default
   SELECT first_name, country
   FROM customers;
 fixed: |
+  SET search_path TO "$user", public;  -- PostgreSQL's default
   SELECT first_name, country
   FROM demo.customers;
 codes:

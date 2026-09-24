@@ -12,6 +12,8 @@
 	--sq-accent-fg: #3f2a06;
 	--sq-error: light-dark(#b91c1c, #fca5a5);
 	--sq-error-bg: light-dark(#fef2f2, #3b1515);
+	--sq-danger: #ef4444;
+	--sq-success: #22c55e;
 	--sq-keyword: light-dark(#0550ae, #79c0ff);
 	--sq-string: light-dark(#116329, #7ee787);
 	--sq-number: light-dark(#9a3412, #f0b72f);
@@ -79,10 +81,48 @@ button:focus-visible, a:focus-visible {
 .reset:hover { color: var(--sq-fg); }
 .reset[hidden] { display: none; }
 .run {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
 	background: var(--sq-accent);
 	color: var(--sq-accent-fg);
 	font-weight: 600;
 }
+svg {
+	width: 14px;
+	height: 14px;
+	flex: none;
+}
+/* Tabs, when the widget holds several queries (a broken one and its fix). */
+.tabs {
+	flex: 1;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	min-width: 0;
+}
+.tabs[hidden], .tabbed .label { display: none; }
+.tab {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 5px 12px;
+	background: transparent;
+	color: var(--sq-muted);
+	font-weight: 500;
+}
+.tab:hover { color: var(--sq-fg); }
+.tab[aria-selected='true'] {
+	background: var(--sq-bg);
+	color: var(--sq-fg);
+	border-color: var(--sq-border);
+	box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+}
+.tab .n { color: var(--sq-muted); }
+.icon { display: inline-flex; }
+.icon-error { color: var(--sq-danger); }
+.icon-ok { color: var(--sq-success); }
+.tabbed .editor > * { min-height: 7em; }
 .run:hover { filter: brightness(1.05); }
 .run:disabled { opacity: 0.7; cursor: progress; }
 kbd {
@@ -185,6 +225,31 @@ tr:last-child td { border-bottom: 0; }
 	white-space: pre-wrap;
 }
 .hint { margin-top: 4px; opacity: 0.85; }
+.next {
+	display: flex;
+	width: fit-content;
+	align-items: center;
+	gap: 6px;
+	margin-top: 12px;
+	background: var(--sq-bg);
+	color: var(--sq-fg);
+	border-color: var(--sq-border);
+	font-family: var(--sq-font);
+	font-weight: 500;
+	white-space: nowrap;
+}
+.next:hover { border-color: var(--sq-accent); }
+.idle { padding: 16px 12px; line-height: 1.6; }
+.idle strong { color: var(--sq-fg); font-weight: 600; }
+.idle kbd {
+	margin: 0;
+	padding: 0 4px;
+	border: 1px solid var(--sq-border);
+	border-radius: 4px;
+	background: var(--sq-subtle);
+	font: 12px var(--sq-mono);
+	opacity: 1;
+}
 .foot {
 	display: flex;
 	align-items: center;

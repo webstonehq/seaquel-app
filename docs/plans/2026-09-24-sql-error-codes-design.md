@@ -70,3 +70,27 @@ four engine indexes.
 - Every code in a guide `codes` map exists in its engine's JSON.
 - No guide slug equals an engine slug.
 - `pnpm check`, `pnpm build`, spot-check robots meta and the sitemap.
+
+## Runnable examples on PostgreSQL code pages
+
+PostgreSQL code pages show a broken query and a fixed one as the two tabs of
+one `<seaquel-sql>` widget, under a one- or two-sentence note. The guides use
+the same widget (markup from `$lib/sql-errors/widget.ts`), which replaced the
+separate `SqlErrorSandbox` component. Several `<pre>`s in a widget become
+tabs; a single `<pre>`, as in blog posts and lessons, works as before. Code pages ship no
+SvelteKit JS, so the page loads `/embed/seaquel-sql.js` itself, and only when
+it has an example.
+
+- Examples are hand-written in
+  `src/content/sql-error-codes/examples/postgresql.ts` (TypeScript rather than
+  YAML: nothing in the project parses YAML at build time). 87 codes.
+- The 11 codes a guide covers reuse the guide's queries instead.
+- Tests run every example through `src/embed/database.ts`, the widget's own
+  runner, and require the broken query to raise exactly its SQLSTATE and the
+  fixed one to succeed. `runQuery` now returns `code` on failure for this.
+- A page with an example is indexable: 98 PostgreSQL code pages in all.
+- Left out because they can't be shown working in the widget: connection,
+  resource, internal and FDW errors, deadlocks and serialization failures
+  (need a second session), statement timeouts (PGlite has no timer), and
+  errors whose only fix is to commit first (25001, 55P04), since the widget
+  runs every query in one transaction.

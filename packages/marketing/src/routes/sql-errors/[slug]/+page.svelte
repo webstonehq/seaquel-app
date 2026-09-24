@@ -1,7 +1,6 @@
 <script lang="ts">
 	import NavHeader from "$lib/components/nav-header.svelte";
 	import FooterSection from "$lib/components/footer-section.svelte";
-	import SqlErrorSandbox from "$lib/components/sql-error-sandbox.svelte";
 	import { Button } from "$lib/components/ui/button";
 	import {
 		ArrowLeftIcon,
@@ -14,12 +13,19 @@
 	import type { PageData } from "./$types";
 	import Seo from "$lib/components/seo.svelte";
 	import { codeLinks } from "$lib/sql-errors";
+	import { sqlErrorWidget } from "$lib/sql-errors/widget";
+	import { onMount } from "svelte";
 
 	let { data }: { data: PageData } = $props();
 
 	const origin = "https://seaquel.app";
 	const entry = $derived(data.entry);
 	const codes = $derived(codeLinks(entry.codes));
+
+	onMount(() => {
+		// Registers <seaquel-sql>, the broken/fixed sandbox below.
+		import("../../../embed/seaquel-sql");
+	});
 
 	const jsonLd = $derived(
 		JSON.stringify([
@@ -170,7 +176,7 @@
 								<a href="/learn-sql/sandbox" class="text-primary hover:underline">practice database</a>
 								from the SQL course. Edit either query freely; every run is rolled back.
 							</p>
-							<SqlErrorSandbox broken={entry.broken} fixed={entry.fixed} />
+							{@html sqlErrorWidget(entry)}
 						</section>
 
 						{#if entry.lessonLink}

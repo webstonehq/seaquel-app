@@ -9,8 +9,10 @@
 		BookOpenIcon,
 		ChevronRightIcon,
 		ExternalLinkIcon,
-		HashIcon
+		HashIcon,
+		PlayIcon
 	} from "lucide-svelte";
+	import { sqlErrorWidget } from "$lib/sql-errors/widget";
 	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();
@@ -53,7 +55,7 @@
 			code.message ? `Message: ${code.message.replace(/[^.!?]$/, "$&.")}` : undefined,
 			page.guides.length > 0
 				? "What causes it and how to fix it, with a query you can run."
-				: code.description?.split("\n\n")[0]
+				: (page.example?.note ?? code.description?.split("\n\n")[0])
 		]
 			.filter(Boolean)
 			.join(" ")
@@ -95,6 +97,10 @@
 
 <svelte:head>
 	{@html `<script type="application/ld+json">${jsonLd}<\/script>`}
+	{#if page.example}
+		<!-- The page ships no SvelteKit JS; the widget registers itself. -->
+		{@html `<script type="module" src="/embed/seaquel-sql.js"><\/script>`}
+	{/if}
 </svelte:head>
 
 <div class="min-h-screen bg-background text-foreground">
@@ -153,6 +159,21 @@
 								</tbody>
 							</table>
 						</section>
+
+						{#if page.example}
+							<section class="mb-10" id="try-it">
+								<div class="flex items-center gap-2 mb-2">
+									<PlayIcon class="size-4 text-primary" />
+									<h2 class="text-xl font-semibold tracking-tight">Reproduce it, then fix it</h2>
+								</div>
+								<p class="text-muted-foreground mb-6 text-pretty">
+									{page.example.note ?? "These are the queries from the guide below."}
+									Run the broken query to see the error, then switch to the fixed one. Edit either
+									freely; every run is rolled back.
+								</p>
+								{@html sqlErrorWidget(page.example)}
+							</section>
+						{/if}
 
 						{#if page.guides.length > 0}
 							<section class="mb-10">

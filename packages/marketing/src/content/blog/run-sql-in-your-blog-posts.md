@@ -150,6 +150,40 @@ ORDER BY avg_stars DESC NULLS LAST
 
 Every run happens inside a transaction that gets rolled back afterwards. Readers can `DELETE FROM books` or `DROP TABLE reviews` just to see what happens, and the next run still starts from your data. Go ahead and try it on the widget above.
 
+## Show the mistake, then the fix
+
+A lot of writing about SQL starts with a query that doesn't work. You show it failing, explain why, then show the version that does. Put two `<pre>` elements in the widget and they become tabs:
+
+```html
+<seaquel-sql setup="#library">
+  <pre title="Broken query" data-result="error">...</pre>
+  <pre title="Fixed query" data-result="ok">...</pre>
+</seaquel-sql>
+```
+
+The `title` is the tab's label. `data-result` is optional: `error` puts a red cross on the tab and `ok` a green check. When an `error` tab fails the way it's meant to, the widget offers to run the next tab. Each tab keeps its own edits, so readers can switch back and forth without losing anything. You're not limited to two tabs, either.
+
+Here's a mistake almost everyone makes with `GROUP BY` at some point:
+
+<seaquel-sql setup="#library">
+<pre title="Broken query" data-result="error">
+SELECT b.author, b.title, count(r.id) AS reviews
+FROM books b
+LEFT JOIN reviews r ON r.book_id = b.id
+GROUP BY b.author
+ORDER BY reviews DESC
+</pre>
+<pre title="Fixed query" data-result="ok">
+SELECT b.author, b.title, count(r.id) AS reviews
+FROM books b
+LEFT JOIN reviews r ON r.book_id = b.id
+GROUP BY b.author, b.title
+ORDER BY reviews DESC
+</pre>
+</seaquel-sql>
+
+Postgres won't pick a title for each author on its own, so every column you select has to be in the `GROUP BY` or inside an aggregate like `count()`. The [SQL error pages](/sql-errors) on this site are built the same way, one tabbed widget per error.
+
 ## What your readers download
 
 The script is about 6 KB gzipped, and that's all that loads with the page.
@@ -176,11 +210,12 @@ seaquel-sql {
 | Variable | What it controls |
 |---|---|
 | `--sq-bg`, `--sq-fg` | Background and main text |
-| `--sq-muted` | Label, status line and footer link |
+| `--sq-muted` | Label, inactive tabs, status line and footer link |
 | `--sq-subtle` | Toolbar and table header background |
 | `--sq-border` | Borders and row dividers |
 | `--sq-accent`, `--sq-accent-fg` | The Run button and focus ring |
 | `--sq-error`, `--sq-error-bg` | Error messages |
+| `--sq-danger`, `--sq-success` | The cross and check on tabs |
 | `--sq-keyword`, `--sq-string`, `--sq-number`, `--sq-comment`, `--sq-function`, `--sq-operator` | Syntax highlighting |
 | `--sq-radius` | Corner radius |
 | `--sq-font`, `--sq-mono` | UI font and code font |
