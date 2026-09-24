@@ -11,9 +11,11 @@
 
 	let { data }: { data: PageData } = $props();
 
+	// See features-section.svelte for why these directives are pinned. Both
+	// globs must stay in sync or the same image is encoded twice per build.
 	const images: Record<string, { default: string }> = import.meta.glob(
 		'$lib/assets/features/*/*.webp',
-		{ eager: true, query: { enhanced: true } }
+		{ eager: true, query: { enhanced: true, format: 'avif;webp', w: '800;1600', basePixels: '800' } }
 	);
 	const animatedImages: Record<string, { default: string }> = import.meta.glob(
 		'$lib/assets/features/*/*.gif',

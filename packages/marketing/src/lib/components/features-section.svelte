@@ -4,9 +4,15 @@
 	import { fly } from "svelte/transition";
 	import FullscreenOverlay from "$lib/components/fullscreen-overlay.svelte";
 
+	// These directives override enhanced-img's defaults (avif;webp;png at
+	// half-width and full-width). The masters are ~2600-3300px wide, far more
+	// than anything on screen, and encoding AVIF at that size is most of our
+	// build time; 800/1600 covers 1x and 2x. basePixels keeps the srcset on
+	// density descriptors, which is what enhanced-img does when it picks the
+	// widths itself. The png fallback is dropped -- nothing we support needs it.
 	const images: Record<string, { default: string }> = import.meta.glob(
 		'$lib/assets/features/*/*.webp',
-		{ eager: true, query: { enhanced: true } }
+		{ eager: true, query: { enhanced: true, format: 'avif;webp', w: '800;1600', basePixels: '800' } }
 	);
 
 	function getImage(path: string) {
