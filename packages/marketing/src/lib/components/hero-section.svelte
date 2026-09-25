@@ -63,48 +63,10 @@
                 </Button>
             </div>
 
-            <!-- Stats or trust indicators -->
-            <div
-                class="grid grid-cols-3 gap-8 pt-12 max-w-2xl w-full"
-                in:fade={{ delay: 600, duration: 600 }}
-            >
-                <div class="space-y-1">
-                    <div class="text-3xl md:text-4xl font-bold text-primary">
-                        10x
-                    </div>
-                    <div class="text-sm text-muted-foreground">
-                        More Efficient
-                    </div>
-                    <div class="text-xs text-muted-foreground/60">
-                        vs. Electron apps
-                    </div>
-                </div>
-                <div class="space-y-1">
-                    <div class="text-3xl md:text-4xl font-bold text-primary">
-                        50%
-                    </div>
-                    <div class="text-sm text-muted-foreground">Less Memory</div>
-                    <div class="text-xs text-muted-foreground/60">
-                        vs. DBeaver
-                    </div>
-                </div>
-                <div class="space-y-1">
-                    <div class="text-3xl md:text-4xl font-bold text-primary">
-                        100%
-                    </div>
-                    <div class="text-sm text-muted-foreground">
-                        Offline Ready
-                    </div>
-                    <div class="text-xs text-muted-foreground/60">
-                        No cloud required
-                    </div>
-                </div>
-            </div>
-
             <!-- Product demo -->
             <div
                 class="w-full max-w-6xl pt-12 flex flex-col items-center"
-                in:fly={{ y: 40, delay: 800, duration: 800 }}
+                in:fly={{ y: 40, delay: 600, duration: 800 }}
             >
                 <!-- Interactive demo label -->
                 <div class="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent-foreground border border-accent/20 mb-4">
