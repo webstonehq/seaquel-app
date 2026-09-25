@@ -86,7 +86,8 @@
                             query. I wanted something that opens fast, stays out
                             of the way, and makes it easy to understand what a
                             query is actually doing. Seaquel is that tool. It's
-                            open source, free for personal use, and built by one
+                            MIT-licensed open source, the official builds are
+                            free for personal use, and it's built by one
                             person who reads every GitHub issue and Discord
                             message. If something's broken or missing, tell me
                             and I'll fix it.

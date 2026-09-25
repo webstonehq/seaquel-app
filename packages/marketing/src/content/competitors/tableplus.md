@@ -67,7 +67,7 @@ rows:
   - feature: "Source available"
     seaquel: "MIT licensed"
     them: false
-    note: "Seaquel's source is MIT, but a commercial license is still required for work use — that restriction is my policy, not the license."
+    note: "Seaquel's source is MIT, and you can build it yourself and use it at work for free. The official builds are released under separate terms and need a license for work use."
     source: https://tableplus.com/blog/2018/04/open-source-or-closed-source.html
   - feature: "Database engines"
     seaquel: "6"

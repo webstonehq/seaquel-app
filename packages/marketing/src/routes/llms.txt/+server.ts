@@ -25,7 +25,7 @@ const PAGES: Array<{ path: string; title: string; description: string }> = [
     path: "/pricing",
     title: "Pricing",
     description:
-      "Free and open source for personal use. Individual and Business licenses cover commercial use.",
+      "Source code is MIT licensed. Official builds are free for personal use; Individual and Business licenses cover commercial use.",
   },
   {
     path: "/download",
@@ -91,7 +91,7 @@ export const GET: RequestHandler = async () => {
     "# Seaquel\n",
     "> A fast, offline-first SQL client for Postgres, MySQL, MariaDB, SQLite, SQL Server and DuckDB. " +
       "Browse schemas, visualize queries, and add AI assistance only when you want it. " +
-      "Available for macOS, Windows and Linux, free and open source for personal use.\n",
+      "Available for macOS, Windows and Linux. The source code is MIT licensed; official builds are free for personal use and need a license for work.\n",
     "The site also hosts a free interactive SQL course (Learn SQL) and a reference of common SQL error messages with fixes, both runnable in the browser.\n",
     section(
       "Product",

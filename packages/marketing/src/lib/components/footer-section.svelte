@@ -175,7 +175,7 @@
         >
             <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
                 <p class="text-sm text-muted-foreground">
-                    &copy; {new Date().getFullYear()} Seaquel. MIT Licensed.
+                    &copy; {new Date().getFullYear()} Seaquel. Source code <a href="/terms" class="hover:text-foreground transition-colors underline underline-offset-4">MIT licensed</a>.
                 </p>
                 <div class="flex items-center gap-4 text-sm text-muted-foreground">
                     <a href="/terms" class="hover:text-foreground transition-colors">Terms</a>

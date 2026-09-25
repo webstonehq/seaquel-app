@@ -12,7 +12,7 @@
 	const SEAQUEL = {
 		pricing: "Free for personal use",
 		commercial: "Annual Individual or Business license",
-		license: "MIT",
+		license: "MIT source; official builds need a license for work",
 		engines: 6,
 		runtime: "Tauri (Rust + WebView)",
 	};

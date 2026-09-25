@@ -80,11 +80,19 @@
     const faqs = [
         {
             q: "Is Seaquel free?",
-            a: "Yes — Seaquel is free and open source for personal, non-commercial use. A commercial license is only required if you use Seaquel for work.",
+            a: "Yes, for personal use. The official builds are free for anything non-commercial. If you use them for work, you need a license.",
         },
         {
             q: "What counts as commercial use?",
             a: "If you're using Seaquel as part of your work at a company, freelancing, or any revenue-generating activity, that's commercial use.",
+        },
+        {
+            q: "The source is MIT. Why would I pay?",
+            a: "You don't have to. Clone the repo, build it yourself, and use that build anywhere, work included, for free. The license covers the official builds: signed and notarized installers, automatic updates, and support. It's also what keeps Seaquel going.",
+        },
+        {
+            q: "Is the license enforced?",
+            a: "No. The app never locks features or nags you. If you use the official builds for work, we trust you to buy a license.",
         },
         {
             q: "Can I try Seaquel before buying?",
@@ -186,7 +194,7 @@
 
 <Seo
     title="Seaquel Pricing — Free for Personal Use, Paid for Work"
-    description="Seaquel is free and open source for personal use. Individual and Business licenses cover commercial use, with transferable seats on Business."
+    description="Seaquel's source code is MIT. The official builds are free for personal use; Individual and Business licenses cover work use, with transferable seats on Business."
 />
 
 <svelte:head>
@@ -211,9 +219,9 @@
                     <p
                         class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
                     >
-                        Seaquel is free for personal use and open source.
-                        Commercial licenses are available for professional and
-                        business use.
+                        The source code is MIT licensed. The official builds
+                        are free for personal use, and a license covers using
+                        them for work.
                     </p>
                 </div>
             </div>

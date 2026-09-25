@@ -31,8 +31,8 @@
 		{ feature: "Deep Links", seaquel: true, others: false },
 		{ feature: "Windows, macOS & Linux", seaquel: true, others: true },
 		{ feature: "Works Fully Offline", seaquel: true, others: "Varies" },
-		{ feature: "Source Available", seaquel: "MIT", others: "Varies" },
-		{ feature: "Price", seaquel: "Free for personal", others: "Free to $510/year" },
+		{ feature: "Open Source Code", seaquel: "MIT", others: "Varies" },
+		{ feature: "Price", seaquel: "Free for personal, paid for work", others: "Free to $510/year" },
 	];
 </script>
 

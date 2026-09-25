@@ -134,7 +134,7 @@ theyWinAt:
     body: "DEB, RPM, AppImage, Snap and Flatpak on Linux, plus installer and portable builds on Windows. Seaquel covers DEB, RPM and AppImage but has no Snap or Flatpak packaging."
 faq:
   - q: "Is Beekeeper Studio open source?"
-    a: "Mostly. The bulk of the code is GPLv3, but anything under a src-commercial directory is governed by a separate commercial license. Seaquel is MIT with a commercial-use policy layered on top. Neither is unambiguously 'fully open source', and any comparison page claiming otherwise about either tool is overselling."
+    a: "Mostly. The bulk of the code is GPLv3, but anything under a src-commercial directory is governed by a separate commercial license. Seaquel's source is entirely MIT, but the official builds are released under separate terms that require a license for work use. Neither is unambiguously 'fully open source', and any comparison page claiming otherwise about either tool is overselling."
   - q: "Which has the better free tier?"
     a: "Beekeeper's, honestly. Community has unlimited connections and tabs and covers about twenty-two engines, including MongoDB and Redis. Seaquel's free tier is the whole app but only six engines, and asks you to buy a license for commercial use."
   - q: "Does Beekeeper Studio use a lot of memory?"
@@ -163,8 +163,9 @@ license if you're using it for work.
 
 Neither of us is "100% open source" in the way that phrase gets used. Beekeeper
 is GPLv3 with a separate commercial license over its `src-commercial`
-directories. Seaquel is MIT, but my commercial-use policy sits on top of the
-license rather than in it.
+directories. Seaquel's source is all MIT, but the official builds I ship are
+released under separate terms, and those terms ask for a license if you use
+them at work. Build it yourself and none of that applies.
 
 Both open-core. Treat anyone claiming otherwise about either app accordingly.
 
