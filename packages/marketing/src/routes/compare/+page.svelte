@@ -10,7 +10,7 @@
 
 <Seo
 	title="Seaquel compared to other SQL clients — sourced, dated | Seaquel"
-	description="Honest, source-linked comparisons of Seaquel against TablePlus, DBeaver, DataGrip and Beekeeper Studio, including where each of them is the better tool."
+	description="Honest, source-linked comparisons of Seaquel against TablePlus, DBeaver, DataGrip, Beekeeper Studio and Azure Data Studio, including where each of them is the better tool."
 />
 
 <div class="min-h-screen bg-background text-foreground">

@@ -10,7 +10,7 @@
 
 <Seo
 	title="SQL client alternatives — honest switching guides | Seaquel"
-	description="Thinking of replacing TablePlus or DBeaver? Sourced guides covering what you gain, what you give up, and when staying put is the better call."
+	description="Replacing TablePlus, DBeaver or the retired Azure Data Studio? Sourced guides covering what you gain, what you give up, and when staying put is the better call."
 />
 
 <div class="min-h-screen bg-background text-foreground">
