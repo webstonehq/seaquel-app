@@ -39,18 +39,19 @@
                 <h1
                     class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight"
                 >
-                    The Database Client
+                    Fast, Offline SQL Client
                     <span
                         class="bg-linear-to-r from-primary via-accent-foreground to-primary bg-clip-text text-transparent"
-                        >Developers Actually Want</span
+                        >for Postgres & More</span
                     >
                 </h1>
                 <p
                     class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
                 >
-                    Lightning-fast, resource-efficient database client with
-                    AI-powered assistance. Work offline, query smarter, and
-                    manage your data with unprecedented speed.
+                    See why a query is slow with visual EXPLAIN plans, build
+                    joins by dragging tables together, and share saved queries
+                    with your team through Git. Try it below, right in your
+                    browser.
                 </p>
             </div>
 
