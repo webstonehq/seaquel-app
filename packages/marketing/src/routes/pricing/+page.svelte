@@ -77,12 +77,121 @@
             })
             .filter((p): p is NonNullable<typeof p> => p !== null) ?? [],
     );
+    const faqs = [
+        {
+            q: "Is Seaquel free?",
+            a: "Yes — Seaquel is free and open source for personal, non-commercial use. A commercial license is only required if you use Seaquel for work.",
+        },
+        {
+            q: "What counts as commercial use?",
+            a: "If you're using Seaquel as part of your work at a company, freelancing, or any revenue-generating activity, that's commercial use.",
+        },
+        {
+            q: "Can I try Seaquel before buying?",
+            a: "Absolutely. Seaquel is fully functional without a license. Try it as long as you like, and purchase a license when you're ready to use it commercially.",
+        },
+        {
+            q: "What happens when my license expires?",
+            a: "You keep access to the version you had at expiration. Renew to get another year of updates and support.",
+        },
+        {
+            q: "Can I transfer my Individual license to someone else?",
+            a: "No. Individual licenses are tied to one person. If you need transferable seats, choose the Business plan.",
+        },
+        {
+            q: "How do Business seat transfers work?",
+            a: "Deactivate the departing member's seat and activate it for someone new — no extra charge. For example, if you buy 5 seats and someone leaves, you reassign that seat to the new hire.",
+        },
+        {
+            q: "Do you offer a refund?",
+            a: "Yes, within 30 days of purchase, no questions asked. Email us at support@seaquel.app and we will refund you.",
+        },
+    ];
+
+    const origin = "https://seaquel.app";
+
+    // Product + FAQPage structured data. Offers come from the same live
+    // Dodo prices as the cards, so the markup can't drift from what's
+    // shown; if prices fail to load, only the free tier is listed.
+    const jsonLd = $derived(
+        JSON.stringify([
+            {
+                "@context": "https://schema.org",
+                "@type": ["Product", "SoftwareApplication"],
+                name: "Seaquel",
+                description:
+                    "Fast, offline-first desktop SQL client for PostgreSQL, MySQL, MariaDB, SQLite, SQL Server and DuckDB. Free for personal use; commercial licenses billed yearly.",
+                url: `${origin}/pricing`,
+                image: `${origin}/product-screenshot.jpg`,
+                brand: { "@type": "Brand", name: "Seaquel" },
+                applicationCategory: "DeveloperApplication",
+                operatingSystem: "macOS, Windows, Linux",
+                offers: [
+                    {
+                        "@type": "Offer",
+                        name: "Personal",
+                        description: "Free for personal, non-commercial use.",
+                        price: 0,
+                        priceCurrency: "USD",
+                        availability: "https://schema.org/InStock",
+                        url: `${origin}/download`,
+                    },
+                    ...(data.plans ?? []).flatMap((p) => {
+                        const meta = PLAN_META[p.tier];
+                        if (!meta) return [];
+                        const price = p.price / 100;
+                        return [
+                            {
+                                "@type": "Offer",
+                                name: meta.name,
+                                description: meta.description,
+                                price,
+                                priceCurrency: p.currency,
+                                priceSpecification: {
+                                    "@type": "UnitPriceSpecification",
+                                    price,
+                                    priceCurrency: p.currency,
+                                    billingDuration: "P1Y",
+                                    unitText:
+                                        p.tier === "business"
+                                            ? "per seat per year"
+                                            : "per year",
+                                },
+                                availability: "https://schema.org/InStock",
+                                url: `${origin}/buy/${p.productId}`,
+                                hasMerchantReturnPolicy: {
+                                    "@type": "MerchantReturnPolicy",
+                                    returnPolicyCategory:
+                                        "https://schema.org/MerchantReturnFiniteReturnWindow",
+                                    merchantReturnDays: 30,
+                                    returnFees: "https://schema.org/FreeReturn",
+                                },
+                            },
+                        ];
+                    }),
+                ],
+            },
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: faqs.map(({ q, a }) => ({
+                    "@type": "Question",
+                    name: q,
+                    acceptedAnswer: { "@type": "Answer", text: a },
+                })),
+            },
+        ]),
+    );
 </script>
 
 <Seo
     title="Seaquel Pricing — Free for Personal Use, Paid for Work"
     description="Seaquel is free and open source for personal use. Individual and Business licenses cover commercial use, with transferable seats on Business."
 />
+
+<svelte:head>
+    {@html `<script type="application/ld+json">${jsonLd}<\/script>`}
+</svelte:head>
 
 <div class="min-h-screen bg-background text-foreground">
     <NavHeader />
@@ -299,7 +408,7 @@
                 </h2>
 
                 <div class="flex flex-col gap-6">
-                    {#each [{ q: "Is Seaquel free?", a: "Yes — Seaquel is free and open source for personal, non-commercial use. A commercial license is only required if you use Seaquel for work." }, { q: "What counts as commercial use?", a: "If you're using Seaquel as part of your work at a company, freelancing, or any revenue-generating activity, that's commercial use." }, { q: "Can I try Seaquel before buying?", a: "Absolutely. Seaquel is fully functional without a license. Try it as long as you like, and purchase a license when you're ready to use it commercially." }, { q: "What happens when my license expires?", a: "You keep access to the version you had at expiration. Renew to get another year of updates and support." }, { q: "Can I transfer my Individual license to someone else?", a: "No. Individual licenses are tied to one person. If you need transferable seats, choose the Business plan." }, { q: "How do Business seat transfers work?", a: "Deactivate the departing member's seat and activate it for someone new — no extra charge. For example, if you buy 5 seats and someone leaves, you reassign that seat to the new hire." }, { q: "Do you offer a refund?", a: "Yes, within 30 days of purchase, no questions asked. Email us at support@seaquel.app and we will refund you." }] as faq}
+                    {#each faqs as faq}
                         <div class="border-b pb-6 last:border-b-0">
                             <h3 class="font-semibold mb-2">{faq.q}</h3>
                             <p

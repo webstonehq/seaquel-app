@@ -8,6 +8,7 @@
 	import { fly } from "svelte/transition";
 	import type { PageData } from "./$types";
 	import Seo from "$lib/components/seo.svelte";
+	import { screenshotAlt } from "$lib/features/screenshot-alt";
 
 	let { data }: { data: PageData } = $props();
 
@@ -88,6 +89,7 @@
 					{#each data.category.features as feature, index (feature.title)}
 					    {@const screenshot = images[`/src/lib/assets/features/${data.category.slug}/${toKebabCase(feature.title)}.webp`]?.default}
 					    {@const animatedScreenshot = animatedImages[`/src/lib/assets/features/${data.category.slug}/${toKebabCase(feature.title)}.gif`]?.default}
+					    {@const alt = screenshotAlt(`${data.category.slug}/${toKebabCase(feature.title)}.${screenshot ? 'webp' : 'gif'}`, feature.title)}
 						<section
 							class="grid md:grid-cols-2 gap-8 md:gap-12 items-center"
 							in:fly={{ y: 30, delay: 150 + index * 100, duration: 600 }}
@@ -112,21 +114,21 @@
 								{#if screenshot}
 									<button
 										class="cursor-pointer border-0 bg-transparent p-0"
-										onclick={() => { fullscreenScreenshot = { src: screenshot, alt: feature.title }; fullscreenOpen = true; }}
+										onclick={() => { fullscreenScreenshot = { src: screenshot, alt }; fullscreenOpen = true; }}
 										aria-label="View {feature.title} screenshot fullscreen"
 									>
 										<enhanced:img
 											src={screenshot}
-											alt={feature.title}
+											{alt}
 										/>
 									</button>
 								{:else if animatedScreenshot}
     								<button
     									class="cursor-pointer border-0 bg-transparent p-0"
-    									onclick={() => { fullscreenScreenshot = { src: animatedScreenshot, alt: feature.title, isAnimated: true }; fullscreenOpen = true; }}
+    									onclick={() => { fullscreenScreenshot = { src: animatedScreenshot, alt, isAnimated: true }; fullscreenOpen = true; }}
     									aria-label="View {feature.title} screenshot fullscreen"
     								>
-    				                    <img src={animatedScreenshot} alt={feature.title}>
+    				                    <img src={animatedScreenshot} {alt}>
     								</button>
 								{:else}
 									<div class="aspect-video rounded-xl border-2 border-dashed border-muted-foreground/25 bg-muted/50 flex flex-col items-center justify-center gap-3">

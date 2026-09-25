@@ -7,12 +7,29 @@
 	import CtaSection from "$lib/components/cta-section.svelte";
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import Seo from "$lib/components/seo.svelte";
+	import { FOUNDER } from "$lib/founder";
+
+	const origin = "https://seaquel.app";
+	const jsonLd = JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		name: "Seaquel",
+		url: origin,
+		logo: `${origin}/seaquel-logo.png`,
+		email: "support@seaquel.app",
+		founder: { "@type": "Person", name: FOUNDER.name, sameAs: [FOUNDER.linkedin] },
+		sameAs: ["https://github.com/webstonehq/seaquel", "https://discord.gg/QuzUESE8x4"],
+	});
 </script>
 
 <Seo
 	title="Seaquel — Fast SQL Client for Postgres, MySQL, SQL Server & DuckDB"
 	description="A fast, offline-first SQL client for Postgres, MySQL, MariaDB, SQLite, SQL Server and DuckDB. Browse schemas, visualize queries, and add AI assistance only when you want it."
 />
+
+<svelte:head>
+	{@html `<script type="application/ld+json">${jsonLd}<\/script>`}
+</svelte:head>
 
 <div class="min-h-screen bg-background text-foreground">
 	<NavHeader />

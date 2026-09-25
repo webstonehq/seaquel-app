@@ -3,6 +3,7 @@
 	import { ZapIcon, CpuIcon, WifiOffIcon, BrainCircuitIcon, DatabaseIcon, ShieldCheckIcon, ActivityIcon, NetworkIcon, LayoutDashboardIcon, GitBranchIcon, BarChart3Icon, GraduationCapIcon, UsersIcon, SparklesIcon, LayoutPanelLeftIcon, ClipboardCheckIcon, TableIcon, ChevronLeftIcon, ChevronRightIcon, WorkflowIcon } from "lucide-svelte";
 	import { fly } from "svelte/transition";
 	import FullscreenOverlay from "$lib/components/fullscreen-overlay.svelte";
+	import { screenshotAlt } from "$lib/features/screenshot-alt";
 
 	// These directives override enhanced-img's defaults (avif;webp;png at
 	// half-width and full-width). The masters are ~2600-3300px wide, far more
@@ -21,6 +22,7 @@
 
 	interface GalleryItem {
 		src: string;
+		alt: string;
 		title: string;
 		description: string;
 		slug: string;
@@ -184,7 +186,7 @@
 			for (const feature of list) {
 				for (const path of feature.screenshots) {
 					const src = getImage(path);
-					if (src) items.push({ src, title: feature.title, description: feature.description, slug: feature.slug });
+					if (src) items.push({ src, alt: screenshotAlt(path, feature.title), title: feature.title, description: feature.description, slug: feature.slug });
 				}
 			}
 		}
@@ -262,7 +264,7 @@
 												>
 													<enhanced:img
 														src={src}
-														alt={feature.title}
+														alt={screenshotAlt(screenshot, feature.title)}
 														class="h-16 w-auto object-cover"
 													/>
 												</button>
@@ -305,7 +307,7 @@
 												>
 													<enhanced:img
 														src={src}
-														alt={feature.title}
+														alt={screenshotAlt(screenshot, feature.title)}
 														class="h-16 w-auto object-cover"
 													/>
 												</button>
@@ -329,7 +331,7 @@
 			<div class="relative flex-1 min-h-0">
 				<enhanced:img
 					src={current.src}
-					alt={current.title}
+					alt={current.alt}
 					class="w-full h-full object-contain"
 				/>
 
