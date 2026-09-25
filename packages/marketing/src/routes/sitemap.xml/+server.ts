@@ -14,6 +14,7 @@ const STATIC_PATHS = [
   "/",
   "/features",
   "/pricing",
+  "/about",
   "/learn-sql",
   "/sql-errors",
   "/compare",

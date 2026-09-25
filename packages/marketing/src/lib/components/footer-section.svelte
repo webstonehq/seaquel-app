@@ -1,8 +1,9 @@
 <script lang="ts">
-    import { GithubIcon, DownloadIcon } from "lucide-svelte";
+    import { GithubIcon, DownloadIcon, LinkedinIcon } from "lucide-svelte";
     import { Button } from "$lib/components/ui/button";
     import Logo from "./logo.svelte";
     import LogoDiscord from "./logo-discord.svelte";
+    import { FOUNDER } from "$lib/founder";
 </script>
 
 <footer class="border-t bg-muted/30">
@@ -37,7 +38,26 @@
                     >
                         <LogoDiscord class="size-4 fill-current" />
                     </Button>
+                    <Button
+                        href={FOUNDER.linkedin}
+                        target="_blank"
+                        rel="noopener"
+                        size="icon"
+                        variant="ghost"
+                        class="size-9"
+                        aria-label="{FOUNDER.name} on LinkedIn"
+                    >
+                        <LinkedinIcon class="size-4" />
+                    </Button>
                 </div>
+                <p class="text-sm text-muted-foreground">
+                    Built by
+                    <a
+                        href="/about"
+                        class="text-foreground hover:underline underline-offset-4"
+                        >{FOUNDER.name}</a
+                    >
+                </p>
             </div>
 
             <!-- Product Links -->
@@ -100,6 +120,13 @@
             <div class="flex flex-col gap-4">
                 <h3 class="font-semibold">Resources</h3>
                 <ul class="flex flex-col gap-2 text-sm text-muted-foreground">
+                    <li>
+                        <a
+                            href="/about"
+                            class="hover:text-foreground transition-colors"
+                            >About</a
+                        >
+                    </li>
                     <li>
                         <a
                             href="/blog"

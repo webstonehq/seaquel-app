@@ -154,6 +154,7 @@ export const GET: RequestHandler = async () => {
           description: c.date,
         })),
         { title: "Full changelog", url: `${ORIGIN}/changelog` },
+        { title: "About", url: `${ORIGIN}/about` },
         { title: "Privacy policy", url: `${ORIGIN}/privacy` },
         { title: "Terms", url: `${ORIGIN}/terms` },
       ],
