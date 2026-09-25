@@ -23,7 +23,7 @@
 </script>
 
 <Seo
-	title="Seaquel — Fast SQL Client for Postgres, MySQL, SQL Server & DuckDB"
+	title="Seaquel — Fast, Offline SQL Client for Postgres & More"
 	description="A fast, offline-first SQL client for Postgres, MySQL, MariaDB, SQLite, SQL Server and DuckDB. Browse schemas, visualize queries, and add AI assistance only when you want it."
 />
 
