@@ -4,6 +4,8 @@
     import DemoPlayer from "$lib/components/demo-player.svelte";
     import { GithubIcon, HeartIcon, MousePointerClickIcon } from "lucide-svelte";
     import { fly, fade } from "svelte/transition";
+
+    let { downloads = null }: { downloads?: number | null } = $props();
 </script>
 
 <section
@@ -54,7 +56,7 @@
 
             <!-- CTA buttons -->
             <div class="flex flex-col sm:flex-row gap-4 pt-4" in:fly={{ y: 20, delay: 400, duration: 600 }}>
-                <DownloadDropdown size="lg" class="text-base px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" />
+                <DownloadDropdown size="lg" {downloads} class="text-base px-8 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300" />
                 <Button href="https://github.com/webstonehq/seaquel" size="lg" variant="outline" class="text-base px-8">
                     <GithubIcon class="mr-2" />
                     View on GitHub

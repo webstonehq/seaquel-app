@@ -10,9 +10,13 @@
 		size?: "default" | "sm" | "lg" | "icon";
 		class?: string;
 		label?: string;
+		/** Lifetime installer downloads, shown as a compact count next to the label. */
+		downloads?: number | null;
 	}
 
-	let { variant = "default", size = "default", class: className = "", label = "Download" }: Props = $props();
+	let { variant = "default", size = "default", class: className = "", label = "Download", downloads = null }: Props = $props();
+
+	const compact = new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 });
 </script>
 
 <DropdownMenu.Root>
@@ -21,6 +25,14 @@
 			<Button {...props} {variant} {size} class={cn("gap-2", className)}>
 				<DownloadIcon class="size-4" />
 				{label}
+				{#if downloads}
+					<span
+						class="rounded-full bg-white/40 px-2 py-0.5 text-xs font-semibold tabular-nums"
+						title="{downloads.toLocaleString('en-US')} downloads"
+					>
+						{compact.format(downloads).toLowerCase()}<span class="sr-only"> downloads</span>
+					</span>
+				{/if}
 				<ChevronDownIcon class="size-3 opacity-60" />
 			</Button>
 		{/snippet}

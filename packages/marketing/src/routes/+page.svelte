@@ -9,6 +9,8 @@
 	import Seo from "$lib/components/seo.svelte";
 	import { FOUNDER } from "$lib/founder";
 
+	let { data } = $props();
+
 	const origin = "https://seaquel.app";
 	const jsonLd = JSON.stringify({
 		"@context": "https://schema.org",
@@ -35,7 +37,7 @@
 	<NavHeader />
 	<!-- Add padding-top to account for fixed header -->
 	<div class="pt-16">
-		<HeroSection />
+		<HeroSection downloads={data.downloads} />
 		<SocialProof />
 		<FeaturesSection />
 		<ComparisonSection />
