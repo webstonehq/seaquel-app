@@ -33,6 +33,24 @@
 		}
 	}
 
+	// LinkedIn's "Add to profile" flow puts the certificate under Licenses &
+	// certifications, which links back here for as long as the entry exists.
+	// Issue date and credential id are prefilled so the form needs no typing.
+	const addToProfileHref = $derived.by(() => {
+		const params = new URLSearchParams({
+			startTask: "CERTIFICATION_NAME",
+			name: "SQL Course Certificate of Completion",
+			organizationName: "Seaquel",
+			certUrl: url,
+			certId: data.certificate.id
+		});
+		if (data.certificate.issuedAt) {
+			const issuedAt = new Date(data.certificate.issuedAt);
+			params.set("issueYear", String(issuedAt.getUTCFullYear()));
+			params.set("issueMonth", String(issuedAt.getUTCMonth() + 1));
+		}
+		return `https://www.linkedin.com/profile/add?${params}`;
+	});
 	const linkedInHref = $derived(
 		`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
 	);
@@ -85,9 +103,18 @@
 
 				{#if data.isOwner}
 					<div class="mt-8 flex flex-wrap items-center gap-3">
-						<Button href={linkedInHref} target="_blank" rel="noreferrer" class="gap-2">
-							Share on LinkedIn
+						<Button href={addToProfileHref} target="_blank" rel="noreferrer" class="gap-2">
+							Add to LinkedIn profile
 							<ArrowRightIcon class="size-4" />
+						</Button>
+						<Button
+							href={linkedInHref}
+							target="_blank"
+							rel="noreferrer"
+							variant="outline"
+							class="gap-2"
+						>
+							Share on LinkedIn
 						</Button>
 						<Button href={xHref} target="_blank" rel="noreferrer" variant="outline" class="gap-2">
 							Share on X
