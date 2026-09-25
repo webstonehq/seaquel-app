@@ -38,7 +38,7 @@
 	<!-- Add padding-top to account for fixed header -->
 	<div class="pt-16">
 		<HeroSection downloads={data.downloads} />
-		<SocialProof />
+		<SocialProof stars={data.stars} />
 		<FeaturesSection />
 		<ComparisonSection />
 		<CtaSection />

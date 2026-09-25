@@ -1,28 +1,14 @@
 <script lang="ts">
 	import { GithubIcon, StarIcon, GitForkIcon, UsersIcon } from "lucide-svelte";
-	import { onMount } from "svelte";
 	import { fade } from "svelte/transition";
 
-	let stars = $state(0);
-	let isLoading = $state(true);
-
-	onMount(async () => {
-		try {
-			const res = await fetch("https://api.github.com/repos/webstonehq/seaquel");
-			const data = await res.json();
-			stars = data.stargazers_count || 0;
-		} catch {
-			stars = 0;
-		} finally {
-			isLoading = false;
-		}
-	});
+	let { stars = null }: { stars?: number | null } = $props();
 </script>
 
 <section class="py-8 border-y bg-muted/20" in:fade={{ delay: 900, duration: 600 }}>
 	<div class="container mx-auto px-4 md:px-6">
 		<div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 lg:gap-16">
-			<!-- GitHub Stars (Real-time) -->
+			<!-- GitHub Stars (from the metrics collector's KV snapshot) -->
 			<a
 				href="https://github.com/webstonehq/seaquel"
 				target="_blank"
@@ -33,9 +19,7 @@
 					<StarIcon class="size-4 text-yellow-500 fill-yellow-500" />
 				</div>
 				<span class="font-medium">
-					{#if isLoading}
-						<span class="animate-pulse">...</span>
-					{:else if stars > 0}
+					{#if stars}
 						{stars.toLocaleString()} stars on GitHub
 					{:else}
 						Star on GitHub

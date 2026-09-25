@@ -9,12 +9,12 @@ const LINK_HEADER = [
 
 // Same snapshot /metrics reads; the collector keeps it fresh so the homepage
 // never has to call the GitHub API itself.
-async function loadDownloadCount(kv: KVNamespace | undefined): Promise<number | null> {
+async function loadMetrics(kv: KVNamespace | undefined): Promise<OpenMetrics | null> {
   if (!kv) return null;
   try {
     const snapshot = await kv.get<{ metrics: OpenMetrics }>("metrics:github", "json");
     if (!snapshot) return null;
-    return snapshot.metrics.totalDownloads;
+    return snapshot.metrics;
   } catch (e) {
     console.error("[home] Failed to read metrics from KV:", e);
     return null;
@@ -23,5 +23,9 @@ async function loadDownloadCount(kv: KVNamespace | undefined): Promise<number | 
 
 export const load: PageServerLoad = async ({ setHeaders, platform }) => {
   setHeaders({ Link: LINK_HEADER });
-  return { downloads: await loadDownloadCount(platform?.env?.GITHUB_API_CACHE) };
+  const metrics = await loadMetrics(platform?.env?.GITHUB_API_CACHE);
+  return {
+    downloads: metrics?.totalDownloads ?? null,
+    stars: metrics?.stars ?? null,
+  };
 };
