@@ -5,7 +5,13 @@
     import { Button } from "$lib/components/ui/button";
     import { Card } from "$lib/components/ui/card";
     import { fly } from "svelte/transition";
-    import { CheckIcon, XIcon, UserIcon, BuildingIcon } from "lucide-svelte";
+    import {
+        CheckIcon,
+        XIcon,
+        UserIcon,
+        BuildingIcon,
+        ShieldCheckIcon,
+    } from "lucide-svelte";
     import Seo from "$lib/components/seo.svelte";
     import { PLAN_META } from "$lib/plans";
 
@@ -211,6 +217,14 @@
                                 >
                                     Buy {plan.name}
                                 </Button>
+                                <p
+                                    class="mt-3 flex items-center justify-center gap-1.5 text-xs text-muted-foreground"
+                                >
+                                    <ShieldCheckIcon
+                                        class="size-3.5 text-green-500 shrink-0"
+                                    />
+                                    30-day money-back guarantee. No questions asked.
+                                </p>
                             </Card>
                         </div>
                     {/each}
@@ -285,7 +299,7 @@
                 </h2>
 
                 <div class="flex flex-col gap-6">
-                    {#each [{ q: "Is Seaquel free?", a: "Yes — Seaquel is free and open source for personal, non-commercial use. A commercial license is only required if you use Seaquel for work." }, { q: "What counts as commercial use?", a: "If you're using Seaquel as part of your work at a company, freelancing, or any revenue-generating activity, that's commercial use." }, { q: "Can I try Seaquel before buying?", a: "Absolutely. Seaquel is fully functional without a license. Try it as long as you like, and purchase a license when you're ready to use it commercially." }, { q: "What happens when my license expires?", a: "You keep access to the version you had at expiration. Renew to get another year of updates and support." }, { q: "Can I transfer my Individual license to someone else?", a: "No. Individual licenses are tied to one person. If you need transferable seats, choose the Business plan." }, { q: "How do Business seat transfers work?", a: "Deactivate the departing member's seat and activate it for someone new — no extra charge. For example, if you buy 5 seats and someone leaves, you reassign that seat to the new hire." }] as faq}
+                    {#each [{ q: "Is Seaquel free?", a: "Yes — Seaquel is free and open source for personal, non-commercial use. A commercial license is only required if you use Seaquel for work." }, { q: "What counts as commercial use?", a: "If you're using Seaquel as part of your work at a company, freelancing, or any revenue-generating activity, that's commercial use." }, { q: "Can I try Seaquel before buying?", a: "Absolutely. Seaquel is fully functional without a license. Try it as long as you like, and purchase a license when you're ready to use it commercially." }, { q: "What happens when my license expires?", a: "You keep access to the version you had at expiration. Renew to get another year of updates and support." }, { q: "Can I transfer my Individual license to someone else?", a: "No. Individual licenses are tied to one person. If you need transferable seats, choose the Business plan." }, { q: "How do Business seat transfers work?", a: "Deactivate the departing member's seat and activate it for someone new — no extra charge. For example, if you buy 5 seats and someone leaves, you reassign that seat to the new hire." }, { q: "Do you offer a refund?", a: "Yes, within 30 days of purchase, no questions asked. Email us at support@seaquel.app and we will refund you." }] as faq}
                         <div class="border-b pb-6 last:border-b-0">
                             <h3 class="font-semibold mb-2">{faq.q}</h3>
                             <p

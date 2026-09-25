@@ -2,6 +2,25 @@
     import NavHeader from "$lib/components/nav-header.svelte";
     import FooterSection from "$lib/components/footer-section.svelte";
     import Seo from "$lib/components/seo.svelte";
+    import { ChevronDownIcon } from "lucide-svelte";
+
+    // Newest first. Add an entry whenever the effective date changes.
+    const revisions = [
+        {
+            date: "September 25, 2026",
+            summary:
+                "Replaced the final-sale policy with a 30-day money-back guarantee (Section 5).",
+        },
+        {
+            date: "September 18, 2026",
+            summary:
+                "Separated the MIT-licensed Source Code from the Official Binaries and Official Server. Commercial use of the Official Binaries requires a license, and the Official Server requires a subscription (Sections 2, 3 and 7).",
+        },
+        {
+            date: "February 15, 2026",
+            summary: "Initial version.",
+        },
+    ];
 </script>
 
 <Seo
@@ -21,7 +40,7 @@
                     Terms of Service
                 </h1>
                 <p class="text-sm text-muted-foreground mb-12">
-                    Effective date: September 18, 2026
+                    Effective date: September 25, 2026
                 </p>
 
                 <div
@@ -157,9 +176,18 @@
                         current subscription period.
                     </p>
                     <p>
-                        All sales are final. Refunds are provided at our sole
-                        discretion and only in exceptional circumstances.
-                        Contact us if you believe a refund is warranted.
+                        We offer a 30-day money-back guarantee. If you request
+                        a refund within 30 days of a purchase, including a
+                        renewal, we will refund the full amount, no questions
+                        asked. To request a refund, email
+                        <a
+                            href="mailto:support@seaquel.app"
+                            class="text-foreground underline underline-offset-4 hover:text-primary transition-colors"
+                            >support@seaquel.app</a
+                        >.
+                        Once a refund is issued, the associated license is
+                        deactivated. Requests made after 30 days are handled at
+                        our discretion.
                     </p>
 
                     <h2>6. Acceptable Use</h2>
@@ -267,6 +295,29 @@
                         >.
                     </p>
                 </div>
+
+                <details class="group mt-12 rounded-xl border bg-card p-5">
+                    <summary
+                        class="flex cursor-pointer items-center justify-between font-semibold marker:content-none [&::-webkit-details-marker]:hidden"
+                    >
+                        Revision History
+                        <ChevronDownIcon
+                            class="size-4 text-muted-foreground transition-transform group-open:rotate-180"
+                        />
+                    </summary>
+                    <ul class="mt-4 flex flex-col gap-4">
+                        {#each revisions as revision (revision.date)}
+                            <li class="text-sm">
+                                <p class="font-medium">{revision.date}</p>
+                                <p
+                                    class="text-muted-foreground leading-relaxed"
+                                >
+                                    {revision.summary}
+                                </p>
+                            </li>
+                        {/each}
+                    </ul>
+                </details>
             </div>
         </section>
 
