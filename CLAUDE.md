@@ -44,6 +44,7 @@ packages/
     │   │   ├── features/        # Features page
     │   │   ├── changelog/       # Changelog listing and detail pages
     │   │   ├── download/        # Download redirect endpoints
+    │   │   ├── updates/         # Desktop updater feeds (stable and beta)
     │   │   └── demo/            # Demo proxy endpoints
     │   ├── lib/
     │   │   ├── components/      # Reusable Svelte components
@@ -62,6 +63,16 @@ packages/
     ├── wrangler.jsonc
     └── components.json
 ```
+
+## Update Feeds
+
+The desktop app's updater asks `/updates/check/{target}/{arch}/{current_version}` (stable) or `/updates/check/beta/{target}/{arch}/{current_version}` (beta). Both answer through `latestJsonFor` in `packages/marketing/src/lib/server/releases.ts`:
+
+- Stable serves the `latest.json` of the newest published release that isn't a pre-release, by tag version (not GitHub's list order). Cached in KV under `updates:latest-json` for 1h.
+- Beta serves the newest published release by version, pre-releases included. Cached under `updates:latest-json:beta` for 10 minutes.
+- A tag with a pre-release suffix (`v2026.10.0-beta.3`) never reaches stable or the download page (`findLatestAsset`), even if GitHub's "pre-release" box wasn't ticked.
+- Any failure answers 204 (no update).
+- Deploy a change to these routes before the app release that depends on it: an app on the Beta channel gets a 404 (and no updates) until the beta route is live.
 
 ## Changelog System
 

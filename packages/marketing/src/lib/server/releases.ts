@@ -2,7 +2,13 @@
  * Resolves a download platform id (e.g. `macos-arm`) to the matching
  * asset in the latest published GitHub release. Shared by the
  * `/download/[platform]` file redirect and the post-download page.
+ *
+ * Also serves the desktop updater's feeds (`/updates/check/...` and
+ * `/updates/check/beta/...`): `latestJsonFor` answers with the
+ * `latest.json` of the release a channel updates to.
  */
+
+import { json } from "@sveltejs/kit";
 
 const GITHUB_RELEASES_URL = "https://api.github.com/repos/webstonehq/seaquel/releases";
 
@@ -40,13 +46,13 @@ export interface ReleaseAsset {
 	version: string;
 }
 
-interface GitHubAsset {
+export interface GitHubAsset {
 	name: string;
 	browser_download_url: string;
 	size: number;
 }
 
-interface GitHubRelease {
+export interface GitHubRelease {
 	tag_name: string;
 	draft: boolean;
 	prerelease: boolean;
@@ -74,7 +80,9 @@ export async function findLatestAsset(
 		// `Bearer undefined` header makes GitHub reject the request with 401.
 		if (token) headers["Authorization"] = `Bearer ${token}`;
 
-		const response = await fetch(GITHUB_RELEASES_URL, { headers });
+		// 100 per page (GitHub's default is 30) so a long run of betas can't
+		// push the newest stable off the first page.
+		const response = await fetch(`${GITHUB_RELEASES_URL}?per_page=100`, { headers });
 		if (!response.ok) {
 			console.error("Failed to fetch releases:", response.status);
 			return null;
@@ -82,9 +90,10 @@ export async function findLatestAsset(
 
 		const releases: GitHubRelease[] = await response.json();
 
-		// Find the latest non-draft, non-prerelease
-		const latestRelease = releases.find(
-			(release) => !release.draft && !release.prerelease
+		// The newest stable release by version: no drafts, no pre-releases
+		// (flagged or by tag), no tags we can't read.
+		const latestRelease = newestByVersion(
+			releases.filter((release) => onChannel(release, "stable")),
 		);
 		if (!latestRelease?.assets?.length) return null;
 
@@ -110,5 +119,176 @@ export async function findLatestAsset(
 	} catch (error) {
 		console.error("Error fetching release:", error);
 		return null;
+	}
+}
+
+export type Channel = "stable" | "beta";
+
+const VERSION = /^v?(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z.-]+))?$/;
+
+function compareIdentifiers(a: string, b: string): number {
+	const an = /^\d+$/.test(a);
+	const bn = /^\d+$/.test(b);
+	if (an && bn) return Number(a) - Number(b);
+	// Numeric identifiers have lower precedence than alphanumeric ones.
+	if (an) return -1;
+	if (bn) return 1;
+	return a < b ? -1 : a > b ? 1 : 0;
+}
+
+/** Semver order for `YYYY.M.P[-pre]` tags; NaN when either can't be read. */
+export function compareVersions(a: string, b: string): number {
+	const ma = VERSION.exec(a);
+	const mb = VERSION.exec(b);
+	if (!ma || !mb) return NaN;
+
+	for (let i = 1; i <= 3; i++) {
+		const d = Number(ma[i]) - Number(mb[i]);
+		if (d !== 0) return d;
+	}
+
+	const pa = ma[4];
+	const pb = mb[4];
+	// A version without a pre-release ranks above the same one with one.
+	if (pa === undefined || pb === undefined) {
+		if (pa === pb) return 0;
+		return pa === undefined ? 1 : -1;
+	}
+
+	const ia = pa.split(".");
+	const ib = pb.split(".");
+	for (let i = 0; i < Math.min(ia.length, ib.length); i++) {
+		const d = compareIdentifiers(ia[i], ib[i]);
+		if (d !== 0) return d;
+	}
+	return ia.length - ib.length;
+}
+
+/**
+ * Whether `release` belongs on `channel`: published (not a draft) with a tag
+ * we can read. Stable also skips anything GitHub flags as a pre-release and
+ * any tag with a pre-release part (`-beta.N`), even when the "pre-release"
+ * box wasn't ticked, so a beta can't reach stable users or the download page.
+ */
+function onChannel(release: GitHubRelease, channel: Channel): boolean {
+	if (release.draft) return false;
+	const version = VERSION.exec(release.tag_name);
+	if (!version) return false;
+	if (channel === "stable" && (release.prerelease || version[4] !== undefined)) return false;
+	return true;
+}
+
+/** The newest of `releases` by tag version; tags must already be readable. */
+function newestByVersion<R extends GitHubRelease>(releases: R[]): R | null {
+	let best: R | null = null;
+	for (const release of releases) {
+		if (!best || compareVersions(release.tag_name, best.tag_name) > 0) best = release;
+	}
+	return best;
+}
+
+/**
+ * The release `channel` updates to: on the channel (see `onChannel`), with
+ * `latest.json`, newest by version.
+ */
+export function pickRelease<R extends GitHubRelease>(releases: R[], channel: Channel): R | null {
+	return newestByVersion(
+		releases.filter(
+			(release) =>
+				onChannel(release, channel) &&
+				release.assets?.some((asset) => asset.name === "latest.json"),
+		),
+	);
+}
+
+const FEED_CACHE: Record<Channel, { key: string; ttlSeconds: number }> = {
+	stable: { key: "updates:latest-json", ttlSeconds: 60 * 60 },
+	beta: { key: "updates:latest-json:beta", ttlSeconds: 10 * 60 },
+};
+
+/**
+ * The updater's answer for `channel`: the chosen release's `latest.json`,
+ * or 204 (no update) when anything goes wrong. Never throws.
+ */
+export async function latestJsonFor(
+	channel: Channel,
+	platform: App.Platform | undefined,
+): Promise<Response> {
+	const { key, ttlSeconds } = FEED_CACHE[channel];
+	const kv = platform?.env?.GITHUB_API_CACHE;
+
+	// Try serving from cache
+	if (kv) {
+		try {
+			const cached = await kv.get(key, "text");
+			if (cached) {
+				console.log(`Serving ${channel} update check from cache`);
+				return json(JSON.parse(cached));
+			}
+		} catch (e) {
+			console.error(`Failed to read ${channel} update check from cache:`, e);
+		}
+	}
+
+	try {
+		const headers: Record<string, string> = {
+			"User-Agent": "seaquel-app-updates-checker",
+			"Accept": "application/vnd.github.v3+json",
+		};
+
+		if (platform?.env?.GITHUB_TOKEN) {
+			console.log("GITHUB_TOKEN present, sending an authenticated request to GitHub");
+			headers["Authorization"] = `Bearer ${platform.env.GITHUB_TOKEN}`;
+		}
+
+		// GitHub returns 30 releases per page by default; ask for the most it
+		// allows so a long run of betas can't push the newest stable off it.
+		const releaseResponse = await fetch(`${GITHUB_RELEASES_URL}?per_page=100`, { headers });
+
+		if (!releaseResponse.ok) {
+			console.error("Failed to fetch releases: ", await releaseResponse.text());
+			return new Response(null, { status: 204 });
+		}
+
+		const releases: GitHubRelease[] = await releaseResponse.json();
+		console.log(`Found ${releases.length} releases`);
+
+		const validRelease = pickRelease(releases, channel);
+		console.log(`Found latest ${channel} release: `, validRelease?.tag_name);
+
+		if (!validRelease) {
+			return new Response(null, { status: 204 });
+		}
+
+		const latestJsonAsset = validRelease.assets.find((asset) => asset.name === "latest.json");
+
+		if (!latestJsonAsset) {
+			console.error("Failed to find latest.json asset in release");
+			return new Response(null, { status: 204 });
+		}
+
+		const assetResponse = await fetch(latestJsonAsset.browser_download_url);
+
+		if (!assetResponse.ok) {
+			console.error("Failed to fetch latest.json content: ", await assetResponse.text());
+			return new Response(null, { status: 204 });
+		}
+
+		const latestJson = await assetResponse.json();
+
+		// Cache the result
+		if (kv) {
+			try {
+				await kv.put(key, JSON.stringify(latestJson), { expirationTtl: ttlSeconds });
+				console.log(`Cached ${channel} update check result`);
+			} catch (e) {
+				console.error(`Failed to write ${channel} update check to cache:`, e);
+			}
+		}
+
+		return json(latestJson);
+	} catch (error) {
+		console.error(error);
+		return new Response(null, { status: 204 });
 	}
 }
