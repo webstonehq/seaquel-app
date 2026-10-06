@@ -8,6 +8,7 @@ export const load: PageServerLoad = async ({ params, platform }) => {
 	if (!isKnownPlatform(params.platform) || !described) redirect(303, "/download");
 
 	return {
+		channel: "stable" as const,
 		platform: params.platform,
 		os: described.os,
 		variant: described.variant,

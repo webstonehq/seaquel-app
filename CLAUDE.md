@@ -70,7 +70,8 @@ The desktop app's updater asks `/updates/check/{target}/{arch}/{current_version}
 
 - Stable serves the `latest.json` of the newest published release that isn't a pre-release, by tag version (not GitHub's list order). Cached in KV under `updates:latest-json` for 1h.
 - Beta serves the newest published release by version, pre-releases included. Cached under `updates:latest-json:beta` for 10 minutes.
-- A tag with a pre-release suffix (`v2026.10.0-beta.3`) never reaches stable or the download page (`findLatestAsset`), even if GitHub's "pre-release" box wasn't ticked.
+- A tag with a pre-release suffix (`v2026.10.0-beta.3`) never reaches stable or the stable download page (`findLatestAsset`), even if GitHub's "pre-release" box wasn't ticked.
+- `/download/beta` (linked from `/download`, noindex, not in the sitemap) offers the beta channel's build. Between betas it shows "no beta right now" instead of handing out a stable build, which would start on the stable channel.
 - Any failure answers 204 (no update).
 - Deploy a change to these routes before the app release that depends on it: an app on the Beta channel gets a 404 (and no updates) until the beta route is live.
 

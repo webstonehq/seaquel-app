@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, it, expect, vi } from "vitest";
-import { compareVersions, findLatestAsset, latestJsonFor, pickRelease } from "./releases";
+import { compareVersions, findLatestAsset, findLatestRelease, latestJsonFor, pickRelease } from "./releases";
 
 const r = (tag: string, o: { draft?: boolean; prerelease?: boolean; latestJson?: boolean } = {}) => ({
 	tag_name: tag,
@@ -211,5 +211,40 @@ describe("findLatestAsset", () => {
 		const asset = await findLatestAsset("macos-arm", undefined);
 		expect(asset?.version).toBe("2026.9.3");
 		expect(asset?.url).toBe("dl/v2026.9.3");
+	});
+
+	it("beta serves the newest beta and says it's a pre-release", async () => {
+		stubGitHub([dmg("v2026.10.0-beta.4"), dmg("v2026.10.0-beta.5", { draft: true }), dmg("v2026.9.3")]);
+		const asset = await findLatestAsset("macos-arm", undefined, "beta");
+		expect(asset?.version).toBe("2026.10.0-beta.4");
+		expect(asset?.prerelease).toBe(true);
+	});
+
+	it("beta falls back to a newer stable, marked as not a pre-release", async () => {
+		stubGitHub([dmg("v2026.10.0"), dmg("v2026.10.0-beta.4", { prerelease: true })]);
+		const asset = await findLatestAsset("macos-arm", undefined, "beta");
+		expect(asset?.version).toBe("2026.10.0");
+		expect(asset?.prerelease).toBe(false);
+	});
+});
+
+describe("findLatestRelease", () => {
+	beforeEach(() => {
+		vi.spyOn(console, "error").mockImplementation(() => {});
+	});
+	afterEach(() => {
+		vi.unstubAllGlobals();
+		vi.restoreAllMocks();
+	});
+
+	it("names the channel's release and whether it's a pre-release", async () => {
+		stubGitHub([r("v2026.10.0-beta.2", { prerelease: true }), r("v2026.9.3")]);
+		expect(await findLatestRelease("beta", undefined)).toEqual({ version: "2026.10.0-beta.2", prerelease: true });
+		expect(await findLatestRelease("stable", undefined)).toEqual({ version: "2026.9.3", prerelease: false });
+	});
+
+	it("is null when GitHub is unreachable", async () => {
+		vi.stubGlobal("fetch", vi.fn(async () => new Response("nope", { status: 500 })));
+		expect(await findLatestRelease("beta", undefined)).toBeNull();
 	});
 });

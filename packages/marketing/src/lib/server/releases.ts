@@ -1,7 +1,8 @@
 /**
  * Resolves a download platform id (e.g. `macos-arm`) to the matching
- * asset in the latest published GitHub release. Shared by the
- * `/download/[platform]` file redirect and the post-download page.
+ * asset in the latest published GitHub release of a channel. Shared by
+ * the `/download/[platform]` and `/download/beta/[platform]` file
+ * redirects and their post-download pages.
  *
  * Also serves the desktop updater's feeds (`/updates/check/...` and
  * `/updates/check/beta/...`): `latestJsonFor` answers with the
@@ -44,6 +45,8 @@ export interface ReleaseAsset {
 	size: number;
 	/** Release tag without the leading `v`, e.g. `2026.4.8`. */
 	version: string;
+	/** Whether the release is a pre-release (flagged on GitHub or by tag). */
+	prerelease: boolean;
 }
 
 export interface GitHubAsset {
@@ -59,17 +62,18 @@ export interface GitHubRelease {
 	assets: GitHubAsset[];
 }
 
-/**
- * The latest release's asset for `platform`, or `null` when the platform
- * is unknown, GitHub is unreachable, or the release has no matching file.
- * Never throws — callers fall back to the releases page.
- */
-export async function findLatestAsset(
-	platform: string,
-	token: string | undefined,
-): Promise<ReleaseAsset | null> {
-	if (!isKnownPlatform(platform)) return null;
+export interface LatestRelease {
+	/** Release tag without the leading `v`, e.g. `2026.10.0-beta.3`. */
+	version: string;
+	/**
+	 * Whether it's a pre-release (flagged on GitHub or by tag). The beta
+	 * channel falls back to the newest stable when no beta is newer.
+	 */
+	prerelease: boolean;
+}
 
+/** `GET /releases`, or `null` when GitHub is unreachable. Never throws. */
+async function fetchReleases(token: string | undefined): Promise<GitHubRelease[] | null> {
 	try {
 		const headers: Record<string, string> = {
 			"User-Agent": "seaquel-website",
@@ -87,39 +91,73 @@ export async function findLatestAsset(
 			console.error("Failed to fetch releases:", response.status);
 			return null;
 		}
-
-		const releases: GitHubRelease[] = await response.json();
-
-		// The newest stable release by version: no drafts, no pre-releases
-		// (flagged or by tag), no tags we can't read.
-		const latestRelease = newestByVersion(
-			releases.filter((release) => onChannel(release, "stable")),
-		);
-		if (!latestRelease?.assets?.length) return null;
-
-		// Find matching asset for the requested platform
-		const pattern = ASSET_PATTERNS[platform];
-		let asset = latestRelease.assets.find((a) => pattern.test(a.name));
-
-		// For generic "macos", prefer Apple Silicon (aarch64) if available
-		if (platform === "macos" && !asset) {
-			asset = latestRelease.assets.find((a) => /aarch64\.dmg$/i.test(a.name));
-		}
-		if (platform === "macos" && !asset) {
-			asset = latestRelease.assets.find((a) => /\.dmg$/i.test(a.name));
-		}
-		if (!asset) return null;
-
-		return {
-			name: asset.name,
-			url: asset.browser_download_url,
-			size: asset.size,
-			version: latestRelease.tag_name.replace(/^v/, ""),
-		};
+		return await response.json();
 	} catch (error) {
-		console.error("Error fetching release:", error);
+		console.error("Error fetching releases:", error);
 		return null;
 	}
+}
+
+/** The newest release on `channel` by version (see `onChannel`). */
+function newestOnChannel(releases: GitHubRelease[], channel: Channel): GitHubRelease | null {
+	return newestByVersion(releases.filter((release) => onChannel(release, channel)));
+}
+
+function isPrerelease(release: GitHubRelease): boolean {
+	return release.prerelease || VERSION.exec(release.tag_name)?.[4] !== undefined;
+}
+
+/**
+ * The release `channel` downloads, or `null` when GitHub is unreachable or
+ * nothing is on the channel. Never throws.
+ */
+export async function findLatestRelease(
+	channel: Channel,
+	token: string | undefined,
+): Promise<LatestRelease | null> {
+	const releases = await fetchReleases(token);
+	const release = releases && newestOnChannel(releases, channel);
+	if (!release) return null;
+	return { version: release.tag_name.replace(/^v/, ""), prerelease: isPrerelease(release) };
+}
+
+/**
+ * The asset for `platform` in the release `channel` downloads (stable by
+ * default), or `null` when the platform is unknown, GitHub is unreachable,
+ * or the release has no matching file. Never throws — callers fall back to
+ * the releases page.
+ */
+export async function findLatestAsset(
+	platform: string,
+	token: string | undefined,
+	channel: Channel = "stable",
+): Promise<ReleaseAsset | null> {
+	if (!isKnownPlatform(platform)) return null;
+
+	const releases = await fetchReleases(token);
+	const latestRelease = releases && newestOnChannel(releases, channel);
+	if (!latestRelease?.assets?.length) return null;
+
+	// Find matching asset for the requested platform
+	const pattern = ASSET_PATTERNS[platform];
+	let asset = latestRelease.assets.find((a) => pattern.test(a.name));
+
+	// For generic "macos", prefer Apple Silicon (aarch64) if available
+	if (platform === "macos" && !asset) {
+		asset = latestRelease.assets.find((a) => /aarch64\.dmg$/i.test(a.name));
+	}
+	if (platform === "macos" && !asset) {
+		asset = latestRelease.assets.find((a) => /\.dmg$/i.test(a.name));
+	}
+	if (!asset) return null;
+
+	return {
+		name: asset.name,
+		url: asset.browser_download_url,
+		size: asset.size,
+		version: latestRelease.tag_name.replace(/^v/, ""),
+		prerelease: isPrerelease(latestRelease),
+	};
 }
 
 export type Channel = "stable" | "beta";
