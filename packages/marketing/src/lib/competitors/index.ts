@@ -78,6 +78,13 @@ export interface CompetitorWithContent extends Competitor {
 
 type CompetitorFrontmatter = Omit<Competitor, 'slug' | 'seoTitle'> & { seoTitle?: string };
 
+// One eager glob shared by every function. Mixing eager and lazy globs over the
+// same files makes Vite warn that the dynamic import can't split them out.
+const modules = import.meta.glob<{ default: Component; metadata: CompetitorFrontmatter }>(
+	'/src/content/competitors/*.md',
+	{ eager: true }
+);
+
 function slugFromPath(path: string): string {
 	return path.split('/').pop()?.replace('.md', '') ?? '';
 }
@@ -99,11 +106,6 @@ function build(path: string, frontmatter: CompetitorFrontmatter): Competitor {
 }
 
 export async function getCompetitors(): Promise<Competitor[]> {
-	const modules = import.meta.glob<{ metadata: CompetitorFrontmatter }>(
-		'/src/content/competitors/*.md',
-		{ eager: true }
-	);
-
 	return Object.entries(modules)
 		.map(([path, module]) => build(path, module.metadata))
 		.sort((a, b) => a.name.localeCompare(b.name));
@@ -120,15 +122,10 @@ export async function getAlternatives(): Promise<Competitor[]> {
 }
 
 export async function getCompetitor(slug: string): Promise<CompetitorWithContent | null> {
-	const modules = import.meta.glob<{
-		default: Component;
-		metadata: CompetitorFrontmatter;
-	}>('/src/content/competitors/*.md');
-
 	const path = `/src/content/competitors/${slug}.md`;
 	if (!(path in modules)) return null;
 
-	const module = await modules[path]();
+	const module = modules[path];
 	const base = build(path, module.metadata);
 
 	// A long-tail page inherits the table and the facts of the tool it is
@@ -155,5 +152,5 @@ export async function getCompetitor(slug: string): Promise<CompetitorWithContent
 }
 
 export function getCompetitorSlugs(): string[] {
-	return Object.keys(import.meta.glob('/src/content/competitors/*.md')).map(slugFromPath);
+	return Object.keys(modules).map(slugFromPath);
 }

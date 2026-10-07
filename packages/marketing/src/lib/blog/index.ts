@@ -38,6 +38,18 @@ interface BlogFrontmatter {
 
 const WORDS_PER_MINUTE = 220;
 
+// One eager glob shared by every function. Mixing eager and lazy globs over the
+// same files makes Vite warn that the dynamic import can't split them out.
+const modules = import.meta.glob<{ default: Component; metadata: BlogFrontmatter }>(
+	'/src/content/blog/*.md',
+	{ eager: true }
+);
+const rawModules = import.meta.glob<string>('/src/content/blog/*.md', {
+	eager: true,
+	query: '?raw',
+	import: 'default'
+});
+
 function formatDate(dateString: string): string {
 	const date = new Date(dateString);
 	return date.toLocaleDateString('en-US', {
@@ -121,16 +133,6 @@ function buildEntry(
 }
 
 export async function getBlogEntries(): Promise<BlogEntry[]> {
-	const modules = import.meta.glob<{ metadata: BlogFrontmatter }>(
-		'/src/content/blog/*.md',
-		{ eager: true }
-	);
-	const rawModules = import.meta.glob<string>('/src/content/blog/*.md', {
-		eager: true,
-		query: '?raw',
-		import: 'default'
-	});
-
 	const entries: BlogEntry[] = [];
 	for (const [path, module] of Object.entries(modules)) {
 		const raw = rawModules[path] ?? '';
@@ -141,20 +143,11 @@ export async function getBlogEntries(): Promise<BlogEntry[]> {
 }
 
 export async function getBlogEntry(slug: string): Promise<BlogEntryWithContent | null> {
-	const modules = import.meta.glob<{
-		default: Component;
-		metadata: BlogFrontmatter;
-	}>('/src/content/blog/*.md');
-	const rawModules = import.meta.glob<string>('/src/content/blog/*.md', {
-		query: '?raw',
-		import: 'default'
-	});
-
 	const path = `/src/content/blog/${slug}.md`;
 	if (!(path in modules)) return null;
 
-	const module = await modules[path]();
-	const raw = rawModules[path] ? await rawModules[path]() : '';
+	const module = modules[path];
+	const raw = rawModules[path] ?? '';
 	const base = buildEntry(path, module.metadata, raw);
 
 	return {
@@ -165,7 +158,6 @@ export async function getBlogEntry(slug: string): Promise<BlogEntryWithContent |
 }
 
 export function getBlogSlugs(): string[] {
-	const modules = import.meta.glob('/src/content/blog/*.md');
 	return Object.keys(modules).map(
 		(path) => path.split('/').pop()?.replace('.md', '') ?? ''
 	);

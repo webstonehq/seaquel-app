@@ -19,6 +19,19 @@ export interface ChangelogEntryWithContent extends ChangelogEntry {
 	content: Component;
 }
 
+// One eager glob shared by every function. Mixing eager and lazy globs over the
+// same files makes Vite warn that the dynamic import can't split them out.
+const modules = import.meta.glob<{
+	default: Component;
+	metadata: { title: string; date: string; description?: string };
+}>('/src/content/changelog/*.md', { eager: true });
+
+const rawModules = import.meta.glob<string>('/src/content/changelog/*.md', {
+	eager: true,
+	query: '?raw',
+	import: 'default'
+});
+
 function formatDate(dateString: string): string {
 	const date = new Date(dateString);
 	return date.toLocaleDateString('en-US', {
@@ -47,16 +60,6 @@ function extractHighlights(raw: string): ChangelogHighlight[] {
  * Load all changelog entries metadata (for listing)
  */
 export async function getChangelogEntries(): Promise<ChangelogEntry[]> {
-	const modules = import.meta.glob<{
-		metadata: { title: string; date: string; description?: string };
-	}>('/src/content/changelog/*.md', { eager: true });
-
-	const rawModules = import.meta.glob<string>('/src/content/changelog/*.md', {
-		eager: true,
-		query: '?raw',
-		import: 'default'
-	});
-
 	const entries: ChangelogEntry[] = [];
 
 	for (const [path, module] of Object.entries(modules)) {
@@ -85,18 +88,13 @@ export async function getChangelogEntries(): Promise<ChangelogEntry[]> {
  * Load a single changelog entry by slug (with content)
  */
 export async function getChangelogEntry(slug: string): Promise<ChangelogEntryWithContent | null> {
-	const modules = import.meta.glob<{
-		default: Component;
-		metadata: { title: string; date: string; description?: string };
-	}>('/src/content/changelog/*.md');
-
 	const path = `/src/content/changelog/${slug}.md`;
 
 	if (!(path in modules)) {
 		return null;
 	}
 
-	const module = await modules[path]();
+	const module = modules[path];
 	const { title, date, description } = module.metadata;
 
 	return {
@@ -114,7 +112,5 @@ export async function getChangelogEntry(slug: string): Promise<ChangelogEntryWit
  * Get all slugs for prerendering
  */
 export function getChangelogSlugs(): string[] {
-	const modules = import.meta.glob('/src/content/changelog/*.md');
-
 	return Object.keys(modules).map((path) => path.split('/').pop()?.replace('.md', '') ?? '');
 }

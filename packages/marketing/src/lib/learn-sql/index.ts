@@ -41,6 +41,18 @@ interface LessonFrontmatter {
 
 const WORDS_PER_MINUTE = 220;
 
+// One eager glob shared by every function. Mixing eager and lazy globs over the
+// same files makes Vite warn that the dynamic import can't split them out.
+const modules = import.meta.glob<{ default: Component; metadata: LessonFrontmatter }>(
+	'/src/content/learn-sql/*.md',
+	{ eager: true }
+);
+const rawModules = import.meta.glob<string>('/src/content/learn-sql/*.md', {
+	eager: true,
+	query: '?raw',
+	import: 'default'
+});
+
 function stripMarkdown(raw: string): string {
 	return raw
 		.replace(/^---[\s\S]*?---/, '')
@@ -97,16 +109,6 @@ function buildLesson(path: string, frontmatter: LessonFrontmatter, raw: string):
 }
 
 export async function getLessons(): Promise<Lesson[]> {
-	const modules = import.meta.glob<{ metadata: LessonFrontmatter }>(
-		'/src/content/learn-sql/*.md',
-		{ eager: true }
-	);
-	const rawModules = import.meta.glob<string>('/src/content/learn-sql/*.md', {
-		eager: true,
-		query: '?raw',
-		import: 'default'
-	});
-
 	const lessons: Lesson[] = [];
 	for (const [path, module] of Object.entries(modules)) {
 		lessons.push(buildLesson(path, module.metadata, rawModules[path] ?? ''));
@@ -116,20 +118,11 @@ export async function getLessons(): Promise<Lesson[]> {
 }
 
 export async function getLesson(slug: string): Promise<LessonWithContent | null> {
-	const modules = import.meta.glob<{
-		default: Component;
-		metadata: LessonFrontmatter;
-	}>('/src/content/learn-sql/*.md');
-	const rawModules = import.meta.glob<string>('/src/content/learn-sql/*.md', {
-		query: '?raw',
-		import: 'default'
-	});
-
 	const path = `/src/content/learn-sql/${slug}.md`;
 	if (!(path in modules)) return null;
 
-	const module = await modules[path]();
-	const raw = rawModules[path] ? await rawModules[path]() : '';
+	const module = modules[path];
+	const raw = rawModules[path] ?? '';
 	const base = buildLesson(path, module.metadata, raw);
 
 	// Neighbours come from the full ordered list so the course chains together
@@ -149,6 +142,5 @@ export async function getLesson(slug: string): Promise<LessonWithContent | null>
 }
 
 export function getLessonSlugs(): string[] {
-	const modules = import.meta.glob('/src/content/learn-sql/*.md');
 	return Object.keys(modules).map((path) => path.split('/').pop()?.replace('.md', '') ?? '');
 }

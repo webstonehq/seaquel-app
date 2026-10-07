@@ -42,6 +42,13 @@ type SqlErrorFrontmatter = Omit<SqlError, 'slug' | 'seoTitle' | 'codes'> & {
 	codes?: SqlError['codes'];
 };
 
+// One eager glob shared by every function. Mixing eager and lazy globs over the
+// same files makes Vite warn that the dynamic import can't split them out.
+const modules = import.meta.glob<{ default: Component; metadata: SqlErrorFrontmatter }>(
+	'/src/content/sql-errors/*.md',
+	{ eager: true }
+);
+
 function slugFromPath(path: string): string {
 	return path.split('/').pop()?.replace('.md', '') ?? '';
 }
@@ -63,26 +70,16 @@ function buildError(path: string, frontmatter: SqlErrorFrontmatter): SqlError {
 }
 
 export async function getSqlErrors(): Promise<SqlError[]> {
-	const modules = import.meta.glob<{ metadata: SqlErrorFrontmatter }>(
-		'/src/content/sql-errors/*.md',
-		{ eager: true }
-	);
-
 	return Object.entries(modules)
 		.map(([path, module]) => buildError(path, module.metadata))
 		.sort((a, b) => a.title.localeCompare(b.title));
 }
 
 export async function getSqlError(slug: string): Promise<SqlErrorWithContent | null> {
-	const modules = import.meta.glob<{
-		default: Component;
-		metadata: SqlErrorFrontmatter;
-	}>('/src/content/sql-errors/*.md');
-
 	const path = `/src/content/sql-errors/${slug}.md`;
 	if (!(path in modules)) return null;
 
-	const module = await modules[path]();
+	const module = modules[path];
 	const base = buildError(path, module.metadata);
 
 	const lessons = await getLessons();
@@ -111,7 +108,6 @@ export async function getSqlErrorsForLesson(lesson: string): Promise<SqlError[]>
 }
 
 export function getSqlErrorSlugs(): string[] {
-	const modules = import.meta.glob('/src/content/sql-errors/*.md');
 	return Object.keys(modules).map(slugFromPath);
 }
 
