@@ -61,7 +61,8 @@
 		"typescript": "^5.9.3",
 		"vite": "^7.2.6",
 		"vite-plugin-devtools-json": "^1.0.0",
-		"vitest": "^4.1.7"
+		"vitest": "^4.1.7",
+		"wrangler": "^4.147.0"
 	},
 	"dependencies": {
 		"@resvg/resvg-wasm": "^2.6.2",
