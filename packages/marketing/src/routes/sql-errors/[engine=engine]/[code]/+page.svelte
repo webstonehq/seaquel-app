@@ -12,8 +12,15 @@
 	import PlayIcon from "@lucide/svelte/icons/play";
 	import { sqlErrorWidget } from "#lib/sql-errors/widget.js";
 	import type { PageData } from "./$types";
+	import { onMount } from "svelte";
 
 	let { data }: { data: PageData } = $props();
+
+	onMount(() => {
+		// The page ships no JS, so this only runs when the client router rendered it
+		// (dev, for one), where the <script> in <svelte:head> is inserted but never run.
+		if (page.example) import("../../../../embed/seaquel-sql");
+	});
 
 	const origin = "https://seaquel.app";
 	const page = $derived(data.page);
