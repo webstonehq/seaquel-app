@@ -1,79 +1,77 @@
 import type { Component, ComponentType, SvelteComponent } from 'svelte';
-import {
-	ActivityIcon,
-	NetworkIcon,
-	CodeIcon,
-	WandSparklesIcon,
-	LayoutGridIcon,
-	PlayIcon,
-	DatabaseIcon,
-	PencilIcon,
-	RowsIcon,
-	DownloadIcon,
-	HistoryIcon,
-	BookmarkIcon,
-	StarIcon,
-	SearchIcon,
-	ShieldIcon,
-	LockIcon,
-	KeyboardIcon,
-	PaletteIcon,
-	ChevronsLeftRightIcon,
-	TerminalIcon,
-	FolderTreeIcon,
-	TablePropertiesIcon,
-	ListOrderedIcon,
-	CopyIcon,
-	GaugeIcon,
-	LinkIcon,
-	ShieldCheckIcon,
-	CommandIcon,
-	MousePointerClickIcon,
-	TriangleAlertIcon,
-	RefreshCwIcon,
-	GlobeIcon,
-	FileCodeIcon,
-	PlugIcon,
-  ImportIcon,
-	LayoutDashboardIcon,
-	WorkflowIcon,
-	GitBranchIcon,
-	BarChart3Icon,
-	LineChartIcon,
-	PieChartIcon,
-	ScatterChartIcon,
-	TrendingUpIcon,
-	FlameIcon,
-	HardDriveIcon,
-	GraduationCapIcon,
-	BookOpenIcon,
-	BoxesIcon,
-	UsersIcon,
-	GitForkIcon,
-	FolderGit2Icon,
-	SlidersHorizontalIcon,
-	BracesIcon,
-	ToggleLeftIcon,
-	ArrowLeftRightIcon,
-	AsteriskIcon,
-	FunctionSquareIcon,
-	MonitorIcon,
-	SparklesIcon,
-	AtSignIcon,
-	LayoutPanelLeftIcon,
-	ShareIcon,
-	DiffIcon,
-	SplitIcon,
-	ExternalLinkIcon,
-	ShieldAlertIcon,
-	ToggleRightIcon,
-	FolderInputIcon,
-	ClipboardCheckIcon,
-	TableIcon,
-	PlusCircleIcon,
-	Columns3Icon,
-	ShieldBanIcon
-} from 'lucide-svelte';
+import ActivityIcon from '@lucide/svelte/icons/activity';
+import NetworkIcon from '@lucide/svelte/icons/network';
+import CodeIcon from '@lucide/svelte/icons/code';
+import WandSparklesIcon from '@lucide/svelte/icons/wand-sparkles';
+import LayoutGridIcon from '@lucide/svelte/icons/layout-grid';
+import PlayIcon from '@lucide/svelte/icons/play';
+import DatabaseIcon from '@lucide/svelte/icons/database';
+import PencilIcon from '@lucide/svelte/icons/pencil';
+import RowsIcon from '@lucide/svelte/icons/rows-2';
+import DownloadIcon from '@lucide/svelte/icons/download';
+import HistoryIcon from '@lucide/svelte/icons/history';
+import BookmarkIcon from '@lucide/svelte/icons/bookmark';
+import StarIcon from '@lucide/svelte/icons/star';
+import SearchIcon from '@lucide/svelte/icons/search';
+import ShieldIcon from '@lucide/svelte/icons/shield';
+import LockIcon from '@lucide/svelte/icons/lock';
+import KeyboardIcon from '@lucide/svelte/icons/keyboard';
+import PaletteIcon from '@lucide/svelte/icons/palette';
+import ChevronsLeftRightIcon from '@lucide/svelte/icons/chevrons-left-right';
+import TerminalIcon from '@lucide/svelte/icons/terminal';
+import FolderTreeIcon from '@lucide/svelte/icons/folder-tree';
+import TablePropertiesIcon from '@lucide/svelte/icons/table-properties';
+import ListOrderedIcon from '@lucide/svelte/icons/list-ordered';
+import CopyIcon from '@lucide/svelte/icons/copy';
+import GaugeIcon from '@lucide/svelte/icons/gauge';
+import LinkIcon from '@lucide/svelte/icons/link';
+import ShieldCheckIcon from '@lucide/svelte/icons/shield-check';
+import CommandIcon from '@lucide/svelte/icons/command';
+import MousePointerClickIcon from '@lucide/svelte/icons/mouse-pointer-click';
+import TriangleAlertIcon from '@lucide/svelte/icons/triangle-alert';
+import RefreshCwIcon from '@lucide/svelte/icons/refresh-cw';
+import GlobeIcon from '@lucide/svelte/icons/globe';
+import FileCodeIcon from '@lucide/svelte/icons/file-code';
+import PlugIcon from '@lucide/svelte/icons/plug';
+import ImportIcon from '@lucide/svelte/icons/import';
+import LayoutDashboardIcon from '@lucide/svelte/icons/layout-dashboard';
+import WorkflowIcon from '@lucide/svelte/icons/workflow';
+import GitBranchIcon from '@lucide/svelte/icons/git-branch';
+import BarChart3Icon from '@lucide/svelte/icons/chart-column';
+import LineChartIcon from '@lucide/svelte/icons/chart-line';
+import PieChartIcon from '@lucide/svelte/icons/chart-pie';
+import ScatterChartIcon from '@lucide/svelte/icons/chart-scatter';
+import TrendingUpIcon from '@lucide/svelte/icons/trending-up';
+import FlameIcon from '@lucide/svelte/icons/flame';
+import HardDriveIcon from '@lucide/svelte/icons/hard-drive';
+import GraduationCapIcon from '@lucide/svelte/icons/graduation-cap';
+import BookOpenIcon from '@lucide/svelte/icons/book-open';
+import BoxesIcon from '@lucide/svelte/icons/boxes';
+import UsersIcon from '@lucide/svelte/icons/users';
+import GitForkIcon from '@lucide/svelte/icons/git-fork';
+import FolderGit2Icon from '@lucide/svelte/icons/folder-git-2';
+import SlidersHorizontalIcon from '@lucide/svelte/icons/sliders-horizontal';
+import BracesIcon from '@lucide/svelte/icons/braces';
+import ToggleLeftIcon from '@lucide/svelte/icons/toggle-left';
+import ArrowLeftRightIcon from '@lucide/svelte/icons/arrow-left-right';
+import AsteriskIcon from '@lucide/svelte/icons/asterisk';
+import FunctionSquareIcon from '@lucide/svelte/icons/square-function';
+import MonitorIcon from '@lucide/svelte/icons/monitor';
+import SparklesIcon from '@lucide/svelte/icons/sparkles';
+import AtSignIcon from '@lucide/svelte/icons/at-sign';
+import LayoutPanelLeftIcon from '@lucide/svelte/icons/layout-panel-left';
+import ShareIcon from '@lucide/svelte/icons/share';
+import DiffIcon from '@lucide/svelte/icons/diff';
+import SplitIcon from '@lucide/svelte/icons/split';
+import ExternalLinkIcon from '@lucide/svelte/icons/external-link';
+import ShieldAlertIcon from '@lucide/svelte/icons/shield-alert';
+import ToggleRightIcon from '@lucide/svelte/icons/toggle-right';
+import FolderInputIcon from '@lucide/svelte/icons/folder-input';
+import ClipboardCheckIcon from '@lucide/svelte/icons/clipboard-check';
+import TableIcon from '@lucide/svelte/icons/table';
+import PlusCircleIcon from '@lucide/svelte/icons/circle-plus';
+import Columns3Icon from '@lucide/svelte/icons/columns-3';
+import ShieldBanIcon from '@lucide/svelte/icons/shield-ban';
 
 export interface Feature {
 	icon: Component<any> | ComponentType<SvelteComponent<any>>;

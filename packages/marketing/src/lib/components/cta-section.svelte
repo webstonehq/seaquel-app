@@ -1,7 +1,9 @@
 <script lang="ts">
     import { Card } from "$lib/components/ui/card";
     import DownloadDropdown from "$lib/components/download-dropdown.svelte";
-    import { CheckIcon, ShieldIcon, HeartIcon } from "lucide-svelte";
+    import CheckIcon from "@lucide/svelte/icons/check";
+    import ShieldIcon from "@lucide/svelte/icons/shield";
+    import HeartIcon from "@lucide/svelte/icons/heart";
 </script>
 
 <section class="py-20 md:py-32">

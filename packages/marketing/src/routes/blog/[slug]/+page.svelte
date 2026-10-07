@@ -4,17 +4,15 @@
 	import { Button } from "$lib/components/ui/button";
 	import PostCard from "$lib/components/blog/post-card.svelte";
 	import NewsletterSignup from "$lib/components/blog/newsletter-signup.svelte";
-	import {
-		ArrowLeftIcon,
-		CalendarIcon,
-		ClockIcon,
-		ChevronRightIcon,
-		ListIcon,
-		LinkIcon,
-		MailIcon,
-		CheckIcon,
-		UserIcon
-	} from "lucide-svelte";
+	import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
+	import CalendarIcon from "@lucide/svelte/icons/calendar";
+	import ClockIcon from "@lucide/svelte/icons/clock";
+	import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
+	import ListIcon from "@lucide/svelte/icons/list";
+	import LinkIcon from "@lucide/svelte/icons/link";
+	import MailIcon from "@lucide/svelte/icons/mail";
+	import CheckIcon from "@lucide/svelte/icons/check";
+	import UserIcon from "@lucide/svelte/icons/user";
 	import { fly } from "svelte/transition";
 	import { onMount } from "svelte";
 	import type { PageData } from "./$types";

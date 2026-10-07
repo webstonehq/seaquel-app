@@ -2,7 +2,7 @@
     import NavHeader from "$lib/components/nav-header.svelte";
     import FooterSection from "$lib/components/footer-section.svelte";
     import Seo from "$lib/components/seo.svelte";
-    import { ChevronDownIcon } from "lucide-svelte";
+    import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
 
     // Newest first. Add an entry whenever the effective date changes.
     const revisions = [

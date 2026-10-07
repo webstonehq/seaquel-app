@@ -6,14 +6,12 @@
 	import PostCard from "$lib/components/blog/post-card.svelte";
 	import NewsletterSignup from "$lib/components/blog/newsletter-signup.svelte";
 	import authorAvatar from "$lib/assets/mike_headshot.webp";
-	import {
-		SparklesIcon,
-		CalendarIcon,
-		ClockIcon,
-		ArrowRightIcon,
-		ChevronLeftIcon,
-		ChevronRightIcon
-	} from "lucide-svelte";
+	import SparklesIcon from "@lucide/svelte/icons/sparkles";
+	import CalendarIcon from "@lucide/svelte/icons/calendar";
+	import ClockIcon from "@lucide/svelte/icons/clock";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
+	import ChevronLeftIcon from "@lucide/svelte/icons/chevron-left";
+	import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
 	import { fly } from "svelte/transition";
 	import type { PageData } from "./$types";
 	import Seo from "$lib/components/seo.svelte";

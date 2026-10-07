@@ -3,7 +3,9 @@
 	import { Button } from "$lib/components/ui/button";
 	import { downloadGroups } from "$lib/downloads";
 	import { fly } from "svelte/transition";
-	import { DownloadIcon, AppleIcon, MonitorIcon } from "lucide-svelte";
+	import DownloadIcon from "@lucide/svelte/icons/download";
+	import AppleIcon from "@lucide/svelte/icons/apple";
+	import MonitorIcon from "@lucide/svelte/icons/monitor";
 	import LogoLinux from "$lib/components/logo-linux.svelte";
 
 	interface Props {

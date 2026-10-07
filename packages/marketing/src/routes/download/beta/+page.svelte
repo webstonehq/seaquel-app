@@ -6,14 +6,12 @@
 	import Seo from "$lib/components/seo.svelte";
 	import { Button } from "$lib/components/ui/button";
 	import { fade, fly } from "svelte/transition";
-	import {
-		AlertCircleIcon,
-		ArrowRightIcon,
-		ExternalLinkIcon,
-		FlaskConicalIcon,
-		MessageSquareIcon,
-		SettingsIcon,
-	} from "lucide-svelte";
+	import AlertCircleIcon from "@lucide/svelte/icons/circle-alert";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
+	import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
+	import FlaskConicalIcon from "@lucide/svelte/icons/flask-conical";
+	import MessageSquareIcon from "@lucide/svelte/icons/message-square";
+	import SettingsIcon from "@lucide/svelte/icons/settings";
 
 	let { data } = $props();
 

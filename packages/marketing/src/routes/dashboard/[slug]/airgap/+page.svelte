@@ -2,13 +2,11 @@
   import { invalidateAll } from "$app/navigation";
   import { Card } from "$lib/components/ui/card";
   import { Button } from "$lib/components/ui/button";
-  import {
-    AlertTriangleIcon,
-    DownloadIcon,
-    LoaderCircleIcon,
-    RotateCcwIcon,
-    ShieldCheckIcon,
-  } from "lucide-svelte";
+  import AlertTriangleIcon from "@lucide/svelte/icons/triangle-alert";
+  import DownloadIcon from "@lucide/svelte/icons/download";
+  import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
+  import RotateCcwIcon from "@lucide/svelte/icons/rotate-ccw";
+  import ShieldCheckIcon from "@lucide/svelte/icons/shield-check";
 
   let { data } = $props();
 

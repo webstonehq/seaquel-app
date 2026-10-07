@@ -14,7 +14,9 @@
    * amber + monospace, using shadcn tokens so it adapts to light/dark.
    */
   import { onMount } from "svelte";
-  import { Check, LoaderCircle, TriangleAlert } from "lucide-svelte";
+  import Check from "@lucide/svelte/icons/check";
+  import LoaderCircle from "@lucide/svelte/icons/loader-circle";
+  import TriangleAlert from "@lucide/svelte/icons/triangle-alert";
   import { remult } from "remult";
   import { Tenant } from "$lib/entities/tenant";
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button";
-	import { AwardIcon, Loader2Icon } from "lucide-svelte";
+	import AwardIcon from "@lucide/svelte/icons/award";
+	import Loader2Icon from "@lucide/svelte/icons/loader-circle";
 	import { Certificate } from "$lib/entities/certificate";
 	import { exportProgress } from "$lib/learn-sql/progress";
 	import { TOTAL_CHALLENGES } from "$lib/learn-sql/challenges";

@@ -1,7 +1,8 @@
 <script lang="ts">
   import { Card } from "$lib/components/ui/card";
   import { Button } from "$lib/components/ui/button";
-  import { LoaderCircleIcon, KeyRoundIcon } from "lucide-svelte";
+  import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
+  import KeyRoundIcon from "@lucide/svelte/icons/key-round";
 
   let licenseKey = $state("");
   let busy = $state(false);

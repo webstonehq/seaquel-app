@@ -2,7 +2,8 @@
 	import NavHeader from "$lib/components/nav-header.svelte";
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import Seo from "$lib/components/seo.svelte";
-	import { ArrowRightIcon, RepeatIcon } from "lucide-svelte";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
+	import RepeatIcon from "@lucide/svelte/icons/repeat";
 	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();

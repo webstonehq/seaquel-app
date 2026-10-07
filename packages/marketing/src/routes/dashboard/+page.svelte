@@ -1,7 +1,9 @@
 <script lang="ts">
   import { Card } from "$lib/components/ui/card";
   import { Button } from "$lib/components/ui/button";
-  import { ExternalLinkIcon, PlusIcon, KeyIcon } from "lucide-svelte";
+  import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
+  import PlusIcon from "@lucide/svelte/icons/plus";
+  import KeyIcon from "@lucide/svelte/icons/key";
 
   let { data } = $props();
 

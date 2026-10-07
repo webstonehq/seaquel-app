@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { GithubIcon, StarIcon, GitForkIcon, UsersIcon } from "lucide-svelte";
+	import GithubIcon from "$lib/components/logo-github.svelte";
+	import StarIcon from "@lucide/svelte/icons/star";
+	import GitForkIcon from "@lucide/svelte/icons/git-fork";
+	import UsersIcon from "@lucide/svelte/icons/users";
 	import { fade } from "svelte/transition";
 
 	let { stars = null }: { stars?: number | null } = $props();

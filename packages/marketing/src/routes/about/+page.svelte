@@ -5,7 +5,8 @@
     import Seo from "$lib/components/seo.svelte";
     import { Button } from "$lib/components/ui/button";
     import LogoDiscord from "$lib/components/logo-discord.svelte";
-    import { LinkedinIcon, GithubIcon } from "lucide-svelte";
+    import LinkedinIcon from "$lib/components/logo-linkedin.svelte";
+    import GithubIcon from "$lib/components/logo-github.svelte";
     import { FOUNDER } from "$lib/founder";
     import founderPhoto from "$lib/assets/mike_headshot.webp";
 </script>

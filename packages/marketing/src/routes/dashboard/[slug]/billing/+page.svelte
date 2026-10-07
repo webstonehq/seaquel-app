@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Card } from "$lib/components/ui/card";
   import { Button } from "$lib/components/ui/button";
-  import { ExternalLinkIcon } from "lucide-svelte";
+  import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
 
   let { data } = $props();
   const tenant = $derived(data.tenant);

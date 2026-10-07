@@ -2,7 +2,9 @@
     import { Button } from "$lib/components/ui/button";
     import DownloadDropdown from "$lib/components/download-dropdown.svelte";
     import DemoPlayer from "$lib/components/demo-player.svelte";
-    import { GithubIcon, HeartIcon, MousePointerClickIcon } from "lucide-svelte";
+    import GithubIcon from "$lib/components/logo-github.svelte";
+    import HeartIcon from "@lucide/svelte/icons/heart";
+    import MousePointerClickIcon from "@lucide/svelte/icons/mouse-pointer-click";
     import { fly, fade } from "svelte/transition";
 
     let { downloads = null }: { downloads?: number | null } = $props();

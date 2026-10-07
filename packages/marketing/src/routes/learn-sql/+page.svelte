@@ -4,20 +4,19 @@
 	import DemoPlayer from "$lib/components/demo-player.svelte";
 	import DownloadDropdown from "$lib/components/download-dropdown.svelte";
 	import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "$lib/components/ui/card";
-	import {
-		GraduationCapIcon,
-		PlayCircleIcon,
-		LayersIcon,
-		MousePointerClickIcon,
-		CheckIcon,
-		BookOpenIcon,
-		TerminalIcon,
-	} from "lucide-svelte";
+	import GraduationCapIcon from "@lucide/svelte/icons/graduation-cap";
+	import PlayCircleIcon from "@lucide/svelte/icons/circle-play";
+	import LayersIcon from "@lucide/svelte/icons/layers";
+	import MousePointerClickIcon from "@lucide/svelte/icons/mouse-pointer-click";
+	import CheckIcon from "@lucide/svelte/icons/check";
+	import BookOpenIcon from "@lucide/svelte/icons/book-open";
+	import TerminalIcon from "@lucide/svelte/icons/terminal";
 	import { fly, fade } from "svelte/transition";
 	import Seo from "$lib/components/seo.svelte";
-	import { ArrowRightIcon, ClockIcon } from "lucide-svelte";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
+	import ClockIcon from "@lucide/svelte/icons/clock";
 	import type { PageData } from "./$types";
-	import { AwardIcon } from "lucide-svelte";
+	import AwardIcon from "@lucide/svelte/icons/award";
 	import { TOTAL_CHALLENGES } from "$lib/learn-sql/challenges";
 
 	let { data }: { data: PageData } = $props();

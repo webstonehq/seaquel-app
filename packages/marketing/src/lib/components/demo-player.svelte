@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { MousePointerClickIcon, Maximize2Icon } from "lucide-svelte";
+    import MousePointerClickIcon from "@lucide/svelte/icons/mouse-pointer-click";
+    import Maximize2Icon from "@lucide/svelte/icons/maximize-2";
     import { fade } from "svelte/transition";
     import { onMount } from "svelte";
     import FullscreenOverlay from "./fullscreen-overlay.svelte";

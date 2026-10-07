@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Card, CardContent, CardHeader, CardTitle } from "$lib/components/ui/card";
-	import { CalendarIcon, ClockIcon, ArrowRightIcon } from "lucide-svelte";
+	import CalendarIcon from "@lucide/svelte/icons/calendar";
+	import ClockIcon from "@lucide/svelte/icons/clock";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
 	import type { BlogEntry } from "$lib/blog";
 	import authorAvatar from "$lib/assets/mike_headshot.webp";
 

@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { CheckIcon, ExternalLinkIcon, XIcon } from "lucide-svelte";
+	import CheckIcon from "@lucide/svelte/icons/check";
+	import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
+	import XIcon from "@lucide/svelte/icons/x";
 	import type { CellValue, ComparisonRow } from "$lib/competitors";
 
 	interface Props {

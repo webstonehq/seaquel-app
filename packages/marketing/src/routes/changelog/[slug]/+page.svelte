@@ -3,7 +3,9 @@
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import DemoPlayer from "$lib/components/demo-player.svelte";
 	import { Button } from "$lib/components/ui/button";
-	import { CalendarIcon, ArrowLeftIcon, MousePointerClickIcon } from "lucide-svelte";
+	import CalendarIcon from "@lucide/svelte/icons/calendar";
+	import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
+	import MousePointerClickIcon from "@lucide/svelte/icons/mouse-pointer-click";
 	import { fly } from "svelte/transition";
 	import type { PageData } from "./$types";
 	import Seo from "$lib/components/seo.svelte";

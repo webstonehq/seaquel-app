@@ -6,7 +6,7 @@
 	import TheyWin from "$lib/components/compare/they-win.svelte";
 	import CompetitorFaq from "$lib/components/compare/competitor-faq.svelte";
 	import VerifiedFooter from "$lib/components/compare/verified-footer.svelte";
-	import { DownloadIcon } from "lucide-svelte";
+	import DownloadIcon from "@lucide/svelte/icons/download";
 	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();

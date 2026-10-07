@@ -6,7 +6,7 @@
 	import ConsentSignup from "$lib/components/consent-signup.svelte";
 	import { CONSENT_COPY } from "$lib/consent-copy";
 	import LogoDiscord from "$lib/components/logo-discord.svelte";
-	import { MailIcon } from "lucide-svelte";
+	import MailIcon from "@lucide/svelte/icons/mail";
 
 	// `?from=` attributes the signup to whichever CTA sent them here, so
 	// it's visible which surface actually works. Sanitised because it

@@ -1,12 +1,10 @@
 <script lang="ts">
-	import {
-		CircleCheckIcon,
-		CircleXIcon,
-		LightbulbIcon,
-		Loader2Icon,
-		PlayIcon,
-		RotateCcwIcon
-	} from "lucide-svelte";
+	import CircleCheckIcon from "@lucide/svelte/icons/circle-check";
+	import CircleXIcon from "@lucide/svelte/icons/circle-x";
+	import LightbulbIcon from "@lucide/svelte/icons/lightbulb";
+	import Loader2Icon from "@lucide/svelte/icons/loader-circle";
+	import PlayIcon from "@lucide/svelte/icons/play";
+	import RotateCcwIcon from "@lucide/svelte/icons/rotate-ccw";
 	import { getDatabase, gradeChallenge, type Grade } from "$lib/sandbox";
 	import type { Challenge } from "$lib/learn-sql/challenges";
 

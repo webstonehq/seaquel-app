@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button } from "$lib/components/ui/button";
   import { Card } from "$lib/components/ui/card";
-  import { LoaderCircleIcon } from "lucide-svelte";
+  import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
   import { Tenant } from "$lib/entities/tenant";
 
   let { licenseId }: { licenseId: string } = $props();

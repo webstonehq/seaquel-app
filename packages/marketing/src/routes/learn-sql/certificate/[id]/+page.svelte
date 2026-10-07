@@ -2,7 +2,9 @@
 	import NavHeader from "$lib/components/nav-header.svelte";
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import { Button } from "$lib/components/ui/button";
-	import { CheckIcon, LinkIcon, ArrowRightIcon } from "lucide-svelte";
+	import CheckIcon from "@lucide/svelte/icons/check";
+	import LinkIcon from "@lucide/svelte/icons/link";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
 	import Seo from "$lib/components/seo.svelte";
 	import type { PageData } from "./$types";
 

@@ -2,7 +2,9 @@
 	import NavHeader from "$lib/components/nav-header.svelte";
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import Seo from "$lib/components/seo.svelte";
-	import { ArrowRightIcon, DatabaseIcon, TriangleAlertIcon } from "lucide-svelte";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
+	import DatabaseIcon from "@lucide/svelte/icons/database";
+	import TriangleAlertIcon from "@lucide/svelte/icons/triangle-alert";
 	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();

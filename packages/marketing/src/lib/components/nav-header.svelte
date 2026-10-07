@@ -4,7 +4,9 @@
 	import ThemeToggle from "$lib/components/theme-toggle.svelte";
 	import DownloadDropdown from "$lib/components/download-dropdown.svelte";
 	import { featureCategories } from "$lib/features";
-	import { GithubIcon, MenuIcon, XIcon } from "lucide-svelte";
+	import GithubIcon from "$lib/components/logo-github.svelte";
+	import MenuIcon from "@lucide/svelte/icons/menu";
+	import XIcon from "@lucide/svelte/icons/x";
 	import Logo from "./logo.svelte";
 
 	let mobileMenuOpen = $state(false);

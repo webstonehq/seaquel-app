@@ -5,13 +5,11 @@
 	import { ChartContainer, type ChartConfig } from "$lib/components/ui/chart";
 	import { AreaChart, BarChart } from "layerchart";
 	import { fly } from "svelte/transition";
-	import {
-		DownloadIcon,
-		StarIcon,
-		GitForkIcon,
-		TagIcon,
-		RefreshCwIcon,
-	} from "lucide-svelte";
+	import DownloadIcon from "@lucide/svelte/icons/download";
+	import StarIcon from "@lucide/svelte/icons/star";
+	import GitForkIcon from "@lucide/svelte/icons/git-fork";
+	import TagIcon from "@lucide/svelte/icons/tag";
+	import RefreshCwIcon from "@lucide/svelte/icons/refresh-cw";
 	import type { HistoricalEntry } from "$lib/metrics/types";
 	import {
 		dailyDownloads,

@@ -6,14 +6,12 @@
     import { Button } from "$lib/components/ui/button";
     import { Card } from "$lib/components/ui/card";
     import { fly } from "svelte/transition";
-    import {
-        CheckIcon,
-        MinusIcon,
-        PlusIcon,
-        ShieldCheckIcon,
-        ArrowLeftIcon,
-        LoaderCircleIcon,
-    } from "lucide-svelte";
+    import CheckIcon from "@lucide/svelte/icons/check";
+    import MinusIcon from "@lucide/svelte/icons/minus";
+    import PlusIcon from "@lucide/svelte/icons/plus";
+    import ShieldCheckIcon from "@lucide/svelte/icons/shield-check";
+    import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
+    import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
     import type { ThemeConfig, ThemeModeConfig } from "dodopayments-checkout";
     import Seo from "$lib/components/seo.svelte";
 

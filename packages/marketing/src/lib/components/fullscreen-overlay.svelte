@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { XIcon } from "lucide-svelte";
+    import XIcon from "@lucide/svelte/icons/x";
     import { fade, scale } from "svelte/transition";
     import { cubicOut } from "svelte/easing";
     import type { Snippet } from "svelte";

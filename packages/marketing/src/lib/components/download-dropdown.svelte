@@ -2,7 +2,9 @@
 	import { Button } from "$lib/components/ui/button";
 	import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
 	import { downloadGroups } from "$lib/downloads";
-	import { DownloadIcon, ChevronDownIcon, ExternalLinkIcon } from "lucide-svelte";
+	import DownloadIcon from "@lucide/svelte/icons/download";
+	import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
+	import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
 	import { cn } from "$lib/utils";
 
 	interface Props {

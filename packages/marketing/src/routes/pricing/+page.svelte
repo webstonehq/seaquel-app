@@ -5,13 +5,11 @@
     import { Button } from "$lib/components/ui/button";
     import { Card } from "$lib/components/ui/card";
     import { fly } from "svelte/transition";
-    import {
-        CheckIcon,
-        XIcon,
-        UserIcon,
-        BuildingIcon,
-        ShieldCheckIcon,
-    } from "lucide-svelte";
+    import CheckIcon from "@lucide/svelte/icons/check";
+    import XIcon from "@lucide/svelte/icons/x";
+    import UserIcon from "@lucide/svelte/icons/user";
+    import BuildingIcon from "@lucide/svelte/icons/building";
+    import ShieldCheckIcon from "@lucide/svelte/icons/shield-check";
     import Seo from "$lib/components/seo.svelte";
     import { PLAN_META } from "$lib/plans";
 

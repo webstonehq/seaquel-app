@@ -7,21 +7,19 @@
 	import { Button } from "$lib/components/ui/button";
 	import { CONSENT_COPY } from "$lib/consent-copy";
 	import { fade, fly } from "svelte/transition";
-	import {
-		AlertCircleIcon,
-		ArrowRightIcon,
-		BookOpenIcon,
-		BriefcaseIcon,
-		CheckIcon,
-		CopyIcon,
-		DatabaseIcon,
-		ExternalLinkIcon,
-		GraduationCapIcon,
-		LifeBuoyIcon,
-		MessageSquareIcon,
-		FlaskConicalIcon,
-		RocketIcon,
-	} from "lucide-svelte";
+	import AlertCircleIcon from "@lucide/svelte/icons/circle-alert";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
+	import BookOpenIcon from "@lucide/svelte/icons/book-open";
+	import BriefcaseIcon from "@lucide/svelte/icons/briefcase";
+	import CheckIcon from "@lucide/svelte/icons/check";
+	import CopyIcon from "@lucide/svelte/icons/copy";
+	import DatabaseIcon from "@lucide/svelte/icons/database";
+	import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
+	import GraduationCapIcon from "@lucide/svelte/icons/graduation-cap";
+	import LifeBuoyIcon from "@lucide/svelte/icons/life-buoy";
+	import MessageSquareIcon from "@lucide/svelte/icons/message-square";
+	import FlaskConicalIcon from "@lucide/svelte/icons/flask-conical";
+	import RocketIcon from "@lucide/svelte/icons/rocket";
 	import type { ReleaseAsset } from "$lib/server/releases";
 
 	interface Props {

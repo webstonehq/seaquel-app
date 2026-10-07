@@ -3,7 +3,9 @@
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import Seo from "$lib/components/seo.svelte";
 	import { Button } from "$lib/components/ui/button";
-	import { ArrowLeftIcon, ExternalLinkIcon, HashIcon } from "lucide-svelte";
+	import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
+	import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
+	import HashIcon from "@lucide/svelte/icons/hash";
 	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();

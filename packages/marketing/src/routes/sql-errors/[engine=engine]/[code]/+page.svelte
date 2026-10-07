@@ -3,15 +3,13 @@
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import Seo from "$lib/components/seo.svelte";
 	import { Button } from "$lib/components/ui/button";
-	import {
-		ArrowLeftIcon,
-		ArrowRightIcon,
-		BookOpenIcon,
-		ChevronRightIcon,
-		ExternalLinkIcon,
-		HashIcon,
-		PlayIcon
-	} from "lucide-svelte";
+	import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
+	import BookOpenIcon from "@lucide/svelte/icons/book-open";
+	import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
+	import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
+	import HashIcon from "@lucide/svelte/icons/hash";
+	import PlayIcon from "@lucide/svelte/icons/play";
 	import { sqlErrorWidget } from "$lib/sql-errors/widget";
 	import type { PageData } from "./$types";
 

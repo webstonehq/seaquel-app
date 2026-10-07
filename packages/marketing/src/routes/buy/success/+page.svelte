@@ -5,13 +5,11 @@
 	import { Card } from "$lib/components/ui/card";
 	import DownloadDropdown from "$lib/components/download-dropdown.svelte";
 	import { fly } from "svelte/transition";
-	import {
-		CircleCheckIcon,
-		MailIcon,
-		DownloadIcon,
-		HelpCircleIcon,
-		CloudIcon,
-	} from "lucide-svelte";
+	import CircleCheckIcon from "@lucide/svelte/icons/circle-check";
+	import MailIcon from "@lucide/svelte/icons/mail";
+	import DownloadIcon from "@lucide/svelte/icons/download";
+	import HelpCircleIcon from "@lucide/svelte/icons/circle-question-mark";
+	import CloudIcon from "@lucide/svelte/icons/cloud";
 	import { page } from "$app/state";
 	import Seo from "$lib/components/seo.svelte";
 

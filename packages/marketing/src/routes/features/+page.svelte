@@ -5,7 +5,7 @@
 	import FeatureCategory from "$lib/components/feature-category.svelte";
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
 	import { fly } from "svelte/transition";
-	import { ArrowRightIcon } from "lucide-svelte";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
 	import { featureCategories } from "$lib/features";
 	import Seo from "$lib/components/seo.svelte";
 

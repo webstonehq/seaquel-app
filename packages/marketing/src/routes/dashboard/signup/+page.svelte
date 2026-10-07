@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Card } from "$lib/components/ui/card";
   import { Button } from "$lib/components/ui/button";
-  import { LoaderCircleIcon } from "lucide-svelte";
+  import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
   import { authClient } from "$lib/auth-client";
   import { remult } from "remult";
   import { License } from "$lib/entities/license";

@@ -4,7 +4,9 @@
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import FullscreenOverlay from "$lib/components/fullscreen-overlay.svelte";
 	import { Button } from "$lib/components/ui/button";
-	import { ArrowLeftIcon, ArrowRightIcon, ImageIcon } from "lucide-svelte";
+	import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
+	import ImageIcon from "@lucide/svelte/icons/image";
 	import { fly } from "svelte/transition";
 	import type { PageData } from "./$types";
 	import Seo from "$lib/components/seo.svelte";

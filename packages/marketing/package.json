@@ -65,7 +65,6 @@
 	},
 	"dependencies": {
 		"@resvg/resvg-wasm": "^2.6.2",
-		"lucide-svelte": "^0.561.0",
 		"mdsvex": "^0.12.6",
 		"satori": "^0.33.5"
 	}

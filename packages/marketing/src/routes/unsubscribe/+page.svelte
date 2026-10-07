@@ -4,7 +4,8 @@
 	import NavHeader from "$lib/components/nav-header.svelte";
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import { Button } from "$lib/components/ui/button";
-	import { CheckIcon, MailXIcon } from "lucide-svelte";
+	import CheckIcon from "@lucide/svelte/icons/check";
+	import MailXIcon from "@lucide/svelte/icons/mail-x";
 	import type { ActionData, PageData } from "./$types";
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
 	import { fly } from "svelte/transition";
-	import { ArrowRightIcon } from "lucide-svelte";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
 	import type { Component, ComponentType, SvelteComponent } from "svelte";
 
 	interface Feature {

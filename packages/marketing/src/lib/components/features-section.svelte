@@ -1,6 +1,25 @@
 <script lang="ts">
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
-	import { ZapIcon, CpuIcon, WifiOffIcon, BrainCircuitIcon, DatabaseIcon, ShieldCheckIcon, ActivityIcon, NetworkIcon, LayoutDashboardIcon, GitBranchIcon, BarChart3Icon, GraduationCapIcon, UsersIcon, SparklesIcon, LayoutPanelLeftIcon, ClipboardCheckIcon, TableIcon, ChevronLeftIcon, ChevronRightIcon, WorkflowIcon } from "lucide-svelte";
+	import ZapIcon from "@lucide/svelte/icons/zap";
+	import CpuIcon from "@lucide/svelte/icons/cpu";
+	import WifiOffIcon from "@lucide/svelte/icons/wifi-off";
+	import BrainCircuitIcon from "@lucide/svelte/icons/brain-circuit";
+	import DatabaseIcon from "@lucide/svelte/icons/database";
+	import ShieldCheckIcon from "@lucide/svelte/icons/shield-check";
+	import ActivityIcon from "@lucide/svelte/icons/activity";
+	import NetworkIcon from "@lucide/svelte/icons/network";
+	import LayoutDashboardIcon from "@lucide/svelte/icons/layout-dashboard";
+	import GitBranchIcon from "@lucide/svelte/icons/git-branch";
+	import BarChart3Icon from "@lucide/svelte/icons/chart-column";
+	import GraduationCapIcon from "@lucide/svelte/icons/graduation-cap";
+	import UsersIcon from "@lucide/svelte/icons/users";
+	import SparklesIcon from "@lucide/svelte/icons/sparkles";
+	import LayoutPanelLeftIcon from "@lucide/svelte/icons/layout-panel-left";
+	import ClipboardCheckIcon from "@lucide/svelte/icons/clipboard-check";
+	import TableIcon from "@lucide/svelte/icons/table";
+	import ChevronLeftIcon from "@lucide/svelte/icons/chevron-left";
+	import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
+	import WorkflowIcon from "@lucide/svelte/icons/workflow";
 	import { fly } from "svelte/transition";
 	import FullscreenOverlay from "$lib/components/fullscreen-overlay.svelte";
 	import { screenshotAlt } from "$lib/features/screenshot-alt";

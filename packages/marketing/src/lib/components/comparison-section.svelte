@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { CheckIcon, XIcon, MinusIcon } from "lucide-svelte";
+	import CheckIcon from "@lucide/svelte/icons/check";
+	import XIcon from "@lucide/svelte/icons/x";
+	import MinusIcon from "@lucide/svelte/icons/minus";
 	import { fly } from "svelte/transition";
 
 	type FeatureValue = boolean | string;

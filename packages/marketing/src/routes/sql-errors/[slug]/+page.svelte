@@ -2,14 +2,12 @@
 	import NavHeader from "$lib/components/nav-header.svelte";
 	import FooterSection from "$lib/components/footer-section.svelte";
 	import { Button } from "$lib/components/ui/button";
-	import {
-		ArrowLeftIcon,
-		ArrowRightIcon,
-		ChevronRightIcon,
-		GraduationCapIcon,
-		PlayIcon,
-		TriangleAlertIcon
-	} from "lucide-svelte";
+	import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
+	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
+	import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
+	import GraduationCapIcon from "@lucide/svelte/icons/graduation-cap";
+	import PlayIcon from "@lucide/svelte/icons/play";
+	import TriangleAlertIcon from "@lucide/svelte/icons/triangle-alert";
 	import type { PageData } from "./$types";
 	import Seo from "$lib/components/seo.svelte";
 	import { codeLinks } from "$lib/sql-errors";

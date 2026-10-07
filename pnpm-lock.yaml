@@ -38,9 +38,6 @@ importers:
       '@resvg/resvg-wasm':
         specifier: ^2.6.2
         version: 2.6.2
-      lucide-svelte:
-        specifier: ^0.561.0
-        version: 0.561.0(svelte@5.51.2)
       mdsvex:
         specifier: ^0.12.6
         version: 0.12.6(svelte@5.51.2)
@@ -2360,12 +2357,6 @@ packages:
   lru-cache@11.2.6:
     resolution: {integrity: sha512-ESL2CrkS/2wTPfuend7Zhkzo2u0daGJ/A2VucJOgQ/C48S/zB8MMeMHSGKYpXhIjbPxfuezITkaBH1wqv00DDQ==}
     engines: {node: 20 || >=22}
-
-  lucide-svelte@0.561.0:
-    resolution: {integrity: sha512-LxKemRvPNMNBjBa7JIVd4gZzBrTtwG1JA2ohpdM15jpQDcZCFWKyJz8eG1McaD0bq2weufkYSuVWQLclmmdUlw==}
-    deprecated: Package deprecated. Please use @lucide/svelte instead.
-    peerDependencies:
-      svelte: ^3 || ^4 || ^5.0.0-next.42
 
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
@@ -5715,10 +5706,6 @@ snapshots:
   longest-streak@3.1.0: {}
 
   lru-cache@11.2.6: {}
-
-  lucide-svelte@0.561.0(svelte@5.51.2):
-    dependencies:
-      svelte: 5.51.2
 
   lz-string@1.5.0: {}
 
