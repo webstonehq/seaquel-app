@@ -1,5 +1,5 @@
 import type { PageLoad } from './$types';
-import { getComparisons } from '$lib/competitors';
+import { getComparisons } from '#lib/competitors/index.js';
 
 export const prerender = true;
 

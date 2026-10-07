@@ -1,15 +1,15 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import { Button } from "$lib/components/ui/button";
-	import DownloadCards from "$lib/components/download-cards.svelte";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import DownloadCards from "#lib/components/download-cards.svelte";
 	import { fade } from "svelte/transition";
 	import DownloadIcon from "@lucide/svelte/icons/download";
 	import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
 	import FlaskConicalIcon from "@lucide/svelte/icons/flask-conical";
-	import Seo from "$lib/components/seo.svelte";
-	import ConsentSignup from "$lib/components/consent-signup.svelte";
-	import { CONSENT_COPY } from "$lib/consent-copy";
+	import Seo from "#lib/components/seo.svelte";
+	import ConsentSignup from "#lib/components/consent-signup.svelte";
+	import { CONSENT_COPY } from "#lib/consent-copy.js";
 </script>
 
 <Seo

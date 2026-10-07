@@ -9,7 +9,7 @@
  * `latest.json` of the release a channel updates to.
  */
 
-import { json } from "@sveltejs/kit";
+
 
 const GITHUB_RELEASES_URL = "https://api.github.com/repos/webstonehq/seaquel/releases";
 
@@ -250,10 +250,10 @@ const FEED_CACHE: Record<Channel, { key: string; ttlSeconds: number }> = {
  */
 export async function latestJsonFor(
 	channel: Channel,
-	platform: App.Platform | undefined,
+	env: Partial<Pick<Cloudflare.Env, "GITHUB_API_CACHE" | "GITHUB_TOKEN">> | undefined,
 ): Promise<Response> {
 	const { key, ttlSeconds } = FEED_CACHE[channel];
-	const kv = platform?.env?.GITHUB_API_CACHE;
+	const kv = env?.GITHUB_API_CACHE;
 
 	// Try serving from cache
 	if (kv) {
@@ -261,7 +261,7 @@ export async function latestJsonFor(
 			const cached = await kv.get(key, "text");
 			if (cached) {
 				console.log(`Serving ${channel} update check from cache`);
-				return json(JSON.parse(cached));
+				return Response.json(JSON.parse(cached));
 			}
 		} catch (e) {
 			console.error(`Failed to read ${channel} update check from cache:`, e);
@@ -274,9 +274,9 @@ export async function latestJsonFor(
 			"Accept": "application/vnd.github.v3+json",
 		};
 
-		if (platform?.env?.GITHUB_TOKEN) {
+		if (env?.GITHUB_TOKEN) {
 			console.log("GITHUB_TOKEN present, sending an authenticated request to GitHub");
-			headers["Authorization"] = `Bearer ${platform.env.GITHUB_TOKEN}`;
+			headers["Authorization"] = `Bearer ${env.GITHUB_TOKEN}`;
 		}
 
 		// GitHub returns 30 releases per page by default; ask for the most it
@@ -324,7 +324,7 @@ export async function latestJsonFor(
 			}
 		}
 
-		return json(latestJson);
+		return Response.json(latestJson);
 	} catch (error) {
 		console.error(error);
 		return new Response(null, { status: 204 });

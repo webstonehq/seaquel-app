@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { Card } from "$lib/components/ui/card";
-  import { Button } from "$lib/components/ui/button";
+  import { Card } from "#lib/components/ui/card/index.js";
+  import { Button } from "#lib/components/ui/button/index.js";
   import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
-  import { authClient } from "$lib/auth-client";
+  import { authClient } from "#lib/auth-client.js";
   import { remult } from "remult";
-  import { License } from "$lib/entities/license";
-  import TenantForm from "$lib/components/dashboard/tenant-form.svelte";
+  import { License } from "#lib/entities/license.js";
+  import TenantForm from "#lib/components/dashboard/tenant-form.svelte";
   import { page } from "$app/state";
 
   // Signing up from somewhere other than the dashboard (claiming a course

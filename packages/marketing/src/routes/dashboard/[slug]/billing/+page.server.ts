@@ -8,10 +8,10 @@
  * the customer id (manual activation path).
  */
 import { error } from "@sveltejs/kit";
-import { env } from "$env/dynamic/private";
+import { DODO_API_KEY, DODO_MODE } from "$app/env/private";
 import { remult } from "remult";
-import { License } from "$lib/entities/license";
-import { BASE_URLS } from "$lib/server/control/dodo";
+import { License } from "#lib/entities/license.js";
+import { BASE_URLS } from "#lib/server/control/dodo.js";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ parent }) => {
@@ -20,8 +20,8 @@ export const load: PageServerLoad = async ({ parent }) => {
   // account (payment method, invoices, cancellation) — owner only.
   if (!isOwner) throw error(404, "not found");
 
-  const apiKey = env.DODO_API_KEY;
-  const mode = env.DODO_MODE || "test";
+  const apiKey = DODO_API_KEY;
+  const mode = DODO_MODE || "test";
   const baseUrl = BASE_URLS[mode] ?? BASE_URLS.test;
   if (!apiKey) return { portalLink: null };
 
@@ -48,7 +48,7 @@ export const load: PageServerLoad = async ({ parent }) => {
       });
       return { portalLink: null };
     }
-    const data = (await res.json()) as { link: string };
+    const data = await res.json() as { link: string };
     return { portalLink: data.link };
   } catch (e) {
     console.error("[billing] portal session fetch failed", e);
@@ -92,7 +92,7 @@ async function lookupCustomerByEmail(
       },
     );
     if (!res.ok) return null;
-    const data = (await res.json()) as Array<{ customer_id: string }>;
+    const data = await res.json() as Array<{ customer_id: string }>;
     return data[0]?.customer_id ?? null;
   } catch {
     return null;

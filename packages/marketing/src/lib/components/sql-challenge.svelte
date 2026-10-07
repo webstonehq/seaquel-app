@@ -5,8 +5,8 @@
 	import Loader2Icon from "@lucide/svelte/icons/loader-circle";
 	import PlayIcon from "@lucide/svelte/icons/play";
 	import RotateCcwIcon from "@lucide/svelte/icons/rotate-ccw";
-	import { getDatabase, gradeChallenge, type Grade } from "$lib/sandbox";
-	import type { Challenge } from "$lib/learn-sql/challenges";
+	import { getDatabase, gradeChallenge, type Grade } from "#lib/sandbox/index.js";
+	import type { Challenge } from "#lib/learn-sql/challenges.js";
 
 	interface Props {
 		challenge: Challenge;

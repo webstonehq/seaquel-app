@@ -13,9 +13,9 @@
  */
 import { fail } from "@sveltejs/kit";
 import { remult } from "remult";
-import { EmailConsent } from "$lib/entities/email-consent";
-import { maskEmail, type ConsentPurpose } from "$lib/server/consent";
-import { enforceRateLimit } from "$lib/server/rate-limit";
+import { EmailConsent } from "#lib/entities/email-consent.js";
+import { maskEmail, type ConsentPurpose } from "#lib/server/consent.js";
+import { enforceRateLimit } from "#lib/server/rate-limit.js";
 import type { Actions, PageServerLoad } from "./$types";
 
 const PURPOSE_LABELS: Record<ConsentPurpose, string> = {

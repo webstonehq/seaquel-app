@@ -1,13 +1,13 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import HeroSection from "$lib/components/hero-section.svelte";
-	import SocialProof from "$lib/components/social-proof.svelte";
-	import FeaturesSection from "$lib/components/features-section.svelte";
-	import ComparisonSection from "$lib/components/comparison-section.svelte";
-	import CtaSection from "$lib/components/cta-section.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import Seo from "$lib/components/seo.svelte";
-	import { FOUNDER } from "$lib/founder";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import HeroSection from "#lib/components/hero-section.svelte";
+	import SocialProof from "#lib/components/social-proof.svelte";
+	import FeaturesSection from "#lib/components/features-section.svelte";
+	import ComparisonSection from "#lib/components/comparison-section.svelte";
+	import CtaSection from "#lib/components/cta-section.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import Seo from "#lib/components/seo.svelte";
+	import { FOUNDER } from "#lib/founder.js";
 
 	let { data } = $props();
 

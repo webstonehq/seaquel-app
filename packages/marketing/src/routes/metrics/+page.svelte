@@ -1,8 +1,8 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import { Card, CardHeader, CardTitle, CardContent } from "$lib/components/ui/card";
-	import { ChartContainer, type ChartConfig } from "$lib/components/ui/chart";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import { Card, CardHeader, CardTitle, CardContent } from "#lib/components/ui/card/index.js";
+	import { ChartContainer, type ChartConfig } from "#lib/components/ui/chart/index.js";
 	import { AreaChart, BarChart } from "layerchart";
 	import { fly } from "svelte/transition";
 	import DownloadIcon from "@lucide/svelte/icons/download";
@@ -10,13 +10,13 @@
 	import GitForkIcon from "@lucide/svelte/icons/git-fork";
 	import TagIcon from "@lucide/svelte/icons/tag";
 	import RefreshCwIcon from "@lucide/svelte/icons/refresh-cw";
-	import type { HistoricalEntry } from "$lib/metrics/types";
+	import type { HistoricalEntry } from "#lib/metrics/types.js";
 	import {
 		dailyDownloads,
 		downloadsInWindow,
 		latestReleaseAdoption,
-	} from "$lib/metrics/derive";
-	import Seo from "$lib/components/seo.svelte";
+	} from "#lib/metrics/derive.js";
+	import Seo from "#lib/components/seo.svelte";
 
 	let { data } = $props();
 

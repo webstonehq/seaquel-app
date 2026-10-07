@@ -1,8 +1,8 @@
 # Local-only env vars. Copy to `.dev.vars` (gitignored) when running
-# `wrangler dev` so these are surfaced via `event.platform.env`.
+# `wrangler dev` so these are surfaced via `env` from `cloudflare:workers`.
 #
 # `vite dev` (no wrangler) reads `.env.local` instead — same key names,
-# different file, see SvelteKit docs on `$env/dynamic/private`.
+# different file, see SvelteKit docs on `$app/env/private`.
 #
 # Production secrets are set via `wrangler secret put`:
 #   wrangler secret put BETTER_AUTH_SECRET

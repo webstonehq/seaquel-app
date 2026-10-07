@@ -7,7 +7,7 @@
  *   - provide consistent error handling and response shape
  *   - control which environment (test/live) is used
  */
-import { BASE_URLS } from "$lib/server/control/dodo";
+import { BASE_URLS } from "#lib/server/control/dodo.js";
 
 export interface LicenseProxyResponse {
 	id: string;

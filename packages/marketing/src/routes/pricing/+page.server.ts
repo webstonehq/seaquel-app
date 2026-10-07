@@ -1,6 +1,6 @@
-import { env } from '$env/dynamic/private';
-import { env as publicEnv } from '$env/dynamic/public';
-import { fetchProductPrice, formatPrice } from '$lib/server/dodo';
+import { DODO_API_KEY, DODO_MODE } from '$app/env/private';
+import { PUBLIC_DODO_PRODUCT_MAP } from '$app/env/public';
+import { fetchProductPrice, formatPrice } from '#lib/server/dodo.js';
 import type { PageServerLoad } from './$types';
 
 export interface PricingPlan {
@@ -12,12 +12,9 @@ export interface PricingPlan {
 }
 
 export const load: PageServerLoad = async () => {
-	const productMap = JSON.parse(publicEnv.PUBLIC_DODO_PRODUCT_MAP || '{}') as Record<
-		string,
-		string
-	>;
-	const apiKey = env.DODO_API_KEY;
-	const dodoMode = env.DODO_MODE || 'test';
+	const productMap = JSON.parse(PUBLIC_DODO_PRODUCT_MAP || '{}') as Record<string, string>;
+	const apiKey = DODO_API_KEY;
+	const dodoMode = DODO_MODE || 'test';
 
 	if (!apiKey) {
 		return { plans: null, error: 'Payment service not configured' };
@@ -31,14 +28,14 @@ export const load: PageServerLoad = async () => {
 	try {
 		const plans: PricingPlan[] = await Promise.all(
 			entries.map(async ([productId, tier]) => {
-				const { price, currency } = await fetchProductPrice(productId, dodoMode as 'test' | 'live', apiKey);
-				return {
-					productId,
-					tier,
-					price,
-					currency,
+			const { price, currency } = await fetchProductPrice(productId, dodoMode as 'test' | 'live', apiKey);
+			return {
+				productId,
+				tier,
+				price,
+				currency,
 					formattedPrice: formatPrice(price, currency),
-				};
+			};
 			}),
 		);
 

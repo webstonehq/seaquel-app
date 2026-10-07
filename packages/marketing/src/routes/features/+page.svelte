@@ -1,13 +1,13 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import CtaSection from "$lib/components/cta-section.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import FeatureCategory from "$lib/components/feature-category.svelte";
-	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import CtaSection from "#lib/components/cta-section.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import FeatureCategory from "#lib/components/feature-category.svelte";
+	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "#lib/components/ui/card/index.js";
 	import { fly } from "svelte/transition";
 	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
-	import { featureCategories } from "$lib/features";
-	import Seo from "$lib/components/seo.svelte";
+	import { featureCategories } from "#lib/features/index.js";
+	import Seo from "#lib/components/seo.svelte";
 
 	const visualTools = featureCategories.find((c) => c.slug === "visual-tools")!;
 	const otherCategories = featureCategories.filter((c) => c.slug !== "visual-tools");

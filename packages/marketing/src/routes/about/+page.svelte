@@ -1,14 +1,14 @@
 <script lang="ts">
-    import NavHeader from "$lib/components/nav-header.svelte";
-    import CtaSection from "$lib/components/cta-section.svelte";
-    import FooterSection from "$lib/components/footer-section.svelte";
-    import Seo from "$lib/components/seo.svelte";
-    import { Button } from "$lib/components/ui/button";
-    import LogoDiscord from "$lib/components/logo-discord.svelte";
-    import LinkedinIcon from "$lib/components/logo-linkedin.svelte";
-    import GithubIcon from "$lib/components/logo-github.svelte";
-    import { FOUNDER } from "$lib/founder";
-    import founderPhoto from "$lib/assets/mike_headshot.webp";
+    import NavHeader from "#lib/components/nav-header.svelte";
+    import CtaSection from "#lib/components/cta-section.svelte";
+    import FooterSection from "#lib/components/footer-section.svelte";
+    import Seo from "#lib/components/seo.svelte";
+    import { Button } from "#lib/components/ui/button/index.js";
+    import LogoDiscord from "#lib/components/logo-discord.svelte";
+    import LinkedinIcon from "#lib/components/logo-linkedin.svelte";
+    import GithubIcon from "#lib/components/logo-github.svelte";
+    import { FOUNDER } from "#lib/founder.js";
+    import founderPhoto from "#lib/assets/mike_headshot.webp";
 </script>
 
 <Seo

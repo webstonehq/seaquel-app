@@ -1,11 +1,11 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import Seo from "$lib/components/seo.svelte";
-	import ConsentSignup from "$lib/components/consent-signup.svelte";
-	import LogoDiscord from "$lib/components/logo-discord.svelte";
-	import { Button } from "$lib/components/ui/button";
-	import { CONSENT_COPY } from "$lib/consent-copy";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import Seo from "#lib/components/seo.svelte";
+	import ConsentSignup from "#lib/components/consent-signup.svelte";
+	import LogoDiscord from "#lib/components/logo-discord.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import { CONSENT_COPY } from "#lib/consent-copy.js";
 	import { fade, fly } from "svelte/transition";
 	import AlertCircleIcon from "@lucide/svelte/icons/circle-alert";
 	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
@@ -20,7 +20,7 @@
 	import MessageSquareIcon from "@lucide/svelte/icons/message-square";
 	import FlaskConicalIcon from "@lucide/svelte/icons/flask-conical";
 	import RocketIcon from "@lucide/svelte/icons/rocket";
-	import type { ReleaseAsset } from "$lib/server/releases";
+	import type { ReleaseAsset } from "#lib/server/releases.js";
 
 	interface Props {
 		data: {

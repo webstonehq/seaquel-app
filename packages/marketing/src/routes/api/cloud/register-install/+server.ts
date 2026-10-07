@@ -32,16 +32,16 @@
  * Returns the same TenantContext shape as `/tenant-info` — the seaquel
  * side stores it identically.
  */
-import { error, json } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import { remult } from "remult";
 import type { RequestHandler } from "./$types";
-import { Install } from "$lib/entities/install";
-import { License } from "$lib/entities/license";
-import { Tenant, findTenantForSubscription } from "$lib/entities/tenant";
-import { TenantMember } from "$lib/entities/tenant-member";
-import { parseProductMap } from "$lib/server/control/dodo";
-import { readEnv } from "$lib/server/control/env";
-import { enforceRateLimit } from "$lib/server/rate-limit";
+import { Install } from "#lib/entities/install.js";
+import { License } from "#lib/entities/license.js";
+import { Tenant, findTenantForSubscription } from "#lib/entities/tenant.js";
+import { TenantMember } from "#lib/entities/tenant-member.js";
+import { parseProductMap } from "#lib/server/control/dodo.js";
+import { readEnv } from "#lib/server/control/env.js";
+import { enforceRateLimit } from "#lib/server/rate-limit.js";
 
 interface RegisterRequest {
   installId: string;
@@ -164,9 +164,9 @@ export const POST: RequestHandler = async (event) => {
     tenantId: tenant.id,
     role: "owner",
   });
-  const productMap = parseProductMap(readEnv(event).PUBLIC_DODO_PRODUCT_MAP);
+  const productMap = parseProductMap(readEnv().PUBLIC_DODO_PRODUCT_MAP);
 
-  return json({
+  return Response.json({
     tenantId: tenant.id,
     slug: tenant.slug,
     status: tenant.status,

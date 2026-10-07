@@ -1,14 +1,13 @@
 /**
- * Single helper that gathers control-plane env vars from whichever
- * source SvelteKit makes them available on. In production on Cloudflare
- * Pages they come from `event.platform.env` (wrangler.jsonc + secrets).
- * In `vite dev` they come from `$env/dynamic/private` which is sourced
- * from `.env*` files and `process.env`.
+ * Single helper that gathers control-plane env vars. They're declared in
+ * src/env.ts; in production on Cloudflare they come from the worker's env
+ * (wrangler.jsonc + secrets), in `vite dev` from `.env*` files and
+ * `process.env`.
  *
  * Returns a single object the orchestrator and webhook handler consume.
  */
-import { env as privateEnv } from "$env/dynamic/private";
-import type { RequestEvent } from "@sveltejs/kit";
+import * as privateEnv from "$app/env/private";
+import { PUBLIC_DODO_PRODUCT_MAP } from "$app/env/public";
 import type { OrchestratorEnv } from "./tenants";
 import type { DnsEnv } from "./dns";
 import type { DodoConfig } from "./dodo";
@@ -52,27 +51,23 @@ export function parseGraceSeconds(raw: string | undefined): number {
   return parsed;
 }
 
-export function readEnv(event: RequestEvent): ControlPlaneEnv {
-  const platformEnv = (event.platform?.env ?? {}) as Partial<ControlPlaneEnv>;
-  const pick = <K extends keyof ControlPlaneEnv>(key: K): ControlPlaneEnv[K] =>
-    (platformEnv[key] ?? (privateEnv as Record<string, string>)[key as string]) as ControlPlaneEnv[K];
-
+export function readEnv(): ControlPlaneEnv {
   return {
-    DODO_API_KEY: pick("DODO_API_KEY"),
-    DODO_WEBHOOK_SECRET: pick("DODO_WEBHOOK_SECRET"),
-    DODO_MODE: pick("DODO_MODE"),
-    PUBLIC_DODO_PRODUCT_MAP: pick("PUBLIC_DODO_PRODUCT_MAP"),
-    SEAQUEL_CONTROL_URL: pick("SEAQUEL_CONTROL_URL"),
-    FLY_API_TOKEN: pick("FLY_API_TOKEN"),
-    FLY_ORG: pick("FLY_ORG"),
-    FLY_IMAGE: pick("FLY_IMAGE"),
-    CF_API_TOKEN: pick("CF_API_TOKEN"),
-    CF_ACCOUNT_ID: pick("CF_ACCOUNT_ID"),
-    CF_CONTAINER_IMAGE: pick("CF_CONTAINER_IMAGE"),
-    CF_ZONE_ID: pick("CF_ZONE_ID"),
-    CF_ROOT_DOMAIN: pick("CF_ROOT_DOMAIN"),
-    SEAQUEL_BUNDLE_SIGNING_PRIVATE_KEY: pick("SEAQUEL_BUNDLE_SIGNING_PRIVATE_KEY"),
-    SEAQUEL_AIRGAP_GRACE_SECONDS: pick("SEAQUEL_AIRGAP_GRACE_SECONDS"),
+    DODO_API_KEY: privateEnv.DODO_API_KEY || undefined,
+    DODO_WEBHOOK_SECRET: privateEnv.DODO_WEBHOOK_SECRET,
+    DODO_MODE: (privateEnv.DODO_MODE || undefined) as ControlPlaneEnv["DODO_MODE"],
+    PUBLIC_DODO_PRODUCT_MAP: PUBLIC_DODO_PRODUCT_MAP || undefined,
+    SEAQUEL_CONTROL_URL: privateEnv.SEAQUEL_CONTROL_URL,
+    FLY_API_TOKEN: privateEnv.FLY_API_TOKEN,
+    FLY_ORG: privateEnv.FLY_ORG,
+    FLY_IMAGE: privateEnv.FLY_IMAGE,
+    CF_API_TOKEN: privateEnv.CF_API_TOKEN,
+    CF_ACCOUNT_ID: privateEnv.CF_ACCOUNT_ID,
+    CF_CONTAINER_IMAGE: privateEnv.CF_CONTAINER_IMAGE,
+    CF_ZONE_ID: privateEnv.CF_ZONE_ID,
+    CF_ROOT_DOMAIN: privateEnv.CF_ROOT_DOMAIN,
+    SEAQUEL_BUNDLE_SIGNING_PRIVATE_KEY: privateEnv.SEAQUEL_BUNDLE_SIGNING_PRIVATE_KEY,
+    SEAQUEL_AIRGAP_GRACE_SECONDS: privateEnv.SEAQUEL_AIRGAP_GRACE_SECONDS,
   };
 }
 

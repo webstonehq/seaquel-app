@@ -376,9 +376,9 @@ const RESERVED_SLUGS = new Set([
 // Valid: 3-32 chars, lowercase alnum + hyphens, no leading/trailing hyphen.
 const SLUG_RE = /^[a-z0-9]([a-z0-9-]{1,30}[a-z0-9])?$/;
 
-function validateSlug<T>(_row: T, field: { value: string }): string | void {
+function validateSlug<T>(_row: T, field: { value: unknown }): string | void {
   const v = field.value;
-  if (!v) return "slug is required";
+  if (typeof v !== "string" || !v) return "slug is required";
   if (!SLUG_RE.test(v)) {
     return "slug must be 3-32 chars, lowercase alphanumeric and hyphens, no leading/trailing hyphen";
   }

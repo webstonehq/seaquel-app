@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Competitor } from "$lib/competitors";
+	import type { Competitor } from "#lib/competitors/index.js";
 
 	interface Props {
 		competitor: Competitor;

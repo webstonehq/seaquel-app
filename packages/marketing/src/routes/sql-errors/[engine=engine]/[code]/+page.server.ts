@@ -1,6 +1,6 @@
 import type { EntryGenerator, PageServerLoad } from './$types';
 import { error } from '@sveltejs/kit';
-import { getAllCodePages, getCodePage, type EngineSlug } from '$lib/server/sql-error-codes';
+import { getAllCodePages, getCodePage, type EngineSlug } from '#lib/server/sql-error-codes.js';
 
 export const prerender = true;
 // Thousands of these are prerendered; without client-side rendering each is a

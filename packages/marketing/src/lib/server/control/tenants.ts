@@ -19,10 +19,10 @@
  * stuck.
  */
 import { remult, withRemult } from "remult";
-import { dev } from "$app/environment";
-import { Tenant } from "$lib/entities/tenant";
-import { TenantMember } from "$lib/entities/tenant-member";
-import { ProvisionEvent } from "$lib/entities/provision-event";
+import { dev } from "$app/env";
+import { Tenant } from "#lib/entities/tenant.js";
+import { TenantMember } from "#lib/entities/tenant-member.js";
+import { ProvisionEvent } from "#lib/entities/provision-event.js";
 import type { DnsClient } from "./dns";
 import {
   getAdapter,
@@ -188,30 +188,30 @@ export async function deprovisionTenant(
 
   const dataProvider = remult.dataProvider;
   const work = withRemult(async () => {
-    try {
-      // Self-hosted tenants run outside our infrastructure — no
-      // container or DNS record to tear down.
-      if (tenant.platform !== "self-hosted") {
-        const adapter = getAdapter(tenant.platform as PlatformName, env);
-        // Fly addresses everything by app name, which is derived from
-        // the slug — rebuild it rather than relying on `originUrl`.
-        // Called even without a `machineId` so a half-finished
-        // provision (app created, machine id never persisted) is still
-        // torn down.
-        await adapter.deprovision({
-          machineId: tenant.machineId,
-          originUrl: "",
+      try {
+        // Self-hosted tenants run outside our infrastructure — no
+        // container or DNS record to tear down.
+        if (tenant.platform !== "self-hosted") {
+          const adapter = getAdapter(tenant.platform as PlatformName, env);
+          // Fly addresses everything by app name, which is derived from
+          // the slug — rebuild it rather than relying on `originUrl`.
+          // Called even without a `machineId` so a half-finished
+          // provision (app created, machine id never persisted) is still
+          // torn down.
+          await adapter.deprovision({
+            machineId: tenant.machineId,
+            originUrl: "",
           appName:
             tenant.platform === "fly" ? flyAppName(tenant.slug) : undefined,
-        });
-        await deps.dns.deleteTenantCname(tenant.slug);
-      }
-      await logEvent(tenantId, PROVISION_EVENTS.deprovisionComplete, {});
+          });
+          await deps.dns.deleteTenantCname(tenant.slug);
+        }
+        await logEvent(tenantId, PROVISION_EVENTS.deprovisionComplete, {});
     } catch (err) {
       await logEvent(tenantId, PROVISION_EVENTS.deprovisionFailed, {
         error: String(err),
       });
-    }
+      }
   }, { dataProvider });
   if (deps.waitUntil) deps.waitUntil(work);
 }
@@ -256,13 +256,9 @@ async function runProvisioning(
   });
 
   // Step 3 — DNS record pointing the public subdomain at the platform.
-  const dnsResult = await deps.dns.writeTenantCname(
-    tenant.slug,
-    handle.originUrl,
-  );
-  await logEvent(tenant.id, PROVISION_EVENTS.dnsWritten, {
-    recordId: dnsResult.recordId,
-  });
+  const dnsResult = await deps.dns.writeTenantCname(tenant.slug, handle.originUrl);
+
+  await logEvent(tenant.id, PROVISION_EVENTS.dnsWritten, { recordId: dnsResult.recordId });
 
   // Step 4 — poll platform status until the container reports healthy.
   await waitForReady(adapter, handle);

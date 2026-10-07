@@ -1,8 +1,8 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import Seo from "$lib/components/seo.svelte";
-	import { Button } from "$lib/components/ui/button";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import Seo from "#lib/components/seo.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
 	import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
 	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
 	import BookOpenIcon from "@lucide/svelte/icons/book-open";
@@ -10,7 +10,7 @@
 	import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
 	import HashIcon from "@lucide/svelte/icons/hash";
 	import PlayIcon from "@lucide/svelte/icons/play";
-	import { sqlErrorWidget } from "$lib/sql-errors/widget";
+	import { sqlErrorWidget } from "#lib/sql-errors/widget.js";
 	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();

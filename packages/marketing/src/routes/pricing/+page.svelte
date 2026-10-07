@@ -1,21 +1,21 @@
 <script lang="ts">
-    import NavHeader from "$lib/components/nav-header.svelte";
-    import CtaSection from "$lib/components/cta-section.svelte";
-    import FooterSection from "$lib/components/footer-section.svelte";
-    import { Button } from "$lib/components/ui/button";
-    import { Card } from "$lib/components/ui/card";
+    import NavHeader from "#lib/components/nav-header.svelte";
+    import CtaSection from "#lib/components/cta-section.svelte";
+    import FooterSection from "#lib/components/footer-section.svelte";
+    import { Button } from "#lib/components/ui/button/index.js";
+    import { Card } from "#lib/components/ui/card/index.js";
     import { fly } from "svelte/transition";
     import CheckIcon from "@lucide/svelte/icons/check";
     import XIcon from "@lucide/svelte/icons/x";
     import UserIcon from "@lucide/svelte/icons/user";
     import BuildingIcon from "@lucide/svelte/icons/building";
     import ShieldCheckIcon from "@lucide/svelte/icons/shield-check";
-    import Seo from "$lib/components/seo.svelte";
-    import { PLAN_META } from "$lib/plans";
+    import Seo from "#lib/components/seo.svelte";
+    import { PLAN_META } from "#lib/plans.js";
 
     let { data } = $props();
 
-    // `name` and `description` come from `$lib/plans.ts` — shared with
+    // `name` and `description` come from `#lib/plans.ts` — shared with
     // the dashboard's tenant-creation form so both surfaces use the
     // same wording. Everything else here (period, features, icon,
     // highlight, originalPrice) is pricing-page-specific.

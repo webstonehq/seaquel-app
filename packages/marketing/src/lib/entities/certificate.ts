@@ -1,5 +1,5 @@
 import { Allow, BackendMethod, Entity, Fields, remult } from "remult";
-import { CHALLENGES, TOTAL_CHALLENGES } from "$lib/learn-sql/challenges";
+import { CHALLENGES, TOTAL_CHALLENGES } from "#lib/learn-sql/challenges.js";
 import { LessonProgress } from "./lesson-progress";
 
 /** The localStorage shape: solved challenge ids keyed by lesson slug. */

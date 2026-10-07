@@ -3,8 +3,8 @@ import mysql from '../../content/sql-error-codes/mysql.json';
 import sqlite from '../../content/sql-error-codes/sqlite.json';
 import sqlServer from '../../content/sql-error-codes/sql-server.json';
 import { examples as postgresqlExamples } from '../../content/sql-error-codes/examples/postgresql';
-import { getSqlErrors } from '$lib/sql-errors';
-import { ENGINE_NAMES, ENGINE_SLUGS, codeSlug as slugFor, isEngine, type EngineSlug } from '$lib/sql-errors/engines';
+import { getSqlErrors } from '#lib/sql-errors/index.js';
+import { ENGINE_NAMES, ENGINE_SLUGS, codeSlug as slugFor, isEngine, type EngineSlug } from '#lib/sql-errors/engines.js';
 
 export { ENGINE_SLUGS, isEngine, type EngineSlug };
 

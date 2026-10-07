@@ -1,9 +1,9 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import DemoPlayer from "$lib/components/demo-player.svelte";
-	import DownloadDropdown from "$lib/components/download-dropdown.svelte";
-	import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "$lib/components/ui/card";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import DemoPlayer from "#lib/components/demo-player.svelte";
+	import DownloadDropdown from "#lib/components/download-dropdown.svelte";
+	import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "#lib/components/ui/card/index.js";
 	import GraduationCapIcon from "@lucide/svelte/icons/graduation-cap";
 	import PlayCircleIcon from "@lucide/svelte/icons/circle-play";
 	import LayersIcon from "@lucide/svelte/icons/layers";
@@ -12,12 +12,12 @@
 	import BookOpenIcon from "@lucide/svelte/icons/book-open";
 	import TerminalIcon from "@lucide/svelte/icons/terminal";
 	import { fly, fade } from "svelte/transition";
-	import Seo from "$lib/components/seo.svelte";
+	import Seo from "#lib/components/seo.svelte";
 	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
 	import ClockIcon from "@lucide/svelte/icons/clock";
 	import type { PageData } from "./$types";
 	import AwardIcon from "@lucide/svelte/icons/award";
-	import { TOTAL_CHALLENGES } from "$lib/learn-sql/challenges";
+	import { TOTAL_CHALLENGES } from "#lib/learn-sql/challenges.js";
 
 	let { data }: { data: PageData } = $props();
 </script>

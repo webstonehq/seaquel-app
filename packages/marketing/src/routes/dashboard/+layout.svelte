@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import { authClient } from "$lib/auth-client";
-  import { Button } from "$lib/components/ui/button";
+  import { authClient } from "#lib/auth-client.js";
+  import { Button } from "#lib/components/ui/button/index.js";
 
   let { children, data } = $props();
 

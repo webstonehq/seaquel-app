@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { page } from "$app/state";
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import Seo from "$lib/components/seo.svelte";
-	import ConsentSignup from "$lib/components/consent-signup.svelte";
-	import { CONSENT_COPY } from "$lib/consent-copy";
-	import LogoDiscord from "$lib/components/logo-discord.svelte";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import Seo from "#lib/components/seo.svelte";
+	import ConsentSignup from "#lib/components/consent-signup.svelte";
+	import { CONSENT_COPY } from "#lib/consent-copy.js";
+	import LogoDiscord from "#lib/components/logo-discord.svelte";
 	import MailIcon from "@lucide/svelte/icons/mail";
 
 	// `?from=` attributes the signup to whichever CTA sent them here, so

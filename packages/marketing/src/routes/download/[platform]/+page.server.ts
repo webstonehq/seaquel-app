@@ -1,9 +1,10 @@
+import { env } from "cloudflare:workers";
 import { redirect } from "@sveltejs/kit";
-import { describePlatform } from "$lib/downloads";
-import { findLatestAsset, isKnownPlatform, RELEASES_PAGE_URL } from "$lib/server/releases";
+import { describePlatform } from "#lib/downloads.js";
+import { findLatestAsset, isKnownPlatform, RELEASES_PAGE_URL } from "#lib/server/releases.js";
 import type { PageServerLoad } from "./$types";
 
-export const load: PageServerLoad = async ({ params, platform }) => {
+export const load: PageServerLoad = async ({ params }) => {
 	const described = describePlatform(params.platform);
 	if (!isKnownPlatform(params.platform) || !described) redirect(303, "/download");
 
@@ -17,7 +18,7 @@ export const load: PageServerLoad = async ({ params, platform }) => {
 		// starting a download.
 		asset: await findLatestAsset(
 			params.platform,
-			platform?.env.GITHUB_TOKEN_FETCH_RELEASES_URL,
+			env.GITHUB_TOKEN_FETCH_RELEASES_URL,
 		),
 		releasesUrl: RELEASES_PAGE_URL,
 	};

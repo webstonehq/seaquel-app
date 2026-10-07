@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { remultAdapter } from "@nerdfolio/remult-better-auth";
-import { authEntities } from "$lib/entities/auth-entities";
+import { authEntities } from "#lib/entities/auth-entities.js";
 import { linkByVerifiedEmail } from "./auth-helpers";
 
 export const auth = betterAuth({

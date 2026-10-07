@@ -15,9 +15,9 @@
 import { redirect } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
 import { remult } from "remult";
-import { Tenant } from "$lib/entities/tenant";
-import { TenantMember } from "$lib/entities/tenant-member";
-import { License } from "$lib/entities/license";
+import { Tenant } from "#lib/entities/tenant.js";
+import { TenantMember } from "#lib/entities/tenant-member.js";
+import { License } from "#lib/entities/license.js";
 
 const PUBLIC_PATHS = new Set([
   "/dashboard/signup",

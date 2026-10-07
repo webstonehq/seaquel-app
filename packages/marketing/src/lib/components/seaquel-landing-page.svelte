@@ -1,9 +1,9 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import HeroSection from "$lib/components/hero-section.svelte";
-	import FeaturesSection from "$lib/components/features-section.svelte";
-	import CtaSection from "$lib/components/cta-section.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import HeroSection from "#lib/components/hero-section.svelte";
+	import FeaturesSection from "#lib/components/features-section.svelte";
+	import CtaSection from "#lib/components/cta-section.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
 </script>
 
 <div class="min-h-screen bg-background text-foreground">

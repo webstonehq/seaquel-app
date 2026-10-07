@@ -57,8 +57,7 @@ packages/
     │   └── app.html             # HTML template
     ├── static/
     │   └── demo/                # Built demo from seaquel project
-    ├── svelte.config.js
-    ├── vite.config.ts
+    ├── vite.config.ts       # Vite + SvelteKit config (adapter, mdsvex)
     ├── tsconfig.json
     ├── wrangler.jsonc
     └── components.json
@@ -92,4 +91,4 @@ Files are named by version (e.g., `2026.1.1.md`). The changelog system uses `imp
 
 ## UI Components
 
-UI components in `packages/marketing/src/lib/components/ui/` follow the shadcn-svelte pattern with bits-ui primitives. Use the `cn()` utility from `$lib/utils` for conditional classnames.
+UI components in `packages/marketing/src/lib/components/ui/` follow the shadcn-svelte pattern with bits-ui primitives. Use the `cn()` utility from `#lib/utils.js` for conditional classnames.

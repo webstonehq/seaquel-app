@@ -1,5 +1,6 @@
+import { env } from 'cloudflare:workers';
 import type { PageServerLoad } from './$types';
-import type { HistoricalEntry, OpenMetrics, ReleaseDownloads } from '$lib/metrics/types';
+import type { HistoricalEntry, OpenMetrics, ReleaseDownloads } from '#lib/metrics/types.js';
 
 interface CachedData {
 	metrics: OpenMetrics;
@@ -8,8 +9,8 @@ interface CachedData {
 
 const CACHE_KEY = 'metrics:github';
 
-export const load: PageServerLoad = async ({ platform }) => {
-	const kv = platform?.env?.GITHUB_API_CACHE;
+export const load: PageServerLoad = async () => {
+	const kv = env.GITHUB_API_CACHE;
 
 	const empty = {
 		metrics: null,

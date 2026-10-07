@@ -1,5 +1,5 @@
 import type { Component } from 'svelte';
-import { getLessons, type LessonLink } from '$lib/learn-sql';
+import { getLessons, type LessonLink } from '#lib/learn-sql/index.js';
 import { ENGINE_NAMES, codeHref, codeSlug, isEngine, type EngineSlug } from './engines';
 
 export interface EngineMessage {

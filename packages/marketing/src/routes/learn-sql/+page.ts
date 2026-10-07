@@ -1,5 +1,5 @@
 import type { PageLoad } from './$types';
-import { getLessons } from '$lib/learn-sql';
+import { getLessons } from '#lib/learn-sql/index.js';
 
 export const prerender = true;
 

@@ -21,13 +21,13 @@
  *  License.dodoSubscriptionId === subscriptionId`. We don't 404 on
  * missing license (that would leak subscription ids by timing); we 403.
  */
-import { error, json } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import { remult } from "remult";
 import type { RequestHandler } from "./$types";
-import { License } from "$lib/entities/license";
-import { Revocation } from "$lib/entities/revocation";
-import { requireUserId } from "$lib/server/control/auth";
-import { enforceRateLimit } from "$lib/server/rate-limit";
+import { License } from "#lib/entities/license.js";
+import { Revocation } from "#lib/entities/revocation.js";
+import { requireUserId } from "#lib/server/control/auth.js";
+import { enforceRateLimit } from "#lib/server/rate-limit.js";
 
 interface RevokeRequest {
   subscriptionId: string;
@@ -85,7 +85,7 @@ export const POST: RequestHandler = async (event) => {
     licenseKey,
   });
   if (existing) {
-    return json({ ok: true, alreadyRevoked: true });
+    return Response.json({ ok: true, alreadyRevoked: true });
   }
 
   try {
@@ -105,10 +105,10 @@ export const POST: RequestHandler = async (event) => {
       console.error("[airgap:revoke] insert failed", err);
       throw error(500, "failed to revoke");
     }
-    return json({ ok: true, alreadyRevoked: true });
+    return Response.json({ ok: true, alreadyRevoked: true });
   }
 
-  return json({ ok: true });
+  return Response.json({ ok: true });
 };
 
 export const DELETE: RequestHandler = async (event) => {
@@ -133,5 +133,5 @@ export const DELETE: RequestHandler = async (event) => {
   if (!existing) throw error(404, "revocation not found");
 
   await remult.repo(Revocation).delete(existing.id);
-  return json({ ok: true });
+  return Response.json({ ok: true });
 };

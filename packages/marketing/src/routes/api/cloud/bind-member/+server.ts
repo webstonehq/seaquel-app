@@ -20,12 +20,12 @@
  * returns the existing row instead of erroring, so a flaky retry from
  * the container's signup action doesn't double-bind.
  */
-import { error, json } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import { remult } from "remult";
 import type { RequestHandler } from "./$types";
-import { TenantMember } from "$lib/entities/tenant-member";
-import { requireCloudAuth } from "$lib/server/control/cloud-auth";
-import { enforceRateLimit } from "$lib/server/rate-limit";
+import { TenantMember } from "#lib/entities/tenant-member.js";
+import { requireCloudAuth } from "#lib/server/control/cloud-auth.js";
+import { enforceRateLimit } from "#lib/server/rate-limit.js";
 
 interface BindRequest {
   licenseKey: string;
@@ -84,9 +84,9 @@ export const POST: RequestHandler = async (event) => {
         boundAt: new Date(),
         acceptedAt: existing.acceptedAt ?? new Date(),
       });
-      return json({ tenantMemberId: updated.id });
+      return Response.json({ tenantMemberId: updated.id });
     }
-    return json({ tenantMemberId: existing.id });
+    return Response.json({ tenantMemberId: existing.id });
   }
 
   // Owner-claim path: there's a pre-existing owner row from provisioning
@@ -106,7 +106,7 @@ export const POST: RequestHandler = async (event) => {
         boundAt: new Date(),
         acceptedAt: ownerRow.acceptedAt ?? new Date(),
       });
-      return json({ tenantMemberId: updated.id });
+      return Response.json({ tenantMemberId: updated.id });
     }
   }
 
@@ -121,5 +121,5 @@ export const POST: RequestHandler = async (event) => {
     boundAt: new Date(),
   });
 
-  return json({ tenantMemberId: inserted.id });
+  return Response.json({ tenantMemberId: inserted.id });
 };

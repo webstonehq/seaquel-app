@@ -21,17 +21,17 @@
 import { error } from "@sveltejs/kit";
 import { remult } from "remult";
 import type { PageServerLoad } from "./$types";
-import { IssuedBundle } from "$lib/entities/issued-bundle";
-import { License } from "$lib/entities/license";
-import { Revocation } from "$lib/entities/revocation";
-import { TenantMember } from "$lib/entities/tenant-member";
+import { IssuedBundle } from "#lib/entities/issued-bundle.js";
+import { License } from "#lib/entities/license.js";
+import { Revocation } from "#lib/entities/revocation.js";
+import { TenantMember } from "#lib/entities/tenant-member.js";
 import {
   DEFAULT_AIRGAP_GRACE_SECONDS,
   parseGraceSeconds,
   readEnv,
-} from "$lib/server/control/env";
-import { parseProductMap } from "$lib/server/control/dodo";
-import { computeBundleNotAfter } from "$lib/server/airgap/expiry";
+} from "#lib/server/control/env.js";
+import { parseProductMap } from "#lib/server/control/dodo.js";
+import { computeBundleNotAfter } from "#lib/server/airgap/expiry.js";
 
 
 export const load: PageServerLoad = async (event) => {
@@ -71,7 +71,7 @@ export const load: PageServerLoad = async (event) => {
   // Preview the next-bundle expiry. The endpoint recomputes from scratch
   // when issuing, so this is read-only — the UI just shows the user what
   // the click-through download WOULD bake in.
-  const env = readEnv(event);
+  const env = readEnv();
   const graceSeconds = parseGraceSeconds(env.SEAQUEL_AIRGAP_GRACE_SECONDS);
   const issuedAt = Math.floor(Date.now() / 1000);
   const computedNotAfter = computeBundleNotAfter(license, graceSeconds, issuedAt);

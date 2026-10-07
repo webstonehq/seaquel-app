@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { ENGINE_SLUGS, codeSlug } from '$lib/sql-errors/engines';
+import { ENGINE_SLUGS, codeSlug } from '#lib/sql-errors/engines.js';
 import { getCodePage, getEngineCodes } from './sql-error-codes';
 import { examples } from '../../content/sql-error-codes/examples/postgresql';
 import { prepareSchema, runQuery } from '../../embed/database';
-import { getSqlErrors } from '$lib/sql-errors';
+import { getSqlErrors } from '#lib/sql-errors/index.js';
 
 const guideCodes = (await getSqlErrors()).flatMap((g) => g.codes.postgresql ?? []);
 

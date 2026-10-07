@@ -2,7 +2,7 @@
 	import CheckIcon from "@lucide/svelte/icons/check";
 	import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
 	import XIcon from "@lucide/svelte/icons/x";
-	import type { CellValue, ComparisonRow } from "$lib/competitors";
+	import type { CellValue, ComparisonRow } from "#lib/competitors/index.js";
 
 	interface Props {
 		competitor: string;

@@ -1,5 +1,5 @@
 import type { PageLoad, EntryGenerator } from './$types';
-import { getAlternatives, getCompetitor } from '$lib/competitors';
+import { getAlternatives, getCompetitor } from '#lib/competitors/index.js';
 import { error } from '@sveltejs/kit';
 
 export const prerender = true;

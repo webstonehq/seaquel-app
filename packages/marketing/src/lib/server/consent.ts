@@ -10,11 +10,11 @@
  * client-supplied consent string would let anyone write arbitrary text
  * into a consent record, which makes the record worthless as proof.
  */
-import { CONSENT_COPY, type ConsentPurpose } from "$lib/consent-copy";
+import { CONSENT_COPY, type ConsentPurpose } from "#lib/consent-copy.js";
 
 /**
  * Consent wording, verbatim as shown in the UI. Defined in
- * `$lib/consent-copy` so the checkbox label and the stored text cannot
+ * `#lib/consent-copy.js` so the checkbox label and the stored text cannot
  * drift apart.
  */
 export const CONSENT_PURPOSES = CONSENT_COPY;

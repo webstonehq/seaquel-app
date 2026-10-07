@@ -16,9 +16,9 @@
 import { error } from "@sveltejs/kit";
 import type { RequestEvent } from "@sveltejs/kit";
 import { remult } from "remult";
-import { Install } from "$lib/entities/install";
-import { License } from "$lib/entities/license";
-import { Tenant } from "$lib/entities/tenant";
+import { Install } from "#lib/entities/install.js";
+import { License } from "#lib/entities/license.js";
+import { Tenant } from "#lib/entities/tenant.js";
 
 const INSTALL_ID_HEADER = "x-install-id";
 const LICENSE_KEY_HEADER = "x-license-key";

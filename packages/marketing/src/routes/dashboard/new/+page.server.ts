@@ -11,9 +11,9 @@
 import { error, redirect } from "@sveltejs/kit";
 import { remult } from "remult";
 import type { PageServerLoad } from "./$types";
-import { auth as betterAuth } from "$lib/server/remult/better-auth";
-import { License } from "$lib/entities/license";
-import { findTenantForSubscription } from "$lib/entities/tenant";
+import { auth as betterAuth } from "#lib/server/remult/better-auth.js";
+import { License } from "#lib/entities/license.js";
+import { findTenantForSubscription } from "#lib/entities/tenant.js";
 
 export const load: PageServerLoad = async ({ url, request }) => {
   const userId = remult.user?.id;

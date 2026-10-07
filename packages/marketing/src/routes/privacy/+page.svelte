@@ -1,7 +1,7 @@
 <script lang="ts">
-    import NavHeader from "$lib/components/nav-header.svelte";
-    import FooterSection from "$lib/components/footer-section.svelte";
-    import Seo from "$lib/components/seo.svelte";
+    import NavHeader from "#lib/components/nav-header.svelte";
+    import FooterSection from "#lib/components/footer-section.svelte";
+    import Seo from "#lib/components/seo.svelte";
 </script>
 
 <Seo

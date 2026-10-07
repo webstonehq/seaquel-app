@@ -1,11 +1,22 @@
-import { dev } from "$app/environment";
+import { dev } from "$app/env";
 import { FlyMachineAdapter } from "./fly";
 import { CloudflareContainerAdapter } from "./cloudflare";
 import { MockPlatformAdapter } from "./mock";
 import type { PlatformAdapter, PlatformName } from "./types";
 
-export type { PlatformAdapter, PlatformName, Region, TenantHandle, TenantStatus } from "./types";
-export { FlyMachineAdapter, CloudflareContainerAdapter, MockPlatformAdapter };
+export type {
+  PlatformAdapter,
+  PlatformName,
+  Region,
+  TenantHandle,
+  TenantStatus
+} from "./types";
+
+export {
+  FlyMachineAdapter,
+  CloudflareContainerAdapter,
+  MockPlatformAdapter
+};
 
 export interface AdapterEnv {
   FLY_API_TOKEN?: string;

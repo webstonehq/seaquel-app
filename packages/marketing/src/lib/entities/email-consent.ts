@@ -1,7 +1,7 @@
 import { Entity, Fields, Validators } from "remult";
-// `$lib/consent-copy`, not `$lib/server/consent`: entities are bundled
+// `#lib/consent-copy`, not `$lib/server/consent`: entities are bundled
 // for the browser via `src/hooks.ts`, so they must not import server code.
-import { CONSENT_COPY } from "$lib/consent-copy";
+import { CONSENT_COPY } from "#lib/consent-copy.js";
 
 /**
  * A record of someone consenting to be emailed for one purpose.

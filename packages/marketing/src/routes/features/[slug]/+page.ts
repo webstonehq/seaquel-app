@@ -1,5 +1,5 @@
 import type { PageLoad, EntryGenerator } from './$types';
-import { getFeatureCategory, getFeatureSlugs, getAdjacentCategories } from '$lib/features';
+import { getFeatureCategory, getFeatureSlugs, getAdjacentCategories } from '#lib/features/index.js';
 import { error } from '@sveltejs/kit';
 
 export const prerender = true;

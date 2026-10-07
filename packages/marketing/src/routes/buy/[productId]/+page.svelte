@@ -1,10 +1,10 @@
 <script lang="ts">
     import { tick, onDestroy } from "svelte";
     import { page } from "$app/state";
-    import NavHeader from "$lib/components/nav-header.svelte";
-    import FooterSection from "$lib/components/footer-section.svelte";
-    import { Button } from "$lib/components/ui/button";
-    import { Card } from "$lib/components/ui/card";
+    import NavHeader from "#lib/components/nav-header.svelte";
+    import FooterSection from "#lib/components/footer-section.svelte";
+    import { Button } from "#lib/components/ui/button/index.js";
+    import { Card } from "#lib/components/ui/card/index.js";
     import { fly } from "svelte/transition";
     import CheckIcon from "@lucide/svelte/icons/check";
     import MinusIcon from "@lucide/svelte/icons/minus";
@@ -13,7 +13,7 @@
     import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
     import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
     import type { ThemeConfig, ThemeModeConfig } from "dodopayments-checkout";
-    import Seo from "$lib/components/seo.svelte";
+    import Seo from "#lib/components/seo.svelte";
 
     let { data } = $props();
 

@@ -1,7 +1,7 @@
 import { repo } from "remult";
-import { User } from "$lib/entities/auth-entities";
-import { License } from "$lib/entities/license";
-import { TenantMember } from "$lib/entities/tenant-member";
+import { User } from "#lib/entities/auth-entities.js";
+import { License } from "#lib/entities/license.js";
+import { TenantMember } from "#lib/entities/tenant-member.js";
 
 export const addRolesToUser = async (emails: string[], roles: string[]) => {
   const users = await repo(User).find({

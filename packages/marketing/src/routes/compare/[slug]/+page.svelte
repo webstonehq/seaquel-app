@@ -1,13 +1,13 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import Seo from "$lib/components/seo.svelte";
-	import VerdictBox from "$lib/components/compare/verdict-box.svelte";
-	import FactsGrid from "$lib/components/compare/facts-grid.svelte";
-	import ComparisonTable from "$lib/components/compare/comparison-table.svelte";
-	import TheyWin from "$lib/components/compare/they-win.svelte";
-	import CompetitorFaq from "$lib/components/compare/competitor-faq.svelte";
-	import VerifiedFooter from "$lib/components/compare/verified-footer.svelte";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import Seo from "#lib/components/seo.svelte";
+	import VerdictBox from "#lib/components/compare/verdict-box.svelte";
+	import FactsGrid from "#lib/components/compare/facts-grid.svelte";
+	import ComparisonTable from "#lib/components/compare/comparison-table.svelte";
+	import TheyWin from "#lib/components/compare/they-win.svelte";
+	import CompetitorFaq from "#lib/components/compare/competitor-faq.svelte";
+	import VerifiedFooter from "#lib/components/compare/verified-footer.svelte";
 	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
 	import DownloadIcon from "@lucide/svelte/icons/download";
 	import type { PageData } from "./$types";

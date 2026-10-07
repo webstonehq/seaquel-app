@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
+	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "#lib/components/ui/card/index.js";
 	import { fly } from "svelte/transition";
 	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
 	import type { Component, ComponentType, SvelteComponent } from "svelte";

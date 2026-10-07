@@ -1,7 +1,7 @@
-import { env } from '$env/dynamic/private';
-import { env as publicEnv } from '$env/dynamic/public';
+import { DODO_API_KEY, DODO_MODE } from '$app/env/private';
+import { PUBLIC_DODO_PRODUCT_MAP } from '$app/env/public';
 import { error } from '@sveltejs/kit';
-import { fetchProductPrice, formatPrice } from '$lib/server/dodo';
+import { fetchProductPrice, formatPrice } from '#lib/server/dodo.js';
 import type { PageServerLoad } from './$types';
 
 const planMeta: Record<
@@ -44,15 +44,15 @@ const planMeta: Record<
 };
 
 export const load: PageServerLoad = async ({ params }) => {
-	const tierMap = JSON.parse(publicEnv.PUBLIC_DODO_PRODUCT_MAP || '{}') as Record<string, string>;
+	const tierMap = JSON.parse(PUBLIC_DODO_PRODUCT_MAP || '{}') as Record<string, string>;
 	const tier = tierMap[params.productId];
 
 	if (!tier || !planMeta[tier]) {
 		error(404, 'Product not found');
 	}
 
-	const apiKey = env.DODO_API_KEY;
-	const dodoMode = (env.DODO_MODE || 'test') as 'test' | 'live';
+	const apiKey = DODO_API_KEY;
+	const dodoMode = (DODO_MODE || 'test') as 'test' | 'live';
 
 	if (!apiKey) {
 		error(503, 'Payment service not configured');

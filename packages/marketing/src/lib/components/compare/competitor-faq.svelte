@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { FaqEntry } from "$lib/competitors";
+	import type { FaqEntry } from "#lib/competitors/index.js";
 
 	interface Props {
 		faq: FaqEntry[];

@@ -1,6 +1,7 @@
+import { env } from "cloudflare:workers";
 import type { KVNamespace } from "@cloudflare/workers-types";
 import type { PageServerLoad } from "./$types";
-import type { OpenMetrics } from "$lib/metrics/types";
+import type { OpenMetrics } from "#lib/metrics/types.js";
 
 const LINK_HEADER = [
   '</sitemap.xml>; rel="sitemap"; type="application/xml"',
@@ -21,9 +22,9 @@ async function loadMetrics(kv: KVNamespace | undefined): Promise<OpenMetrics | n
   }
 }
 
-export const load: PageServerLoad = async ({ setHeaders, platform }) => {
+export const load: PageServerLoad = async ({ setHeaders }) => {
   setHeaders({ Link: LINK_HEADER });
-  const metrics = await loadMetrics(platform?.env?.GITHUB_API_CACHE);
+  const metrics = await loadMetrics(env.GITHUB_API_CACHE);
   return {
     downloads: metrics?.totalDownloads ?? null,
     stars: metrics?.stars ?? null,

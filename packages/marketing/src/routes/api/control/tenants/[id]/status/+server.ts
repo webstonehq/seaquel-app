@@ -9,12 +9,12 @@
  *
  * Ownership-checked the same way as the parent route — 404 not 403.
  */
-import { error, json } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import { remult } from "remult";
 import type { RequestHandler } from "./$types";
-import { Tenant } from "$lib/entities/tenant";
-import { ProvisionEvent } from "$lib/entities/provision-event";
-import { requireUserId } from "$lib/server/control/auth";
+import { Tenant } from "#lib/entities/tenant.js";
+import { ProvisionEvent } from "#lib/entities/provision-event.js";
+import { requireUserId } from "#lib/server/control/auth.js";
 
 export const GET: RequestHandler = async (event) => {
   const ownerUserId = requireUserId();
@@ -30,7 +30,7 @@ export const GET: RequestHandler = async (event) => {
       { orderBy: { at: "desc" } },
     );
 
-  return json({
+  return Response.json({
     id: tenant.id,
     status: tenant.status,
     publicUrl: tenant.publicUrl,

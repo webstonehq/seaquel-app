@@ -26,7 +26,7 @@
   import Sparkles from "@lucide/svelte/icons/sparkles";
   import X from "@lucide/svelte/icons/x";
   import type { PageData } from "./$types";
-  import { Tenant } from "$lib/entities/tenant";
+  import { Tenant } from "#lib/entities/tenant.js";
 
   let { data }: { data: PageData } = $props();
 

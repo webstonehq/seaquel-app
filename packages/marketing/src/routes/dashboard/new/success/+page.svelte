@@ -18,7 +18,7 @@
   import LoaderCircle from "@lucide/svelte/icons/loader-circle";
   import TriangleAlert from "@lucide/svelte/icons/triangle-alert";
   import { remult } from "remult";
-  import { Tenant } from "$lib/entities/tenant";
+  import { Tenant } from "#lib/entities/tenant.js";
 
   let status = $state<"polling" | "found" | "failed" | "timeout">("polling");
   let foundTenant = $state<{ slug: string } | null>(null);

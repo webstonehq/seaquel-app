@@ -1,10 +1,10 @@
 import type { RequestHandler } from "./$types";
-import { getChangelogEntries } from "$lib/changelog";
-import { getBlogEntries } from "$lib/blog";
-import { getLessons } from "$lib/learn-sql";
-import { getSqlErrors } from "$lib/sql-errors";
-import { ENGINE_SLUGS, getAllCodePages } from "$lib/server/sql-error-codes";
-import { getAlternatives, getComparisons } from "$lib/competitors";
+import { getChangelogEntries } from "#lib/changelog/index.js";
+import { getBlogEntries } from "#lib/blog/index.js";
+import { getLessons } from "#lib/learn-sql/index.js";
+import { getSqlErrors } from "#lib/sql-errors/index.js";
+import { ENGINE_SLUGS, getAllCodePages } from "#lib/server/sql-error-codes.js";
+import { getAlternatives, getComparisons } from "#lib/competitors/index.js";
 
 export const prerender = true;
 

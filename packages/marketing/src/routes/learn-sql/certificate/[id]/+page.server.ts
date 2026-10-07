@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
 import { remult } from "remult";
-import { Certificate } from "$lib/entities";
+import { Certificate } from "#lib/entities/index.js";
 import type { PageServerLoad } from "./$types";
 
 // Certificates are meant to be shared, so this route is public and read

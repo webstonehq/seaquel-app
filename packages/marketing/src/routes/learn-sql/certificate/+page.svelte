@@ -1,11 +1,11 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import { Button } from "$lib/components/ui/button";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
 	import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
-	import Seo from "$lib/components/seo.svelte";
-	import CertificateClaim from "$lib/components/certificate-claim.svelte";
-	import { exportProgress } from "$lib/learn-sql/progress";
+	import Seo from "#lib/components/seo.svelte";
+	import CertificateClaim from "#lib/components/certificate-claim.svelte";
+	import { exportProgress } from "#lib/learn-sql/progress.js";
 	import { onMount } from "svelte";
 
 	// The claim lives on its own page rather than buried in /learn-sql so it

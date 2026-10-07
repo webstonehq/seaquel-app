@@ -1,6 +1,6 @@
 import type { PageLoad, EntryGenerator } from './$types';
-import { getLesson, getLessons, getLessonSlugs } from '$lib/learn-sql';
-import { getSqlErrorsForLesson } from '$lib/sql-errors';
+import { getLesson, getLessons, getLessonSlugs } from '#lib/learn-sql/index.js';
+import { getSqlErrorsForLesson } from '#lib/sql-errors/index.js';
 import { error } from '@sveltejs/kit';
 
 export const prerender = true;

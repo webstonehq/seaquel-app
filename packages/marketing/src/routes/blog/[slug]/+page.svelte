@@ -1,9 +1,9 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import { Button } from "$lib/components/ui/button";
-	import PostCard from "$lib/components/blog/post-card.svelte";
-	import NewsletterSignup from "$lib/components/blog/newsletter-signup.svelte";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import PostCard from "#lib/components/blog/post-card.svelte";
+	import NewsletterSignup from "#lib/components/blog/newsletter-signup.svelte";
 	import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
 	import CalendarIcon from "@lucide/svelte/icons/calendar";
 	import ClockIcon from "@lucide/svelte/icons/clock";
@@ -16,8 +16,8 @@
 	import { fly } from "svelte/transition";
 	import { onMount } from "svelte";
 	import type { PageData } from "./$types";
-	import Seo from "$lib/components/seo.svelte";
-	import authorAvatar from "$lib/assets/mike_headshot.webp";
+	import Seo from "#lib/components/seo.svelte";
+	import authorAvatar from "#lib/assets/mike_headshot.webp";
 
 	let { data }: { data: PageData } = $props();
 

@@ -79,8 +79,8 @@ function fakeKv() {
 	};
 }
 
-function platformWith(kv: ReturnType<typeof fakeKv>): App.Platform {
-	return { env: { GITHUB_API_CACHE: kv } } as unknown as App.Platform;
+function envWith(kv: ReturnType<typeof fakeKv>): Cloudflare.Env {
+	return { GITHUB_API_CACHE: kv } as unknown as Cloudflare.Env;
 }
 
 const okJson = (body: unknown) => new Response(JSON.stringify(body), { status: 200 });
@@ -125,8 +125,8 @@ describe("latestJsonFor", () => {
 	it("caches each channel under its own key and TTL", async () => {
 		stubGitHub(list);
 		const kv = fakeKv();
-		await latestJsonFor("stable", platformWith(kv));
-		await latestJsonFor("beta", platformWith(kv));
+		await latestJsonFor("stable", envWith(kv));
+		await latestJsonFor("beta", envWith(kv));
 		expect(kv.puts).toEqual([
 			{ key: "updates:latest-json", ttl: 3600 },
 			{ key: "updates:latest-json:beta", ttl: 600 },
@@ -141,7 +141,7 @@ describe("latestJsonFor", () => {
 		const fetchMock = stubGitHub(list);
 		const kv = fakeKv();
 		kv.store.set("updates:latest-json:beta", JSON.stringify({ version: "cached-beta" }));
-		const res = await latestJsonFor("beta", platformWith(kv));
+		const res = await latestJsonFor("beta", envWith(kv));
 		expect(await res.json()).toEqual({ version: "cached-beta" });
 		expect(fetchMock).not.toHaveBeenCalled();
 	});
@@ -150,13 +150,13 @@ describe("latestJsonFor", () => {
 		stubGitHub(list);
 		const kv = fakeKv();
 		kv.store.set("updates:latest-json", JSON.stringify({ version: "cached-stable" }));
-		const beta = await latestJsonFor("beta", platformWith(kv));
+		const beta = await latestJsonFor("beta", envWith(kv));
 		expect(await beta.json()).toEqual({ version: "v2026.10.0-beta.2" });
 		expect(kv.get).not.toHaveBeenCalledWith("updates:latest-json", expect.anything());
 
 		const kv2 = fakeKv();
 		kv2.store.set("updates:latest-json:beta", JSON.stringify({ version: "cached-beta" }));
-		const stable = await latestJsonFor("stable", platformWith(kv2));
+		const stable = await latestJsonFor("stable", envWith(kv2));
 		expect(await stable.json()).toEqual({ version: "v2026.9.3" });
 		expect(kv2.get).not.toHaveBeenCalledWith("updates:latest-json:beta", expect.anything());
 	});
@@ -164,7 +164,7 @@ describe("latestJsonFor", () => {
 	it("answers 204 when GitHub's response isn't OK", async () => {
 		vi.stubGlobal("fetch", vi.fn(async () => new Response("rate limited", { status: 403 })));
 		const kv = fakeKv();
-		const res = await latestJsonFor("stable", platformWith(kv));
+		const res = await latestJsonFor("stable", envWith(kv));
 		expect(res.status).toBe(204);
 		expect(kv.puts).toEqual([]);
 	});

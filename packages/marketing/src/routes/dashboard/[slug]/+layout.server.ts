@@ -1,7 +1,7 @@
 import { error } from "@sveltejs/kit";
 import { remult } from "remult";
-import { Tenant } from "$lib/entities/tenant";
-import { TenantMember } from "$lib/entities/tenant-member";
+import { Tenant } from "#lib/entities/tenant.js";
+import { TenantMember } from "#lib/entities/tenant-member.js";
 import type { LayoutServerLoad } from "./$types";
 
 export const load: LayoutServerLoad = async ({ params }) => {

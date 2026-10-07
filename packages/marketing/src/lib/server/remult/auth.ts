@@ -1,5 +1,5 @@
 import { Module } from "remult/server";
-import { authEntities } from "$lib/entities/auth-entities";
+import { authEntities } from "#lib/entities/auth-entities.js";
 import { Roles } from "./auth-roles";
 import { addRolesToUser } from "./auth-helpers";
 import { auth as betterAuth } from "./better-auth";

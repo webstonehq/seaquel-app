@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
-	import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
-	import { downloadGroups } from "$lib/downloads";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import * as DropdownMenu from "#lib/components/ui/dropdown-menu/index.js";
+	import { downloadGroups } from "#lib/downloads.js";
 	import DownloadIcon from "@lucide/svelte/icons/download";
 	import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
 	import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
-	import { cn } from "$lib/utils";
+	import { cn } from "#lib/utils.js";
 
 	interface Props {
 		variant?: "default" | "outline" | "ghost";

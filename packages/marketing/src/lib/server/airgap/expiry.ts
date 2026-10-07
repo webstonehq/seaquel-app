@@ -1,4 +1,4 @@
-import type { License } from "$lib/entities/license";
+import type { License } from "#lib/entities/license.js";
 
 /** Cancelled-license grace window before bundles hard-expire. 7 days. */
 export const CANCELLED_GRACE_SECONDS = 7 * 24 * 60 * 60;

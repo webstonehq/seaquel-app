@@ -1,11 +1,11 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import { Card, CardContent } from "$lib/components/ui/card";
-	import { Button } from "$lib/components/ui/button";
-	import PostCard from "$lib/components/blog/post-card.svelte";
-	import NewsletterSignup from "$lib/components/blog/newsletter-signup.svelte";
-	import authorAvatar from "$lib/assets/mike_headshot.webp";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import { Card, CardContent } from "#lib/components/ui/card/index.js";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import PostCard from "#lib/components/blog/post-card.svelte";
+	import NewsletterSignup from "#lib/components/blog/newsletter-signup.svelte";
+	import authorAvatar from "#lib/assets/mike_headshot.webp";
 	import SparklesIcon from "@lucide/svelte/icons/sparkles";
 	import CalendarIcon from "@lucide/svelte/icons/calendar";
 	import ClockIcon from "@lucide/svelte/icons/clock";
@@ -14,7 +14,7 @@
 	import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
 	import { fly } from "svelte/transition";
 	import type { PageData } from "./$types";
-	import Seo from "$lib/components/seo.svelte";
+	import Seo from "#lib/components/seo.svelte";
 
 	let { data }: { data: PageData } = $props();
 

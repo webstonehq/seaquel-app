@@ -1,5 +1,5 @@
 import type { PageLoad, EntryGenerator } from './$types';
-import { getChangelogEntry, getChangelogSlugs } from '$lib/changelog';
+import { getChangelogEntry, getChangelogSlugs } from '#lib/changelog/index.js';
 import { error } from '@sveltejs/kit';
 
 export const prerender = true;

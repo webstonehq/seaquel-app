@@ -1,7 +1,8 @@
+import { env } from "cloudflare:workers";
 import { error } from "@sveltejs/kit";
 import { remult } from "remult";
-import { Certificate } from "$lib/entities";
-import { renderCertificateImage } from "$lib/server/certificate-image";
+import { Certificate } from "#lib/entities/index.js";
+import { renderCertificateImage } from "#lib/server/certificate-image.js";
 import type { RequestHandler } from "./$types";
 
 /**
@@ -12,7 +13,7 @@ import type { RequestHandler } from "./$types";
  * max-age is deliberate: the image only changes if the learner renames the
  * certificate, which is rare enough to live with.
  */
-export const GET: RequestHandler = async ({ params, url, platform }) => {
+export const GET: RequestHandler = async ({ params, url }) => {
   const certificate = await remult.repo(Certificate).findId(params.id);
   if (!certificate) throw error(404, "Not found");
 
@@ -23,7 +24,7 @@ export const GET: RequestHandler = async ({ params, url, platform }) => {
       challengeCount: certificate.challengeCount,
       issuedAt: certificate.issuedAt ?? new Date(),
     },
-    { origin: url.origin, assets: platform?.env?.ASSETS },
+    { origin: url.origin, assets: env.ASSETS },
   );
 
   return new Response(png as BodyInit, {

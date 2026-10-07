@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Concession } from "$lib/competitors";
+	import type { Concession } from "#lib/competitors/index.js";
 
 	interface Props {
 		competitor: string;

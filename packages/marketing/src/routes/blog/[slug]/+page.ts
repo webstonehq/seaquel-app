@@ -1,5 +1,5 @@
 import type { PageLoad, EntryGenerator } from './$types';
-import { getBlogEntries, getBlogEntry, getBlogSlugs } from '$lib/blog';
+import { getBlogEntries, getBlogEntry, getBlogSlugs } from '#lib/blog/index.js';
 import { error } from '@sveltejs/kit';
 
 export const prerender = true;

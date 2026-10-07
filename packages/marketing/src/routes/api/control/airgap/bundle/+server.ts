@@ -3,7 +3,7 @@
  *
  * The owner of a self-hosted Seaquel tenant calls this from
  * `/dashboard/[slug]/airgap` to download a new bundle. The bundle is a
- * signed Ed25519 envelope (see `$lib/server/airgap/bundle-signer`) that
+ * signed Ed25519 envelope (see `#lib/server/airgap/bundle-signer.js`) that
  * the self-hosted container's offline dispatcher reads on next boot to
  * decide which license keys are entitled, which are revoked, and when
  * the bundle expires.
@@ -30,25 +30,25 @@
 import { error } from "@sveltejs/kit";
 import { remult } from "remult";
 import type { RequestHandler } from "./$types";
-import { IssuedBundle } from "$lib/entities/issued-bundle";
-import { License } from "$lib/entities/license";
-import { Revocation } from "$lib/entities/revocation";
-import { Tenant } from "$lib/entities/tenant";
-import { TenantMember } from "$lib/entities/tenant-member";
-import { requireUserId } from "$lib/server/control/auth";
+import { IssuedBundle } from "#lib/entities/issued-bundle.js";
+import { License } from "#lib/entities/license.js";
+import { Revocation } from "#lib/entities/revocation.js";
+import { Tenant } from "#lib/entities/tenant.js";
+import { TenantMember } from "#lib/entities/tenant-member.js";
+import { requireUserId } from "#lib/server/control/auth.js";
 import {
   parseGraceSeconds,
   readEnv,
-} from "$lib/server/control/env";
-import { parseProductMap } from "$lib/server/control/dodo";
-import { enforceRateLimit } from "$lib/server/rate-limit";
+} from "#lib/server/control/env.js";
+import { parseProductMap } from "#lib/server/control/dodo.js";
+import { enforceRateLimit } from "#lib/server/rate-limit.js";
 import {
   canonicalize,
   signBundle,
   type BundlePayload,
-} from "$lib/server/airgap/bundle-signer";
-import { bytesToHex } from "$lib/server/airgap/canonical";
-import { computeBundleNotAfter } from "$lib/server/airgap/expiry";
+} from "#lib/server/airgap/bundle-signer.js";
+import { bytesToHex } from "#lib/server/airgap/canonical.js";
+import { computeBundleNotAfter } from "#lib/server/airgap/expiry.js";
 
 interface BundleRequest {
   tenantId: string;
@@ -89,7 +89,7 @@ export const POST: RequestHandler = async (event) => {
   const license = await remult.repo(License).findId(tenant.licenseId);
   if (!license) throw error(500, "tenant has no backing license");
 
-  const env = readEnv(event);
+  const env = readEnv();
   if (!env.SEAQUEL_BUNDLE_SIGNING_PRIVATE_KEY) {
     // Loud config failure rather than silently issuing an unsigned blob.
     console.error("[airgap:bundle] SEAQUEL_BUNDLE_SIGNING_PRIVATE_KEY not set");

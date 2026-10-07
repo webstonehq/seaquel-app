@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { Card, CardHeader, CardTitle, CardContent } from "$lib/components/ui/card";
-	import { Button } from "$lib/components/ui/button";
-	import { downloadGroups } from "$lib/downloads";
+	import { Card, CardHeader, CardTitle, CardContent } from "#lib/components/ui/card/index.js";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import { downloadGroups } from "#lib/downloads.js";
 	import { fly } from "svelte/transition";
 	import DownloadIcon from "@lucide/svelte/icons/download";
 	import AppleIcon from "@lucide/svelte/icons/apple";
 	import MonitorIcon from "@lucide/svelte/icons/monitor";
-	import LogoLinux from "$lib/components/logo-linux.svelte";
+	import LogoLinux from "#lib/components/logo-linux.svelte";
 
 	interface Props {
 		/** Where the per-platform links live: `/download` or `/download/beta`. */

@@ -5,16 +5,16 @@
  * validate it via the same `activateLicense` helper the desktop app
  * uses, then persist a `licenses` row in D1 linked to the current user.
  */
-import { error, json } from "@sveltejs/kit";
-import { env } from "$env/dynamic/private";
-import { env as publicEnv } from "$env/dynamic/public";
+import { error } from "@sveltejs/kit";
+import { DODO_MODE } from "$app/env/private";
+import { PUBLIC_DODO_PRODUCT_MAP } from "$app/env/public";
 import { remult } from "remult";
 import type { RequestHandler } from "./$types";
-import { License } from "$lib/entities/license";
-import { requireUserId } from "$lib/server/control/auth";
-import { activateLicense, type LicenseProxyResponse } from "$lib/license";
-import { auth as betterAuth } from "$lib/server/remult/better-auth";
-import { enforceRateLimit } from "$lib/server/rate-limit";
+import { License } from "#lib/entities/license.js";
+import { requireUserId } from "#lib/server/control/auth.js";
+import { activateLicense, type LicenseProxyResponse } from "#lib/license.js";
+import { auth as betterAuth } from "#lib/server/remult/better-auth.js";
+import { enforceRateLimit } from "#lib/server/rate-limit.js";
 
 export const POST: RequestHandler = async (event) => {
   // Throttle license-key brute force. The endpoint is session-gated so
@@ -37,7 +37,7 @@ export const POST: RequestHandler = async (event) => {
   }
   const userEmail = session.user.email;
 
-  const body = (await event.request.json()) as { licenseKey?: string };
+  const body = await event.request.json() as { licenseKey?: string };
   if (!body.licenseKey?.trim()) {
     throw error(400, "licenseKey is required");
   }
@@ -48,7 +48,7 @@ export const POST: RequestHandler = async (event) => {
     .repo(License)
     .findFirst({ licenseKey, ownerUserId: userId });
   if (existing) {
-    return json({ ok: true, license: existing });
+    return Response.json({ ok: true, license: existing });
   }
 
   // Never move a license another account already owns — for an N-seat
@@ -60,14 +60,9 @@ export const POST: RequestHandler = async (event) => {
     throw error(409, "This license key is already linked to another account");
   }
 
-  const mode = env.DODO_MODE || "test";
+  const mode = DODO_MODE || "test";
   const instanceName = `cloud-${userId}`;
-  const dodoRes = await activateLicense(
-    licenseKey,
-    instanceName,
-    mode,
-    publicEnv.PUBLIC_DODO_PRODUCT_MAP,
-  );
+  const dodoRes = await activateLicense(licenseKey, instanceName, mode, PUBLIC_DODO_PRODUCT_MAP);
 
   if (!dodoRes.ok) {
     const body = await dodoRes.json() as { message?: string };
@@ -81,8 +76,8 @@ export const POST: RequestHandler = async (event) => {
 
   let dodo: LicenseProxyResponse;
   try {
-    dodo = (await dodoRes.json()) as LicenseProxyResponse;
-  } catch (e) {
+    dodo = await dodoRes.json() as LicenseProxyResponse;
+  } catch(e) {
     console.error("[license:activate] failed to parse Dodo response", e);
     throw error(502, "Unexpected response from license service");
   }
@@ -91,11 +86,9 @@ export const POST: RequestHandler = async (event) => {
   // Fall back to reverse-lookup from tier name if Dodo didn't include it.
   let planId = dodo.product_id ?? "";
   if (!planId) {
-    const productMap: Record<string, string> = JSON.parse(
-      publicEnv.PUBLIC_DODO_PRODUCT_MAP || "{}",
-    );
-    planId =
-      Object.entries(productMap).find(([, v]) => v === dodo.tier)?.[0] ?? "";
+    const productMap: Record<string, string> = JSON.parse(PUBLIC_DODO_PRODUCT_MAP || "{}");
+
+    planId = Object.entries(productMap).find(([, v]) => v === dodo.tier)?.[0] ?? "";
   }
 
   const dodoCustomerId = dodo.customer_id ?? "";
@@ -113,7 +106,7 @@ export const POST: RequestHandler = async (event) => {
         planId: planId || byKey.planId,
         dodoCustomerId: dodoCustomerId || byKey.dodoCustomerId,
       });
-      return json({ ok: true, license: linked });
+      return Response.json({ ok: true, license: linked });
     }
 
     // 2. Race window: `subscription.active` landed first (creates a row
@@ -134,7 +127,7 @@ export const POST: RequestHandler = async (event) => {
         licenseKey,
         planId: planId || keyless.planId,
       });
-      return json({ ok: true, license: linked });
+      return Response.json({ ok: true, license: linked });
     }
 
     // 3. No webhook row exists — create one. Seats default to 1; the
@@ -151,7 +144,7 @@ export const POST: RequestHandler = async (event) => {
       ownerUserId: userId,
     });
 
-    return json({ ok: true, license });
+    return Response.json({ ok: true, license });
   } catch (e) {
     console.error("[license:activate] DB error", e);
     throw error(500, "Failed to save license");

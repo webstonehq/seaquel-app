@@ -1,12 +1,12 @@
 import type { RequestHandler } from "./$types";
 import { readFileSync, existsSync } from "fs";
 import { join } from "path";
-import { getChangelogEntries } from "$lib/changelog";
-import { getBlogEntries } from "$lib/blog";
-import { getLessons } from "$lib/learn-sql";
-import { getSqlErrors } from "$lib/sql-errors";
-import { ENGINE_SLUGS, ENGINES, getEngineCodes } from "$lib/server/sql-error-codes";
-import { getAlternatives, getComparisons } from "$lib/competitors";
+import { getChangelogEntries } from "#lib/changelog/index.js";
+import { getBlogEntries } from "#lib/blog/index.js";
+import { getLessons } from "#lib/learn-sql/index.js";
+import { getSqlErrors } from "#lib/sql-errors/index.js";
+import { ENGINE_SLUGS, ENGINES, getEngineCodes } from "#lib/server/sql-error-codes.js";
+import { getAlternatives, getComparisons } from "#lib/competitors/index.js";
 
 // https://llmstxt.org — a markdown index of the site for LLMs and AI tools.
 export const prerender = true;

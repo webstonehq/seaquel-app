@@ -20,7 +20,7 @@
  */
 
 import { error, type RequestEvent } from "@sveltejs/kit";
-import type { KVNamespace } from "@cloudflare/workers-types";
+import { env } from "cloudflare:workers";
 
 export interface RateLimitOptions {
   /** Logical bucket name. Mixed with the IP to form the KV key. */
@@ -46,8 +46,7 @@ export async function checkRateLimit(
   event: RequestEvent,
   opts: RateLimitOptions,
 ): Promise<RateLimitResult> {
-  const kv = (event.platform?.env as { GITHUB_API_CACHE?: KVNamespace } | undefined)
-    ?.GITHUB_API_CACHE;
+  const kv = env.GITHUB_API_CACHE;
   if (!kv) return { ok: true, retryAfter: 0 };
 
   const ip = event.getClientAddress();

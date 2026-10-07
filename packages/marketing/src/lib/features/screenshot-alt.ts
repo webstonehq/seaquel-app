@@ -1,5 +1,5 @@
 /**
- * Alt text for the feature screenshots in `$lib/assets/features/`, keyed by
+ * Alt text for the feature screenshots in `#lib/assets/features/`, keyed by
  * `<category>/<file>`. Each entry describes what the screenshot actually
  * shows rather than repeating the feature name, since this is what screen
  * readers, search engines and AI assistants read. When a screenshot is
@@ -100,7 +100,7 @@ const SCREENSHOT_ALT: Record<string, string> = {
 	"visual-tools/workflows.webp": "Seaquel Workflows canvas linking a customers table node to a SQL query node and a results node showing three returned rows.",
 };
 
-/** `path` is relative to `$lib/assets/features/`, e.g. `ai-assistant/mentions.webp`. */
+/** `path` is relative to `#lib/assets/features/`, e.g. `ai-assistant/mentions.webp`. */
 export function screenshotAlt(path: string, fallback: string): string {
 	return SCREENSHOT_ALT[path] ?? `Seaquel ${fallback} screenshot`;
 }

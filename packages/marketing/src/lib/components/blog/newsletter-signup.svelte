@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ConsentSignup from "$lib/components/consent-signup.svelte";
-	import { CONSENT_COPY } from "$lib/consent-copy";
+	import ConsentSignup from "#lib/components/consent-signup.svelte";
+	import { CONSENT_COPY } from "#lib/consent-copy.js";
 
 	// Thin wrapper kept so blog callers don't change. All the behaviour —
 	// consent capture, real error handling — lives in ConsentSignup.

@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { prepareSchema, runQuery } from '../../embed/database';
 import { ENGINE_SLUGS, codeSlug, isEngine } from './engines';
-import { getEngineCodes } from '$lib/server/sql-error-codes';
+import { getEngineCodes } from '#lib/server/sql-error-codes.js';
 
 // Every error page promises that its broken query produces the quoted error
 // and its fixed query runs. Holding the content to that here keeps a typo in

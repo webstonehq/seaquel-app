@@ -41,7 +41,7 @@ export interface AssetFetcher {
 
 export interface RenderContext {
 	origin: string;
-	/** `platform.env.ASSETS` in production; absent in dev and in tests. */
+	/** `env.ASSETS` from cloudflare:workers in production; absent in dev and in tests. */
 	assets?: AssetFetcher;
 }
 

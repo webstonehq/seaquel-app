@@ -16,15 +16,15 @@
  * Errors are returned as `{ ok: false, error: <enum> }` rather than
  * thrown — the caller renders them inline on the signup form.
  */
-import { error, json } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import { remult } from "remult";
 import type { RequestHandler } from "./$types";
-import { License } from "$lib/entities/license";
-import { TenantMember } from "$lib/entities/tenant-member";
-import { requireCloudAuth } from "$lib/server/control/cloud-auth";
-import { parseProductMap } from "$lib/server/control/dodo";
-import { readEnv } from "$lib/server/control/env";
-import { enforceRateLimit } from "$lib/server/rate-limit";
+import { License } from "#lib/entities/license.js";
+import { TenantMember } from "#lib/entities/tenant-member.js";
+import { requireCloudAuth } from "#lib/server/control/cloud-auth.js";
+import { parseProductMap } from "#lib/server/control/dodo.js";
+import { readEnv } from "#lib/server/control/env.js";
+import { enforceRateLimit } from "#lib/server/rate-limit.js";
 
 interface VerifyRequest {
   licenseKey: string;
@@ -69,13 +69,13 @@ export const POST: RequestHandler = async (event) => {
     .repo(License)
     .findFirst({ licenseKey });
   if (!presented) {
-    return json({ ok: false, error: "license_not_found" satisfies VerifyError });
+    return Response.json({ ok: false, error: "license_not_found" satisfies VerifyError });
   }
   if (presented.status !== "active") {
-    return json({ ok: false, error: "license_inactive" satisfies VerifyError });
+    return Response.json({ ok: false, error: "license_inactive" satisfies VerifyError });
   }
   if (presented.dodoSubscriptionId !== tenantLicense.dodoSubscriptionId) {
-    return json({
+    return Response.json({
       ok: false,
       error: "wrong_subscription" satisfies VerifyError,
     });
@@ -105,13 +105,13 @@ export const POST: RequestHandler = async (event) => {
     !sameTenantSameKey &&
     otherActive.tenantId !== tenant.id
   ) {
-    return json({
+    return Response.json({
       ok: false,
       error: "license_already_in_other_tenant" satisfies VerifyError,
     });
   }
 
-  const productMap = parseProductMap(readEnv(event).PUBLIC_DODO_PRODUCT_MAP);
+  const productMap = parseProductMap(readEnv().PUBLIC_DODO_PRODUCT_MAP);
 
   // Owner-claim path: the visitor is the owner if their email matches
   // the unbound owner row AND the license they're presenting is the
@@ -125,7 +125,7 @@ export const POST: RequestHandler = async (event) => {
     presented.id === tenantLicense.id &&
     !ownerRow.containerUserId;
 
-  return json({
+  return Response.json({
     ok: true,
     subscriptionId: presented.dodoSubscriptionId,
     tier: productMap[presented.planId] ?? "personal",

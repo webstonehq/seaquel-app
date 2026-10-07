@@ -6,11 +6,11 @@
  * (last 4 chars only) — the container has no business knowing the full
  * key for a different user.
  */
-import { json } from "@sveltejs/kit";
+
 import { remult } from "remult";
 import type { RequestHandler } from "./$types";
-import { TenantMember } from "$lib/entities/tenant-member";
-import { requireCloudAuth } from "$lib/server/control/cloud-auth";
+import { TenantMember } from "#lib/entities/tenant-member.js";
+import { requireCloudAuth } from "#lib/server/control/cloud-auth.js";
 
 export const GET: RequestHandler = async (event) => {
   const { tenant } = await requireCloudAuth(event, { strict: true });
@@ -20,7 +20,7 @@ export const GET: RequestHandler = async (event) => {
     orderBy: { invitedAt: "asc" },
   });
 
-  return json(
+  return Response.json(
     members.map((m) => ({
       tenantMemberId: m.id,
       containerUserId: m.containerUserId,

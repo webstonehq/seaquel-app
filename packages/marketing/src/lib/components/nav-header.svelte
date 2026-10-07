@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
-	import * as NavigationMenu from "$lib/components/ui/navigation-menu";
-	import ThemeToggle from "$lib/components/theme-toggle.svelte";
-	import DownloadDropdown from "$lib/components/download-dropdown.svelte";
-	import { featureCategories } from "$lib/features";
-	import GithubIcon from "$lib/components/logo-github.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import * as NavigationMenu from "#lib/components/ui/navigation-menu/index.js";
+	import ThemeToggle from "#lib/components/theme-toggle.svelte";
+	import DownloadDropdown from "#lib/components/download-dropdown.svelte";
+	import { featureCategories } from "#lib/features/index.js";
+	import GithubIcon from "#lib/components/logo-github.svelte";
 	import MenuIcon from "@lucide/svelte/icons/menu";
 	import XIcon from "@lucide/svelte/icons/x";
 	import Logo from "./logo.svelte";

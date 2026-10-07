@@ -4,7 +4,7 @@
  * The checkbox label a person reads and the `consentText` written to
  * their row must be the same string — a record of consent to wording
  * that differs from what was on screen proves nothing. Client-safe (no
- * server imports) so components can render it; `$lib/server/consent`
+ * server imports) so components can render it; `#lib/server/consent.js`
  * re-exports it as `CONSENT_PURPOSES` for the write path.
  *
  * Changing a string here changes what future rows record. Existing rows

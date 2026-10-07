@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button";
-  import { Card } from "$lib/components/ui/card";
+  import { Button } from "#lib/components/ui/button/index.js";
+  import { Card } from "#lib/components/ui/card/index.js";
   import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
-  import { Tenant } from "$lib/entities/tenant";
+  import { Tenant } from "#lib/entities/tenant.js";
 
   let { licenseId }: { licenseId: string } = $props();
 
   let slug = $state("");
   // Platform is locked to "fly" in v1 — the Cloudflare adapter
-  // (`$lib/server/control/platform/cloudflare.ts`) throws "not implemented"
+  // (`#lib/server/control/platform/cloudflare.ts`) throws "not implemented"
   // on every method. The chooser UI below is kept (disabled, "coming soon")
   // so the layout is final and the next release just flips a feature flag.
   let platform = $state<"fly" | "cloudflare">("fly");

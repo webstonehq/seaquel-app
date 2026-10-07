@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { invalidateAll } from "$app/navigation";
-  import { Card } from "$lib/components/ui/card";
-  import { Button } from "$lib/components/ui/button";
+  import { refreshAll } from "$app/navigation";
+  import { Card } from "#lib/components/ui/card/index.js";
+  import { Button } from "#lib/components/ui/button/index.js";
   import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
   import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
   import PlusIcon from "@lucide/svelte/icons/plus";
   import UserIcon from "@lucide/svelte/icons/user";
-  import { TenantMember } from "$lib/entities/tenant-member";
+  import { TenantMember } from "#lib/entities/tenant-member.js";
 
   let { data } = $props();
 
@@ -41,7 +41,7 @@
         email: inviteEmail.trim(),
       });
       inviteEmail = "";
-      await invalidateAll();
+      await refreshAll();
     } catch (err) {
       inviteError = err instanceof Error ? err.message : "Invite failed.";
     } finally {

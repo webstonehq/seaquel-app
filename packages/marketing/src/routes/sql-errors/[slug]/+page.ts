@@ -1,5 +1,5 @@
 import type { PageLoad, EntryGenerator } from './$types';
-import { getSqlError, getSqlErrorSlugs } from '$lib/sql-errors';
+import { getSqlError, getSqlErrorSlugs } from '#lib/sql-errors/index.js';
 import { error } from '@sveltejs/kit';
 
 export const prerender = true;

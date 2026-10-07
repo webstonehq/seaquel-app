@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Card } from "$lib/components/ui/card";
-  import { Button } from "$lib/components/ui/button";
+  import { Card } from "#lib/components/ui/card/index.js";
+  import { Button } from "#lib/components/ui/button/index.js";
   import ExternalLinkIcon from "@lucide/svelte/icons/external-link";
   import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
   import Trash2Icon from "@lucide/svelte/icons/trash-2";
-  import { Tenant } from "$lib/entities/tenant";
+  import { Tenant } from "#lib/entities/tenant.js";
 
   let { data } = $props();
   let tenant = $derived({ ...data.tenant });

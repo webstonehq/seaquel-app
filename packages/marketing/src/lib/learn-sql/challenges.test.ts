@@ -2,7 +2,7 @@ import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { CHALLENGES } from './challenges';
-import { gradeChallenge, runQuery } from '$lib/sandbox';
+import { gradeChallenge, runQuery } from '#lib/sandbox/index.js';
 
 // Every challenge ships a reference solution that the grader runs on each
 // submission. A solution that stops working would silently mark correct

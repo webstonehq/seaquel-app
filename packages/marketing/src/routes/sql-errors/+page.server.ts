@@ -1,7 +1,7 @@
 import type { PageServerLoad } from './$types';
-import { getSqlErrors } from '$lib/sql-errors';
-import { getLessons } from '$lib/learn-sql';
-import { ENGINE_SLUGS, ENGINES, getEngineCodes } from '$lib/server/sql-error-codes';
+import { getSqlErrors } from '#lib/sql-errors/index.js';
+import { getLessons } from '#lib/learn-sql/index.js';
+import { ENGINE_SLUGS, ENGINES, getEngineCodes } from '#lib/server/sql-error-codes.js';
 
 export const prerender = true;
 

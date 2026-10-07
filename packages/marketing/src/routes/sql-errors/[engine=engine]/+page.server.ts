@@ -1,5 +1,5 @@
 import type { EntryGenerator, PageServerLoad } from './$types';
-import { ENGINE_SLUGS, getEngineIndex, type EngineSlug } from '$lib/server/sql-error-codes';
+import { ENGINE_SLUGS, getEngineIndex, type EngineSlug } from '#lib/server/sql-error-codes.js';
 
 export const prerender = true;
 // A long static list: nothing on it needs JavaScript, and hydrating it would

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import { Button } from "$lib/components/ui/button";
-	import { Card } from "$lib/components/ui/card";
-	import DownloadDropdown from "$lib/components/download-dropdown.svelte";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
+	import { Card } from "#lib/components/ui/card/index.js";
+	import DownloadDropdown from "#lib/components/download-dropdown.svelte";
 	import { fly } from "svelte/transition";
 	import CircleCheckIcon from "@lucide/svelte/icons/circle-check";
 	import MailIcon from "@lucide/svelte/icons/mail";
@@ -11,7 +11,7 @@
 	import HelpCircleIcon from "@lucide/svelte/icons/circle-question-mark";
 	import CloudIcon from "@lucide/svelte/icons/cloud";
 	import { page } from "$app/state";
-	import Seo from "$lib/components/seo.svelte";
+	import Seo from "#lib/components/seo.svelte";
 
 	const sessionId = page.url.searchParams.get("session_id") || page.url.searchParams.get("order_id");
 </script>

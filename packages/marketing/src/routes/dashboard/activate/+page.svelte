@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Card } from "$lib/components/ui/card";
-  import { Button } from "$lib/components/ui/button";
+  import { Card } from "#lib/components/ui/card/index.js";
+  import { Button } from "#lib/components/ui/button/index.js";
   import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
   import KeyRoundIcon from "@lucide/svelte/icons/key-round";
 

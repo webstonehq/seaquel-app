@@ -1,6 +1,7 @@
-import { latestJsonFor } from "$lib/server/releases";
+import { env } from "cloudflare:workers";
+import { latestJsonFor } from "#lib/server/releases.js";
 
-export const GET = async ({ params, platform }) => {
+export const GET = async ({ params }) => {
   console.log("Checking for available updates.", { params });
-  return latestJsonFor("stable", platform);
+  return latestJsonFor("stable", env);
 };

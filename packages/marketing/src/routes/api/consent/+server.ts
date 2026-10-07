@@ -5,7 +5,7 @@
  * `/api/newsletter/subscribe`, which stored a signup but no evidence of
  * what anyone agreed to.
  *
- * Validation and the repeat-signup decision live in `$lib/server/consent`
+ * Validation and the repeat-signup decision live in `#lib/server/consent.js`
  * as pure functions; this handler only does IO. Notably the consent
  * wording is resolved from `purpose` server-side — a client-supplied
  * string would make the stored record useless as proof.
@@ -14,11 +14,11 @@
  * cannot be used to probe which addresses are already subscribed.
  * `400` on shape errors, `429` with `Retry-After` on rate limit.
  */
-import { json, type RequestHandler } from "@sveltejs/kit";
+import type { RequestHandler } from "@sveltejs/kit";
 import { remult } from "remult";
-import { EmailConsent } from "$lib/entities/email-consent";
-import { createUnsubscribeToken, parseConsentRequest, planConsentWrite } from "$lib/server/consent";
-import { enforceRateLimit } from "$lib/server/rate-limit";
+import { EmailConsent } from "#lib/entities/email-consent.js";
+import { createUnsubscribeToken, parseConsentRequest, planConsentWrite } from "#lib/server/consent.js";
+import { enforceRateLimit } from "#lib/server/rate-limit.js";
 
 export const POST: RequestHandler = async (event) => {
   await enforceRateLimit(event, { bucket: "consent", windowSeconds: 60, max: 3 });
@@ -27,11 +27,11 @@ export const POST: RequestHandler = async (event) => {
   try {
     body = await event.request.json();
   } catch {
-    return json({ ok: false, error: "invalid_body" }, { status: 400 });
+    return Response.json({ ok: false, error: "invalid_body" }, { status: 400 });
   }
 
   const parsed = parseConsentRequest(body);
-  if (!parsed.ok) return json({ ok: false, error: parsed.error }, { status: 400 });
+  if (!parsed.ok) return Response.json({ ok: false, error: parsed.error }, { status: 400 });
   const { email, purpose, source, consentText } = parsed.value;
 
   // Proof-of-consent fields come from the request envelope, never the
@@ -76,5 +76,5 @@ export const POST: RequestHandler = async (event) => {
     console.debug("[consent] write failed; reporting success", err);
   }
 
-  return json({ ok: true });
+  return Response.json({ ok: true });
 };

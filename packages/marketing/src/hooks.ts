@@ -1,6 +1,6 @@
-import { repo, type ClassType } from 'remult'
-import type { Transport } from '@sveltejs/kit'
-import { entities } from '$lib/entities'
+import type { Transport } from '@sveltejs/kit/hooks';
+import { repo, type ClassType } from 'remult';
+import { entities } from '#lib/entities/index.js';
 
 export const transport: Transport = {
   remultTransport: {

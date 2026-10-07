@@ -1,9 +1,9 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import { Card } from "$lib/components/ui/card";
-  import { Button } from "$lib/components/ui/button";
+  import { Card } from "#lib/components/ui/card/index.js";
+  import { Button } from "#lib/components/ui/button/index.js";
   import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
-  import { authClient } from "$lib/auth-client";
+  import { authClient } from "#lib/auth-client.js";
 
   let email = $state("");
   let password = $state("");

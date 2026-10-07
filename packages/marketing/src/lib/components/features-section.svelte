@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
+	import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "#lib/components/ui/card/index.js";
 	import ZapIcon from "@lucide/svelte/icons/zap";
 	import CpuIcon from "@lucide/svelte/icons/cpu";
 	import WifiOffIcon from "@lucide/svelte/icons/wifi-off";
@@ -21,8 +21,8 @@
 	import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
 	import WorkflowIcon from "@lucide/svelte/icons/workflow";
 	import { fly } from "svelte/transition";
-	import FullscreenOverlay from "$lib/components/fullscreen-overlay.svelte";
-	import { screenshotAlt } from "$lib/features/screenshot-alt";
+	import FullscreenOverlay from "#lib/components/fullscreen-overlay.svelte";
+	import { screenshotAlt } from "#lib/features/screenshot-alt.js";
 
 	// These directives override enhanced-img's defaults (avif;webp;png at
 	// half-width and full-width). The masters are ~2600-3300px wide, far more
@@ -31,7 +31,7 @@
 	// density descriptors, which is what enhanced-img does when it picks the
 	// widths itself. The png fallback is dropped -- nothing we support needs it.
 	const images: Record<string, { default: string }> = import.meta.glob(
-		'$lib/assets/features/*/*.webp',
+		'#lib/assets/features/*/*.webp',
 		{ eager: true, query: { enhanced: true, format: 'avif;webp', w: '800;1600', basePixels: '800' } }
 	);
 

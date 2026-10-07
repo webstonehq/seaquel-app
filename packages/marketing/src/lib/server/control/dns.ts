@@ -7,7 +7,7 @@
  *
  * API reference: https://developers.cloudflare.com/api/operations/dns-records-for-a-zone-create-dns-record
  */
-import { dev } from "$app/environment";
+import { dev } from "$app/env";
 
 const CF_API = "https://api.cloudflare.com/client/v4";
 
@@ -68,10 +68,7 @@ class CloudflareDnsClient implements DnsClient {
   async deleteTenantCname(slug: string): Promise<void> {
     const host = `${slug}.${this.rootDomain}`;
     // Lookup first — CF API requires the record id, not the name.
-    const list = (await this.cfFetch(
-      `/zones/${this.zoneId}/dns_records?name=${encodeURIComponent(host)}&type=CNAME`,
-      "GET",
-    )) as { result: Array<{ id: string }> };
+    const list = await this.cfFetch(`/zones/${this.zoneId}/dns_records?name=${encodeURIComponent(host)}&type=CNAME`, "GET") as { result: Array<{ id: string }> };
 
     for (const r of list.result) {
       await this.cfFetch(`/zones/${this.zoneId}/dns_records/${r.id}`, "DELETE");
@@ -91,7 +88,7 @@ class CloudflareDnsClient implements DnsClient {
       },
       body: body ? JSON.stringify(body) : undefined,
     });
-    const payload = (await res.json()) as {
+    const payload = await res.json() as { 
       success: boolean;
       errors?: Array<{ message: string }>;
       result?: unknown;

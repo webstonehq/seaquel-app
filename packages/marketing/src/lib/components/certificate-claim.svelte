@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
+	import { Button } from "#lib/components/ui/button/index.js";
 	import AwardIcon from "@lucide/svelte/icons/award";
 	import Loader2Icon from "@lucide/svelte/icons/loader-circle";
-	import { Certificate } from "$lib/entities/certificate";
-	import { exportProgress } from "$lib/learn-sql/progress";
-	import { TOTAL_CHALLENGES } from "$lib/learn-sql/challenges";
-	import { authClient } from "$lib/auth-client";
+	import { Certificate } from "#lib/entities/certificate.js";
+	import { exportProgress } from "#lib/learn-sql/progress.js";
+	import { TOTAL_CHALLENGES } from "#lib/learn-sql/challenges.js";
+	import { authClient } from "#lib/auth-client.js";
 	import { onMount } from "svelte";
 
 	interface Props {

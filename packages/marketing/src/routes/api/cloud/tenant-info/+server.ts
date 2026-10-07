@@ -12,14 +12,14 @@
  * `X-License-Key` header pair, with the license required to belong to
  * the install's Dodo subscription.
  */
-import { error, json } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import { remult } from "remult";
 import type { RequestHandler } from "./$types";
-import { License } from "$lib/entities/license";
-import { TenantMember } from "$lib/entities/tenant-member";
-import { requireCloudAuth } from "$lib/server/control/cloud-auth";
-import { parseProductMap } from "$lib/server/control/dodo";
-import { readEnv } from "$lib/server/control/env";
+import { License } from "#lib/entities/license.js";
+import { TenantMember } from "#lib/entities/tenant-member.js";
+import { requireCloudAuth } from "#lib/server/control/cloud-auth.js";
+import { parseProductMap } from "#lib/server/control/dodo.js";
+import { readEnv } from "#lib/server/control/env.js";
 
 export const GET: RequestHandler = async (event) => {
   const { tenant } = await requireCloudAuth(event, { strict: true });
@@ -31,9 +31,9 @@ export const GET: RequestHandler = async (event) => {
     .repo(TenantMember)
     .findFirst({ tenantId: tenant.id, role: "owner" });
 
-  const productMap = parseProductMap(readEnv(event).PUBLIC_DODO_PRODUCT_MAP);
+  const productMap = parseProductMap(readEnv().PUBLIC_DODO_PRODUCT_MAP);
 
-  return json({
+  return Response.json({
     tenantId: tenant.id,
     slug: tenant.slug,
     status: tenant.status,

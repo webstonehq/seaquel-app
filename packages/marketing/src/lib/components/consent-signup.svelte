@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
+	import { Button } from "#lib/components/ui/button/index.js";
 	import MailIcon from "@lucide/svelte/icons/mail";
 	import CheckIcon from "@lucide/svelte/icons/check";
 	import AlertCircleIcon from "@lucide/svelte/icons/circle-alert";

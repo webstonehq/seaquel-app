@@ -1,11 +1,11 @@
 <script lang="ts">
-    import GithubIcon from "$lib/components/logo-github.svelte";
+    import GithubIcon from "#lib/components/logo-github.svelte";
     import DownloadIcon from "@lucide/svelte/icons/download";
-    import LinkedinIcon from "$lib/components/logo-linkedin.svelte";
-    import { Button } from "$lib/components/ui/button";
+    import LinkedinIcon from "#lib/components/logo-linkedin.svelte";
+    import { Button } from "#lib/components/ui/button/index.js";
     import Logo from "./logo.svelte";
     import LogoDiscord from "./logo-discord.svelte";
-    import { FOUNDER } from "$lib/founder";
+    import { FOUNDER } from "#lib/founder.js";
 </script>
 
 <footer class="border-t bg-muted/30">

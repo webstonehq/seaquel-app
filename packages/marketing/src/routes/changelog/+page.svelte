@@ -1,12 +1,12 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import { Card, CardHeader, CardTitle, CardContent } from "$lib/components/ui/card";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import { Card, CardHeader, CardTitle, CardContent } from "#lib/components/ui/card/index.js";
 	import CalendarIcon from "@lucide/svelte/icons/calendar";
 	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
 	import { fly } from "svelte/transition";
 	import type { PageData } from "./$types";
-	import Seo from "$lib/components/seo.svelte";
+	import Seo from "#lib/components/seo.svelte";
 
 	let { data }: { data: PageData } = $props();
 </script>

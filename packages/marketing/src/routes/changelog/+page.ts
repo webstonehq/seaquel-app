@@ -1,5 +1,5 @@
 import type { PageLoad } from './$types';
-import { getChangelogEntries } from '$lib/changelog';
+import { getChangelogEntries } from '#lib/changelog/index.js';
 
 export const prerender = true;
 

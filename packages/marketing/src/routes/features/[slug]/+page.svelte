@@ -1,27 +1,27 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import CtaSection from "$lib/components/cta-section.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import FullscreenOverlay from "$lib/components/fullscreen-overlay.svelte";
-	import { Button } from "$lib/components/ui/button";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import CtaSection from "#lib/components/cta-section.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import FullscreenOverlay from "#lib/components/fullscreen-overlay.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
 	import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
 	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
 	import ImageIcon from "@lucide/svelte/icons/image";
 	import { fly } from "svelte/transition";
 	import type { PageData } from "./$types";
-	import Seo from "$lib/components/seo.svelte";
-	import { screenshotAlt } from "$lib/features/screenshot-alt";
+	import Seo from "#lib/components/seo.svelte";
+	import { screenshotAlt } from "#lib/features/screenshot-alt.js";
 
 	let { data }: { data: PageData } = $props();
 
 	// See features-section.svelte for why these directives are pinned. Both
 	// globs must stay in sync or the same image is encoded twice per build.
 	const images: Record<string, { default: string }> = import.meta.glob(
-		'$lib/assets/features/*/*.webp',
+		'#lib/assets/features/*/*.webp',
 		{ eager: true, query: { enhanced: true, format: 'avif;webp', w: '800;1600', basePixels: '800' } }
 	);
 	const animatedImages: Record<string, { default: string }> = import.meta.glob(
-		'$lib/assets/features/*/*.gif',
+		'#lib/assets/features/*/*.gif',
 		{ eager: true }
 	);
 

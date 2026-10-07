@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { invalidateAll } from "$app/navigation";
-  import { Card } from "$lib/components/ui/card";
-  import { Button } from "$lib/components/ui/button";
+  import { refreshAll } from "$app/navigation";
+  import { Card } from "#lib/components/ui/card/index.js";
+  import { Button } from "#lib/components/ui/button/index.js";
   import AlertTriangleIcon from "@lucide/svelte/icons/triangle-alert";
   import DownloadIcon from "@lucide/svelte/icons/download";
   import LoaderCircleIcon from "@lucide/svelte/icons/loader-circle";
@@ -89,7 +89,7 @@
           throw new Error(text || `restore failed: ${res.status}`);
         }
       }
-      await invalidateAll();
+      await refreshAll();
     } catch (err) {
       // Surface the error on the download alert too — the checkbox itself
       // has no inline message slot, but the page-level alert is sticky.
@@ -143,7 +143,7 @@
 
       // The endpoint inserts an IssuedBundle row; refresh the audit list
       // so the new row appears at the top without a manual reload.
-      await invalidateAll();
+      await refreshAll();
     } catch (err) {
       downloadError =
         err instanceof Error ? err.message : "Bundle download failed.";

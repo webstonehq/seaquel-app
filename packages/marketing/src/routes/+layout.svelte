@@ -1,11 +1,11 @@
 <script lang="ts">
     import "./layout.css";
-    import favicon from "$lib/assets/favicon.svg";
+    import favicon from "#lib/assets/favicon.svg";
     import { ModeWatcher } from "mode-watcher";
     import { remult, Remult } from "remult";
     import { createSubscriber } from "svelte/reactivity";
     import { untrack } from "svelte";
-    import { handleCodeCopy } from "$lib/copy-code";
+    import { handleCodeCopy } from "#lib/copy-code.js";
 
     let { children, data } = $props();
 

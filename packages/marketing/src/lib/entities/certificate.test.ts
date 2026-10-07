@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { verifyComplete } from './certificate';
-import { CHALLENGES, TOTAL_CHALLENGES } from '$lib/learn-sql/challenges';
+import { CHALLENGES, TOTAL_CHALLENGES } from '#lib/learn-sql/challenges.js';
 
 // The client reports which challenges it solved, and a client can always lie.
 // The certificate is only worth anything because this check runs server-side

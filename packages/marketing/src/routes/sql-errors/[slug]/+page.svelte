@@ -1,7 +1,7 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import { Button } from "$lib/components/ui/button";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
 	import ArrowLeftIcon from "@lucide/svelte/icons/arrow-left";
 	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
 	import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
@@ -9,9 +9,9 @@
 	import PlayIcon from "@lucide/svelte/icons/play";
 	import TriangleAlertIcon from "@lucide/svelte/icons/triangle-alert";
 	import type { PageData } from "./$types";
-	import Seo from "$lib/components/seo.svelte";
-	import { codeLinks } from "$lib/sql-errors";
-	import { sqlErrorWidget } from "$lib/sql-errors/widget";
+	import Seo from "#lib/components/seo.svelte";
+	import { codeLinks } from "#lib/sql-errors/index.js";
+	import { sqlErrorWidget } from "#lib/sql-errors/widget.js";
 	import { onMount } from "svelte";
 
 	let { data }: { data: PageData } = $props();

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import { page } from "$app/state";
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import { Button } from "$lib/components/ui/button";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
 	import CheckIcon from "@lucide/svelte/icons/check";
 	import MailXIcon from "@lucide/svelte/icons/mail-x";
 	import type { ActionData, PageData } from "./$types";

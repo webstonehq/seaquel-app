@@ -1,11 +1,11 @@
 <script lang="ts">
-	import NavHeader from "$lib/components/nav-header.svelte";
-	import FooterSection from "$lib/components/footer-section.svelte";
-	import { Button } from "$lib/components/ui/button";
+	import NavHeader from "#lib/components/nav-header.svelte";
+	import FooterSection from "#lib/components/footer-section.svelte";
+	import { Button } from "#lib/components/ui/button/index.js";
 	import CheckIcon from "@lucide/svelte/icons/check";
 	import LinkIcon from "@lucide/svelte/icons/link";
 	import ArrowRightIcon from "@lucide/svelte/icons/arrow-right";
-	import Seo from "$lib/components/seo.svelte";
+	import Seo from "#lib/components/seo.svelte";
 	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();

@@ -19,21 +19,21 @@
  * dashboard surfaces the change. Container/data deletion is a separate
  * grace-period sweep — we never destroy paid data on a single webhook.
  */
-import { error, json, text } from "@sveltejs/kit";
-import { env } from "$env/dynamic/private";
+import { error } from "@sveltejs/kit";
+import { DODO_API_KEY, DODO_MODE } from "$app/env/private";
 import { remult } from "remult";
 import type { RequestHandler } from "./$types";
-import { AppliedEvent } from "$lib/entities/applied-event";
-import { License } from "$lib/entities/license";
-import { Revocation } from "$lib/entities/revocation";
-import { Tenant } from "$lib/entities/tenant";
+import { AppliedEvent } from "#lib/entities/applied-event.js";
+import { License } from "#lib/entities/license.js";
+import { Revocation } from "#lib/entities/revocation.js";
+import { Tenant } from "#lib/entities/tenant.js";
 import {
   BASE_URLS,
   type DodoWebhookPayload,
   type DodoWebhookData,
   verifyWebhookSignature,
-} from "$lib/server/control/dodo";
-import { readEnv } from "$lib/server/control/env";
+} from "#lib/server/control/dodo.js";
+import { readEnv } from "#lib/server/control/env.js";
 
 /**
  * Dodo subscription statuses we act on → our internal license status.
@@ -47,7 +47,7 @@ const SUBSCRIPTION_STATUS_MAP: Record<string, "canceled" | "expired"> = {
 };
 
 export const POST: RequestHandler = async (event) => {
-  const cpEnv = readEnv(event);
+  const cpEnv = readEnv();
   if (!cpEnv.DODO_WEBHOOK_SECRET) {
     throw error(500, "DODO_WEBHOOK_SECRET not configured");
   }
@@ -89,9 +89,9 @@ export const POST: RequestHandler = async (event) => {
       });
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
-      const looksLikeUniqueViolation = /unique|duplicate/i.test(msg);
+      const looksLikeUniqueViolation = (/unique|duplicate/i).test(msg);
       if (!looksLikeUniqueViolation) throw err;
-      return text("duplicate", { status: 200 });
+      return new Response("duplicate", { status: 200 });
     }
 
     try {
@@ -107,9 +107,10 @@ export const POST: RequestHandler = async (event) => {
         case "subscription.expired":
           await applySubscriptionLifecycle(payload.data);
           break;
-        // payment.succeeded etc. — recorded in applied_events for audit,
-        // no License action needed.
+
         default:
+          // payment.succeeded etc. — recorded in applied_events for audit,
+          // no License action needed.
           break;
       }
     } catch (err) {
@@ -122,7 +123,7 @@ export const POST: RequestHandler = async (event) => {
       throw err;
     }
 
-    return json({ received: true });
+    return Response.json({ received: true });
   } catch (e) {
     console.error("[dodo:webhook] handler error", e);
     throw error(500, "webhook processing failed");
@@ -303,7 +304,7 @@ async function applySubscriptionLifecycle(d: DodoWebhookData): Promise<void> {
       // Stamp only on the active → inactive transition, so a later
       // `expired` after `cancelled` doesn't push the air-gap grace
       // window forward.
-      canceledAt: row.status === "active" ? now : (row.canceledAt ?? now),
+      canceledAt: row.status === "active" ? now : row.canceledAt ?? now
     });
   }
 
@@ -338,7 +339,7 @@ async function applySubscriptionLifecycle(d: DodoWebhookData): Promise<void> {
       const msg = err instanceof Error ? err.message : String(err);
       // Concurrent insert raced us through the findFirst gap — the
       // UNIQUE index caught it. Treat as success.
-      if (!/unique|duplicate/i.test(msg)) throw err;
+      if (!(/unique|duplicate/i).test(msg)) throw err;
     }
   }
 
@@ -367,10 +368,10 @@ async function applySubscriptionLifecycle(d: DodoWebhookData): Promise<void> {
  * and the user can link it manually via /dashboard/activate.
  */
 async function fetchCustomerEmail(customerId: string): Promise<string> {
-  const apiKey = env.DODO_API_KEY;
+  const apiKey = DODO_API_KEY;
   if (!apiKey) return "";
 
-  const mode = env.DODO_MODE || "test";
+  const mode = DODO_MODE || "test";
   const baseUrl = BASE_URLS[mode] ?? BASE_URLS.test;
 
   try {
@@ -379,7 +380,7 @@ async function fetchCustomerEmail(customerId: string): Promise<string> {
       signal: AbortSignal.timeout(3000),
     });
     if (!res.ok) return "";
-    const data = (await res.json()) as { email?: string };
+    const data = await res.json() as { email?: string };
     return data.email ?? "";
   } catch {
     return "";

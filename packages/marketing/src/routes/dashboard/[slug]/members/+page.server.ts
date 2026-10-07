@@ -5,8 +5,8 @@
 import { error } from "@sveltejs/kit";
 import { remult } from "remult";
 import type { PageServerLoad } from "./$types";
-import { TenantMember } from "$lib/entities/tenant-member";
-import { License } from "$lib/entities/license";
+import { TenantMember } from "#lib/entities/tenant-member.js";
+import { License } from "#lib/entities/license.js";
 
 export const load: PageServerLoad = async ({ parent }) => {
   const { tenant, isOwner } = await parent();

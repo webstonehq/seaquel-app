@@ -15,11 +15,11 @@
  * by `(tenantId, licenseKey)` regardless of status, and the stored
  * `containerUserId` would point at a now-deleted local user.
  */
-import { error, json } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import { remult } from "remult";
 import type { RequestHandler } from "./$types";
-import { TenantMember } from "$lib/entities/tenant-member";
-import { requireCloudAuth } from "$lib/server/control/cloud-auth";
+import { TenantMember } from "#lib/entities/tenant-member.js";
+import { requireCloudAuth } from "#lib/server/control/cloud-auth.js";
 
 interface UnbindRequest {
   containerUserId: string;
@@ -42,7 +42,7 @@ export const POST: RequestHandler = async (event) => {
     .findFirst({ tenantId: tenant.id, containerUserId });
   if (!member) throw error(404, "member not found");
   if (member.role === "owner") throw error(409, "cannot remove the tenant owner");
-  if (member.status === "removed") return json({ ok: true });
+  if (member.status === "removed") return Response.json({ ok: true });
 
   await remult.repo(TenantMember).save({
     ...member,
@@ -51,5 +51,5 @@ export const POST: RequestHandler = async (event) => {
     licenseKey: "",
     boundAt: undefined,
   });
-  return json({ ok: true });
+  return Response.json({ ok: true });
 };
